@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YYC CASH LOAN - Application Submitted</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #004d99;
+            --secondary: #ff9900;
+            --text: #333333;
+            --light-bg: #f5f7fa;
+            --white: #ffffff;
+            --success: #28a745;
+            --danger: #dc3545;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text);
+            line-height: 1.6;
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
+            padding-bottom: 70px; /* Space for bottom nav */
+        }
+
+        .app-container {
+            background-color: var(--white);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .app-header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .app-header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: var(--white);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 480px;
+            margin: 0 auto;
+            height: 60px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.7rem;
+            width: 20%;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        /* Content */
+        .content-section {
+            padding: 20px 15px;
+        }
+
+        .success-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 30px 20px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+
+        .success-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .success-message {
+            margin-bottom: 25px;
+            color: var(--text);
+        }
+
+        .application-details {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .contact-info {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-item i {
+            width: 30px;
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #e68a00;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>YYC CASH LOAN</h1>
+        </header>
+
+        <section class="content-section">
+            <div class="success-card">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h2 class="success-title">Application Submitted!</h2>
+                <p class="success-message">Thank you for applying with YYC CASH LOAN. Your application has been received and is now being processed.</p>
+                <p class="success-message">You will receive an SMS and email notification within 24 hours with the status of your application.</p>
+                <button class="btn btn-block" onclick="window.location.href='index.html#account'">Track Your Application</button>
+            </div>
+
+            <div class="application-details">
+                <h3 class="section-title">Application Summary</h3>
+                <div id="application-summary">
+                    <!-- This will be populated with JavaScript -->
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <h3 class="section-title">Need Help?</h3>
+                <p>If you have any questions about your application, please contact us:</p>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>yyccashloan@gmail.com</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="index.html#apply" class="nav-item">
+                <i class="fas fa-edit"></i>
+                <span>Apply</span>
+            </a>
+            <a href="index.html#loans" class="nav-item">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Loans</span>
+            </a>
+            <a href="index.html#how" class="nav-item">
+                <i class="fas fa-info-circle"></i>
+                <span>How It Works</span>
+            </a>
+            <a href="index.html#account" class="nav-item active">
+                <i class="fas fa-user"></i>
+                <span>Account</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        // Load application data from localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const applicationData = JSON.parse(localStorage.getItem('loanApplication'));
+            
+            if (applicationData) {
+                // Create HTML for application summary
+                let summaryHTML = '';
+                
+                // Add each detail to the summary
+                summaryHTML += createDetailRow('Full Name', applicationData.fullName);
+                summaryHTML += createDetailRow('ID Number', applicationData.idNumber);
+                summaryHTML += createDetailRow('Contact Number', applicationData.phone);
+                summaryHTML += createDetailRow('Email', applicationData.email);
+                summaryHTML += createDetailRow('Loan Amount', 'R' + parseInt(applicationData.loanAmount).toLocaleString());
+                summaryHTML += createDetailRow('Loan Purpose', applicationData.loanPurpose);
+                summaryHTML += createDetailRow('Repayment Term', applicationData.repaymentTerm + ' months');
+                
+                // Insert the HTML into the page
+                document.getElementById('application-summary').innerHTML = summaryHTML;
+            } else {
+                // If no application data is found
+                document.getElementById('application-summary').innerHTML = 
+                    '<p>No application data found. Please <a href="index.html#apply">apply for a loan</a>.</p>';
+            }
+        });
+        
+        // Helper function to create a detail row
+        function createDetailRow(label, value) {
+            return `
+                <div class="detail-row">
+                    <span>${label}:</span>
+                    <span>${value}</span>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

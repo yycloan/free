@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YYC CASH LOAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #004d99;
+            --secondary: #ff9900;
+            --text: #333333;
+            --light-bg: #f5f7fa;
+            --white: #ffffff;
+            --success: #28a745;
+            --danger: #dc3545;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text);
+            line-height: 1.6;
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
+            padding-bottom: 70px; /* Space for bottom nav */
+        }
+
+        .app-container {
+            background-color: var(--white);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .app-header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .app-header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: var(--white);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 480px;
+            margin: 0 auto;
+            height: 60px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.7rem;
+            width: 20%;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 20px 15px;
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .hero-text {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .hero-text h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .hero-text p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .hero-image {
+            flex: 1;
+            background-image: url('https://images.unsplash.com/photo-1579621970795-87facc2f976d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 180px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #e68a00;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        /* Loan Calculator */
+        .calculator-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .calculator-section h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .form-control.error {
+            border-color: var(--danger);
+        }
+
+        .error-message {
+            color: var(--danger);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .range-slider {
+            width: 100%;
+        }
+
+        .calculator-result {
+            background-color: var(--light-bg);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 15px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .result-item:last-child {
+            margin-bottom: 0;
+            font-weight: bold;
+        }
+
+        /* Features Section */
+        .features-section {
+            margin-bottom: 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .feature-card h4 {
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .feature-card p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-card {
+            padding: 15px;
+            border-left: 3px solid var(--primary);
+            background-color: var(--light-bg);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        /* Apply Form */
+        .form-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .step-dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--light-gray);
+            border-radius: 50%;
+            margin: 0 5px;
+        }
+
+        .step-dot.active {
+            background-color: var(--primary);
+        }
+
+        /* Loan Types */
+        .loan-types-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .loan-type-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+        }
+
+        .loan-type-card h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .loan-type-card p {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* How It Works */
+        .steps-container {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .step-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+
+        .step-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .step-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .step-item::after {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 20px;
+            width: 2px;
+            height: calc(100% - 20px);
+            background-color: var(--light-gray);
+        }
+
+        .step-item:last-child::after {
+            display: none;
+        }
+
+        .step-content {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        /* FAQ Section */
+        .faq-item {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            margin-bottom: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .faq-answer {
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: var(--light-bg);
+        }
+
+        .faq-answer.active {
+            padding: 15px;
+            max-height: 500px;
+        }
+
+        /* Contact Form */
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-item i {
+            width: 30px;
+            color: var(--primary);
+        }
+
+        /* Client Portal */
+        .portal-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .loan-status {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .status-indicator {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .status-pending {
+            background-color: var(--secondary);
+        }
+
+        .status-approved {
+            background-color: var(--success);
+        }
+
+        .status-rejected {
+            background-color: var(--danger);
+        }
+
+        .progress-bar-container {
+            height: 10px;
+            background-color: var(--light-gray);
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        /* Login Form */
+        .login-form {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>YYC CASH LOAN | NCRCP15906</h1>
+        </header>
+
+        <!-- Home Section -->
+        <section id="home" class="content-section active">
+            <div class="hero-section">
+                <div class="hero-text">
+                    <h2>Need Fast Cash?</h2>
+                    <p>Get Approved in Minutes with YYC CASH LOAN! No upfront Fee's</p>
+                    <button class="btn" onclick="navigateTo('apply')">Apply Now No Fee</button>
+                </div>
+                <div class="hero-image"></div>
+            </div>
+
+            <div class="calculator-section">
+                <h3>Quick Loan Calculator for free</h3>
+                <div class="form-group">
+                    <label for="loan-amount">Loan Amount: R<span id="amount-value">5000</span></label>
+                    <input type="range" id="loan-amount" class="range-slider form-control" min="1000" max="150000" step="1000" value="5000">
+                </div>
+                <div class="form-group">
+                    <label for="loan-term">Repayment Term: <span id="term-value">6</span> months</label>
+                    <input type="range" id="loan-term" class="range-slider form-control" min="1" max="84" value="6">
+                </div>
+                <div class="calculator-result">
+                    <div class="result-item">
+                        <span>Monthly Repayment:</span>
+                        <span id="monthly-payment">R950</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Total Interest:</span>
+                        <span id="total-interest">R700</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Total Repayment:</span>
+                        <span id="total-repayment">R5,700</span>
+                    </div>
+                </div>
+            </div>
+<div class="loan-types-grid">
+                <div class="loan-type-card">
+                    <h4><i class="fas fa-user-alt"></i>We do Not Pay Out to Capitec Banks </h4>
+                    <p>you can apply for a loan by submiting your capitec bank statement but please NOTE WE DO NOT PAY OUT TO CAPITEC DUE TO SECURITY CONCERNS AND FOR EASY PAYOUTS.</p>
+                    <button class="btn" onclick="navigateTo('apply')">Apply Here</button>
+                </div>
+                
+            <h3 class="section-title">Why Choose YYC CASH LOAN?</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h4>Fast Approvals</h4>
+                    <p>Loan decisions made within 2 hours No Upfront Fee</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lock"></i>
+                    <h4>100% Secure</h4>
+                    <p>All your information is encrypted and confidential</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h4>Flexible Terms</h4>
+                    <p>Choose a schedule that suits your lifestyle</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>Registered & Trusted</h4>
+                    <p>Fully compliant with lending regulations</p>
+                </div>
+            </div>
+
+            <div class="testimonials-section">
+                <h3 class="section-title">What Our Clients Say</h3>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"I got my loan in under 3 hours! YYC is a lifesaver. didnt pay any fee"</p>
+                    <p class="testimonial-author">– Thando, Soweto</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The process was so simple and fast. I'll definitely use them again. no upfront fee"</p>
+                    <p class="testimonial-author">– John, Cape Town</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Apply Section -->
+        <section id="apply" class="content-section">
+            <h3 class="section-title">Apply for a Loan</h3>
+            
+            <div class="form-section">
+                <div class="step-indicator">
+                    <div class="step-dot active" data-step="1"></div>
+                    <div class="step-dot" data-step="2"></div>
+                    <div class="step-dot" data-step="3"></div>
+                    <div class="step-dot" data-step="4"></div>
+                </div>
+                
+                <form id="loan-application">
+                    <div class="form-step active" data-step="1">
+                        <h4>Personal Information</h4>
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" id="full-name" class="form-control" required>
+                            <div class="error-message">Please enter your full name</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id-number">ID Number</label>
+                            <input type="text" id="id-number" class="form-control" required>
+                            <div class="error-message">Please enter your ID number</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Contact Number</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                            <div class="error-message">Please enter your contact number</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                            <div class="error-message">Please enter a valid email address</div>
+                        </div>
+                        <div class="form-navigation">
+                            <button type="button" class="btn" onclick="nextStep(1)">Next</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-step" data-step="2">
+                        <h4>Employment Details</h4>
+                        <div class="form-group">
+                            <label for="employer">Employer Name</label>
+                            <input type="text" id="employer" class="form-control" required>
+                            <div class="error-message">Please enter your employer name</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="employment-type">Employment Type</label>
+                            <select id="employment-type" class="form-control" required>
+                                <option value="">Select employment type</option>
+                                <option value="full-time">Full-time</option>
+                                <option value="part-time">Part-time</option>
+                                <option value="self-employed">Self-employed</option>
+                                <option value="not-employed">Not employed</option>
+                            </select>
+                            <div class="error-message">Please select your employment type</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="net-salary">Net Salary (R)</label>
+                            <input type="number" id="net-salary" class="form-control" required>
+                            <div class="error-message">Please enter your net salary</div>
+                        </div>
+                        <div class="form-navigation">
+                            <button type="button" class="btn" style="background-color: var(--gray);" onclick="prevStep(2)">Back</button>
+                            <button type="button" class="btn" onclick="nextStep(2)">Next</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-step" data-step="3">
+                        <h4>Loan Request Details</h4>
+                        <div class="form-group">
+                            <label for="loan-amount-request">Amount Needed (R)</label>
+                            <input type="number" id="loan-amount-request" class="form-control" required>
+                            <div class="error-message">Please enter the loan amount</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="loan-purpose">Loan Purpose</label>
+                            <select id="loan-purpose" class="form-control" required>
+                                <option value="">Select purpose</option>
+                                <option value="emergency">Emergency</option>
+                                <option value="education">Education</option>
+                                <option value="medical">Medical</option>
+                                <option value="debt-consolidation">Debt Consolidation</option>
+                                <option value="business">Business</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div class="error-message">Please select a loan purpose</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="repayment-term">Desired Repayment Term (months)</label>
+                            <select id="repayment-term" class="form-control" required>
+                                <option value="">Select term</option>
+                               <option value="1">1 month</option>
+  <option value="2">2 months</option>
+  <option value="3">3 months</option>
+  <option value="4">4 months</option>
+  <option value="5">5 months</option>
+  <option value="6">6 months</option>
+  <option value="7">7 months</option>
+  <option value="8">8 months</option>
+  <option value="9">9 months</option>
+  <option value="10">10 months</option>
+  <option value="11">11 months</option>
+  <option value="12">12 months</option>
+  <option value="13">13 months</option>
+  <option value="14">14 months</option>
+  <option value="15">15 months</option>
+  <option value="16">16 months</option>
+  <option value="17">17 months</option>
+  <option value="18">18 months</option>
+  <option value="19">19 months</option>
+  <option value="20">20 months</option>
+  <option value="21">21 months</option>
+  <option value="22">22 months</option>
+  <option value="23">23 months</option>
+  <option value="24">24 months</option>
+  <option value="25">25 months</option>
+  <option value="26">26 months</option>
+  <option value="27">27 months</option>
+  <option value="28">28 months</option>
+  <option value="29">29 months</option>
+  <option value="30">30 months</option>
+  <option value="31">31 months</option>
+  <option value="32">32 months</option>
+  <option value="33">33 months</option>
+  <option value="34">34 months</option>
+  <option value="35">35 months</option>
+  <option value="36">36 months</option>
+  <option value="37">37 months</option>
+  <option value="38">38 months</option>
+  <option value="39">39 months</option>
+  <option value="40">40 months</option>
+  <option value="41">41 months</option>
+  <option value="42">42 months</option>
+  <option value="43">43 months</option>
+  <option value="44">44 months</option>
+  <option value="45">45 months</option>
+  <option value="46">46 months</option>
+  <option value="47">47 months</option>
+  <option value="48">48 months</option>
+  <option value="49">49 months</option>
+  <option value="50">50 months</option>
+  <option value="51">51 months</option>
+  <option value="52">52 months</option>
+  <option value="53">53 months</option>
+  <option value="54">54 months</option>
+  <option value="55">55 months</option>
+  <option value="56">56 months</option>
+  <option value="57">57 months</option>
+  <option value="58">58 months</option>
+  <option value="59">59 months</option>
+  <option value="60">60 months</option>
+  <option value="61">61 months</option>
+  <option value="62">62 months</option>
+  <option value="63">63 months</option>
+  <option value="64">64 months</option>
+  <option value="65">65 months</option>
+  <option value="66">66 months</option>
+  <option value="67">67 months</option>
+  <option value="68">68 months</option>
+  <option value="69">69 months</option>
+  <option value="70">70 months</option>
+  <option value="71">71 months</option>
+  <option value="72">72 months</option>
+  <option value="73">73 months</option>
+  <option value="74">74 months</option>
+  <option value="75">75 months</option>
+  <option value="76">76 months</option>
+  <option value="77">77 months</option>
+  <option value="78">78 months</option>
+  <option value="79">79 months</option>
+  <option value="80">80 months</option>
+  <option value="81">81 months</option>
+  <option value="82">82 months</option>
+  <option value="83">83 months</option>
+  <option value="84">84 months</option>
+                            </select>
+                            <div class="error-message">Please select a repayment term</div>
+                        </div>
+                        <div class="form-navigation">
+                            <button type="button" class="btn" style="background-color: var(--gray);" onclick="prevStep(3)">Back</button>
+                            <button type="button" class="btn" onclick="nextStep(3)">Next</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-step" data-step="4">
+                        <h4>Document Upload</h4>
+                        <div class="form-group">
+                            <label for="id-upload">Upload ID/Passport/Driver's License</label>
+                            <input type="file" id="id-upload" class="form-control" accept="image/*" required>
+                            <div class="error-message">Please upload your ID document</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="payslip-upload">Upload Latest Payslip/Bank Statement (optional)</label>
+                            <input type="file" id="payslip-upload" class="form-control" accept="image/*,application/pdf">
+                        </div>
+                        <div class="form-navigation">
+                            <button type="button" class="btn" style="background-color: var(--gray);" onclick="prevStep(4)">Back</button>
+                            <button type="submit" class="btn">Submit Application</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="calculator-section">
+                <h4>Eligibility Requirements</h4>
+                <ul style="padding-left: 20px;">
+                    <li>Be 18 years or older</li>
+                    <li>Hold a valid  ID</li>
+                    <li>have  income</li>
+                    <li>Have a bank account</li>
+                </ul>
+                <div style="margin-top: 15px; text-align: center;">
+                    <i class="fas fa-lock" style="color: var(--primary);"></i>
+                    <p style="font-size: 0.8rem;">All submissions are protected by industry-standard 256-bit SSL encryption.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loans Section -->
+        <section id="loans" class="content-section">
+            <h3 class="section-title">Our Loan Products</h3>
+            
+            <div class="loan-types-grid">
+                <div class="loan-type-card">
+                    <h4><i class="fas fa-user-alt"></i> Personal Loans</h4>
+                    <p>For medical bills, school fees, travel, or emergencies. Fixed monthly repayments and flexible terms.</p>
+                    <button class="btn" onclick="navigateTo('apply')">Apply Here</button>
+                </div>
+                
+                <div class="loan-type-card">
+                    <h4><i class="fas fa-money-bill-wave"></i> Payday Loans</h4>
+                    <p>Small, short-term loans repayable on your next payday. Ideal for month-end emergencies.</p>
+                    <button class="btn" onclick="navigateTo('apply')">Apply Here</button>
+                </div>
+                
+                <div class="loan-type-card">
+                    <h4><i class="fas fa-briefcase"></i> Business Loans</h4>
+                    <p>Funding for entrepreneurs and SMEs. Can be used for inventory, marketing, staff, or cash flow.</p>
+                    <button class="btn" onclick="navigateTo('apply')">Apply Here</button>
+                </div>
+                
+                <div class="loan-type-card">
+                    <h4><i class="fas fa-hand-holding-usd"></i> Debt Consolidation</h4>
+                    <p>Combine multiple debts into one affordable payment. Simplify your finances and reduce interest.</p>
+                    <button class="btn" onclick="navigateTo('apply')">Apply Here</button>
+                </div>
+            </div>
+            
+            <div class="calculator-section" style="margin-top: 20px;">
+                <h3>Loan Calculator</h3>
+                <div class="form-group">
+                    <label for="calc-amount">Desired Loan Amount (R)</label>
+                    <input type="number" id="calc-amount" class="form-control" value="10000">
+                </div>
+                <div class="form-group">
+                    <label for="calc-term">Repayment Term (months)</label>
+                    <select id="calc-term" class="form-control">
+                        <option value="1">1 month</option>
+  <option value="2">2 months</option>
+  <option value="3">3 months</option>
+  <option value="4">4 months</option>
+  <option value="5">5 months</option>
+  <option value="6" selected>6 months</option>
+  <option value="7">7 months</option>
+  <option value="8">8 months</option>
+  <option value="9">9 months</option>
+  <option value="10">10 months</option>
+  <option value="11">11 months</option>
+  <option value="12">12 months</option>
+  <option value="13">13 months</option>
+  <option value="14">14 months</option>
+  <option value="15">15 months</option>
+  <option value="16">16 months</option>
+  <option value="17">17 months</option>
+  <option value="18">18 months</option>
+  <option value="19">19 months</option>
+  <option value="20">20 months</option>
+  <option value="21">21 months</option>
+  <option value="22">22 months</option>
+  <option value="23">23 months</option>
+  <option value="24">24 months</option>
+  <option value="25">25 months</option>
+  <option value="26">26 months</option>
+  <option value="27">27 months</option>
+  <option value="28">28 months</option>
+  <option value="29">29 months</option>
+  <option value="30">30 months</option>
+  <option value="31">31 months</option>
+  <option value="32">32 months</option>
+  <option value="33">33 months</option>
+  <option value="34">34 months</option>
+  <option value="35">35 months</option>
+  <option value="36">36 months</option>
+  <option value="37">37 months</option>
+  <option value="38">38 months</option>
+  <option value="39">39 months</option>
+  <option value="40">40 months</option>
+  <option value="41">41 months</option>
+  <option value="42">42 months</option>
+  <option value="43">43 months</option>
+  <option value="44">44 months</option>
+  <option value="45">45 months</option>
+  <option value="46">46 months</option>
+  <option value="47">47 months</option>
+  <option value="48">48 months</option>
+  <option value="49">49 months</option>
+  <option value="50">50 months</option>
+  <option value="51">51 months</option>
+  <option value="52">52 months</option>
+  <option value="53">53 months</option>
+  <option value="54">54 months</option>
+  <option value="55">55 months</option>
+  <option value="56">56 months</option>
+  <option value="57">57 months</option>
+  <option value="58">58 months</option>
+  <option value="59">59 months</option>
+  <option value="60">60 months</option>
+  <option value="61">61 months</option>
+  <option value="62">62 months</option>
+  <option value="63">63 months</option>
+  <option value="64">64 months</option>
+  <option value="65">65 months</option>
+  <option value="66">66 months</option>
+  <option value="67">67 months</option>
+  <option value="68">68 months</option>
+  <option value="69">69 months</option>
+  <option value="70">70 months</option>
+  <option value="71">71 months</option>
+  <option value="72">72 months</option>
+  <option value="73">73 months</option>
+  <option value="74">74 months</option>
+  <option value="75">75 months</option>
+  <option value="76">76 months</option>
+  <option value="77">77 months</option>
+  <option value="78">78 months</option>
+  <option value="79">79 months</option>
+  <option value="80">80 months</option>
+  <option value="81">81 months</option>
+  <option value="82">82 months</option>
+  <option value="83">83 months</option>
+  <option value="84">84 months</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="calc-interest">Interest Rate (%)</label>
+                    <input type="number" id="calc-interest" class="form-control" value="15" readonly>
+                </div>
+                <div class="calculator-result">
+                    <div class="result-item">
+                        <span>Monthly Installment:</span>
+                        <span id="calc-monthly">R1,750</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Total Interest:</span>
+                        <span id="calc-interest-total">R500</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Total Repayment:</span>
+                        <span id="calc-total">R10,500</span>
+                    </div>
+                </div>
+                <button class="btn btn-block" style="margin-top: 15px;" onclick="navigateTo('apply')">Apply Now Based on These Terms</button>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how" class="content-section">
+            <h3 class="section-title">How It Works</h3>
+            
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-content">
+                        <div class="step-title">Step 1: Apply Online</div>
+                        <p>Complete a secure digital form from your phone or PC — no office visit needed.</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-content">
+                        <div class="step-title">Step 2: Instant Assessment</div>
+                        <p>Our system and team review your application in real-time, often responding within 1 hour.</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-content">
+                        <div class="step-title">Step 3: Get Your Cash</div>
+                        <p>Once approved, your funds are transferred to your bank account — usually the same day.</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-content">
+                        <div class="step-title">Step 4: Simple Repayment</div>
+                        <p>Repay over time via debit order. We also offer payment flexibility if you need to adjust your schedule.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section" style="margin-top: 20px;">
+                <h4>Frequently Asked Questions</h4>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        How do I apply? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        You can apply directly through our mobile app or website by filling out the application form. The process takes less than 10 minutes.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        How soon will I get the money? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Most applications are processed within 1 hour during business hours. Once approved, funds are typically transferred to your account on the same day.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        What interest rate do you charge? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Our interest rates vary based on the loan amount, term, and your credit profile. Rates typically range from 15% to 25% per annum, in compliance with South African lending regulations.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Can I pay early without penalties? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, you can pay off your loan early without any penalties. In fact, early repayment will reduce the total interest you pay.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Do you lend to blacklisted individuals? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We consider each application on a case-by-case basis. While having a negative credit record may affect your application, we look at your current income and ability to repay as well.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Account Section -->
+        <section id="account" class="content-section">
+            <h3 class="section-title">Client Portal</h3>
+            
+            <div id="login-section" class="login-form">
+                <h4>Login to Your Account</h4>
+                <div class="form-group">
+                    <label for="login-id">ID Number</label>
+                    <input type="text" id="login-id" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-name">Full Name</label>
+                    <input type="text" id="login-name" class="form-control" required>
+                </div>
+                <button class="btn btn-block" onclick="loginToPortal()">Login</button>
+            </div>
+            
+            <div id="portal-section" style="display: none;">
+                <div class="portal-card">
+                    <h4>Loan Application Status</h4>
+                    <div class="loan-status">
+                        <div class="status-indicator status-pending"></div>
+                        <span>Application Pending Review</span>
+                    </div>
+                    <p>Application submitted on: <span id="application-date">2023-05-13</span></p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 30%;"></div>
+                    </div>
+                    <p style="font-size: 0.8rem; text-align: center;">Application is 30% complete</p>
+                </div>
+                
+                <div class="portal-card">
+                    <h4>Application Details</h4>
+                    <div class="detail-row">
+                        <span>Full Name:</span>
+                        <span id="detail-name">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>ID Number:</span>
+                        <span id="detail-id">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Contact Number:</span>
+                        <span id="detail-phone">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Email:</span>
+                        <span id="detail-email">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Loan Amount:</span>
+                        <span id="detail-amount">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Loan Term:</span>
+                        <span id="detail-term">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Loan Purpose:</span>
+                        <span id="detail-purpose">-</span>
+                    </div>
+                </div>
+                
+                <div class="portal-card">
+                    <h4>Next Steps</h4>
+                    <p>Our team is currently reviewing your application. You will receive an SMS and email notification once a decision has been made.</p>
+                    <p style="margin-top: 10px;">For any queries, please contact us at:</p>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+27 10 123 4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>+27 71 234 5678</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>yyccashloan@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active" data-section="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item" data-section="apply">
+                <i class="fas fa-edit"></i>
+                <span>Apply</span>
+            </a>
+            <a href="#" class="nav-item" data-section="loans">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Loans</span>
+            </a>
+            <a href="#" class="nav-item" data-section="how">
+                <i class="fas fa-info-circle"></i>
+                <span>How It Works</span>
+            </a>
+            <a href="#" class="nav-item" data-section="account">
+                <i class="fas fa-user"></i>
+                <span>Account</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        // Navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sectionId = this.getAttribute('data-section');
+                navigateTo(sectionId);
+            });
+        });
+
+        function navigateTo(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update active nav item
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-section') === sectionId) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Loan Calculator
+        const loanAmountSlider = document.getElementById('loan-amount');
+        const loanTermSlider = document.getElementById('loan-term');
+        const amountValue = document.getElementById('amount-value');
+        const termValue = document.getElementById('term-value');
+        const monthlyPayment = document.getElementById('monthly-payment');
+        const totalInterest = document.getElementById('total-interest');
+        const totalRepayment = document.getElementById('total-repayment');
+
+        function updateCalculator() {
+            const amount = parseInt(loanAmountSlider.value);
+            const term = parseInt(loanTermSlider.value);
+            const interestRate = 0.15; // 15% annual interest rate
+            
+            // Monthly interest rate
+            const monthlyRate = interestRate / 12;
+            
+            // Calculate monthly payment using the formula: P * r * (1 + r)^n / ((1 + r)^n - 1)
+            const monthlyPaymentValue = amount * monthlyRate * Math.pow(1 + monthlyRate, term) / (Math.pow(1 + monthlyRate, term) - 1);
+            
+            // Calculate total payment and interest
+            const totalPayment = monthlyPaymentValue * term;
+            const interestAmount = totalPayment - amount;
+            
+            // Update display
+            amountValue.textContent = amount.toLocaleString();
+            termValue.textContent = term;
+            monthlyPayment.textContent = 'R' + Math.round(monthlyPaymentValue).toLocaleString();
+            totalInterest.textContent = 'R' + Math.round(interestAmount).toLocaleString();
+            totalRepayment.textContent = 'R' + Math.round(totalPayment).toLocaleString();
+        }
+
+        loanAmountSlider.addEventListener('input', updateCalculator);
+        loanTermSlider.addEventListener('input', updateCalculator);
+        
+        // Initialize calculator
+        updateCalculator();
+
+        // Detailed Calculator
+        const calcAmount = document.getElementById('calc-amount');
+        const calcTerm = document.getElementById('calc-term');
+        const calcInterest = document.getElementById('calc-interest');
+        const calcMonthly = document.getElementById('calc-monthly');
+        const calcInterestTotal = document.getElementById('calc-interest-total');
+        const calcTotal = document.getElementById('calc-total');
+
+        function updateDetailedCalculator() {
+            const amount = parseInt(calcAmount.value);
+            const term = parseInt(calcTerm.value);
+            const interestRate = parseInt(calcInterest.value) / 100; // Convert percentage to decimal
+            
+            // Monthly interest rate
+            const monthlyRate = interestRate / 12;
+            
+            // Calculate monthly payment
+            const monthlyPaymentValue = amount * monthlyRate * Math.pow(1 + monthlyRate, term) / (Math.pow(1 + monthlyRate, term) - 1);
+            
+            // Calculate total payment and interest
+            const totalPayment = monthlyPaymentValue * term;
+            const interestAmount = totalPayment - amount;
+            
+            // Update display
+            calcMonthly.textContent = 'R' + Math.round(monthlyPaymentValue).toLocaleString();
+            calcInterestTotal.textContent = 'R' + Math.round(interestAmount).toLocaleString();
+            calcTotal.textContent = 'R' + Math.round(totalPayment).toLocaleString();
+        }
+
+        calcAmount.addEventListener('input', updateDetailedCalculator);
+        calcTerm.addEventListener('change', updateDetailedCalculator);
+        
+        // Initialize detailed calculator
+        updateDetailedCalculator();
+
+        // Form validation function
+        function validateFields(step) {
+            const currentStep = document.querySelector(`.form-step[data-step="${step}"]`);
+            const requiredFields = currentStep.querySelectorAll('[required]');
+            let isValid = true;
+            
+            // Reset all error states
+            requiredFields.forEach(field => {
+                field.classList.remove('error');
+                const errorMsg = field.nextElementSibling;
+                if (errorMsg && errorMsg.classList.contains('error-message')) {
+                    errorMsg.style.display = 'none';
+                }
+            });
+            
+            // Check each required field
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('error');
+                    const errorMsg = field.nextElementSibling;
+                    if (errorMsg && errorMsg.classList.contains('error-message')) {
+                        errorMsg.style.display = 'block';
+                    }
+                    isValid = false;
+                } else if (field.type === 'email' && !validateEmail(field.value)) {
+                    field.classList.add('error');
+                    const errorMsg = field.nextElementSibling;
+                    if (errorMsg && errorMsg.classList.contains('error-message')) {
+                        errorMsg.style.display = 'block';
+                    }
+                    isValid = false;
+                }
+            });
+            
+            return isValid;
+        }
+        
+        // Email validation
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Multi-step form with validation
+        function nextStep(currentStep) {
+            // Validate current step fields
+            if (!validateFields(currentStep)) {
+                return; // Stop if validation fails
+            }
+            
+            const nextStepNum = currentStep + 1;
+            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
+            document.querySelector(`.form-step[data-step="${nextStepNum}"]`).classList.add('active');
+            
+            // Update step indicator
+            document.querySelector(`.step-dot[data-step="${currentStep}"]`).classList.remove('active');
+            document.querySelector(`.step-dot[data-step="${nextStepNum}"]`).classList.add('active');
+        }
+
+        function prevStep(currentStep) {
+            const prevStepNum = currentStep - 1;
+            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
+            document.querySelector(`.form-step[data-step="${prevStepNum}"]`).classList.add('active');
+            
+            // Update step indicator
+            document.querySelector(`.step-dot[data-step="${currentStep}"]`).classList.remove('active');
+            document.querySelector(`.step-dot[data-step="${prevStepNum}"]`).classList.add('active');
+        }
+
+        // FAQ toggle
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            answer.classList.toggle('active');
+            
+            // Toggle icon
+            const icon = element.querySelector('i');
+            if (answer.classList.contains('active')) {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+
+        // Form submission
+        document.getElementById('loan-application').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate the final step
+            if (!validateFields(4)) {
+                return; // Stop if validation fails
+            }
+            
+            // Get form data
+            const formData = {
+                fullName: document.getElementById('full-name').value,
+                idNumber: document.getElementById('id-number').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                employer: document.getElementById('employer').value,
+                employmentType: document.getElementById('employment-type').value,
+                netSalary: document.getElementById('net-salary').value,
+                loanAmount: document.getElementById('loan-amount-request').value,
+                loanPurpose: document.getElementById('loan-purpose').value,
+                repaymentTerm: document.getElementById('repayment-term').value
+            };
+            
+            // Save to local storage
+            localStorage.setItem('loanApplication', JSON.stringify(formData));
+            
+            // Redirect to connect.html
+            window.location.href = 'connect.html';
+        });
+
+        // Client Portal Login
+        function loginToPortal() {
+            const loginId = document.getElementById('login-id').value;
+            const loginName = document.getElementById('login-name').value;
+            
+            // Check if there's saved application data
+            const savedData = localStorage.getItem('loanApplication');
+            
+            if (savedData) {
+                const applicationData = JSON.parse(savedData);
+                
+                // Simple validation (in a real app, this would be server-side)
+                if (loginId === applicationData.idNumber && loginName.toLowerCase() === applicationData.fullName.toLowerCase()) {
+                    // Show portal section
+                    document.getElementById('login-section').style.display = 'none';
+                    document.getElementById('portal-section').style.display = 'block';
+                    
+                    // Populate application details
+                    document.getElementById('detail-name').textContent = applicationData.fullName;
+                    document.getElementById('detail-id').textContent = applicationData.idNumber;
+                    document.getElementById('detail-phone').textContent = applicationData.phone;
+                    document.getElementById('detail-email').textContent = applicationData.email;
+                    document.getElementById('detail-amount').textContent = 'R' + parseInt(applicationData.loanAmount).toLocaleString();
+                    document.getElementById('detail-term').textContent = applicationData.repaymentTerm + ' months';
+                    document.getElementById('detail-purpose').textContent = applicationData.loanPurpose;
+                    
+                    // Set application date to today
+                    const today = new Date();
+                    document.getElementById('application-date').textContent = today.toISOString().split('T')[0];
+                    
+                    // Set progress bar
+                    document.querySelector('.progress-bar').style.width = '30%';
+                } else {
+                    alert('Invalid credentials. Please try again.');
+                }
+            } else {
+                alert('No application found. Please apply for a loan first.');
+            }
+        }
+    </script>
+</body>
+</html>
