@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - YYC CASH LOAN | NCRCP15906</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #d61313;
+            --secondary: #e63946;
+            --accent: #f1c40f;
+            --light: #ffffff;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #28a745;
+            --gradient-secondary: linear-gradient(135deg, #e63946 0%, #d61313 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            line-height: 1.6;
+            padding-bottom: 70px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .logo .ncr {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-left: 10px;
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav {
+            display: none;
+        }
+
+        .desktop-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .desktop-nav .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .desktop-nav .nav-link:hover,
+        .desktop-nav .nav-link.active {
+            color: var(--primary);
+            background: rgba(214, 19, 19, 0.1);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: block;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--dark);
+            padding: 8px;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .page-header p {
+            color: var(--gray);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Steps Section */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border: 2px solid rgba(214, 19, 19, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(214, 19, 19, 0.2);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 30px rgba(214, 19, 19, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .step-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .step-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .step-features li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+            color: var(--gray);
+        }
+
+        .step-features li i {
+            color: var(--success);
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        /* Timeline */
+        .timeline-section {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin-bottom: 80px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .timeline-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient-secondary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 40px;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 40px;
+            text-align: left;
+        }
+
+        .timeline-content {
+            background: rgba(214, 19, 19, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(214, 19, 19, 0.1);
+        }
+
+        .timeline-content h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .timeline-content p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--primary);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+
+        /* Requirements Section */
+        .requirements-section {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin-bottom: 80px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .requirements-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .requirement-card {
+            background: rgba(214, 19, 19, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(214, 19, 19, 0.1);
+        }
+
+        .requirement-card h4 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .requirement-card h4 i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .requirement-list {
+            list-style: none;
+        }
+
+        .requirement-list li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        .requirement-list li i {
+            color: var(--success);
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-secondary);
+            color: white;
+            text-align: center;
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 20px 50px;
+            background: white;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-size: 1.2rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            display: block;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .mobile-nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+        }
+
+        .mobile-nav ul li {
+            flex: 1;
+            text-align: center;
+        }
+
+        .mobile-nav ul li a {
+            display: block;
+            padding: 12px 5px;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav ul li a.active {
+            color: var(--primary);
+        }
+
+        .mobile-nav ul li a i {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .main-content {
+                margin: 20px auto;
+                padding: 0 15px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .timeline-section,
+            .requirements-section,
+            .cta-section {
+                padding: 40px 20px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 50px !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+            }
+
+            .timeline-dot {
+                left: 10px !important;
+                right: auto !important;
+            }
+
+            .requirements-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+        /* Desktop styles */
+        @media (min-width: 769px) {
+            .desktop-nav {
+                display: block;
+            }
+            
+            .mobile-menu-btn,
+            .mobile-nav {
+                display: none;
+            }
+            
+            body {
+                padding-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <h1>YYC CASH LOAN</h1>
+            <span class="ncr">NCRCP15906</span>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="apply.html" class="nav-link">Apply</a></li>
+                <li><a href="loans.html" class="nav-link">Loans</a></li>
+                <li><a href="how-it-works.html" class="nav-link active">How It Works</a></li>
+                <li><a href="account.html" class="nav-link">Account</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="page-header">
+            <h1>How It Works</h1>
+            <p>Getting your loan is simple and fast. Follow our 4-step process to get the cash you need with no upfront fees and instant payouts.</p>
+        </div>
+
+        <!-- Steps Section -->
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Apply Online</h3>
+                <p>Complete our secure digital application form from your phone or computer. The process takes just a few minutes.</p>
+                <ul class="step-features">
+                    <li><i class="fas fa-check"></i> 100% online application</li>
+                    <li><i class="fas fa-check"></i> No office visit required</li>
+                    <li><i class="fas fa-check"></i> Secure and encrypted</li>
+                    <li><i class="fas fa-check"></i> Available 24/7</li>
+                </ul>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Instant Assessment</h3>
+                <p>Our advanced system and experienced team review your application in real-time, often responding within 1-2 hours.</p>
+                <ul class="step-features">
+                    <li><i class="fas fa-check"></i> Real-time processing</li>
+                    <li><i class="fas fa-check"></i> Quick credit assessment</li>
+                    <li><i class="fas fa-check"></i> Automated approval system</li>
+                    <li><i class="fas fa-check"></i> Instant notifications</li>
+                </ul>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Get Your Cash</h3>
+                <p>Once approved, your funds are transferred directly to your bank account - usually the same day or within 24 hours.</p>
+                <ul class="step-features">
+                    <li><i class="fas fa-check"></i> Same day payouts</li>
+                    <li><i class="fas fa-check"></i> Direct bank transfer</li>
+                    <li><i class="fas fa-check"></i> No upfront fees</li>
+                    <li><i class="fas fa-check"></i> Instant confirmation</li>
+                </ul>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>Simple Repayment</h3>
+                <p>Repay over time via convenient debit order. We also offer payment flexibility if you need to adjust your schedule.</p>
+                <ul class="step-features">
+                    <li><i class="fas fa-check"></i> Automatic debit orders</li>
+                    <li><i class="fas fa-check"></i> Flexible payment dates</li>
+                    <li><i class="fas fa-check"></i> Early settlement options</li>
+                    <li><i class="fas fa-check"></i> Payment reminders</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Timeline Section -->
+        <div class="timeline-section">
+            <h2>Your Loan Journey Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Application Submitted</h4>
+                        <p>Your application is received and immediately enters our secure processing system.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Document Verification</h4>
+                        <p>We verify your information and conduct necessary credit and affordability checks.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Approval Decision</h4>
+                        <p>You receive an instant decision via SMS and email with your loan terms.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Funds Transfer</h4>
+                        <p>Money is transferred directly to your bank account within hours of approval.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Requirements Section -->
+        <div class="requirements-section">
+            <h2>What You Need to Apply</h2>
+            <div class="requirements-grid">
+                <div class="requirement-card">
+                    <h4><i class="fas fa-user"></i> Personal Requirements</h4>
+                    <ul class="requirement-list">
+                        <li><i class="fas fa-check"></i> South African citizen or permanent resident</li>
+                        <li><i class="fas fa-check"></i> Between 18 and 65 years old</li>
+                        <li><i class="fas fa-check"></i> Valid South African ID document</li>
+                        <li><i class="fas fa-check"></i> Proof of residence (not older than 3 months)</li>
+                        <li><i class="fas fa-check"></i> Active cellphone number</li>
+                        <li><i class="fas fa-check"></i> Valid email address</li>
+                    </ul>
+                </div>
+
+                <div class="requirement-card">
+                    <h4><i class="fas fa-briefcase"></i> Employment Requirements</h4>
+                    <ul class="requirement-list">
+                        <li><i class="fas fa-check"></i> Employed for at least 3 months</li>
+                        <li><i class="fas fa-check"></i> Minimum monthly income of R2,500</li>
+                        <li><i class="fas fa-check"></i> Latest payslip or salary certificate</li>
+                        <li><i class="fas fa-check"></i> 3 months bank statements</li>
+                        <li><i class="fas fa-check"></i> Employment contract or letter</li>
+                        <li><i class="fas fa-check"></i> Proof of income (pensioners welcome)</li>
+                    </ul>
+                </div>
+
+                <div class="requirement-card">
+                    <h4><i class="fas fa-university"></i> Banking Requirements</h4>
+                    <ul class="requirement-list">
+                        <li><i class="fas fa-check"></i> Active South African bank account</li>
+                        <li><i class="fas fa-check"></i> Account open for at least 3 months</li>
+                        <li><i class="fas fa-check"></i> Salary paid into this account</li>
+                        <li><i class="fas fa-check"></i> Valid debit order facility</li>
+                        <li><i class="fas fa-check"></i> Bank account in your name</li>
+                        <li><i class="fas fa-check"></i> No recent returned debit orders</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Ready to Get Started?</h2>
+            <p>Join thousands of South Africans who trust YYC CASH LOAN for their financial needs. Apply now and get your cash within hours!</p>
+            <a href="apply.html" class="btn">Apply Now - No Fee</a>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="apply.html"><i class="fas fa-file-alt"></i>Apply</a></li>
+            <li><a href="loans.html"><i class="fas fa-money-bill-wave"></i>Loans</a></li>
+            <li><a href="how-it-works.html" class="active"><i class="fas fa-info-circle"></i>How It Works</a></li>
+            <li><a href="account.html"><i class="fas fa-user"></i>Account</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            alert('Menu options: Home, Apply, Loans, How It Works, Account');
+        });
+
+        // Mobile navigation active state
+        function setActiveNavItem() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.mobile-nav a');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize active nav item
+        document.addEventListener('DOMContentLoaded', setActiveNavItem);
+
+        // Animate timeline items on scroll
+        function animateTimeline() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            timelineItems.forEach((item, index) => {
+                const rect = item.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                if (isVisible) {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize timeline animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(30px)';
+                item.style.transition = 'all 0.6s ease';
+            });
+            
+            window.addEventListener('scroll', animateTimeline);
+            animateTimeline(); // Initial check
+        });
+    </script>
+</body>
+</html>
