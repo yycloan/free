@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Loan Products - YYC CASH LOAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>YYC CASH LOAN</h1>
+            <div class="subtitle">NCRCP15906 | Fast & Secure Loans</div>
+        </header>
+
+        <!-- Loans Section -->
+        <section id="loans" class="content-section active">
+            <h3 class="section-title">Our Loan Products</h3>
+            
+            <div class="loan-types-grid">
+                <div class="loan-type-card">
+                    <h4><i class="fas fa-user-alt"></i> Personal Loans</h4>
+                    <p>For medical bills, school fees, travel, or emergencies. Fixed monthly repayments and flexible terms up to 84 months.</p>
+                    <button class="btn btn-primary" onclick="navigateTo('apply')">Apply Here</button>
+                </div>
+                
+                <div class="loan-type-card">
+                    <h4><i class="fas fa-money-bill-wave"></i> Payday Loans</h4>
+                    <p>Small, short-term loans repayable on your next payday. Ideal for month-end emergencies and urgent expenses.</p>
+                    <button class="btn btn-primary" onclick="navigateTo('apply')">Apply Here</button>
+                </div>
+                
+                <div class="loan-type-card">
+                    <h4><i class="fas fa-briefcase"></i> Business Loans</h4>
+                    <p>Funding for entrepreneurs and SMEs. Can be used for inventory, marketing, staff salaries, or cash flow management.</p>
+                    <button class="btn btn-primary" onclick="navigateTo('apply')">Apply Here</button>
+                </div>
+                
+                <div class="loan-type-card">
+                    <h4><i class="fas fa-hand-holding-usd"></i> Debt Consolidation</h4>
+                    <p>Combine multiple debts into one affordable payment. Simplify your finances and potentially reduce interest rates.</p>
+                    <button class="btn btn-primary" onclick="navigateTo('apply')">Apply Here</button>
+                </div>
+            </div>
+            
+            <div class="calculator-section" style="margin-top: 20px;">
+                <h3><i class="fas fa-calculator"></i> Loan Calculator</h3>
+                <div class="form-group">
+                    <label for="calc-amount">Desired Loan Amount (R)</label>
+                    <input type="number" id="calc-amount" class="form-control" value="10000" min="1000" max="150000">
+                </div>
+                <div class="form-group">
+                    <label for="calc-term">Repayment Term</label>
+                    <select id="calc-term" class="form-control">
+                        <option value="1">1 month</option>
+                        <option value="2">2 months</option>
+                        <option value="3">3 months</option>
+                        <option value="6" selected>6 months</option>
+                        <option value="12">12 months</option>
+                        <option value="18">18 months</option>
+                        <option value="24">24 months</option>
+                        <option value="36">36 months</option>
+                        <option value="48">48 months</option>
+                        <option value="60">60 months</option>
+                        <option value="72">72 months</option>
+                        <option value="84">84 months</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="calc-interest">Interest Rate (% per annum)</label>
+                    <input type="number" id="calc-interest" class="form-control" value="15" readonly>
+                </div>
+                <div class="calculator-result">
+                    <div class="result-item">
+                        <span>Monthly Installment:</span>
+                        <span id="calc-monthly">R1,750</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Total Interest:</span>
+                        <span id="calc-interest-total">R500</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Total Repayment:</span>
+                        <span id="calc-total">R10,500</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-block" style="margin-top: 15px;" onclick="navigateTo('apply')">Apply Now Based on These Terms</button>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item" data-section="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="apply.html" class="nav-item" data-section="apply">
+                <i class="fas fa-edit"></i>
+                <span>Apply</span>
+            </a>
+            <a href="loans.html" class="nav-item active" data-section="loans">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Loans</span>
+            </a>
+            <a href="how.html" class="nav-item" data-section="how">
+                <i class="fas fa-info-circle"></i>
+                <span>How It Works</span>
+            </a>
+            <a href="account.html" class="nav-item" data-section="account">
+                <i class="fas fa-user"></i>
+                <span>Account</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        // Navigation functionality
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sectionId = this.getAttribute('data-section');
+                navigateTo(sectionId);
+            });
+        });
+
+        function navigateTo(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update active nav item
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-section') === sectionId) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Detailed Calculator
+        const calcAmount = document.getElementById('calc-amount');
+        const calcTerm = document.getElementById('calc-term');
+        const calcInterest = document.getElementById('calc-interest');
+        const calcMonthly = document.getElementById('calc-monthly');
+        const calcInterestTotal = document.getElementById('calc-interest-total');
+        const calcTotal = document.getElementById('calc-total');
+
+        function updateDetailedCalculator() {
+            const amount = parseInt(calcAmount.value) || 0;
+            const term = parseInt(calcTerm.value) || 1;
+            const interestRate = parseInt(calcInterest.value) / 100; // Convert percentage to decimal
+            
+            if (amount > 0) {
+                // Monthly interest rate
+                const monthlyRate = interestRate / 12;
+                
+                // Calculate monthly payment
+                const monthlyPaymentValue = amount * monthlyRate * Math.pow(1 + monthlyRate, term) / (Math.pow(1 + monthlyRate, term) - 1);
+                
+                // Calculate total payment and interest
+                const totalPayment = monthlyPaymentValue * term;
+                const interestAmount = totalPayment - amount;
+                
+                // Update display
+                calcMonthly.textContent = 'R' + Math.round(monthlyPaymentValue).toLocaleString();
+                calcInterestTotal.textContent = 'R' + Math.round(interestAmount).toLocaleString();
+                calcTotal.textContent = 'R' + Math.round(totalPayment).toLocaleString();
+            }
+        }
+
+        calcAmount.addEventListener('input', updateDetailedCalculator);
+        calcTerm.addEventListener('change', updateDetailedCalculator);
+        
+        // Initialize detailed calculator
+        updateDetailedCalculator();
+    </script>
+</body>
+</html>

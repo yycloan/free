@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - YYC CASH LOAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>YYC CASH LOAN</h1>
+            <div class="subtitle">NCRCP15906 | Fast & Secure Loans</div>
+        </header>
+
+        <!-- How It Works Section -->
+        <section id="how" class="content-section active">
+            <h3 class="section-title">How It Works</h3>
+            
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-content">
+                        <div class="step-title">Step 1: Apply Online</div>
+                        <p>Complete our secure digital form from your phone or computer. No office visit needed - apply from anywhere, anytime.</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-content">
+                        <div class="step-title">Step 2: Instant Assessment</div>
+                        <p>Our advanced system and experienced team review your application in real-time, often responding within 1-2 hours.</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-content">
+                        <div class="step-title">Step 3: Get Your Cash</div>
+                        <p>Once approved, your funds are transferred directly to your bank account - usually the same day or within 24 hours.</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-content">
+                        <div class="step-title">Step 4: Simple Repayment</div>
+                        <p>Repay over time via convenient debit order. We also offer payment flexibility if you need to adjust your schedule.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section" style="margin-top: 20px;">
+                <h4>Frequently Asked Questions</h4>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        How do I apply for a loan? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        You can apply directly through our mobile-optimized website by filling out the application form. The entire process takes less than 10 minutes and can be completed from your phone.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        How soon will I receive the money? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Most applications are processed within 1-2 hours during business hours (8 AM - 5 PM). Once approved, funds are typically transferred to your account on the same day or within 24 hours.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        What interest rates do you charge? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Our interest rates vary based on the loan amount, term, and your credit profile. Rates typically range from 15% to 25% per annum, in full compliance with South African lending regulations and NCR guidelines.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Can I pay off my loan early? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, you can pay off your loan early without any penalties. In fact, early repayment will reduce the total interest you pay, saving you money.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Do you lend to people with bad credit? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We consider each application on a case-by-case basis. While having a negative credit record may affect your application, we also look at your current income and ability to repay.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Are there any upfront fees? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        No, we do not charge any upfront fees. All fees and charges are clearly disclosed and only applied once your loan is approved and disbursed.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item" data-section="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="apply.html" class="nav-item" data-section="apply">
+                <i class="fas fa-edit"></i>
+                <span>Apply</span>
+            </a>
+            <a href="loans.html" class="nav-item" data-section="loans">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Loans</span>
+            </a>
+            <a href="how.html" class="nav-item active" data-section="how">
+                <i class="fas fa-info-circle"></i>
+                <span>How It Works</span>
+            </a>
+            <a href="account.html" class="nav-item" data-section="account">
+                <i class="fas fa-user"></i>
+                <span>Account</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        // Navigation functionality
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sectionId = this.getAttribute('data-section');
+                navigateTo(sectionId);
+            });
+        });
+
+        function navigateTo(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update active nav item
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-section') === sectionId) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // FAQ toggle functionality
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            answer.classList.toggle('active');
+            
+            // Toggle icon
+            const icon = element.querySelector('i');
+            if (answer.classList.contains('active')) {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+    </script>
+</body>
+</html>

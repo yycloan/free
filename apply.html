@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for a Loan - YYC CASH LOAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: #333;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            font-size: 14px;
+        }
+
+        /* Header - Smaller for mobile */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .logo img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .nav-menu {
+            display: none; /* Hidden on mobile by default */
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: #ED1C24;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ED1C24;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Navigation - Always visible */
+        .mobile-nav {
+            display: block;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem;
+            box-shadow: 0 -2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .mobile-nav-menu {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+        }
+
+        .mobile-nav-menu a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+            padding: 0.3rem;
+        }
+
+        .mobile-nav-menu a:hover {
+            color: #ED1C24;
+            transform: translateY(-2px);
+        }
+
+        .mobile-nav-menu i {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 60px;
+            padding: 1rem 0 80px 0; /* Bottom padding for mobile nav */
+        }
+
+        .hero-apply {
+            background: linear-gradient(135deg, #1C75BC, #1C75BC);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .hero-apply h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-apply p {
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            padding: 0 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Application Form - Optimized for mobile */
+        .application-section {
+            padding: 1rem 0;
+        }
+
+        .application-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .application-header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 1.5rem 1rem;
+            text-align: center;
+        }
+
+        .application-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .application-header p {
+            font-size: 0.9rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .application-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            position: relative;
+            padding: 0 1rem;
+        }
+
+        .application-progress::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            right: 1rem;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            height: 2px;
+            background: #e74c3c;
+            transform: translateY(-50%);
+            z-index: 2;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        .progress-step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            position: relative;
+            z-index: 3;
+            transition: all 0.3s ease;
+        }
+
+        .progress-step.active {
+            background: #ED1C24;
+        }
+
+        .progress-step.completed {
+            background: #0abf46;
+        }
+
+        .application-body {
+            padding: 1.5rem 1rem;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #e74c3c;
+            background: white;
+            box-shadow: 0 3px 10px rgba(231, 76, 60, 0.1);
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            flex-direction: column; /* Stack on mobile by default */
+        }
+
+        .form-col {
+            flex: 1;
+        }
+
+        .required-field::after {
+            content: ' *';
+            color: #e74c3c;
+        }
+
+        .form-note {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-right: 0.8rem;
+            margin-top: 0.2rem;
+            min-width: 16px;
+        }
+
+        .checkbox-group label {
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem;
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .file-upload-label:hover {
+            border-color: #e74c3c;
+            background: #fff;
+        }
+
+        .file-upload-label i {
+            font-size: 1.2rem;
+            margin-right: 0.8rem;
+            color: #666;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-name {
+            margin-top: 0.4rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            max-width: 150px;
+        }
+
+        .btn-prev {
+            background: #f8f9fa;
+            color: #2c3e50;
+            border: 2px solid #ddd;
+        }
+
+        .btn-prev:hover:not(:disabled) {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .btn-next {
+            background: linear-gradient(45deg, #ED1C24, #ED1C24);
+            color: white;
+            box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn-next:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-submit {
+            background: linear-gradient(45deg, #0abf46, #0abf46);
+            color: white;
+            box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Message Styles */
+        .message {
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin: 0.8rem 0;
+            display: none;
+            font-size: 0.85rem;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .error-message {
+            background: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+        }
+
+        .duplicate-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+
+        .success-message-inline {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        /* Loan Types Section - Smaller for mobile */
+        .loan-types-section {
+            padding: 2rem 0;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+        }
+
+        .loan-types-table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            font-size: 0.8rem;
+        }
+
+        .loan-types-table th,
+        .loan-types-table td {
+            padding: 0.8rem 0.5rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .loan-types-table th {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+
+        .loan-types-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .loan-types-table tr:hover {
+            background: #e9ecef;
+        }
+
+        .loan-types-table td:last-child {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        /* Footer - Smaller for mobile */
+        .footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 2rem 0 1rem;
+            font-size: 0.85rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 0.8rem;
+            color: #e74c3c;
+            font-size: 1rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.4rem;
+            transition: color 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .footer-section a:hover {
+            color: #e74c3c;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #e74c3c;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Improved Popup Overlay - Mobile optimized */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            padding: 1rem;
+        }
+
+        .popup-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .popup-container {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            max-width: 400px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            transform: scale(0.8) translateY(30px);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+
+        .popup-overlay.show .popup-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .popup-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: popupIconPulse 2s infinite;
+        }
+
+        .popup-icon i {
+            font-size: 2rem;
+            color: white;
+            animation: popupIconBounce 1s ease-out;
+        }
+
+        .popup-icon::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            opacity: 0.3;
+            animation: popupIconRipple 2s infinite;
+        }
+
+        .popup-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+            font-weight: bold;
+            animation: popupSlideUp 0.8s ease-out 0.3s both;
+        }
+
+        .popup-message {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            animation: popupSlideUp 0.8s ease-out 0.5s both;
+        }
+
+        .popup-reference {
+            background: #f8f9fa;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #27ae60;
+            animation: popupSlideUp 0.8s ease-out 0.7s both;
+        }
+
+        .popup-reference strong {
+            color: #27ae60;
+            font-size: 0.9rem;
+        }
+
+        .popup-processing {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding: 0.6rem;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 8px;
+            color: white;
+            animation: popupSlideUp 0.8s ease-out 0.9s both;
+            font-size: 0.8rem;
+        }
+
+        .popup-processing i {
+            font-size: 0.8rem;
+            animation: spin 2s linear infinite;
+        }
+
+        .popup-buttons {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            animation: popupSlideUp 0.8s ease-out 1.1s both;
+            flex-direction: column;
+        }
+
+        .popup-btn {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .popup-btn-primary {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+        }
+
+        .popup-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .popup-btn-secondary {
+            background: #f8f9fa;
+            color: #2c3e50;
+            border: 2px solid #ddd;
+        }
+
+        .popup-btn-secondary:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes popupIconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes popupIconBounce {
+            0% { transform: scale(0) rotate(180deg); }
+            50% { transform: scale(1.2) rotate(90deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        @keyframes popupIconRipple {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        @keyframes popupSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design - Tablet and larger */
+        @media (min-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+
+            .nav-menu {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: none;
+            }
+
+            .hero-apply h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-apply p {
+                font-size: 1.2rem;
+            }
+
+            .application-body {
+                padding: 2rem;
+            }
+
+            .form-row {
+                flex-direction: row;
+            }
+
+            .step-title {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                max-width: 200px;
+            }
+
+            .popup-buttons {
+                flex-direction: row;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .main-content {
+                padding-bottom: 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .application-container {
+                max-width: 900px;
+            }
+
+            .application-body {
+                padding: 3rem;
+            }
+        }
+    </style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, #1C75BC, #1C75BC);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .form-header h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .form-body {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1C75BC;
+            background: white;
+            box-shadow: 0 5px 15px rgba(28, 117, 188, 0.1);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-col {
+            flex: 1;
+        }
+
+        .required-field::after {
+            content: ' *';
+            color: #e74c3c;
+        }
+
+        .form-note {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-right: 1rem;
+            margin-top: 0.3rem;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-label:hover {
+            border-color: #1C75BC;
+            background: #fff;
+        }
+
+        .file-upload-label i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: #666;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-name {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-submit {
+            background: linear-gradient(45deg, #1C75BC, #1C75BC);
+            color: white;
+            box-shadow: 0 4px 15px rgba(28, 117, 188, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(28, 117, 188, 0.4);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #1C75BC;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Error Message */
+        .error-message {
+            background: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Debug Message */
+        .debug-message {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            color: #1976d2;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            display: none;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .debug-message.show {
+            display: block;
+        }
+
+        /* Success Popup */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            padding: 20px;
+        }
+
+        .popup-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .popup-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 480px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            transform: scale(0.8) translateY(30px);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+
+        .popup-overlay.show .popup-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .popup-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #1C75BC, #1C75BC);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: popupIconPulse 2s infinite;
+        }
+
+        .popup-icon i {
+            font-size: 2.5rem;
+            color: white;
+            animation: popupIconBounce 1s ease-out;
+        }
+
+        .popup-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .popup-message {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .popup-reference {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #1C75BC;
+        }
+
+        .popup-reference strong {
+            color: #1C75BC;
+            font-size: 1.1rem;
+        }
+
+        .popup-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .popup-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .popup-btn-primary {
+            background: linear-gradient(45deg, #1C75BC, #1C75BC);
+            color: white;
+            box-shadow: 0 4px 15px rgba(28, 117, 188, 0.3);
+        }
+
+        .popup-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(28, 117, 188, 0.4);
+        }
+
+        .popup-btn-secondary {
+            background: #f8f9fa;
+            color: #2c3e50;
+            border: 2px solid #ddd;
+        }
+
+        .popup-btn-secondary:hover {
+            background: #e9ecef;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                width: calc(100% - 20px);
+            }
+
+            .form-body {
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .popup-container {
+                padding: 1.5rem;
+                margin: 1rem;
+                max-width: 95%;
+            }
+            
+            .popup-buttons {
+                flex-direction: column;
+            }
+            
+            .popup-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .form-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-body {
+                padding: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+<!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <img src="/placeholder.svg?height=30&width=30" alt="Oyster Personal Finance Logo">
+                <span>Oyster Finance</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="apply.html">Apply</a></li>
+                <li><a href="review.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+     <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <ul class="mobile-nav-menu">
+            <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i>About</a></li>
+            <li><a href="apply.html"><i class="fas fa-file-alt"></i>Apply</a></li>
+            <li><a href="review.html"><i class="fas fa-star"></i>Reviews</a></li>
+            <li><a href="contact.html"><i class="fas fa-phone"></i>Contact</a></li>
+            <li><a href="profile.html"><i class="fas fa-user"></i>Profile</a></li>
+        </ul>
+    </nav>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>YYC CASH LOAN</h1>
+            <div class="subtitle">NCRCP15906 | Fast & Secure Loans</div>
+        </header>
+
+        <!-- Apply Section -->
+        <section id="apply" class="content-section active">
+            <h3 class="section-title">Apply for a Loan</h3>
+            
+            <div class="form-section">
+                <div class="step-indicator">
+                    <div class="step-dot active" data-step="1"></div>
+                    <div class="step-dot" data-step="2"></div>
+                    <div class="step-dot" data-step="3"></div>
+                    <div class="step-dot" data-step="4"></div>
+                </div>
+                
+                <form id="loan-application">
+                    <div class="form-step active" data-step="1">
+                        <h4>Personal Information</h4>
+                        <div class="form-group">
+                            <label for="full-name">Full Name *</label>
+                            <input type="text" id="full-name" class="form-control" required>
+                            <div class="error-message">Please enter your full name</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id-number">ID Number *</label>
+                            <input type="text" id="id-number" class="form-control" required maxlength="13">
+                            <div class="error-message">Please enter your 13-digit ID number</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Contact Number *</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                            <div class="error-message">Please enter your contact number</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" class="form-control" required>
+                            <div class="error-message">Please enter a valid email address</div>
+                        </div>
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-primary" onclick="nextStep(1)">Next Step</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-step" data-step="2">
+                        <h4>Employment Details</h4>
+                        <div class="form-group">
+                            <label for="employer">Employer Name *</label>
+                            <input type="text" id="employer" class="form-control" required>
+                            <div class="error-message">Please enter your employer name</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="employment-type">Employment Type *</label>
+                            <select id="employment-type" class="form-control" required>
+                                <option value="">Select employment type</option>
+                                <option value="full-time">Full-time Employee</option>
+                                <option value="part-time">Part-time Employee</option>
+                                <option value="self-employed">Self-employed</option>
+                                <option value="pensioner">Pensioner</option>
+                                <option value="not-employed">Not Currently Employed</option>
+                            </select>
+                            <div class="error-message">Please select your employment type</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="net-salary">Monthly Net Income (R) *</label>
+                            <input type="number" id="net-salary" class="form-control" required min="1000">
+                            <div class="error-message">Please enter your monthly net income</div>
+                        </div>
+                        <div class="form-navigation">
+                            <button type="button" class="btn" style="background-color: var(--gray);" onclick="prevStep(2)">Back</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next Step</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-step" data-step="3">
+                        <h4>Loan Request Details</h4>
+                        <div class="form-group">
+                            <label for="loan-amount-request">Amount Needed (R) *</label>
+                            <input type="number" id="loan-amount-request" class="form-control" required min="1000" max="150000">
+                            <div class="error-message">Please enter the loan amount (R1,000 - R150,000)</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="loan-purpose">Loan Purpose *</label>
+                            <select id="loan-purpose" class="form-control" required>
+                                <option value="">Select purpose</option>
+                                <option value="emergency">Emergency Expenses</option>
+                                <option value="education">Education/School Fees</option>
+                                <option value="medical">Medical Expenses</option>
+                                <option value="debt-consolidation">Debt Consolidation</option>
+                                <option value="business">Business Investment</option>
+                                <option value="home-improvement">Home Improvement</option>
+                                <option value="vehicle">Vehicle Purchase/Repair</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div class="error-message">Please select a loan purpose</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="repayment-term">Desired Repayment Term *</label>
+                            <select id="repayment-term" class="form-control" required>
+                                <option value="">Select term</option>
+                                <option value="1">1 month</option>
+                                <option value="2">2 months</option>
+                                <option value="3">3 months</option>
+                                <option value="6">6 months</
