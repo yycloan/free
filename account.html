@@ -722,7 +722,7 @@
                     <input type="email" id="email" name="email" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Phone Number</label>
                     <input type="password" id="password" name="password" class="form-control" required>
                 </div>
                 <button type="submit" class="btn">Login to Account</button>
@@ -863,84 +863,189 @@
     </nav>
 
     <script>
-        // Login functionality
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            // Simple validation (in real app, this would be server-side)
-            if (email && password) {
-                // Simulate login process
-                const submitBtn = this.querySelector('.btn');
-                const originalText = submitBtn.textContent;
-                
-                submitBtn.textContent = 'Logging in...';
-                submitBtn.disabled = true;
-                
-                setTimeout(() => {
-                    // Hide login section and show dashboard
-                    document.getElementById('loginSection').style.display = 'none';
-                    document.getElementById('dashboardSection').style.display = 'block';
-                    
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                }, 1500);
-            } else {
-                alert('Please enter both email and password.');
+// Use Email + Phone Number for login
+let storedData = JSON.parse(localStorage.getItem('loanApplication'));
+let currentStageIndex = parseInt(localStorage.getItem('loanStageIndex')) || 0;
+
+function showDashboard(data) {
+    document.getElementById('loginSection').style.display = 'none';
+    document.getElementById('dashboardSection').style.display = 'block';
+
+    document.querySelector('.welcome-message h2').innerText = `Welcome back, ${data.fullName.split(' ')[0]}!`;
+
+    const accountDetails = document.querySelectorAll('.dashboard-card')[1].querySelectorAll('.detail-value');
+    accountDetails[0].innerText = data.fullName;
+    accountDetails[1].innerText = data.email;
+    accountDetails[2].innerText = data.phone;
+    accountDetails[3].innerText = new Date().toLocaleString('default', { month: 'short', year: 'numeric' });
+    accountDetails[4].innerText = 'Pending';
+
+    const loanAmountEl = document.querySelector('.dashboard-card .loan-details .detail-row:nth-child(1) .detail-value');
+    if (loanAmountEl) loanAmountEl.innerText = `R${data.loanAmount}`;
+
+    const cards = document.querySelectorAll('.dashboard-card');
+    if (cards[2] && cards[2].querySelector('h3').textContent.includes('Recent Payments')) {
+        cards[2].remove();
+    }
+
+    const quickActionContainer = cards[0].querySelector('.quick-actions');
+    if (quickActionContainer) quickActionContainer.innerHTML = '';
+
+    // Add Live Tracking Bar
+    const topCard = document.createElement('div');
+    topCard.className = 'dashboard-card';
+    topCard.innerHTML = `
+        <h3><i class="fas fa-tasks"></i> Live Loan Application Tracking</h3>
+        <div class="loan-status" id="loan-status-label">Status: Starting...</div>
+        <div class="progress-bar" style="height: 24px; margin-top: 10px; background: #ddd; border-radius: 6px; overflow: hidden;">
+            <div class="progress-fill" id="progress-fill" style="
+                width: 5%;
+                font-weight: bold;
+                font-size: 0.9rem;
+                color: white;
+                text-align: center;
+                padding: 3px 0;
+                background: linear-gradient(90deg, #4caf50, #81c784);
+                transition: width 1s ease;
+            ">5%</div>
+        </div>
+    `;
+    document.querySelector('.dashboard-grid').prepend(topCard);
+
+    simulateProgress(data);
+    addUserActionButtons(data);
+}
+
+function simulateProgress(data) {
+    const progressBar = document.getElementById('progress-fill');
+    const statusLabel = document.getElementById('loan-status-label');
+
+    const steps = [
+        { percent: 5, delay: 0, message: 'Application Received' },
+        { percent: 25, delay: 60000, message: 'Processing Started' },
+        { percent: 88, delay: 60000, message: 'Application Under Review' },
+        { percent: 100, delay: 5000, message: `🎉 Congratulations ${data.fullName.split(' ')[0]}! Your loan of R${data.loanAmount} has been approved.` }
+    ];
+
+    function nextStep() {
+        if (currentStageIndex < steps.length) {
+            const s = steps[currentStageIndex];
+            progressBar.style.width = s.percent + '%';
+            progressBar.innerText = s.percent + '%';
+            statusLabel.innerText = 'Status: ' + s.message;
+
+            localStorage.setItem('loanStageIndex', currentStageIndex); // persist progress
+
+            if (currentStageIndex === steps.length - 1) {
+                const msg = document.createElement('div');
+                msg.style.marginTop = '20px';
+                msg.innerHTML = `
+                    ⚠️ However, your credit score is currently low.<br>
+                    To access funds and improve future eligibility, please repair your credit.<br><br>
+                    <a href="approval.html" class="btn btn-primary">View Approval & Fix Low Credit</a>
+                `;
+                progressBar.parentElement.appendChild(msg);
             }
-        });
 
-        // Logout functionality
-        function logout() {
-            if (confirm('Are you sure you want to logout?')) {
-                document.getElementById('dashboardSection').style.display = 'none';
-                document.getElementById('loginSection').style.display = 'block';
-                document.getElementById('loginForm').reset();
+            currentStageIndex++;
+            if (currentStageIndex < steps.length) {
+                setTimeout(nextStep, steps[currentStageIndex].delay);
             }
         }
+    }
 
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        
-        mobileMenuBtn.addEventListener('click', function() {
-            alert('Menu options: Home, Apply, Loans, How It Works, Account');
-        });
+    nextStep();
+}
 
-        // Mobile navigation active state
-        function setActiveNavItem() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            const navLinks = document.querySelectorAll('.mobile-nav a');
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add('active');
-                }
-            });
-        }
+// Editable Action Buttons
+function addUserActionButtons(data) {
+    const actionCard = document.createElement('div');
+    actionCard.className = 'dashboard-card';
+    actionCard.innerHTML = `
+        <h3><i class="fas fa-cogs"></i> Quick Actions</h3>
+        <div class="quick-actions">
+            <button onclick="openPopup('profile', '${data.fullName}', '${data.email}', '${data.phone}')">Update Profile</button>
+            <button onclick="openPopup('support')">Contact Support</button>
+            <button onclick="openPopup('bank')">Update Banking Details</button>
+        </div>
+        <div id="popup" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; border-radius:8px; padding:20px; box-shadow:0 2px 8px rgba(0,0,0,0.3); z-index:1000;">
+            <div id="popup-content"></div>
+            <button onclick="savePopup()" style="margin-top:10px;">Save</button>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    `;
+    document.querySelector('.dashboard-grid').appendChild(actionCard);
+}
 
-        // Initialize active nav item
-        document.addEventListener('DOMContentLoaded', setActiveNavItem);
+function openPopup(type, name = '', email = '', phone = '') {
+    const popup = document.getElementById('popup');
+    const content = document.getElementById('popup-content');
+    popup.style.display = 'block';
 
-        // Demo login for testing
-        function demoLogin() {
-            document.getElementById('email').value = 'demo@example.com';
-            document.getElementById('password').value = 'demo123';
-        }
+    if (type === 'profile') {
+        content.innerHTML = `
+            <label>Full Name: <input type="text" id="editName" value="${name}"></label><br>
+            <label>Email: <input type="email" id="editEmail" value="${email}"></label><br>
+            <label>Phone: <input type="text" id="editPhone" value="${phone}"></label>
+        `;
+    } else if (type === 'support') {
+        content.innerHTML = `
+            <label>Your Message:<br>
+            <textarea id="supportMessage" rows="5" style="width:100%;"></textarea></label>
+        `;
+    } else if (type === 'bank') {
+        content.innerHTML = `
+            <label>Bank Name: <input type="text" id="bankName"></label><br>
+            <label>Account Number: <input type="text" id="bankAccount"></label>
+        `;
+    }
 
-        // Add demo login button for testing
-        document.addEventListener('DOMContentLoaded', function() {
-            const demoBtn = document.createElement('button');
-            demoBtn.textContent = 'Demo Login';
-            demoBtn.className = 'btn btn-outline';
-            demoBtn.style.marginTop = '10px';
-            demoBtn.onclick = demoLogin;
-            
-            const loginForm = document.getElementById('loginForm');
-            loginForm.appendChild(demoBtn);
-        });
-    </script>
+    popup.setAttribute('data-type', type);
+}
+
+function savePopup() {
+    const type = document.getElementById('popup').getAttribute('data-type');
+    if (type === 'profile') {
+        storedData.fullName = document.getElementById('editName').value.trim();
+        storedData.email = document.getElementById('editEmail').value.trim();
+        storedData.phone = document.getElementById('editPhone').value.trim();
+        localStorage.setItem('loanApplication', JSON.stringify(storedData));
+        alert('Profile updated successfully!');
+        location.reload();
+    } else if (type === 'support') {
+        const msg = document.getElementById('supportMessage').value;
+        alert("Support request sent:\n\n" + msg);
+    } else if (type === 'bank') {
+        const bank = document.getElementById('bankName').value;
+        const account = document.getElementById('bankAccount').value;
+        alert("Banking details saved:\n" + bank + " - " + account);
+    }
+
+    closePopup();
+}
+
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+}
+
+// Login Handler
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('password').value.trim();
+
+    if (!storedData) {
+        alert("No application data found. Please apply first.");
+        return;
+    }
+
+    if (email === storedData.email && phone === storedData.phone) {
+        showDashboard(storedData);
+    } else {
+        alert("Login failed. Email or phone number doesn't match our records.");
+    }
+});
+</script>
+
 </body>
 </html>
