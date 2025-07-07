@@ -1244,35 +1244,218 @@
         </div>
     </div>
 
-    <!-- Quick Loan Calculator Preview -->
-    <section class="quick-calculator">
-        <h3>Quick Loan Calculator</h3>
-        <div class="calculator-preview">
-            <div class="calc-item">
-                <h4>Loan Amount</h4>
-                <div class="amount">R5,000</div>
-            </div>
-            <div class="calc-item">
-                <h4>Repayment Term</h4>
-                <div class="amount">6 months</div>
-            </div>
-            <div class="calc-item">
-                <h4>Monthly Repayment</h4>
-                <div class="amount">R870</div>
-            </div>
-            <div class="calc-item">
-                <h4>Total Interest</h4>
-                <div class="amount">R221</div>
-            </div>
-            <div class="calc-item">
-                <h4>Total Repayment</h4>
-                <div class="amount">R5,221</div>
-            </div>
-        </div>
-        <div style="text-align: center; margin-top: 20px;">
-            <a href="apply.html" class="btn btn-primary">Get Your Instant Payout</a>
-        </div>
-    </section>
+      <style>
+    * { box-sizing: border-box; }
+    
+    .container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: auto;
+      padding: 30px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .step {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      min-height: 200px;
+      animation: fadeIn 0.5s ease;
+    }
+    .step.active {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .icon {
+      font-size: 40px;
+      color: #007bff;
+    }
+    .input-box {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 12px 20px;
+      width: 100%;
+      font-size: 16px;
+      background: #f0f8ff;
+      text-align: left;
+    }
+    .button {
+      background: #007bff;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      animation: pulse 1s infinite alternate;
+    }
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+    .progress {
+      width: 100%;
+      background: #eee;
+      height: 10px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: #007bff;
+      animation: loadbar 2s forwards;
+    }
+    @keyframes loadbar {
+      to { width: 100%; }
+    }
+    .success-check {
+      font-size: 60px;
+      color: #28a745;
+      animation: bounce 1s ease infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+    .typing {
+      border-right: 2px solid #007bff;
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+    }
+    .account-flow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      border-radius: 12px;
+      background: #f1faff;
+      font-weight: bold;
+      position: relative;
+    }
+    .cash-icon {
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      font-size: 24px;
+      color: green;
+      animation: moveCash 2s linear forwards;
+    }
+    @keyframes moveCash {
+      0% { left: 10%; opacity: 1; }
+      100% { left: 80%; opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="step active" id="step1">
+      <i class="fas fa-clipboard-check icon"></i>
+      <h2>Easy Loan Application</h2>
+    </div>
+
+    <div class="step" id="step2">
+      <i class="fas fa-user icon"></i>
+      <h3>Enter your name</h3>
+      <div class="input-box"><span id="typed-name" class="typing"></span></div>
+    </div>
+
+    <div class="step" id="step3">
+      <i class="fas fa-money-bill icon"></i>
+      <h3>Enter Amount</h3>
+      <div class="input-box"><span id="typed-amount" class="typing"></span></div>
+    </div>
+
+    <div class="step" id="step4">
+      <i class="fas fa-university icon"></i>
+      <h3>Select Account</h3>
+      <div class="input-box">Standard Bank <i class="fas fa-check-circle" style="color:green; float:right;"></i></div>
+      <button class="button">Next</button>
+    </div>
+
+    <div class="step" id="step5">
+      <i class="fas fa-arrow-right-arrow-left icon"></i>
+      <h3>Paying Out...</h3>
+      <div class="account-flow">
+        <div>YYC Loan</div>
+        <div class="cash-icon">💸</div>
+        <div>Ms Johan</div>
+      </div>
+      <div class="progress"><div class="progress-bar"></div></div>
+    </div>
+
+    <div class="step" id="step6">
+      <i class="fas fa-check-circle success-check"></i>
+      <h3>Payout Successful!</h3>
+    </div>
+  </div>
+
+  <script>
+    const steps = document.querySelectorAll('.step');
+    const nameText = "Ms Johan";
+    const amountText = "R 50,000";
+
+    function showStep(i) {
+      steps.forEach((s, index) => {
+        s.classList.remove("active");
+        if (index === i) s.classList.add("active");
+      });
+    }
+
+    function typeText(el, text, delay, callback) {
+      let idx = 0;
+      const typer = setInterval(() => {
+        el.textContent += text[idx++];
+        if (idx >= text.length) {
+          clearInterval(typer);
+          if (callback) setTimeout(callback, 1000);
+        }
+      }, delay);
+    }
+
+    function runAnimation() {
+      showStep(0);
+      setTimeout(() => {
+        showStep(1);
+        typeText(document.getElementById("typed-name"), nameText, 100, () => {
+          showStep(2);
+          typeText(document.getElementById("typed-amount"), amountText, 100, () => {
+            showStep(3);
+            setTimeout(() => {
+              document.querySelector("#step4 .button").click();
+            }, 1500);
+          });
+        });
+      }, 2000);
+    }
+
+    document.querySelector("#step4 .button").addEventListener("click", () => {
+      showStep(4);
+      setTimeout(() => {
+        showStep(5);
+        setTimeout(() => {
+          showStep(6);
+          setTimeout(() => {
+            // Reset for loop
+            document.getElementById("typed-name").textContent = "";
+            document.getElementById("typed-amount").textContent = "";
+            showStep(0);
+            setTimeout(runAnimation, 1500);
+          }, 3000);
+        }, 3000);
+      }, 2000);
+    });
+
+    setTimeout(runAnimation, 1000);
+  </script>
 
     <!-- Stats Counter - Horizontal layout -->
     <div class="stats-container">
