@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews - YYC CASH LOAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: #e74c3c;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e74c3c;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            box-shadow: 0 -2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .mobile-nav-menu {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+        }
+
+        .mobile-nav-menu a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-menu a:hover {
+            color: #e74c3c;
+            transform: translateY(-2px);
+        }
+
+        .mobile-nav-menu i {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 0px;
+            padding: 3rem 0;
+        }
+
+        .hero-reviews {
+            background: linear-gradient(135deg, #1C75BC, #1C75BC);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .hero-reviews h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-reviews p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Rating Summary */
+        .rating-summary {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .summary-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .overall-rating {
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .rating-number {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #e74c3c;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .rating-stars {
+            color: #f39c12;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .rating-text {
+            color: #666;
+        }
+
+        .rating-bars {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .rating-bar {
+            margin-bottom: 1rem;
+        }
+
+        .bar-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .bar-stars {
+            color: #1C75BC;
+        }
+
+        .bar-count {
+            color: #1C75BC;
+        }
+
+        .bar-container {
+            height: 10px;
+            background: #1C75BC;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: #f39c12;
+            border-radius: 5px;
+            transition: width 1.5s ease-out;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            padding: 2rem 0;
+            background: #f8f9fa;
+        }
+
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn.active {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+
+        .filter-btn:hover:not(.active) {
+            border-color: #e74c3c;
+            color: #e74c3c;
+        }
+
+        /* Reviews Grid */
+        .reviews-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            transform: perspective(1000px) rotateX(0deg);
+        }
+
+        .review-card:hover {
+            transform: perspective(1000px) rotateX(-5deg) translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .reviewer-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .reviewer-info h3 {
+            margin-bottom: 0.3rem;
+            color: #2c3e50;
+        }
+
+        .reviewer-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .review-stars {
+            color: #f39c12;
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .review-loan-type {
+            display: inline-block;
+            background: #f8f9fa;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .verified-badge {
+            background: #27ae60;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 1rem;
+        }
+
+        /* Load More Button */
+        .load-more {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .load-more-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .load-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        /* Write Review Section */
+        .write-review-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+        }
+
+        .write-review-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .write-review-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .write-review-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .write-review-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #e74c3c;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-group select option {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .star-rating-container {
+            margin-bottom: 2rem;
+        }
+
+        .star-rating-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .star-rating i {
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .star-rating i:hover,
+        .star-rating i.active {
+            color: #f39c12;
+        }
+
+        .submit-review-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .submit-review-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #e74c3c;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #e74c3c;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #27ae60;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+            display: none;
+            animation: slideInDown 0.5s ease-out;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
+            .hero-reviews h1 {
+                font-size: 2rem;
+            }
+
+            .summary-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .write-review-card {
+                padding: 2rem;
+            }
+
+            .main-content {
+                padding-bottom: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>YYC CASH LOAN</h1>
+            <div class="subtitle">NCRCP15906 | Fast & Secure Loans</div>
+        </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-reviews">
+            <div class="container">
+                <h1>Real Stories, Real Satisfaction</h1>
+                <p>We're proud to help thousands of South Africans achieve their goals. Here's what some of our happy customers have to say.</p>
+            </div>
+        </section>
+
+        <!-- Rating Summary -->
+        <section class="rating-summary">
+            <div class="container">
+                <div class="summary-container">
+                    <div class="overall-rating">
+                        <div class="rating-number">4.8</div>
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="rating-text">Based on All reviews</div>
+                    </div>
+                    <div class="rating-bars">
+                        <div class="rating-bar">
+                            <div class="bar-label">
+                                <div class="bar-stars">5 stars</div>
+                                <div class="bar-count">5+</div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-fill" style="width: 0%;" data-width="82%"></div>
+                            </div>
+                        </div>
+                        <div class="rating-bar">
+                            <div class="bar-label">
+                                <div class="bar-stars">4 stars</div>
+                                <div class="bar-count">4+</div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-fill" style="width: 0%;" data-width="12%"></div>
+                            </div>
+                        </div>
+                        <div class="rating-bar">
+                            <div class="bar-label">
+                                <div class="bar-stars">3 stars</div>
+                                <div class="bar-count">3+</div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-fill" style="width: 0%;" data-width="3%"></div>
+                            </div>
+                        </div>
+                        <div class="rating-bar">
+                            <div class="bar-label">
+                                <div class="bar-stars">2 stars</div>
+                                <div class="bar-count">2+</div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-fill" style="width: 0%;" data-width="1%"></div>
+                            </div>
+                        </div>
+                        <div class="rating-bar">
+                            <div class="bar-label">
+                                <div class="bar-stars">1 star</div>
+                                <div class="bar-count">1+</div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-fill" style="width: 0%;" data-width="0.8%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="filter-section">
+            <div class="container">
+                <div class="filter-container">
+                    <button class="filter-btn active" data-filter="all">All Reviews</button>
+                    <button class="filter-btn" data-filter="personal">Personal Loans</button>
+                    <button class="filter-btn" data-filter="business">Business Loans</button>
+                    <button class="filter-btn" data-filter="home">Home Loans</button>
+                    <button class="filter-btn" data-filter="vehicle">Vehicle Loans</button>
+                    <button class="filter-btn" data-filter="5-star">5 Star Reviews</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Grid -->
+        <section class="reviews-section">
+            <div class="container">
+                <div class="reviews-grid">
+                    <!-- Review 1 -->
+                    <div class="review-card" data-category="personal" data-stars="5">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">NA</div>
+                            <div class="reviewer-info">
+                                <h3>Nkosi A.</h3>
+                                <div class="reviewer-date">15 May 2025</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            "Fast, efficient, and stress-free! I got my loan approved within hours and the money was in my account the next day. The customer service team was incredibly helpful throughout the process. I'll definitely be using YYC CASH LOAN again in the future."
+                        </div>
+                        <div>
+                            <span class="review-loan-type">Personal Loan</span>
+                            <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="review-card" data-category="business" data-stars="5">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">BO</div>
+                            <div class="reviewer-info">
+                                <h3>Bella O.</h3>
+                                <div class="reviewer-date">2 May 2025</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            "They helped me grow my salon business when traditional banks wouldn't give me a chance. The application process was simple and the staff were very helpful throughout. The interest rates are fair and the repayment terms are flexible. My business is thriving now thanks to YYC CASH LOAN!"
+                        </div>
+                        <div>
+                            <span class="review-loan-type">Business Loan</span>
+                            <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="review-card" data-category="personal" data-stars="4">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">VI</div>
+                            <div class="reviewer-info">
+                                <h3>Van Wyk I.</h3>
+                                <div class="reviewer-date">28 April 2025</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            "Reliable and transparent service with no hidden fees. The application process was straightforward and I received my funds quickly. The only reason I'm not giving 5 stars is because the online portal was a bit slow at times, but overall a great experience."
+                        </div>
+                        <div>
+                            <span class="review-loan-type">Personal Loan</span>
+                            <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 4 -->
+                    <div class="review-card" data-category="home" data-stars="5">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">TM</div>
+                            <div class="reviewer-info">
+                                <h3>Thabo M.</h3>
+                                <div class="reviewer-date">15 April 2025</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            "I never thought I'd be able to own my own home, but YYC CASH LOAN made it possible. They offered me a competitive interest rate and guided me through every step of the process. The staff were knowledgeable and patient with all my questions. I'm now a proud homeowner thanks to them!"
+                        </div>
+                        <div>
+                            <span class="review-loan-type">Home Loan</span>
+                            <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+                        </div>
+                    </div>
+<!-- Review 5 -->
+<div class="review-card" data-category="car" data-stars="5">
+    <div class="review-header">
+        <div class="reviewer-avatar">NK</div>
+        <div class="reviewer-info">
+            <h3>Nadine K.</h3>
+            <div class="reviewer-date">30 March 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Superb service! From quote to payout, everything was seamless. I was able to buy my new car within a week. Highly recommend for anyone looking for efficiency and clarity."
+    </div>
+    <div>
+        <span class="review-loan-type">Car Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 6 -->
+<div class="review-card" data-category="home" data-stars="4">
+    <div class="review-header">
+        <div class="reviewer-avatar">AL</div>
+        <div class="reviewer-info">
+            <h3>Andre L.</h3>
+            <div class="reviewer-date">22 March 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+    </div>
+    <div class="review-text">
+        "The staff were incredibly helpful and guided me through the home loan process. It took slightly longer than expected, but I felt supported every step of the way."
+    </div>
+    <div>
+        <span class="review-loan-type">Home Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 7 -->
+<div class="review-card" data-category="personal" data-stars="5">
+    <div class="review-header">
+        <div class="reviewer-avatar">SM</div>
+        <div class="reviewer-info">
+            <h3>Shaun M.</h3>
+            <div class="reviewer-date">19 March 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Applied on a Tuesday, funds in my account by Thursday. This is the kind of service we all need more of. Everything was explained clearly, and there were no surprises."
+    </div>
+    <div>
+        <span class="review-loan-type">Personal Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 8 -->
+<div class="review-card" data-category="car" data-stars="3">
+    <div class="review-header">
+        <div class="reviewer-avatar">LR</div>
+        <div class="reviewer-info">
+            <h3>Lebo R.</h3>
+            <div class="reviewer-date">11 March 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Mixed experience. I did get the loan in the end, but there were a few communication breakdowns and delays. I appreciate the final outcome, just wish it had been smoother."
+    </div>
+    <div>
+        <span class="review-loan-type">Car Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 9 -->
+<div class="review-card" data-category="personal" data-stars="4">
+    <div class="review-header">
+        <div class="reviewer-avatar">DR</div>
+        <div class="reviewer-info">
+            <h3>Dineo R.</h3>
+            <div class="reviewer-date">28 February 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Fast approval process and friendly consultants. The repayment terms were well explained. Would have liked more online self-service options."
+    </div>
+    <div>
+        <span class="review-loan-type">Personal Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 10 -->
+<div class="review-card" data-category="home" data-stars="5">
+    <div class="review-header">
+        <div class="reviewer-avatar">ZT</div>
+        <div class="reviewer-info">
+            <h3>Zama T.</h3>
+            <div class="reviewer-date">20 February 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Amazing from start to finish! I never imagined buying my first home could be so stress-free. The team was responsive and professional."
+    </div>
+    <div>
+        <span class="review-loan-type">Home Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+                    <!-- Review 5 -->
+                    <div class="review-card" data-category="vehicle" data-stars="5">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">LN</div>
+                            <div class="reviewer-info">
+                                <h3>Lerato N.</h3>
+                                <div class="reviewer-date">10 April 2025</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            "I needed a car urgently for my new job, and YYC CASH LOAN came through for me when I needed it most. The application was approved within hours, and I was able to purchase my car the next day. The interest rate was better than what the dealership offered me. Excellent service!"
+                        </div>
+                        <div>
+                            <span class="review-loan-type">Vehicle Loan</span>
+                            <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 6 -->
+                    <div class="review-card" data-category="personal" data-stars="4">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">JD</div>
+                            <div class="reviewer-info">
+                                <h3>John D.</h3>
+                                <div class="reviewer-date">5 April 2025</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            "I had an unexpected medical emergency and needed funds quickly. YYC CASH LOAN processed my application promptly and I received the money within 24 hours. The only reason for 4 stars instead of 5 is that I had to call to follow up on my application status."
+                        </div>
+                        <div>
+                            <span class="review-loan-type">Personal Loan</span>
+                            <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+                        </div>
+                    </div>
+                    
+                     <!-- Review 7 -->
+                    <div class="review-card" data-category="vehicle" data-stars="5">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">KM</div>
+                            <div class="reviewer-info">
+                                <h3>Katlego M.</h3>
+                                <div class="reviewer-date">12 April 2025</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            "YYC CASH LOAN made getting my vehicle loan so easy. The team was friendly and guided me through every step. I’m now driving my dream bakkie thanks to them!"
+                        </div>
+                        <div>
+                            <span class="review-loan-type">Vehicle Loan</span>
+                            <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 8 -->
+                    <div class="review-card" data-category="business" data-stars="5">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">AB</div>
+                            <div class="reviewer-info">
+                                <h3>Annelie B.</h3>
+                                <div class="reviewer-date">9 April 2025</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            "I run a small bakery in Stellenbosch, and this business loan helped me expand my kitchen. They understood my needs and were super efficient. Highly recommended!"
+                        </div>
+                        <div>
+                            <span class="review-loan-type">Business Loan</span>
+                            <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 9 -->
+                    <div class="review-card" data-category="personal" data-stars="4">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">TN</div>
+                            <div class="reviewer-info">
+                                <h3>Thabo N.</h3>
+                                <div class="reviewer-date">6 April 2025</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            "Quick service and good communication. The mobile site was a bit slow, but overall the experience was great. Got my loan for household repairs without stress."
+                        </div>
+                        <div>
+                            <span class="review-loan-type">Personal Loan</span>
+                            <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 10 -->
+                    <div class="review-card" data-category="business" data-stars="5">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">HJ</div>
+                            <div class="reviewer-info">
+                                <h3>Hendrik J.</h3>
+                                <div class="reviewer-date">3 April 2025</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            "Dankie YYC CASH LOAN! I was able to upgrade my farm equipment without delay. The process was seamless and their staff were professional and helpful."
+                        </div>
+                        <div>
+                            <span class="review-loan-type">Business Loan</span>
+                            <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+                        </div>
+                    </div>
+
+
+                    <!-- Review 11 -->
+                    <div class="review-card" data-category="vehicle" data-stars="4">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">SP</div>
+                            <div class="reviewer-info">
+                                <h3>Simphiwe P.</h3>
+                                <div class="reviewer-date">1 April 2025</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            "Great experience overall. I got the car I’ve been saving for. Slight delay in the paperwork but the follow-up was impressive. Thank you YYC CASH LOAN!"
+                        </div>
+                        <div>
+                            <span class="review-loan-type">Vehicle Loan</span>
+                            <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+                        </div>
+                    </div>
+<!-- Review 12 -->
+<div class="review-card" data-category="personal" data-stars="4">
+    <div class="review-header">
+        <div class="reviewer-avatar">LT</div>
+        <div class="reviewer-info">
+            <h3>Lourens T.</h3>
+            <div class="reviewer-date">22 March 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Ek het 'n persoonlike lening nodig gehad om my dogter se troue te help befonds. YYC was regtig professioneel, net 'n bietjie stadiger as verwag met die uitbetaling."
+    </div>
+    <div>
+        <span class="review-loan-type">Persoonlike Lening</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 13 -->
+<div class="review-card" data-category="education" data-stars="5">
+    <div class="review-header">
+        <div class="reviewer-avatar">TA</div>
+        <div class="reviewer-info">
+            <h3>Thabiso A.</h3>
+            <div class="reviewer-date">18 March 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="review-text">
+        "With YYC’s help, my son can now study engineering at TUT. The application was quick, and the consultants kept us updated the whole way."
+    </div>
+    <div>
+        <span class="review-loan-type">Education Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 14 -->
+<div class="review-card" data-category="home" data-stars="5">
+    <div class="review-header">
+        <div class="reviewer-avatar">MH</div>
+        <div class="reviewer-info">
+            <h3>Marietjie H.</h3>
+            <div class="reviewer-date">14 March 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Ons het ons kombuis laat oordoen met 'n lening van YYC. Hulle diens was vinnig en vriendelik – ek sal hulle enige tyd aanbeveel!"
+    </div>
+    <div>
+        <span class="review-loan-type">Verbeteringslening</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+<!-- Review 15 -->
+<div class="review-card" data-category="business" data-stars="5">
+    <div class="review-header">
+        <div class="reviewer-avatar">KB</div>
+        <div class="reviewer-info">
+            <h3>Karabo B.</h3>
+            <div class="reviewer-date">10 March 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="review-text">
+        "My fashion boutique in Polokwane was struggling until YYC stepped in. The business loan gave me breathing room and now sales are climbing again!"
+    </div>
+    <div>
+        <span class="review-loan-type">Business Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 16 -->
+<div class="review-card" data-category="home" data-stars="4">
+    <div class="review-header">
+        <div class="reviewer-avatar">DV</div>
+        <div class="reviewer-info">
+            <h3>Dewald V.</h3>
+            <div class="reviewer-date">5 March 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Die lening was presies wat ons nodig gehad het om die dak van ons huis in Bloemfontein te herstel. Ek sou net graag vinniger kommunikasie wou hê."
+    </div>
+    <div>
+        <span class="review-loan-type">Huisherstel Lening</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 17 -->
+<div class="review-card" data-category="education" data-stars="5">
+    <div class="review-header">
+        <div class="reviewer-avatar">ZM</div>
+        <div class="reviewer-info">
+            <h3>Zanele M.</h3>
+            <div class="reviewer-date">2 March 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="review-text">
+        "YYC made it possible for me to study full-time at Wits. I didn’t think I’d qualify but they explained everything and walked me through the process."
+    </div>
+    <div>
+        <span class="review-loan-type">Student Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 18 -->
+<div class="review-card" data-category="personal" data-stars="5">
+    <div class="review-header">
+        <div class="reviewer-avatar">EN</div>
+        <div class="reviewer-info">
+            <h3>Elzabé N.</h3>
+            <div class="reviewer-date">25 February 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Ek moes dringend Johannesburg toe vlieg vir 'n familielid se operasie. YYC het gehelp met 'n vinnige lening sonder gedoe. Baie dankie vir julle empatie!"
+    </div>
+    <div>
+        <span class="review-loan-type">Noodlening</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 19 -->
+<div class="review-card" data-category="vehicle" data-stars="4">
+    <div class="review-header">
+        <div class="reviewer-avatar">TK</div>
+        <div class="reviewer-info">
+            <h3>Thuli K.</h3>
+            <div class="reviewer-date">20 February 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+    </div>
+    <div class="review-text">
+        "I got a second-hand bakkie to deliver goods for my online shop in Mpumalanga. The loan approval took longer than expected, but the interest rate is great!"
+    </div>
+    <div>
+        <span class="review-loan-type">Vehicle Finance</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 11 -->
+<div class="review-card" data-category="personal" data-stars="3">
+    <div class="review-header">
+        <div class="reviewer-avatar">MK</div>
+        <div class="reviewer-info">
+            <h3>Melanie K.</h3>
+            <div class="reviewer-date">17 February 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+    </div>
+    <div class="review-text">
+        "The loan was eventually approved, but I had to submit documents multiple times. Customer service was polite but not always reachable. Hoping for improvements in processing."
+    </div>
+    <div>
+        <span class="review-loan-type">Personal Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 12 -->
+<div class="review-card" data-category="home" data-stars="4">
+    <div class="review-header">
+        <div class="reviewer-avatar">BN</div>
+        <div class="reviewer-info">
+            <h3>Brian N.</h3>
+            <div class="reviewer-date">10 February 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Good value and decent interest rates. The process wasn’t instant, but the team kept me updated, which I appreciated. I’m happy with the final outcome."
+    </div>
+    <div>
+        <span class="review-loan-type">Home Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 13 -->
+<div class="review-card" data-category="car" data-stars="5">
+    <div class="review-header">
+        <div class="reviewer-avatar">CT</div>
+        <div class="reviewer-info">
+            <h3>Carlos T.</h3>
+            <div class="reviewer-date">04 February 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Easily one of the best loan experiences I’ve had. No hidden costs, fast communication, and I drove off with my new car within a few days. Excellent!"
+    </div>
+    <div>
+        <span class="review-loan-type">Car Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 14 -->
+<div class="review-card" data-category="personal" data-stars="2">
+    <div class="review-header">
+        <div class="reviewer-avatar">ZW</div>
+        <div class="reviewer-info">
+            <h3>Zanele W.</h3>
+            <div class="reviewer-date">30 January 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Disappointed with how long it took to finalize everything. I expected a faster turnaround. The support team was helpful but the process dragged on too much."
+    </div>
+    <div>
+        <span class="review-loan-type">Personal Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 15 -->
+<div class="review-card" data-category="home" data-stars="5">
+    <div class="review-header">
+        <div class="reviewer-avatar">FD</div>
+        <div class="reviewer-info">
+            <h3>Fatima D.</h3>
+            <div class="reviewer-date">21 January 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Top-notch experience! Everyone I spoke to was courteous and knowledgeable. The process of securing a home loan was surprisingly stress-free."
+    </div>
+    <div>
+        <span class="review-loan-type">Home Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 16 -->
+<div class="review-card" data-category="car" data-stars="4">
+    <div class="review-header">
+        <div class="reviewer-avatar">GH</div>
+        <div class="reviewer-info">
+            <h3>Gregory H.</h3>
+            <div class="reviewer-date">18 January 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Happy with the outcome, but the documentation requirements were a bit much. That said, the staff helped make sense of it all and the rate was competitive."
+    </div>
+    <div>
+        <span class="review-loan-type">Car Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 17 -->
+<div class="review-card" data-category="personal" data-stars="5">
+    <div class="review-header">
+        <div class="reviewer-avatar">NM</div>
+        <div class="reviewer-info">
+            <h3>Noma M.</h3>
+            <div class="reviewer-date">12 January 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Extremely satisfied! The process was quick, and everything was done online. No need to visit a branch. I’d definitely use this service again."
+    </div>
+    <div>
+        <span class="review-loan-type">Personal Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 18 -->
+<div class="review-card" data-category="home" data-stars="3">
+    <div class="review-header">
+        <div class="reviewer-avatar">TK</div>
+        <div class="reviewer-info">
+            <h3>Themba K.</h3>
+            <div class="reviewer-date">05 January 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+    </div>
+    <div class="review-text">
+        "The loan team was helpful, but there were delays with the property valuation. Not entirely their fault, but it added stress. Still, I got the loan eventually."
+    </div>
+    <div>
+        <span class="review-loan-type">Home Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 19 -->
+<div class="review-card" data-category="car" data-stars="4">
+    <div class="review-header">
+        <div class="reviewer-avatar">JL</div>
+        <div class="reviewer-info">
+            <h3>Janine L.</h3>
+            <div class="reviewer-date">30 December 2024</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Overall, a pleasant experience. The loan terms were fair and the application was mostly online. I had one hiccup with uploading docs but it was resolved quickly."
+    </div>
+    <div>
+        <span class="review-loan-type">Car Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 20 -->
+<div class="review-card" data-category="personal" data-stars="5">
+    <div class="review-header">
+        <div class="reviewer-avatar">RA</div>
+        <div class="reviewer-info">
+            <h3>Riyaan A.</h3>
+            <div class="reviewer-date">22 December 2024</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Impressed with the speed and professionalism. Funds were transferred within 24 hours of approval. No hassles. Would gladly recommend."
+    </div>
+    <div>
+        <span class="review-loan-type">Personal Loan</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+
+<!-- Review 20 -->
+<div class="review-card" data-category="business" data-stars="5">
+    <div class="review-header">
+        <div class="reviewer-avatar">WB</div>
+        <div class="reviewer-info">
+            <h3>Willem B.</h3>
+            <div class="reviewer-date">18 February 2025</div>
+        </div>
+    </div>
+    <div class="review-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+    <div class="review-text">
+        "Ek het my tuinboumaatskappy in die Wes-Kaap begin met hulp van YYC. Die span was kundig, vriendelik en regtig bereid om te help."
+    </div>
+    <div>
+        <span class="review-loan-type">Besigheidslening</span>
+        <span class="verified-badge"><i class="fas fa-check"></i> Verified Customer</span>
+    </div>
+</div>
+                </div>
+                <div class="load-more">
+                    <button class="load-more-btn">Load More Reviews</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Write Review Section -->
+        <section class="write-review-section">
+            <div class="container">
+                <div class="write-review-container">
+                    <div class="write-review-card">
+                        <h2 class="write-review-title">Share Your Experience</h2>
+                        <div class="success-message" id="successMessage">
+                            <i class="fas fa-check-circle"></i> Thank you for your review! It has been submitted successfully.
+                        </div>
+                        <form id="reviewForm">
+                            <div class="form-group">
+                                <label for="fullName">Full Name *</label>
+                                <input type="text" id="fullName" name="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="loanType">Loan Type *</label>
+                                <select id="loanType" name="loanType" required>
+                                    <option value="">Select loan type</option>
+                                    <option value="personal">Personal Loan</option>
+                                    <option value="business">Business Loan</option>
+                                    <option value="home">Home Loan</option>
+                                    <option value="vehicle">Vehicle Loan</option>
+                                    <option value="emergency">Emergency Loan</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="star-rating-container">
+                                <label class="star-rating-label">Your Rating *</label>
+                                <div class="star-rating" id="starRating">
+                                    <i class="far fa-star" data-rating="1"></i>
+                                    <i class="far fa-star" data-rating="2"></i>
+                                    <i class="far fa-star" data-rating="3"></i>
+                                    <i class="far fa-star" data-rating="4"></i>
+                                    <i class="far fa-star" data-rating="5"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="reviewText">Your Review *</label>
+                                <textarea id="reviewText" name="reviewText" placeholder="Tell us about your experience with YYC CASH LOAN..." required></textarea>
+                            </div>
+                            <button type="submit" class="submit-review-btn">
+                                <i class="fas fa-paper-plane"></i> Submit Review
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item" data-section="home">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="apply.html" class="nav-item" data-section="apply">
+            <i class="fas fa-edit"></i>
+            <span>Apply</span>
+        </a>
+        <a href="loans.html" class="nav-item" data-section="loans">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>Loans</span>
+        </a>
+        <a href="how.html" class="nav-item" data-section="how">
+            <i class="fas fa-info-circle"></i>
+            <span>How It Works</span>
+        </a>
+        <a href="account.html" class="nav-item" data-section="account">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+</div>
+
+<script>
+    // Navigation functionality
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const sectionId = this.getAttribute('data-section');
+            navigateTo(sectionId);
+        });
+    });
+
+    function navigateTo(sectionId) {
+        // Hide all sections
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        // Show selected section
+        document.getElementById(sectionId).classList.add('active');
+        
+        // Update active nav item
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('data-section') === sectionId) {
+                item.classList.add('active');
+            }
+        });
+        
+        // Scroll to top
+        window.scrollTo(0, 0);
+    }
+    
+    // Animate rating bars on page load
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            document.querySelectorAll('.bar-fill').forEach(bar => {
+                bar.style.width = bar.getAttribute('data-width');
+            });
+        }, 500);
+    });
+
+    // Star rating functionality
+    const starRating = document.getElementById('starRating');
+    let selectedRating = 0;
+
+    if (starRating) {
+        starRating.addEventListener('click', function(e) {
+            if (e.target.tagName === 'I') {
+                const rating = parseInt(e.target.getAttribute('data-rating'));
+                selectedRating = rating;
+                
+                // Update stars
+                document.querySelectorAll('#starRating i').forEach(star => {
+                    const starValue = parseInt(star.getAttribute('data-rating'));
+                    if (starValue <= rating) {
+                        star.className = 'fas fa-star active';
+                    } else {
+                        star.className = 'far fa-star';
+                    }
+                });
+            }
+        });
+
+        // Hover effect
+        starRating.addEventListener('mouseover', function(e) {
+            if (e.target.tagName === 'I') {
+                const rating = parseInt(e.target.getAttribute('data-rating'));
+                
+                document.querySelectorAll('#starRating i').forEach(star => {
+                    const starValue = parseInt(star.getAttribute('data-rating'));
+                    if (starValue <= rating) {
+                        star.className = 'fas fa-star';
+                    } else {
+                        star.className = 'far fa-star';
+                    }
+                });
+            }
+        });
+
+        starRating.addEventListener('mouseout', function() {
+            document.querySelectorAll('#starRating i').forEach(star => {
+                const starValue = parseInt(star.getAttribute('data-rating'));
+                if (starValue <= selectedRating) {
+                    star.className = 'fas fa-star active';
+                } else {
+                    star.className = 'far fa-star';
+                }
+            });
+        });
+    }
+
+    // Review form submission
+    const reviewForm = document.getElementById('reviewForm');
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (selectedRating === 0) {
+                alert('Please select a rating');
+                return;
+            }
+            
+            // Get form data
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                loanType: document.getElementById('loanType').value,
+                rating: selectedRating,
+                reviewText: document.getElementById('reviewText').value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Save to localStorage
+            const reviews = JSON.parse(localStorage.getItem('reviewSubmissions') || '[]');
+            reviews.push(formData);
+            localStorage.setItem('reviewSubmissions', JSON.stringify(reviews));
+
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Reset form
+            this.reset();
+            selectedRating = 0;
+            document.querySelectorAll('#starRating i').forEach(star => {
+                star.className = 'far fa-star';
+            });
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        });
+    }
+
+    // Filter functionality
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            const filter = this.getAttribute('data-filter');
+            
+            // Filter reviews
+            document.querySelectorAll('.review-card').forEach(card => {
+                if (filter === 'all') {
+                    card.style.display = 'block';
+                } else if (filter === '5-star') {
+                    if (card.getAttribute('data-stars') === '5') {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                } else {
+                    if (card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        });
+    });
+
+    // Load more reviews (simulation)
+    document.querySelector('.load-more-btn').addEventListener('click', function() {
+        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+        
+        setTimeout(() => {
+            this.innerHTML = 'No More Reviews';
+            this.disabled = true;
+            this.style.opacity = '0.7';
+        }, 2000);
+    });
+
+    // 3D card hover effects
+    document.querySelectorAll('.review-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'perspective(1000px) rotateX(-5deg) translateY(-10px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'perspective(1000px) rotateX(0deg) translateY(0px)';
+        });
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.98)';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+        }
+    });
+</script>
+</body>
+</html>
