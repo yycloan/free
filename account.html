@@ -3,214 +3,944 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Portal - YYC CASH LOAN</title>
+    <title>My Account - YYC CASH LOAN | NCRCP15906</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary: #d61313;
+            --secondary: #e63946;
+            --accent: #f1c40f;
+            --light: #ffffff;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #28a745;
+            --gradient-secondary: linear-gradient(135deg, #e63946 0%, #d61313 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            line-height: 1.6;
+            padding-bottom: 70px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .logo .ncr {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-left: 10px;
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav {
+            display: block;
+        }
+
+        .desktop-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .desktop-nav .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .desktop-nav .nav-link:hover,
+        .desktop-nav .nav-link.active {
+            color: var(--primary);
+            background: rgba(214, 19, 19, 0.1);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: block;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--dark);
+            padding: 8px;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Login Section */
+        .login-section {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border: 2px solid rgba(214, 19, 19, 0.1);
+            text-align: center;
+        }
+
+        .login-section h1 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .login-section p {
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .login-form {
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(214, 19, 19, 0.1);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(214, 19, 19, 0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--gradient-secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-size: 1rem;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(230, 57, 70, 0.4);
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .forgot-password a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .register-link p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Dashboard Section (Hidden by default) */
+        .dashboard-section {
+            display: none;
+        }
+
+        .dashboard-header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .welcome-message h2 {
+            color: var(--dark);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .welcome-message p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(214, 19, 19, 0.1);
+        }
+
+        .dashboard-card h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .dashboard-card h3 i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .loan-status {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .loan-details {
+            margin-bottom: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .progress-bar {
+            background: rgba(214, 19, 19, 0.1);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            background: var(--gradient-secondary);
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .quick-action-btn {
+            padding: 8px 15px;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            display: block;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .mobile-nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+        }
+
+        .mobile-nav ul li {
+            flex: 1;
+            text-align: center;
+        }
+
+        .mobile-nav ul li a {
+            display: block;
+            padding: 12px 5px;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav ul li a.active {
+            color: var(--primary);
+        }
+
+        .mobile-nav ul li a i {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .main-content {
+                margin: 20px auto;
+                padding: 0 15px;
+            }
+
+            .login-section {
+                padding: 25px;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .quick-actions {
+                flex-direction: column;
+            }
+
+            .quick-action-btn {
+                min-width: auto;
+            }
+        }
+
+        /* Desktop styles */
+        @media (min-width: 769px) {
+            .desktop-nav {
+                display: block;
+            }
+            
+            .mobile-menu-btn,
+            .mobile-nav {
+                display: none;
+            }
+            
+            body {
+                padding-bottom: 0;
+            }
+        }
+
+        /* Enhanced Header Styles */
+        header {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.75rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .logo .ncr {
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-left: 10px;
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .desktop-nav li {
+            margin-left: 25px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 12px 18px;
+            border-radius: 30px;
+            display: block;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+            background-color: rgba(214, 19, 19, 0.1);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: none;
+        }
+
+        .hamburger-line {
+            width: 30px;
+            height: 3px;
+            background-color: var(--dark);
+            margin: 6px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Mobile Slide-out Menu */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            display: none;
+        }
+
+        .mobile-slide-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: var(--light);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1002;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-slide-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-logo span {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--gray);
+        }
+
+        .mobile-menu-list {
+            list-style: none;
+            padding: 20px;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .mobile-nav-link {
+            display: block;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .mobile-nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .mobile-nav-link:hover,
+        .mobile-nav-link.active {
+            background-color: rgba(214, 19, 19, 0.1);
+            color: var(--primary);
+        }
+
+        .mobile-menu-footer {
+            padding: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .contact-info p,
+        .ncr-info p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+        }
+
+        /* Mobile Bottom Navigation */
+        .mobile-bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--light);
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 10px 0;
+            display: none;
+        }
+
+        .mobile-bottom-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .bottom-nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark);
+            transition: color 0.3s ease;
+        }
+
+        .bottom-nav-link i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .bottom-nav-link span {
+            font-size: 0.75rem;
+        }
+
+        .bottom-nav-link:hover,
+        .bottom-nav-link.active {
+            color: var(--primary);
+        }
+
+        /* Media Queries for Enhanced Header */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-bottom-nav {
+                display: flex;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="app-container">
-        <header class="app-header">
+    <!-- Header -->
+    <header>
+        <div class="logo">
             <h1>YYC CASH LOAN</h1>
-            <div class="subtitle">NCRCP15906 | Fast & Secure Loans</div>
-        </header>
-
-        <!-- Account Section -->
-        <section id="account" class="content-section active">
-            <h3 class="section-title">Client Portal</h3>
-            
-            <div id="login-section" class="login-form">
-                <h4><i class="fas fa-sign-in-alt"></i> Login to Your Account</h4>
-                <div class="form-group">
-                    <label for="login-id">ID Number</label>
-                    <input type="text" id="login-id" class="form-control" required maxlength="13" placeholder="Enter your 13-digit ID number">
-                </div>
-                <div class="form-group">
-                    <label for="login-name">Full Name</label>
-                    <input type="text" id="login-name" class="form-control" required placeholder="Enter your full name as per ID">
-                </div>
-                <button class="btn btn-primary btn-block" onclick="loginToPortal()">Login to Portal</button>
-                <p style="font-size: 0.8rem; text-align: center; margin-top: 10px; color: var(--gray);">
-                    Don't have an account? <a href="apply.html" onclick="navigateTo('apply')" style="color: var(--primary);">Apply for a loan</a>
-                </p>
-            </div>
-            
-            <div id="portal-section" style="display: none;">
-                <div class="portal-card">
-                    <h4><i class="fas fa-chart-line"></i> Loan Application Status</h4>
-                    <div class="loan-status">
-                        <div class="status-indicator status-pending"></div>
-                        <span>Application Under Review</span>
-                    </div>
-                    <p>Application submitted on: <span id="application-date">2024-01-15</span></p>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 30%;"></div>
-                    </div>
-                    <p style="font-size: 0.8rem; text-align: center;">Application is 30% complete</p>
-                </div>
-                
-                <div class="portal-card">
-                    <h4><i class="fas fa-user-circle"></i> Application Details</h4>
-                    <div class="detail-row">
-                        <span>Full Name:</span>
-                        <span id="detail-name">-</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>ID Number:</span>
-                        <span id="detail-id">-</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Contact Number:</span>
-                        <span id="detail-phone">-</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Email:</span>
-                        <span id="detail-email">-</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Loan Amount:</span>
-                        <span id="detail-amount">-</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Loan Term:</span>
-                        <span id="detail-term">-</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Loan Purpose:</span>
-                        <span id="detail-purpose">-</span>
-                    </div>
-                </div>
-                
-                <div class="portal-card">
-                    <h4><i class="fas fa-info-circle"></i> Next Steps</h4>
-                    <p>Our team is currently reviewing your application. You will receive an SMS and email notification once a decision has been made.</p>
-                    <p style="margin-top: 15px; font-weight: 600;">For any queries, please contact us:</p>
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>+27 10 123 4567</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fab fa-whatsapp"></i>
-                            <span>+27 71 234 5678</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>yyccashloan@gmail.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-clock"></i>
-                            <span>Mon-Fri: 8:00 AM - 5:00 PM</span>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary btn-block" style="margin-top: 15px;" onclick="logoutFromPortal()">Logout</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Bottom Navigation -->
-        <nav class="bottom-nav">
-            <a href="index.html" class="nav-item" data-section="home">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
-            </a>
-            <a href="apply.html" class="nav-item" data-section="apply">
-                <i class="fas fa-edit"></i>
-                <span>Apply</span>
-            </a>
-            <a href="loans.html" class="nav-item" data-section="loans">
-                <i class="fas fa-money-bill-wave"></i>
-                <span>Loans</span>
-            </a>
-            <a href="how.html" class="nav-item" data-section="how">
-                <i class="fas fa-info-circle"></i>
-                <span>How It Works</span>
-            </a>
-            <a href="account.html" class="nav-item active" data-section="account">
-                <i class="fas fa-user"></i>
-                <span>Account</span>
-            </a>
+            <span class="ncr">NCRCP15906</span>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="apply.html" class="nav-link">Apply</a></li>
+                <li><a href="loans.html" class="nav-link">Loans</a></li>
+                <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+                <li><a href="account.html" class="nav-link active">Account</a></li>
+            </ul>
         </nav>
+        
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Login Section -->
+        <div class="login-section" id="loginSection">
+            <h1>My Account</h1>
+            <p>Access your loan dashboard and manage your account</p>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn">Login to Account</button>
+            </form>
+            
+            <div class="forgot-password">
+                <a href="#" onclick="alert('Password reset functionality would be implemented here')">Forgot your password?</a>
+            </div>
+            
+            <div class="register-link">
+                <p>Don't have an account yet?</p>
+                <a href="apply.html" class="btn btn-outline">Apply for a Loan</a>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div class="dashboard-section" id="dashboardSection">
+            <div class="dashboard-header">
+                <div class="welcome-message">
+                    <h2>Welcome back, John!</h2>
+                    <p>Here's your loan overview and account details</p>
+                </div>
+                <button class="btn logout-btn" onclick="logout()">Logout</button>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Current Loan Card -->
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-money-bill-wave"></i> Current Loan</h3>
+                    <div class="loan-status">Active - Good Standing</div>
+                    <div class="loan-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Loan Amount:</span>
+                            <span class="detail-value">R15,000</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Outstanding Balance:</span>
+                            <span class="detail-value">R8,750</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Monthly Payment:</span>
+                            <span class="detail-value">R1,250</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Next Payment:</span>
+                            <span class="detail-value">15 Feb 2025</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 42%"></div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 20px;">42% paid off</p>
+                    <div class="quick-actions">
+                        <button class="btn quick-action-btn" onclick="alert('Make payment functionality')">Make Payment</button>
+                        <button class="btn quick-action-btn btn-outline" onclick="alert('View statement functionality')">View Statement</button>
+                    </div>
+                </div>
+
+                <!-- Account Information Card -->
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-user"></i> Account Information</h3>
+                    <div class="loan-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Full Name:</span>
+                            <span class="detail-value">John Doe</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Email:</span>
+                            <span class="detail-value">john@example.com</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Phone:</span>
+                            <span class="detail-value">+27 12 345 6789</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Member Since:</span>
+                            <span class="detail-value">Jan 2024</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Account Status:</span>
+                            <span class="detail-value" style="color: var(--success);">Verified</span>
+                        </div>
+                    </div>
+                    <div class="quick-actions">
+                        <button class="btn quick-action-btn btn-outline" onclick="alert('Update profile functionality')">Update Profile</button>
+                    </div>
+                </div>
+
+                <!-- Payment History Card -->
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-history"></i> Recent Payments</h3>
+                    <div class="loan-details">
+                        <div class="detail-row">
+                            <span class="detail-label">15 Jan 2025:</span>
+                            <span class="detail-value" style="color: var(--success);">R1,250 ✓</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">15 Dec 2024:</span>
+                            <span class="detail-value" style="color: var(--success);">R1,250 ✓</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">15 Nov 2024:</span>
+                            <span class="detail-value" style="color: var(--success);">R1,250 ✓</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">15 Oct 2024:</span>
+                            <span class="detail-value" style="color: var(--success);">R1,250 ✓</span>
+                        </div>
+                    </div>
+                    <div class="quick-actions">
+                        <button class="btn quick-action-btn btn-outline" onclick="alert('View full history functionality')">View Full History</button>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Card -->
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                    <div class="quick-actions" style="flex-direction: column; gap: 15px;">
+                        <button class="btn quick-action-btn" onclick="alert('Apply for new loan functionality')">Apply for New Loan</button>
+                        <button class="btn quick-action-btn btn-outline" onclick="alert('Download documents functionality')">Download Documents</button>
+                        <button class="btn quick-action-btn btn-outline" onclick="alert('Contact support functionality')">Contact Support</button>
+                        <button class="btn quick-action-btn btn-outline" onclick="alert('Update banking details functionality')">Update Banking Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="apply.html"><i class="fas fa-file-alt"></i>Apply</a></li>
+            <li><a href="loans.html"><i class="fas fa-money-bill-wave"></i>Loans</a></li>
+            <li><a href="how-it-works.html"><i class="fas fa-info-circle"></i>How It Works</a></li>
+            <li><a href="account.html" class="active"><i class="fas fa-user"></i>Account</a></li>
+        </ul>
+    </nav>
+
     <script>
-        // Navigation functionality
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                const sectionId = this.getAttribute('data-section');
-                navigateTo(sectionId);
-            });
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation (in real app, this would be server-side)
+            if (email && password) {
+                // Simulate login process
+                const submitBtn = this.querySelector('.btn');
+                const originalText = submitBtn.textContent;
+                
+                submitBtn.textContent = 'Logging in...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    // Hide login section and show dashboard
+                    document.getElementById('loginSection').style.display = 'none';
+                    document.getElementById('dashboardSection').style.display = 'block';
+                    
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
+            } else {
+                alert('Please enter both email and password.');
+            }
         });
 
-        function navigateTo(sectionId) {
-            // Hide all sections
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-            
-            // Update active nav item
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('data-section') === sectionId) {
-                    item.classList.add('active');
-                }
-            });
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
-
-        // Client Portal Login
-        function loginToPortal() {
-            const loginId = document.getElementById('login-id').value.trim();
-            const loginName = document.getElementById('login-name').value.trim();
-            
-            if (!loginId || !loginName) {
-                alert('Please enter both ID number and full name.');
-                return;
-            }
-            
-            // Check if there's saved application data
-            const savedData = localStorage.getItem('loanApplication');
-            
-            if (savedData) {
-                const applicationData = JSON.parse(savedData);
-                
-                // Simple validation
-                if (loginId === applicationData.idNumber && loginName.toLowerCase() === applicationData.fullName.toLowerCase()) {
-                    // Show portal section
-                    document.getElementById('login-section').style.display = 'none';
-                    document.getElementById('portal-section').style.display = 'block';
-                    
-                    // Populate application details
-                    document.getElementById('detail-name').textContent = applicationData.fullName;
-                    document.getElementById('detail-id').textContent = applicationData.idNumber;
-                    document.getElementById('detail-phone').textContent = applicationData.phone;
-                    document.getElementById('detail-email').textContent = applicationData.email;
-                    document.getElementById('detail-amount').textContent = 'R' + parseInt(applicationData.loanAmount).toLocaleString();
-                    document.getElementById('detail-term').textContent = applicationData.repaymentTerm + ' months';
-                    document.getElementById('detail-purpose').textContent = applicationData.loanPurpose.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
-                    
-                    // Set application date
-                    document.getElementById('application-date').textContent = applicationData.applicationDate || new Date().toISOString().split('T')[0];
-                    
-                } else {
-                    alert('Invalid credentials. Please check your ID number and full name.');
-                }
-            } else {
-                alert('No application found. Please apply for a loan first.');
+        // Logout functionality
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                document.getElementById('dashboardSection').style.display = 'none';
+                document.getElementById('loginSection').style.display = 'block';
+                document.getElementById('loginForm').reset();
             }
         }
 
-        function logoutFromPortal() {
-            document.getElementById('login-section').style.display = 'block';
-            document.getElementById('portal-section').style.display = 'none';
-            document.getElementById('login-id').value = '';
-            document.getElementById('login-name').value = '';
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            alert('Menu options: Home, Apply, Loans, How It Works, Account');
+        });
+
+        // Mobile navigation active state
+        function setActiveNavItem() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.mobile-nav a');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
         }
+
+        // Initialize active nav item
+        document.addEventListener('DOMContentLoaded', setActiveNavItem);
+
+        // Demo login for testing
+        function demoLogin() {
+            document.getElementById('email').value = 'demo@example.com';
+            document.getElementById('password').value = 'demo123';
+        }
+
+        // Add demo login button for testing
+        document.addEventListener('DOMContentLoaded', function() {
+            const demoBtn = document.createElement('button');
+            demoBtn.textContent = 'Demo Login';
+            demoBtn.className = 'btn btn-outline';
+            demoBtn.style.marginTop = '10px';
+            demoBtn.onclick = demoLogin;
+            
+            const loginForm = document.getElementById('loginForm');
+            loginForm.appendChild(demoBtn);
+        });
     </script>
 </body>
 </html>
