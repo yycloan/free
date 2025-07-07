@@ -87,10 +87,33 @@
             margin-left: 6px;
         }
 
-        nav ul {
+        /* Desktop Navigation */
+        .desktop-nav {
             display: none;
         }
 
+        .desktop-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .desktop-nav .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .desktop-nav .nav-link:hover,
+        .desktop-nav .nav-link.active {
+            color: var(--primary);
+            background: rgba(214, 19, 19, 0.1);
+        }
+
+        /* Mobile Menu Button */
         .mobile-menu-btn {
             display: block;
             background: none;
@@ -213,23 +236,28 @@
             box-shadow: 0 8px 20px rgba(28, 117, 188, 0.3);
         }
 
-        /* Feature Icons Section - Mobile grid */
+        /* Feature Icons Section - ALWAYS HORIZONTAL */
         .feature-icons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin: -30px 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            margin: -30px 10px 20px;
             position: relative;
             z-index: 10;
+            overflow-x: auto;
+            padding: 0 5px;
         }
 
         .feature-icon-item {
             background: white;
             border-radius: 10px;
-            padding: 15px 10px;
+            padding: 12px 8px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             transition: all 0.3s;
+            flex: 1;
+            min-width: 80px;
+            max-width: 120px;
         }
 
         .feature-icon-item:hover {
@@ -237,15 +265,15 @@
         }
 
         .feature-icon {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto 10px;
+            width: 35px;
+            height: 35px;
+            margin: 0 auto 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             color: white;
-            font-size: 18px;
+            font-size: 16px;
         }
 
         .icon-blue {
@@ -265,15 +293,17 @@
         }
 
         .feature-icon-title {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: var(--dark);
-            margin-bottom: 3px;
+            margin-bottom: 2px;
+            line-height: 1.2;
         }
 
         .feature-subtitle {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--gray);
+            line-height: 1.1;
         }
 
         /* Quick Loan Calculator - Mobile optimized */
@@ -1024,11 +1054,6 @@
                 font-size: 0.9rem;
             }
 
-            .feature-icons {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-
             .stats-container {
                 margin: 15px 8px;
                 padding: 12px 6px;
@@ -1070,11 +1095,77 @@
                 margin: 15px 8px;
                 padding: 12px;
             }
+
+            /* Feature icons stay horizontal even on very small screens */
+            .feature-icons {
+                gap: 4px;
+                margin: -30px 5px 20px;
+            }
+
+            .feature-icon-item {
+                padding: 10px 6px;
+                min-width: 70px;
+            }
+
+            .feature-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+
+            .feature-icon-title {
+                font-size: 10px;
+            }
+
+            .feature-subtitle {
+                font-size: 8px;
+            }
+        }
+
+        /* Desktop styles */
+        @media (min-width: 769px) {
+            .desktop-nav {
+                display: block;
+            }
+            
+            .mobile-menu-btn,
+            .mobile-nav {
+                display: none;
+            }
+            
+            body {
+                padding-bottom: 0;
+            }
+
+            .feature-icons {
+                max-width: 800px;
+                margin: -30px auto 40px;
+                gap: 20px;
+            }
+
+            .feature-icon-item {
+                padding: 20px 15px;
+                min-width: 150px;
+            }
+
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .feature-icon-title {
+                font-size: 14px;
+            }
+
+            .feature-subtitle {
+                font-size: 12px;
+            }
         }
 
         /* Hide desktop elements on mobile */
         @media (max-width: 768px) {
-            nav ul {
+            .desktop-nav {
                 display: none !important;
             }
         }
@@ -1088,6 +1179,19 @@
             <h1>YYC CASH LOAN</h1>
             <span class="ncr">NCRCP15906</span>
         </div>
+        
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="apply.html" class="nav-link">Apply</a></li>
+                <li><a href="loans.html" class="nav-link">Loans</a></li>
+                <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+                <li><a href="account.html" class="nav-link">Account</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Mobile Menu Button -->
         <button class="mobile-menu-btn" id="mobileMenuBtn">
             <i class="fas fa-bars"></i>
         </button>
@@ -1103,12 +1207,12 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1>Need Fast Cash?</h1>
-            <p>Get Approved in Minutes with YYC CASH LOAN! Instant Pay Out, instant payouts guaranteed.</p>
-            <a href="apply.html" class="btn">Apply Now - Instant Pay Out</a>
+            <p>Get Approved in Minutes with YYC CASH LOAN! No upfront fees, instant payouts guaranteed.</p>
+            <a href="apply.html" class="btn">Apply Now - No Fee</a>
         </div>
     </section>
 
-    <!-- Feature Icons -->
+    <!-- Feature Icons - ALWAYS HORIZONTAL -->
     <div class="feature-icons">
         <div class="feature-icon-item">
             <div class="feature-icon icon-blue">
@@ -1140,218 +1244,35 @@
         </div>
     </div>
 
-     <style>
-    * { box-sizing: border-box; }
-    
-    .container {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: auto;
-      padding: 30px;
-      text-align: center;
-      overflow: hidden;
-    }
-    .step {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      min-height: 200px;
-      animation: fadeIn 0.5s ease;
-    }
-    .step.active {
-      display: flex;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .icon {
-      font-size: 40px;
-      color: #007bff;
-    }
-    .input-box {
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 12px 20px;
-      width: 100%;
-      font-size: 16px;
-      background: #f0f8ff;
-      text-align: left;
-    }
-    .button {
-      background: #007bff;
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      animation: pulse 1s infinite alternate;
-    }
-    @keyframes pulse {
-      from { transform: scale(1); }
-      to { transform: scale(1.05); }
-    }
-    .progress {
-      width: 100%;
-      background: #eee;
-      height: 10px;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .progress-bar {
-      height: 100%;
-      width: 0;
-      background: #007bff;
-      animation: loadbar 2s forwards;
-    }
-    @keyframes loadbar {
-      to { width: 100%; }
-    }
-    .success-check {
-      font-size: 60px;
-      color: #28a745;
-      animation: bounce 1s ease infinite;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-    }
-    .typing {
-      border-right: 2px solid #007bff;
-      white-space: nowrap;
-      overflow: hidden;
-      display: inline-block;
-    }
-    .account-flow {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      padding: 20px;
-      border-radius: 12px;
-      background: #f1faff;
-      font-weight: bold;
-      position: relative;
-    }
-    .cash-icon {
-      position: absolute;
-      top: 50%;
-      left: 10%;
-      font-size: 24px;
-      color: green;
-      animation: moveCash 2s linear forwards;
-    }
-    @keyframes moveCash {
-      0% { left: 10%; opacity: 1; }
-      100% { left: 80%; opacity: 0; }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="step active" id="step1">
-      <i class="fas fa-clipboard-check icon"></i>
-      <h2>Easy Loan Application</h2>
-    </div>
-
-    <div class="step" id="step2">
-      <i class="fas fa-user icon"></i>
-      <h3>Enter your name</h3>
-      <div class="input-box"><span id="typed-name" class="typing"></span></div>
-    </div>
-
-    <div class="step" id="step3">
-      <i class="fas fa-money-bill icon"></i>
-      <h3>Enter Amount</h3>
-      <div class="input-box"><span id="typed-amount" class="typing"></span></div>
-    </div>
-
-    <div class="step" id="step4">
-      <i class="fas fa-university icon"></i>
-      <h3>Select Account</h3>
-      <div class="input-box">Standard Bank <i class="fas fa-check-circle" style="color:green; float:right;"></i></div>
-      <button class="button">Next</button>
-    </div>
-
-    <div class="step" id="step5">
-      <i class="fas fa-arrow-right-arrow-left icon"></i>
-      <h3>Paying Out...</h3>
-      <div class="account-flow">
-        <div>YYC Loan</div>
-        <div class="cash-icon">💸</div>
-        <div>Ms Johan</div>
-      </div>
-      <div class="progress"><div class="progress-bar"></div></div>
-    </div>
-
-    <div class="step" id="step6">
-      <i class="fas fa-check-circle success-check"></i>
-      <h3>Payout Successful!</h3>
-    </div>
-  </div>
-
-  <script>
-    const steps = document.querySelectorAll('.step');
-    const nameText = "Ms Johan";
-    const amountText = "R 50,000";
-
-    function showStep(i) {
-      steps.forEach((s, index) => {
-        s.classList.remove("active");
-        if (index === i) s.classList.add("active");
-      });
-    }
-
-    function typeText(el, text, delay, callback) {
-      let idx = 0;
-      const typer = setInterval(() => {
-        el.textContent += text[idx++];
-        if (idx >= text.length) {
-          clearInterval(typer);
-          if (callback) setTimeout(callback, 1000);
-        }
-      }, delay);
-    }
-
-    function runAnimation() {
-      showStep(0);
-      setTimeout(() => {
-        showStep(1);
-        typeText(document.getElementById("typed-name"), nameText, 100, () => {
-          showStep(2);
-          typeText(document.getElementById("typed-amount"), amountText, 100, () => {
-            showStep(3);
-            setTimeout(() => {
-              document.querySelector("#step4 .button").click();
-            }, 1500);
-          });
-        });
-      }, 2000);
-    }
-
-    document.querySelector("#step4 .button").addEventListener("click", () => {
-      showStep(4);
-      setTimeout(() => {
-        showStep(5);
-        setTimeout(() => {
-          showStep(6);
-          setTimeout(() => {
-            // Reset for loop
-            document.getElementById("typed-name").textContent = "";
-            document.getElementById("typed-amount").textContent = "";
-            showStep(0);
-            setTimeout(runAnimation, 1500);
-          }, 3000);
-        }, 3000);
-      }, 2000);
-    });
-
-    setTimeout(runAnimation, 1000);
-  </script>
+    <!-- Quick Loan Calculator Preview -->
+    <section class="quick-calculator">
+        <h3>Quick Loan Calculator</h3>
+        <div class="calculator-preview">
+            <div class="calc-item">
+                <h4>Loan Amount</h4>
+                <div class="amount">R5,000</div>
+            </div>
+            <div class="calc-item">
+                <h4>Repayment Term</h4>
+                <div class="amount">6 months</div>
+            </div>
+            <div class="calc-item">
+                <h4>Monthly Repayment</h4>
+                <div class="amount">R870</div>
+            </div>
+            <div class="calc-item">
+                <h4>Total Interest</h4>
+                <div class="amount">R221</div>
+            </div>
+            <div class="calc-item">
+                <h4>Total Repayment</h4>
+                <div class="amount">R5,221</div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="apply.html" class="btn btn-primary">Get Your Instant Payout</a>
+        </div>
+    </section>
 
     <!-- Stats Counter - Horizontal layout -->
     <div class="stats-container">
@@ -1387,7 +1308,7 @@
                     <i class="fas fa-bolt"></i>
                 </div>
                 <h3>Fast Approvals</h3>
-                <p>Loan decisions made within 2 hours. Instant Pay Out required. Our streamlined process ensures you get the cash you need when you need it most.</p>
+                <p>Loan decisions made within 2 hours. No upfront fees required. Our streamlined process ensures you get the cash you need when you need it most.</p>
             </div>
             <div class="benefit-item">
                 <div class="benefit-icon">
@@ -1488,7 +1409,7 @@
                     <h3>Personal Loans</h3>
                 </div>
                 <div class="loan-card-body">
-                    <p>For medical bills, school, travel, or emergencies. Fixed monthly repayments and flexible terms up to 84 months.</p>
+                    <p>For medical bills, school fees, travel, or emergencies. Fixed monthly repayments and flexible terms up to 84 months.</p>
                     <ul class="features">
                         <li><i class="fas fa-check"></i> Up to R250,000</li>
                         <li><i class="fas fa-check"></i> Terms up to 84 months</li>
@@ -1573,7 +1494,7 @@
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                 </div>
-                <p>"I got my loan in under 3 hours! YYC is a lifesaver."</p>
+                <p>"I got my loan in under 3 hours! YYC is a lifesaver. Didn't pay any upfront fee."</p>
                 <div class="client">– Thando, Soweto</div>
             </div>
         </div>
@@ -1611,7 +1532,7 @@
                     What interest rates do you charge? <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>Our interest rates are competitive and vary based on the loan amount, term, and your credit profile. All rates are disclosed upfront with no hidden. Use our calculator above for an estimate.</p>
+                    <p>Our interest rates are competitive and vary based on the loan amount, term, and your credit profile. All rates are disclosed upfront with no hidden fees. Use our calculator above for an estimate.</p>
                 </div>
             </div>
             <div class="faq-item">
@@ -1630,14 +1551,22 @@
                     <p>We consider applications from people with various credit histories. While we do conduct credit checks, we also look at your current financial situation and ability to repay.</p>
                 </div>
             </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Are there any upfront fees? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>No, we do not charge any upfront fees. All fees and charges are clearly disclosed in your loan agreement and are only deducted from your loan amount upon approval.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- CTA -->
     <section class="cta">
         <h2>Ready to Get Your Cash?</h2>
-        <p>Join thousands of South Africans who trust YYC CASH LOAN for their financial needs. Apply today and get instant payouts with Instant Pay Out.</p>
-        <a href="apply.html" class="btn btn-light">Apply Now - Instant Pay Out</a>
+        <p>Join thousands of South Africans who trust YYC CASH LOAN for their financial needs. Apply today and get instant payouts with no upfront fees.</p>
+        <a href="apply.html" class="btn btn-light">Apply Now - No Fee</a>
     </section>
 
     <!-- Footer -->
@@ -1645,7 +1574,7 @@
         <div class="footer-content">
             <div class="footer-column">
                 <h3>About YYC CASH LOAN</h3>
-                <p>YYC CASH LOAN is a trusted provider of fast, secure loans for South Africans. We are committed to providing instant payouts with Instant Pay Out and transparent terms.</p>
+                <p>YYC CASH LOAN is a trusted provider of fast, secure loans for South Africans. We are committed to providing instant payouts with no upfront fees and transparent terms.</p>
                 <p><strong>NCRCP15906</strong></p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -1741,12 +1670,12 @@
         const testimonials = [
             {
                 rating: 5,
-                text: "I got my loan in under 3 hours! YYC is a lifesaver.",
+                text: "I got my loan in under 3 hours! YYC is a lifesaver. Didn't pay any upfront fee.",
                 client: "– Thando, Soweto"
             },
             {
                 rating: 5,
-                text: "The process was so simple and fast. I'll definitely use them again. Instant Pay Out!",
+                text: "The process was so simple and fast. I'll definitely use them again. No upfront fees!",
                 client: "– John, Cape Town"
             },
             {
@@ -1824,6 +1753,8 @@
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         
         mobileMenuBtn.addEventListener('click', function() {
+            // Simple alert for mobile menu - can be expanded later
+            alert('Menu options: Home
             // Simple alert for mobile menu - can be expanded later
             alert('Menu options: Home, Apply, Loans, How It Works, Account');
         });
