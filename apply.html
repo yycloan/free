@@ -422,34 +422,6 @@
                     </div>
                 </div>
 
-                <!-- Employment Information -->
-                <div class="form-section">
-                    <h3><i class="fas fa-briefcase"></i> Employment Information</h3>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="employment-status">Employment Status *</label>
-                            <select id="employment-status" name="employment_status" class="form-control" required>
-                                <option value="">Select Status</option>
-                                <option value="employed">Employed</option>
-                                <option value="self-employed">Self-Employed</option>
-                                <option value="pensioner">Pensioner</option>
-                                <option value="unemployed">Unemployed</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="employer">Employer Name</label>
-                            <input type="text" id="employer" name="employer" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="monthly-income">Monthly Income *</label>
-                            <input type="number" id="monthly-income" name="monthly_income" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="employment-duration">Employment Duration (months)</label>
-                            <input type="number" id="employment-duration" name="employment_duration" class="form-control">
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Banking Information -->
                 <div class="form-section">
@@ -569,85 +541,115 @@
         </ul>
     </nav>
 
-    <script>
-        // Form validation and submission
-        document.getElementById('loan-application').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Basic validation
-            const requiredFields = this.querySelectorAll('[required]');
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    field.style.borderColor = 'var(--danger)';
-                    isValid = false;
-                } else {
-                    field.style.borderColor = 'rgba(214, 19, 19, 0.1)';
-                }
-            });
-            
-            if (!isValid) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // Simulate form submission
-            const submitBtn = this.querySelector('.btn-submit');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = 'Processing...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                alert('Application submitted successfully! You will receive a response within 2 hours.');
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                this.reset();
-            }, 2000);
-        });
+<script>
+    document.getElementById('loan-application').addEventListener('submit', function(e) {
+        e.preventDefault();
 
-        // ID Number validation (basic South African ID format)
-        document.getElementById('id-number').addEventListener('input', function() {
-            const idNumber = this.value.replace(/\D/g, '');
-            if (idNumber.length > 13) {
-                this.value = idNumber.substring(0, 13);
+        const requiredFields = this.querySelectorAll('[required]');
+        let isValid = true;
+
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                field.style.borderColor = 'var(--danger)';
+                isValid = false;
             } else {
-                this.value = idNumber;
+                field.style.borderColor = 'rgba(214, 19, 19, 0.1)';
             }
         });
 
-        // Phone number formatting
-        document.getElementById('phone').addEventListener('input', function() {
-            let phone = this.value.replace(/\D/g, '');
-            if (phone.length > 10) {
-                phone = phone.substring(0, 10);
-            }
-            this.value = phone;
-        });
-
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        
-        mobileMenuBtn.addEventListener('click', function() {
-            alert('Menu options: Home, Apply, Loans, How It Works, Account');
-        });
-
-        // Mobile navigation active state
-        function setActiveNavItem() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            const navLinks = document.querySelectorAll('.mobile-nav a');
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add('active');
-                }
-            });
+        if (!isValid) {
+            alert('Please fill in all required fields.');
+            return;
         }
 
-        // Initialize active nav item
-        document.addEventListener('DOMContentLoaded', setActiveNavItem);
-    </script>
+        const fullName = `${document.getElementById('first-name').value.trim()} ${document.getElementById('last-name').value.trim()}`;
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const loanType = document.getElementById('loan-purpose').value.trim();
+        const loanAmount = document.getElementById('loan-amount').value.trim();
+        const loanDuration = document.getElementById('repayment-term').value.trim();
+
+        const loanData = {
+            fullName,
+            email,
+            phone,
+            loanType,
+            loanAmount,
+            loanDuration
+        };
+
+        localStorage.setItem('loanApplication', JSON.stringify(loanData));
+
+        // Show custom confirmation modal
+        showConfirmationPopup();
+
+        this.reset();
+    });
+
+    function showConfirmationPopup() {
+    const existingPopup = document.getElementById('loan-success-popup');
+    if (existingPopup) return; // Avoid duplicate popups
+
+    const popup = document.createElement('div');
+    popup.id = 'loan-success-popup';
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.zIndex = '10000';
+    popup.style.background = '#fff';
+    popup.style.padding = '30px';
+    popup.style.borderRadius = '20px';
+    popup.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
+    popup.style.textAlign = 'center';
+    popup.style.maxWidth = '90%';
+    popup.style.width = '90%';
+    popup.style.maxWidth = '400px';
+
+    popup.innerHTML = `
+        <h2 style="color: var(--success); margin-bottom: 10px;">✅ Loan Successfully Submitted!</h2>
+        <p style="color: var(--dark); margin-bottom: 25px;">⏱ Your application is being processed and will be reviewed within 1 hour.</p>
+        <a href="account.html" class="btn btn-primary" style="margin-bottom: 20px;">Login to Your Account & Track Your Loan</a><br>
+        <button onclick="document.getElementById('loan-success-popup').remove()" 
+                style="background: var(--danger); color: #fff; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">
+            ❌ Close
+        </button>
+    `;
+
+    document.body.appendChild(popup);
+}
+    // ID input validation
+    document.getElementById('id-number').addEventListener('input', function () {
+        const idNumber = this.value.replace(/\D/g, '');
+        this.value = idNumber.substring(0, 13);
+    });
+
+    // Phone input formatting
+    document.getElementById('phone').addEventListener('input', function () {
+        let phone = this.value.replace(/\D/g, '');
+        this.value = phone.substring(0, 10);
+    });
+
+    // Mobile Menu
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    mobileMenuBtn.addEventListener('click', function () {
+        alert('Menu options: Home, Apply, Loans, How It Works, Account');
+    });
+
+    // Active mobile nav
+    function setActiveNavItem() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('.mobile-nav a');
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', setActiveNavItem);
+</script>
+
 </body>
 </html>
