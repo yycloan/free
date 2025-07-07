@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loan Products - YYC CASH LOAN | NCRCP15906</title>
+    <title>YYC CASH LOAN - Fast & Secure Loans | NCRCP15906</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -14,7 +14,13 @@
             --dark: #212529;
             --gray: #6c757d;
             --success: #28a745;
+            --info: #17a2b8;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --orange: #ff5722;
+            --gradient-primary: linear-gradient(135deg, #00AEEF 0%, #1C75BC 100%);
             --gradient-secondary: linear-gradient(135deg, #e63946 0%, #d61313 100%);
+            --gradient-accent: linear-gradient(135deg, #f1c40f 0%, #ffc107 100%);
         }
 
         * {
@@ -26,22 +32,37 @@
 
         body {
             background-color: #f5f5f5;
-            line-height: 1.6;
+            overflow-x: hidden;
+            font-size: 14px;
+            line-height: 1.4;
             padding-bottom: 70px;
         }
 
-        /* Header */
+        /* Enhanced 3D Effects - Reduced for mobile */
+        .card, .btn, .stats-box, .faq-item, .calculator, .testimonial-card, .loan-card, .step-card {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-radius: 12px;
+        }
+
+        .card:hover, .btn:hover, .stats-box:hover, .faq-item:hover, .calculator:hover, .testimonial-card:hover, .loan-card:hover, .step-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        /* Header - Compact for mobile */
         header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 15px 5%;
+            padding: 8px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            min-height: 50px;
         }
 
         .logo {
@@ -49,16 +70,21 @@
             align-items: center;
         }
 
+        .logo img {
+            height: 30px;
+            margin-right: 6px;
+        }
+
         .logo h1 {
-            font-size: 1.5rem;
+            font-size: 1rem;
             color: var(--primary);
             font-weight: 700;
         }
 
         .logo .ncr {
-            font-size: 0.8rem;
+            font-size: 0.6rem;
             color: var(--gray);
-            margin-left: 10px;
+            margin-left: 6px;
         }
 
         /* Desktop Navigation */
@@ -98,212 +124,848 @@
             padding: 8px;
         }
 
-        /* Main Content */
-        .main-content {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .page-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .page-header h1 {
-            font-size: 3rem;
-            color: var(--dark);
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
-
-        .page-header p {
-            color: var(--gray);
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Loan Products Grid */
-        .loan-products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-
-        .loan-product-card {
-            background: white;
-            border-radius: 20px;
+        /* Enhanced Hero Section - Mobile optimized */
+        .hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            border: 2px solid rgba(214, 19, 19, 0.1);
-            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
         }
 
-        .loan-product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 60px rgba(214, 19, 19, 0.2);
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
         }
 
-        .card-header {
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide:nth-child(1) {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                             url('/placeholder.svg?height=600&width=800');
+        }
+
+        .hero-slide:nth-child(2) {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                             url('/placeholder.svg?height=600&width=800');
+        }
+
+        .hero-slide:nth-child(3) {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                             url('/placeholder.svg?height=600&width=800');
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        .hero-content {
+            width: 100%;
+            padding: 20px 15px;
+            color: white;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+            line-height: 1.4;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
             background: var(--gradient-secondary);
             color: white;
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
         }
 
-        .card-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 20px rgba(28, 117, 188, 0.3);
+        }
+
+        /* Feature Icons Section - ALWAYS HORIZONTAL */
+        .feature-icons {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            margin: -30px 10px 20px;
+            position: relative;
+            z-index: 10;
+            overflow-x: auto;
+            padding: 0 5px;
+        }
+
+        .feature-icon-item {
+            background: white;
+            border-radius: 10px;
+            padding: 12px 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 80px;
+            max-width: 120px;
+        }
+
+        .feature-icon-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .feature-icon {
+            width: 35px;
+            height: 35px;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            font-size: 16px;
+        }
+
+        .icon-blue {
+            background: linear-gradient(135deg, #1C75BC 0%, #00AEEF 100%);
+        }
+
+        .icon-red {
+            background: linear-gradient(135deg, #ED1C24 0%, #e63946 100%);
+        }
+
+        .icon-green {
+            background: linear-gradient(135deg, #27b33c 0%, #28a745 100%);
+        }
+
+        .icon-yellow {
+            background: linear-gradient(135deg, #f1c40f 0%, #ffc107 100%);
+        }
+
+        .feature-icon-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+
+        .feature-subtitle {
+            font-size: 9px;
+            color: var(--gray);
+            line-height: 1.1;
+        }
+
+        /* Quick Loan Calculator - Mobile optimized */
+        .quick-calculator {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            padding: 20px 15px;
+            border-radius: 15px;
+            margin: 20px 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid rgba(214, 19, 19, 0.1);
+        }
+
+        .quick-calculator h3 {
+            text-align: center;
+            color: var(--dark);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .calculator-preview {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            text-align: center;
+        }
+
+        .calc-item {
+            background: rgba(214, 19, 19, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(214, 19, 19, 0.1);
+        }
+
+        .calc-item h4 {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .calc-item .amount {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 3px;
+        }
+
+        /* Stats Container - Horizontal layout for mobile */
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 15px 10px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,249,250,0.98));
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 20px 10px;
+            overflow-x: auto;
+        }
+
+        .stats-box {
+            flex: 1;
+            min-width: 100px;
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px 8px;
+            text-align: center;
+            border: 1px solid rgba(214, 19, 19, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .stats-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 2px;
+            width: 100%;
+            background: var(--gradient-secondary);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .stats-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(214, 19, 19, 0.15);
+        }
+
+        .icon-container {
+            width: 30px;
+            height: 30px;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .stats-box h3 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin: 5px 0;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .stats-box p {
+            color: var(--gray);
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            line-height: 1.1;
+        }
+
+        /* Section Styling - Mobile optimized */
+        .section {
+            padding: 30px 15px;
+            max-width: 100%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .section-title h2 {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 12px;
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 2px;
+            background: var(--gradient-secondary);
+            bottom: -6px;
+            left: 20%;
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Why Choose Section - Mobile grid */
+        .why-choose {
+            background-color: white;
+            padding: 30px 15px;
+        }
+
+        .why-choose h2 {
+            font-size: 1.4rem;
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .benefit-item {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            padding: 15px 12px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(214, 19, 19, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(214, 19, 19, 0.1);
+        }
+
+        .benefit-icon {
+            width: 35px;
+            height: 35px;
+            margin: 0 auto 10px;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .benefit-item h3 {
+            font-size: 0.95rem;
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .benefit-item p {
+            color: var(--gray);
+            line-height: 1.4;
+            font-size: 0.8rem;
+        }
+
+        /* How It Works - Mobile optimized */
+        .how-it-works {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px 15px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .step-card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            padding: 15px 12px;
+            text-align: center;
+            border: 1px solid rgba(214, 19, 19, 0.1);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-number {
+            width: 35px;
+            height: 35px;
+            background: var(--gradient-secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0 auto 10px;
+            box-shadow: 0 3px 10px rgba(214, 19, 19, 0.2);
+        }
+
+        .step-card h3 {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .step-card p {
+            color: var(--gray);
+            line-height: 1.4;
+            font-size: 0.8rem;
+        }
+
+        /* Simple Calculator - Very compact */
+
+        .simple-calculator h3 {
+            text-align: center;
+            color: var(--dark);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .calc-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .calc-input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calc-input-group label {
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-bottom: 3px;
+            font-weight: 600;
+        }
+
+        .calc-input {
+            padding: 8px 10px;
+            border: 1px solid rgba(214, 19, 19, 0.2);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            background: white;
+        }
+
+        .calc-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .calc-btn {
+            width: 100%;
+            padding: 10px;
+            background: var(--gradient-secondary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .calc-result.show {
+            display: block;
+        }
+
+        .calc-result .monthly {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .calc-result .details {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        /* Loan Products Section - Mobile grid */
+        .loan-products {
+            padding: 30px 15px;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        }
+
+        .loan-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .loan-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(214, 19, 19, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .loan-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(214, 19, 19, 0.15);
+        }
+
+        .loan-card-header {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .loan-card-header .icon-wrapper {
+            width: 30px;
+            height: 30px;
+            margin: 0 auto 8px;
             background: rgba(255,255,255,0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
         }
 
-        .card-header h3 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .card-header .subtitle {
+        .loan-card-header .icon-wrapper i {
             font-size: 1rem;
-            opacity: 0.9;
         }
 
-        .card-body {
-            padding: 40px 30px;
+        .loan-card-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
         }
 
-        .card-body p {
+        .loan-card-body {
+            padding: 15px;
+        }
+
+        .loan-card-body p {
+            margin-bottom: 12px;
             color: var(--gray);
-            margin-bottom: 25px;
-            line-height: 1.7;
-            font-size: 1.1rem;
+            line-height: 1.4;
+            font-size: 0.85rem;
         }
 
-        .features-list {
+        .loan-card-body .features {
             list-style: none;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
         }
 
-        .features-list li {
-            padding: 12px 0;
+        .loan-card-body .features li {
+            padding: 4px 0;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            font-size: 1rem;
+            font-size: 0.8rem;
         }
 
-        .features-list li:last-child {
-            border-bottom: none;
-        }
-
-        .features-list li i {
+        .loan-card-body .features li i {
             color: var(--success);
-            margin-right: 15px;
-            font-size: 1.2rem;
+            margin-right: 6px;
+            font-size: 0.8rem;
         }
 
-        .loan-details {
-            background: rgba(214, 19, 19, 0.05);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 25px;
+        /* Testimonials - Mobile optimized */
+        .testimonials {
+            background-color: #f9f9f9;
+            padding: 30px 15px;
         }
 
-        .loan-details h4 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.2rem;
+        .testimonial-slider {
+            max-width: 100%;
+            margin: 0 auto;
         }
 
-        .detail-item {
+        .testimonial-card {
+            background-color: white;
+            padding: 20px 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(214, 19, 19, 0.1);
+        }
+
+        .testimonial-card .rating {
+            color: var(--warning);
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 12px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .testimonial-card .client {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.85rem;
+        }
+
+        .testimonial-nav {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .testimonial-nav button {
+            background: var(--gradient-secondary);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin: 0 6px;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-nav button:hover {
+            transform: scale(1.1);
+        }
+
+        /* FAQ - Mobile optimized */
+        .faq-container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: white;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(214, 19, 19, 0.1);
+        }
+
+        .faq-question {
+            padding: 15px 12px;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-        }
-
-        .detail-item span:first-child {
-            color: var(--gray);
-        }
-
-        .detail-item span:last-child {
+            align-items: center;
             font-weight: 600;
             color: var(--dark);
+            font-size: 0.9rem;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 15px 40px;
+        .faq-question i {
+            color: var(--primary);
+            transition: transform 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 12px 15px;
+            max-height: 150px;
+        }
+
+        .faq-answer p {
+            color: var(--gray);
+            line-height: 1.4;
+            font-size: 0.85rem;
+        }
+
+        /* CTA - Mobile optimized */
+        .cta {
             background: var(--gradient-secondary);
             color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            font-size: 1rem;
-            width: 100%;
             text-align: center;
+            padding: 30px 15px;
         }
 
-        .btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(230, 57, 70, 0.4);
-        }
-
-        /* Comparison Table */
-        .comparison-section {
-            margin-top: 80px;
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-        }
-
-        .comparison-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 40px;
+        .cta h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
             font-weight: 700;
         }
 
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        .cta p {
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
         }
 
-        .comparison-table th,
-        .comparison-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .comparison-table th {
-            background: rgba(214, 19, 19, 0.1);
+        .btn-light {
+            background-color: white;
             color: var(--primary);
-            font-weight: 700;
         }
 
-        .comparison-table tr:hover {
-            background: rgba(214, 19, 19, 0.02);
+        .btn-light:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
         }
 
-        /* Mobile Navigation */
+        /* Footer - Mobile optimized */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 25px 15px 15px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 100%;
+        }
+
+        .footer-column h3 {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            position: relative;
+            padding-bottom: 6px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column p {
+            margin-bottom: 8px;
+            color: #bbb;
+            line-height: 1.4;
+            font-size: 0.85rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 6px;
+        }
+
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .footer-column ul li a i {
+            margin-right: 6px;
+            color: var(--primary);
+            font-size: 0.75rem;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 12px;
+        }
+
+        .social-links a {
+            width: 30px;
+            height: 30px;
+            background-color: #444;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 6px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 15px;
+            margin-top: 15px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 0.75rem;
+        }
+
+        /* Mobile Navigation - Always visible */
         .mobile-nav {
             position: fixed;
             bottom: 0;
@@ -348,33 +1010,98 @@
             margin-bottom: 3px;
         }
 
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .main-content {
-                margin: 20px auto;
-                padding: 0 15px;
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.6rem;
             }
 
-            .page-header h1 {
-                font-size: 2rem;
-            }
-
-            .loan-products-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-
-            .card-body {
-                padding: 25px 20px;
-            }
-
-            .comparison-table {
+            .hero-content p {
                 font-size: 0.9rem;
             }
 
-            .comparison-table th,
-            .comparison-table td {
-                padding: 10px 8px;
+            .stats-container {
+                margin: 15px 8px;
+                padding: 12px 6px;
+                gap: 6px;
+            }
+
+            .stats-box {
+                min-width: 90px;
+                padding: 10px 6px;
+            }
+
+            .stats-box h3 {
+                font-size: 1rem;
+            }
+
+            .stats-box p {
+                font-size: 0.6rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .section {
+                padding: 25px 10px;
+            }
+
+            .section-title h2 {
+                font-size: 1.3rem;
+            }
+
+            .simple-calculator {
+                margin: 15px 8px;
+                padding: 12px;
+            }
+
+            /* Feature icons stay horizontal even on very small screens */
+            .feature-icons {
+                gap: 4px;
+                margin: -30px 5px 20px;
+            }
+
+            .feature-icon-item {
+                padding: 10px 6px;
+                min-width: 70px;
+            }
+
+            .feature-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+
+            .feature-icon-title {
+                font-size: 10px;
+            }
+
+            .feature-subtitle {
+                font-size: 8px;
             }
         }
 
@@ -392,6 +1119,38 @@
             body {
                 padding-bottom: 0;
             }
+
+            .feature-icons {
+                max-width: 800px;
+                margin: -30px auto 40px;
+                gap: 20px;
+            }
+
+            .feature-icon-item {
+                padding: 20px 15px;
+                min-width: 150px;
+            }
+
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .feature-icon-title {
+                font-size: 14px;
+            }
+
+            .feature-subtitle {
+                font-size: 12px;
+            }
+        }
+
+        /* Hide desktop elements on mobile */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none !important;
+            }
         }
     </style>
 </head>
@@ -399,6 +1158,7 @@
     <!-- Header -->
     <header>
         <div class="logo">
+            <img src="/placeholder.svg?height=30&width=30" alt="YYC Cash Loan Logo">
             <h1>YYC CASH LOAN</h1>
             <span class="ncr">NCRCP15906</span>
         </div>
@@ -406,9 +1166,9 @@
         <!-- Desktop Navigation -->
         <nav class="desktop-nav">
             <ul>
-                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html" class="nav-link active">Home</a></li>
                 <li><a href="apply.html" class="nav-link">Apply</a></li>
-                <li><a href="loans.html" class="nav-link active">Loans</a></li>
+                <li><a href="loans.html" class="nav-link">Loans</a></li>
                 <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
                 <li><a href="account.html" class="nav-link">Account</a></li>
             </ul>
@@ -420,279 +1180,835 @@
         </button>
     </header>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="page-header">
-            <h1>Our Loan Products</h1>
-            <p>Choose from our range of flexible loan solutions designed to meet your specific financial needs. All loans come with competitive rates and no upfront fees.</p>
+    <!-- Enhanced Hero Section -->
+    <section class="hero">
+        <div class="hero-slider">
+            <div class="hero-slide active"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
         </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Need Fast Cash?</h1>
+            <p>Get Approved in Minutes with YYC CASH LOAN! No upfront fees, instant payouts guaranteed.</p>
+            <a href="apply.html" class="btn">Apply Now - No Fee</a>
+        </div>
+    </section>
 
-        <!-- Loan Products Grid -->
-        <div class="loan-products-grid">
-            <!-- Personal Loans -->
-            <div class="loan-product-card">
-                <div class="card-header">
-                    <div class="card-icon">
+    <!-- Feature Icons - ALWAYS HORIZONTAL -->
+    <div class="feature-icons">
+        <div class="feature-icon-item">
+            <div class="feature-icon icon-blue">
+                <i class="fas fa-clock"></i>
+            </div>
+            <div class="feature-icon-title">Fast Approvals</div>
+            <div class="feature-subtitle">Within 2 hours</div>
+        </div>
+        <div class="feature-icon-item">
+            <div class="feature-icon icon-red">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="feature-icon-title">100% Secure</div>
+            <div class="feature-subtitle">Encrypted data</div>
+        </div>
+        <div class="feature-icon-item">
+            <div class="feature-icon icon-green">
+                <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div class="feature-icon-title">Flexible Terms</div>
+            <div class="feature-subtitle">Your schedule</div>
+        </div>
+        <div class="feature-icon-item">
+            <div class="feature-icon icon-yellow">
+                <i class="fas fa-certificate"></i>
+            </div>
+            <div class="feature-icon-title">NCR Registered</div>
+            <div class="feature-subtitle">NCRCP15906</div>
+        </div>
+    </div>
+
+      <style>
+    * { box-sizing: border-box; }
+    
+    .container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: auto;
+      padding: 30px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .step {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      min-height: 200px;
+      animation: fadeIn 0.5s ease;
+    }
+    .step.active {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .icon {
+      font-size: 40px;
+      color: #007bff;
+    }
+    .input-box {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 12px 20px;
+      width: 100%;
+      font-size: 16px;
+      background: #f0f8ff;
+      text-align: left;
+    }
+    .button {
+      background: #007bff;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      animation: pulse 1s infinite alternate;
+    }
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+    .progress {
+      width: 100%;
+      background: #eee;
+      height: 10px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: #007bff;
+      animation: loadbar 2s forwards;
+    }
+    @keyframes loadbar {
+      to { width: 100%; }
+    }
+    .success-check {
+      font-size: 60px;
+      color: #28a745;
+      animation: bounce 1s ease infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+    .typing {
+      border-right: 2px solid #007bff;
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+    }
+    .account-flow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      border-radius: 12px;
+      background: #f1faff;
+      font-weight: bold;
+      position: relative;
+    }
+    .cash-icon {
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      font-size: 24px;
+      color: green;
+      animation: moveCash 2s linear forwards;
+    }
+    @keyframes moveCash {
+      0% { left: 10%; opacity: 1; }
+      100% { left: 80%; opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="step active" id="step1">
+      <i class="fas fa-clipboard-check icon"></i>
+      <h2>Easy Loan Application</h2>
+    </div>
+
+    <div class="step" id="step2">
+      <i class="fas fa-user icon"></i>
+      <h3>Enter your name</h3>
+      <div class="input-box"><span id="typed-name" class="typing"></span></div>
+    </div>
+
+    <div class="step" id="step3">
+      <i class="fas fa-money-bill icon"></i>
+      <h3>Enter Amount</h3>
+      <div class="input-box"><span id="typed-amount" class="typing"></span></div>
+    </div>
+
+    <div class="step" id="step4">
+      <i class="fas fa-university icon"></i>
+      <h3>Select Account</h3>
+      <div class="input-box">Standard Bank <i class="fas fa-check-circle" style="color:green; float:right;"></i></div>
+      <button class="button">Next</button>
+    </div>
+
+    <div class="step" id="step5">
+      <i class="fas fa-arrow-right-arrow-left icon"></i>
+      <h3>Paying Out...</h3>
+      <div class="account-flow">
+        <div>YYC Loan</div>
+        <div class="cash-icon">💸</div>
+        <div>Ms Johan</div>
+      </div>
+      <div class="progress"><div class="progress-bar"></div></div>
+    </div>
+
+    <div class="step" id="step6">
+      <i class="fas fa-check-circle success-check"></i>
+      <h3>Payout Successful!</h3>
+    </div>
+  </div>
+
+  <script>
+    const steps = document.querySelectorAll('.step');
+    const nameText = "Ms Johan";
+    const amountText = "R 50,000";
+
+    function showStep(i) {
+      steps.forEach((s, index) => {
+        s.classList.remove("active");
+        if (index === i) s.classList.add("active");
+      });
+    }
+
+    function typeText(el, text, delay, callback) {
+      let idx = 0;
+      const typer = setInterval(() => {
+        el.textContent += text[idx++];
+        if (idx >= text.length) {
+          clearInterval(typer);
+          if (callback) setTimeout(callback, 1000);
+        }
+      }, delay);
+    }
+
+    function runAnimation() {
+      showStep(0);
+      setTimeout(() => {
+        showStep(1);
+        typeText(document.getElementById("typed-name"), nameText, 100, () => {
+          showStep(2);
+          typeText(document.getElementById("typed-amount"), amountText, 100, () => {
+            showStep(3);
+            setTimeout(() => {
+              document.querySelector("#step4 .button").click();
+            }, 1500);
+          });
+        });
+      }, 2000);
+    }
+
+    document.querySelector("#step4 .button").addEventListener("click", () => {
+      showStep(4);
+      setTimeout(() => {
+        showStep(5);
+        setTimeout(() => {
+          showStep(6);
+          setTimeout(() => {
+            // Reset for loop
+            document.getElementById("typed-name").textContent = "";
+            document.getElementById("typed-amount").textContent = "";
+            showStep(0);
+            setTimeout(runAnimation, 1500);
+          }, 3000);
+        }, 3000);
+      }, 2000);
+    });
+
+    setTimeout(runAnimation, 1000);
+  </script>
+
+    <!-- Stats Counter - Horizontal layout -->
+    <div class="stats-container">
+        <div class="stats-box">
+            <div class="icon-container">
+                <i class="fas fa-users"></i>
+            </div>
+            <h3 id="users-counter">15,000</h3>
+            <p>Happy Customers</p>
+        </div>
+        <div class="stats-box">
+            <div class="icon-container">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 id="loans-counter">25,000</h3>
+            <p>Loans Approved</p>
+        </div>
+        <div class="stats-box">
+            <div class="icon-container">
+                <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <h3 id="amount-counter">R50M</h3>
+            <p>Total Paid Out</p>
+        </div>
+    </div>
+
+    <!-- Why Choose YYC - 2x2 Grid -->
+    <section class="why-choose">
+        <h2>Why Choose YYC CASH LOAN?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Fast Approvals</h3>
+                <p>Loan decisions made within 2 hours. No upfront fees required. Our streamlined process ensures you get the cash you need when you need it most.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>100% Secure</h3>
+                <p>All your information is encrypted and kept confidential. We use bank-grade security measures to protect your personal and financial data.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h3>Flexible Terms</h3>
+                <p>Choose a repayment schedule that suits your lifestyle. We offer various term options from 1 month to 84 months to fit your budget.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3>NCR Registered</h3>
+                <p>Fully compliant with South African lending regulations. NCRCP15906 - Your guarantee of legitimate and responsible lending practices.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works - 2x2 Grid -->
+    <section class="how-it-works">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Get your cash in 4 simple steps with our streamlined process</p>
+        </div>
+        <div class="steps">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Apply Online</h3>
+                <p>Complete our secure digital form from your phone or computer. No office visit needed - apply from anywhere, anytime.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Instant Assessment</h3>
+                <p>Our advanced system and experienced team review your application in real-time, often responding within 1-2 hours.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Get Your Cash</h3>
+                <p>Once approved, your funds are transferred directly to your bank account - usually the same day or within 24 hours.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>Simple Repayment</h3>
+                <p>Repay over time via convenient debit order. We also offer payment flexibility if you need to adjust your schedule.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simple Calculator - Very compact -->
+     <title>Loan Calculator</title>
+  <style>
+    .calc-input-group {
+      margin-bottom: 15px;
+    }
+
+    .calc-input-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .calc-input {
+      width: 100%;
+      padding: 8px;
+    }
+
+    .calc-btn {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .calc-result {
+      margin-top: 20px;
+      background: #f3f3f3;
+      padding: 15px;
+      border-radius: 5px;
+    }
+
+    .monthly {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: green;
+    }
+
+    .details {
+      font-size: 0.9rem;
+      color: #333;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Loan Calculator</h2>
+
+  <div class="calc-input-group">
+    <label for="amount">Loan Amount (R)</label>
+    <input type="number" id="amount" class="calc-input" value="10000" min="1000" max="250000" />
+  </div>
+
+  <div class="calc-input-group">
+    <label for="loanType">Loan Type</label>
+    <select id="loanType" class="calc-input">
+      <option value="personal">Personal Loan (3%)</option>
+      <option value="business">Business Loan (5%)</option>
+      <option value="home">Home Loan (5%)</option>
+    </select>
+  </div>
+
+  <div class="calc-input-group">
+    <label for="term">Repayment Term (Months)</label>
+    <select id="term" class="calc-input">
+      <option value="1">1</option>
+      <option value="3">3</option>
+      <option value="6" selected>6</option>
+      <option value="12">12</option>
+      <option value="24">24</option>
+      <option value="36">36</option>
+    </select>
+  </div>
+
+  <button class="calc-btn" onclick="calculateLoan()">Calculate</button>
+
+  <div id="calc-result" class="calc-result">
+    <div class="monthly" id="monthly-result">Monthly Repayment: R0.00</div>
+    <div class="details" id="details-result">Total: R0.00 | Interest: R0.00</div>
+  </div>
+
+  <script>
+    function calculateLoan() {
+      const amount = parseFloat(document.getElementById("amount").value);
+      const term = parseInt(document.getElementById("term").value);
+      const loanType = document.getElementById("loanType").value;
+
+      if (!amount || amount <= 0 || !term || term <= 0) {
+        alert("Please enter valid loan amount and term.");
+        return;
+      }
+
+      // Determine interest rate
+      let interestRate = 0;
+      if (loanType === "personal") interestRate = 3;
+      else if (loanType === "business" || loanType === "home") interestRate = 5;
+
+      // Calculate interest and total repayment
+      const interest = (amount * interestRate) / 100;
+      const total = amount + interest;
+      const monthly = total / term;
+
+      // Display results
+      document.getElementById("monthly-result").textContent = `Monthly Repayment: R${monthly.toFixed(2)}`;
+      document.getElementById("details-result").textContent = `Total: R${total.toFixed(2)} | Interest: R${interest.toFixed(2)}`;
+    }
+  </script>
+
+
+    <!-- Our Loan Products -->
+    <section class="loan-products">
+        <div class="section-title">
+            <h2>Our Loan Products</h2>
+            <p>Choose the right loan solution for your financial needs</p>
+        </div>
+        <div class="loan-grid">
+            <div class="loan-card">
+                <div class="loan-card-header">
+                    <div class="icon-wrapper">
                         <i class="fas fa-user"></i>
                     </div>
                     <h3>Personal Loans</h3>
-                    <p class="subtitle">For medical bills, school fees, travel, or emergencies</p>
                 </div>
-                <div class="card-body">
-                    <p>Fixed monthly repayments and flexible terms up to 84 months. Perfect for consolidating debt, home improvements, or any personal financial need.</p>
-                    
-                    <div class="loan-details">
-                        <h4>Loan Details</h4>
-                        <div class="detail-item">
-                            <span>Loan Amount:</span>
-                            <span>R1,000 - R250,000</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Repayment Term:</span>
-                            <span>1 - 84 months</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Interest Rate:</span>
-                            <span>From 20% p.a.</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Processing Time:</span>
-                            <span>Within 2 hours</span>
-                        </div>
-                    </div>
-
-                    <ul class="features-list">
-                        <li><i class="fas fa-check"></i> No collateral required</li>
+                <div class="loan-card-body">
+                    <p>For medical bills, school fees, travel, or emergencies. Fixed monthly repayments and flexible terms up to 84 months.</p>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Up to R250,000</li>
+                        <li><i class="fas fa-check"></i> Terms up to 84 months</li>
                         <li><i class="fas fa-check"></i> Fixed interest rates</li>
-                        <li><i class="fas fa-check"></i> Flexible repayment terms</li>
-                        <li><i class="fas fa-check"></i> Quick approval process</li>
-                        <li><i class="fas fa-check"></i> No upfront fees</li>
+                        <li><i class="fas fa-check"></i> No collateral required</li>
                     </ul>
-                    
-                    <a href="apply.html" class="btn">Apply Here</a>
+                    <a href="apply.html" class="btn btn-primary" style="width: 100%; font-size: 0.8rem; padding: 8px;">Apply Here</a>
                 </div>
             </div>
-
-            <!-- Payday Loans -->
-            <div class="loan-product-card">
-                <div class="card-header">
-                    <div class="card-icon">
+            
+            <div class="loan-card">
+                <div class="loan-card-header">
+                    <div class="icon-wrapper">
                         <i class="fas fa-calendar-day"></i>
                     </div>
                     <h3>Payday Loans</h3>
-                    <p class="subtitle">Small, short-term loans repayable on your next payday</p>
                 </div>
-                <div class="card-body">
-                    <p>Ideal for month-end emergencies and urgent expenses. Get cash quickly when you need it most, with simple repayment on your next payday.</p>
-                    
-                    <div class="loan-details">
-                        <h4>Loan Details</h4>
-                        <div class="detail-item">
-                            <span>Loan Amount:</span>
-                            <span>R500 - R8,000</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Repayment Term:</span>
-                            <span>7 - 30 days</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Interest Rate:</span>
-                            <span>From 5% per month</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Processing Time:</span>
-                            <span>Within 1 hour</span>
-                        </div>
-                    </div>
-
-                    <ul class="features-list">
-                        <li><i class="fas fa-check"></i> Same day approval</li>
+                <div class="loan-card-body">
+                    <p>Small, short-term loans repayable on your next payday. Ideal for month-end emergencies and urgent expenses.</p>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Quick approval</li>
+                        <li><i class="fas fa-check"></i> Same day payout</li>
                         <li><i class="fas fa-check"></i> Minimal documentation</li>
                         <li><i class="fas fa-check"></i> Emergency assistance</li>
-                        <li><i class="fas fa-check"></i> Quick cash solution</li>
-                        <li><i class="fas fa-check"></i> Simple application</li>
                     </ul>
-                    
-                    <a href="apply.html" class="btn">Apply Here</a>
+                    <a href="apply.html" class="btn btn-primary" style="width: 100%; font-size: 0.8rem; padding: 8px;">Apply Here</a>
                 </div>
             </div>
-
-            <!-- Business Loans -->
-            <div class="loan-product-card">
-                <div class="card-header">
-                    <div class="card-icon">
+            
+            <div class="loan-card">
+                <div class="loan-card-header">
+                    <div class="icon-wrapper">
                         <i class="fas fa-briefcase"></i>
                     </div>
                     <h3>Business Loans</h3>
-                    <p class="subtitle">Funding for entrepreneurs and SMEs</p>
                 </div>
-                <div class="card-body">
-                    <p>Can be used for inventory, marketing, staff salaries, or cash flow management. Help your business grow with our flexible business financing solutions.</p>
-                    
-                    <div class="loan-details">
-                        <h4>Loan Details</h4>
-                        <div class="detail-item">
-                            <span>Loan Amount:</span>
-                            <span>R5,000 - R500,000</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Repayment Term:</span>
-                            <span>3 - 60 months</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Interest Rate:</span>
-                            <span>From 18% p.a.</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Processing Time:</span>
-                            <span>Within 24 hours</span>
-                        </div>
-                    </div>
-
-                    <ul class="features-list">
+                <div class="loan-card-body">
+                    <p>Funding for entrepreneurs and SMEs. Can be used for inventory, marketing, staff salaries, or cash flow management.</p>
+                    <ul class="features">
                         <li><i class="fas fa-check"></i> Business growth funding</li>
-                        <li><i class="fas fa-check"></i> Working capital solutions</li>
+                        <li><i class="fas fa-check"></i> Working capital</li>
                         <li><i class="fas fa-check"></i> Equipment financing</li>
                         <li><i class="fas fa-check"></i> Competitive rates</li>
-                        <li><i class="fas fa-check"></i> Business-friendly terms</li>
                     </ul>
-                    
-                    <a href="apply.html" class="btn">Apply Here</a>
+                    <a href="apply.html" class="btn btn-primary" style="width: 100%; font-size: 0.8rem; padding: 8px;">Apply Here</a>
                 </div>
             </div>
-
-            <!-- Debt Consolidation -->
-            <div class="loan-product-card">
-                <div class="card-header">
-                    <div class="card-icon">
+            
+            <div class="loan-card">
+                <div class="loan-card-header">
+                    <div class="icon-wrapper">
                         <i class="fas fa-compress-arrows-alt"></i>
                     </div>
                     <h3>Debt Consolidation</h3>
-                    <p class="subtitle">Combine multiple debts into one affordable payment</p>
                 </div>
-                <div class="card-body">
-                    <p>Simplify your finances and potentially reduce interest rates by combining all your debts into one manageable monthly payment.</p>
-                    
-                    <div class="loan-details">
-                        <h4>Loan Details</h4>
-                        <div class="detail-item">
-                            <span>Loan Amount:</span>
-                            <span>R10,000 - R300,000</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Repayment Term:</span>
-                            <span>12 - 84 months</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Interest Rate:</span>
-                            <span>From 19% p.a.</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>Processing Time:</span>
-                            <span>Within 4 hours</span>
-                        </div>
-                    </div>
-
-                    <ul class="features-list">
+                <div class="loan-card-body">
+                    <p>Combine multiple debts into one affordable payment. Simplify your finances and potentially reduce interest rates.</p>
+                    <ul class="features">
                         <li><i class="fas fa-check"></i> Combine multiple debts</li>
                         <li><i class="fas fa-check"></i> Lower interest rates</li>
                         <li><i class="fas fa-check"></i> Single monthly payment</li>
                         <li><i class="fas fa-check"></i> Simplified finances</li>
-                        <li><i class="fas fa-check"></i> Improved credit score</li>
                     </ul>
-                    
-                    <a href="apply.html" class="btn">Apply Here</a>
+                    <a href="apply.html" class="btn btn-primary" style="width: 100%; font-size: 0.8rem; padding: 8px;">Apply Here</a>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Comparison Table -->
-        <div class="comparison-section">
-            <h2>Compare Our Loan Products</h2>
-            <div style="overflow-x: auto;">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Personal Loans</th>
-                            <th>Payday Loans</th>
-                            <th>Business Loans</th>
-                            <th>Debt Consolidation</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Loan Amount</strong></td>
-                            <td>R1,000 - R250,000</td>
-                            <td>R500 - R8,000</td>
-                            <td>R5,000 - R500,000</td>
-                            <td>R10,000 - R300,000</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Repayment Term</strong></td>
-                            <td>1 - 84 months</td>
-                            <td>7 - 30 days</td>
-                            <td>3 - 60 months</td>
-                            <td>12 - 84 months</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Interest Rate</strong></td>
-                            <td>From 20% p.a.</td>
-                            <td>From 5% per month</td>
-                            <td>From 18% p.a.</td>
-                            <td>From 19% p.a.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Processing Time</strong></td>
-                            <td>Within 2 hours</td>
-                            <td>Within 1 hour</td>
-                            <td>Within 24 hours</td>
-                            <td>Within 4 hours</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Collateral Required</strong></td>
-                            <td>No</td>
-                            <td>No</td>
-                            <td>No</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Upfront Fees</strong></td>
-                            <td>None</td>
-                            <td>None</td>
-                            <td>None</td>
-                            <td>None</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Best For</strong></td>
-                            <td>General expenses</td>
-                            <td>Emergency cash</td>
-                            <td>Business growth</td>
-                            <td>Multiple debts</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-title">
+            <h2>What Our Clients Say</h2>
+            <p>Real experiences from real customers</p>
+        </div>
+        <div class="testimonial-slider">
+            <div class="testimonial-card">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>"I got my loan in under 3 hours! YYC is a lifesaver. Didn't pay any upfront fee."</p>
+                <div class="client">– Thando, Soweto</div>
             </div>
         </div>
-    </div>
+        <div class="testimonial-nav">
+            <button id="prev-testimonial"><i class="fas fa-chevron-left"></i></button>
+            <button id="next-testimonial"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+        <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+            <p>Find answers to common questions about our loan services</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    How do I apply for a loan? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Simply click on "Apply Now" and complete our secure online application form. You'll need basic personal information, employment details, and banking information. The process takes just a few minutes.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    How soon will I receive the money? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Once approved, funds are typically transferred to your bank account within 24 hours. In many cases, you can receive your money the same day if approved early in the day.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    What interest rates do you charge? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Our interest rates are competitive and vary based on the loan amount, term, and your credit profile. All rates are disclosed upfront with no hidden fees. Use our calculator above for an estimate.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Can I pay off my loan early? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, you can pay off your loan early without any penalties. Early settlement can save you money on interest charges. Contact us to arrange early settlement.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you lend to people with bad credit? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We consider applications from people with various credit histories. While we do conduct credit checks, we also look at your current financial situation and ability to repay.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Are there any upfront fees? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>No, we do not charge any upfront fees. All fees and charges are clearly disclosed in your loan agreement and are only deducted from your loan amount upon approval.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <h2>Ready to Get Your Cash?</h2>
+        <p>Join thousands of South Africans who trust YYC CASH LOAN for their financial needs. Apply today and get instant payouts with no upfront fees.</p>
+        <a href="apply.html" class="btn btn-light">Apply Now - No Fee</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About YYC CASH LOAN</h3>
+                <p>YYC CASH LOAN is a trusted provider of fast, secure loans for South Africans. We are committed to providing instant payouts with no upfront fees and transparent terms.</p>
+                <p><strong>NCRCP15906</strong></p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="apply.html"><i class="fas fa-chevron-right"></i> Apply</a></li>
+                    <li><a href="loans.html"><i class="fas fa-chevron-right"></i> Loans</a></li>
+                    <li><a href="how-it-works.html"><i class="fas fa-chevron-right"></i> How It Works</a></li>
+                    <li><a href="account.html"><i class="fas fa-chevron-right"></i> Account</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Loan Products</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Personal Loans</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Payday Loans</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Business Loans</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Debt Consolidation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> Johannesburg, South Africa</a></li>
+                    <li><a href="tel:+27123456789"><i class="fas fa-phone"></i> +27 12 345 6789</a></li>
+                    <li><a href="mailto:info@yycashloan.co.za"><i class="fas fa-envelope"></i> info@yycashloan.co.za</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 6:00 PM</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 YYC CASH LOAN. All Rights Reserved. NCRCP15906</p>
+        </div>
+    </footer>
 
     <!-- Mobile Navigation -->
     <nav class="mobile-nav" id="mobileNav">
         <ul>
-            <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="index.html" class="active"><i class="fas fa-home"></i>Home</a></li>
             <li><a href="apply.html"><i class="fas fa-file-alt"></i>Apply</a></li>
-            <li><a href="loans.html" class="active"><i class="fas fa-money-bill-wave"></i>Loans</a></li>
+            <li><a href="loans.html"><i class="fas fa-money-bill-wave"></i>Loans</a></li>
             <li><a href="how-it-works.html"><i class="fas fa-info-circle"></i>How It Works</a></li>
             <li><a href="account.html"><i class="fas fa-user"></i>Account</a></li>
         </ul>
     </nav>
 
     <script>
+        // Hero Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        setInterval(nextSlide, 5000);
+
+        // Testimonial Slider
+        const testimonials = [
+            {
+                rating: 5,
+                text: "I got my loan in under 3 hours! YYC is a lifesaver. Didn't pay any upfront fee.",
+                client: "– Thando, Soweto"
+            },
+            {
+                rating: 5,
+                text: "The process was so simple and fast. I'll definitely use them again. No upfront fees!",
+                client: "– John, Cape Town"
+            },
+            {
+                rating: 5,
+                text: "Professional service and instant payout. Highly recommended for emergency cash.",
+                client: "– Sarah, Durban"
+            }
+        ];
+        
+        let currentTestimonial = 0;
+        const testimonialCard = document.querySelector('.testimonial-card');
+        
+        function showTestimonial(index) {
+            currentTestimonial = (index + testimonials.length) % testimonials.length;
+            const testimonial = testimonials[currentTestimonial];
+            
+            let stars = '';
+            for (let i = 0; i < testimonial.rating; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            
+            testimonialCard.style.opacity = '0';
+            
+            setTimeout(() => {
+                testimonialCard.innerHTML = `
+                    <div class="rating">
+                        ${stars}
+                    </div>
+                    <p>"${testimonial.text}"</p>
+                    <div class="client">${testimonial.client}</div>
+                `;
+                testimonialCard.style.opacity = '1';
+            }, 200);
+        }
+        
+        document.getElementById('prev-testimonial').addEventListener('click', () => {
+            showTestimonial(currentTestimonial - 1);
+        });
+        
+        document.getElementById('next-testimonial').addEventListener('click', () => {
+            showTestimonial(currentTestimonial + 1);
+        });
+        
+        // Auto-rotate testimonials
+        setInterval(() => {
+            showTestimonial(currentTestimonial + 1);
+        }, 8000);
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                if (isActive) {
+                    item.classList.remove('active');
+                } else {
+                    item.classList.add('active');
+                }
+            });
+        });
+
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         
         mobileMenuBtn.addEventListener('click', function() {
+            // Simple alert for mobile menu - can be expanded later
+            alert('Menu options: Home
+            // Simple alert for mobile menu - can be expanded later
             alert('Menu options: Home, Apply, Loans, How It Works, Account');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.backdropFilter = 'blur(15px)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            }
         });
 
         // Mobile navigation active state
