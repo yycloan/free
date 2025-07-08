@@ -895,79 +895,371 @@
         }
 
         /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
+        /* Mobile-First Optimizations */
+@media (max-width: 768px) {
+    .desktop-nav {
+        display: none;
+    }
 
-            .main-content {
-                margin: 20px auto;
-                padding: 0 15px;
-            }
+    .main-content {
+        margin: 10px auto;
+        padding: 0 10px;
+    }
 
-            .login-section {
-                padding: 25px;
-            }
+    .login-section {
+        padding: 20px;
+        margin: 10px;
+    }
 
-            .dashboard-header {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
-            }
+    .login-section h1 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
 
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
+    .login-section p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
 
-            .quick-actions {
-                flex-direction: column;
-            }
+    .form-control {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
 
-            .quick-action-btn {
-                min-width: auto;
-            }
+    .btn {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
 
-            .transfer-visualization {
-                flex-direction: column;
-                gap: 15px;
-            }
+    .dashboard-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
 
-            .transfer-path {
-                width: 100%;
-                margin: 10px 0;
-                transform: rotate(90deg);
-            }
+    .welcome-message h2 {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+    }
 
-            .bank-account {
-                min-width: 120px;
-            }
+    .welcome-message p {
+        font-size: 0.9rem;
+    }
 
-            .progress-stages {
-                flex-wrap: wrap;
-                gap: 10px;
-            }
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
 
-            .stage-marker {
-                flex: 0 0 45%;
-            }
-        }
+    .dashboard-card {
+        padding: 20px;
+        border-radius: 12px;
+    }
 
-        /* Desktop styles */
-        @media (min-width: 769px) {
-            .desktop-nav {
-                display: block;
-            }
-            
-            .mobile-menu-btn,
-            .mobile-nav {
-                display: none;
-            }
-            
-            body {
-                padding-bottom: 0;
-            }
-        }
+    .dashboard-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    .dashboard-card h3 i {
+        font-size: 1.2rem;
+    }
+
+    .detail-row {
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+    }
+
+    .detail-label {
+        font-size: 0.8rem;
+    }
+
+    .detail-value {
+        font-size: 0.9rem;
+    }
+
+    .quick-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .quick-action-btn {
+        min-width: auto;
+        padding: 10px 15px;
+        font-size: 0.8rem;
+    }
+
+    /* Advanced Tracking Mobile Optimizations */
+    .advanced-tracking-card {
+        padding: 15px;
+    }
+
+    .tracking-header {
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+
+    .tracking-title h3 {
+        font-size: 1rem;
+    }
+
+    .tracking-title i {
+        padding: 6px;
+        font-size: 0.9rem;
+    }
+
+    .live-indicator {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+    }
+
+    .live-dot {
+        width: 6px;
+        height: 6px;
+    }
+
+    .stage-status {
+        padding: 12px 15px;
+        margin-bottom: 15px;
+    }
+
+    .stage-text {
+        font-size: 0.9rem;
+    }
+
+    /* Transfer Simulation Mobile */
+    .transfer-simulation {
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    .transfer-title {
+        font-size: 0.9rem;
+    }
+
+    .transfer-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .transfer-visualization {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .bank-account {
+        min-width: 100px;
+        padding: 15px;
+    }
+
+    .account-icon {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+    }
+
+    .account-name {
+        font-size: 0.8rem;
+    }
+
+    .account-type {
+        font-size: 0.7rem;
+    }
+
+    .transfer-path {
+        width: 80%;
+        margin: 8px auto;
+        height: 6px;
+        transform: rotate(90deg);
+    }
+
+    .money-particles {
+        height: 30px;
+        top: -12px;
+    }
+
+    .money-particle {
+        font-size: 14px;
+    }
+
+    .transfer-amount-display {
+        padding: 12px;
+        margin-top: 15px;
+    }
+
+    .amount-label {
+        font-size: 0.8rem;
+    }
+
+    .amount-value {
+        font-size: 1.2rem;
+    }
+
+    /* Ultra Progress Bar Mobile */
+    .ultra-progress-container {
+        margin: 20px 0;
+        padding: 15px;
+    }
+
+    .progress-title {
+        font-size: 0.9rem;
+    }
+
+    .progress-percentage {
+        font-size: 1rem;
+    }
+
+    .ultra-progress-bar {
+        height: 30px;
+    }
+
+    .ultra-progress-fill {
+        font-size: 0.9rem;
+    }
+
+    .progress-stages {
+        margin-top: 12px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .stage-marker {
+        flex: 0 0 45%;
+        margin-bottom: 10px;
+    }
+
+    .stage-dot {
+        width: 12px;
+        height: 12px;
+        border: 2px solid white;
+    }
+
+    .stage-label {
+        font-size: 0.65rem;
+        margin-top: 6px;
+        line-height: 1.2;
+    }
+
+    /* Approval Message Mobile */
+    .approval-message {
+        margin-top: 20px;
+        padding: 20px;
+    }
+
+    .approval-title {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+
+    .approval-text {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+
+    .credit-warning {
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    .credit-warning p {
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+    }
+
+    .approval-btn {
+        padding: 14px 25px;
+        font-size: 0.9rem;
+        margin-top: 15px;
+    }
+
+    /* Mobile Navigation Adjustments */
+    .mobile-nav ul li a {
+        padding: 10px 5px;
+        font-size: 0.65rem;
+    }
+
+    .mobile-nav ul li a i {
+        font-size: 1rem;
+        margin-bottom: 2px;
+    }
+
+    /* Header Mobile */
+    header {
+        padding: 12px 4%;
+    }
+
+    .logo h1 {
+        font-size: 1.3rem;
+    }
+
+    .logo .ncr {
+        font-size: 0.7rem;
+    }
+
+    .mobile-menu-btn {
+        font-size: 1.1rem;
+        padding: 6px;
+    }
+
+    /* Reduce spacing and margins for mobile */
+    body {
+        padding-bottom: 60px;
+    }
+
+    .logout-btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 480px) {
+    .main-content {
+        padding: 0 8px;
+    }
+
+    .login-section {
+        padding: 15px;
+        margin: 8px;
+    }
+
+    .login-section h1 {
+        font-size: 1.6rem;
+    }
+
+    .dashboard-card {
+        padding: 15px;
+    }
+
+    .advanced-tracking-card {
+        padding: 12px;
+    }
+
+    .transfer-simulation {
+        padding: 12px;
+    }
+
+    .ultra-progress-container {
+        padding: 12px;
+    }
+
+    .approval-message {
+        padding: 15px;
+    }
+
+    .stage-marker {
+        flex: 0 0 48%;
+    }
+
+    .bank-account {
+        padding: 12px;
+        min-width: 90px;
+    }
+
+    .account-icon {
+        font-size: 1.3rem;
+    }
+}
     </style>
 </head>
 <body>
