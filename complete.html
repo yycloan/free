@@ -1,301 +1,871 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YYC CASH LOAN - Application Submitted</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #0066cc;
-            --primary-dark: #004d99;
-            --secondary: #ff9900;
-            --text: #333333;
-            --light-bg: #f5f7fa;
-            --white: #ffffff;
-            --success: #28a745;
-            --danger: #dc3545;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --border-radius: 8px;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payout Successful - YYC CASH LOAN</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #d61313;
+      --secondary: #e63946;
+      --accent: #f1c40f;
+      --light: #ffffff;
+      --dark: #212529;
+      --gray: #6c757d;
+      --success: #28a745;
+      --info: #17a2b8;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --orange: #ff5722;
+      --gradient-primary: linear-gradient(135deg, #00AEEF 0%, #1C75BC 100%);
+      --gradient-secondary: linear-gradient(135deg, #e63946 0%, #d61313 100%);
+      --gradient-accent: linear-gradient(135deg, #f1c40f 0%, #ffc107 100%);
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        body {
-            background-color: var(--light-bg);
-            color: var(--text);
-            line-height: 1.6;
-            max-width: 480px;
-            margin: 0 auto;
-            position: relative;
-            min-height: 100vh;
-            padding-bottom: 70px; /* Space for bottom nav */
-        }
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      overflow-x: hidden;
+      font-size: 14px;
+      line-height: 1.4;
+      padding-bottom: 70px;
+      padding-top: 60px;
+      min-height: 100vh;
+    }
 
-        .app-container {
-            background-color: var(--white);
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
+    /* Header Styles */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 8px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      min-height: 50px;
+    }
 
-        /* Header Styles */
-        .app-header {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 15px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: var(--shadow);
-        }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
 
-        .app-header h1 {
-            font-size: 1.5rem;
-            margin: 0;
-        }
+    .logo img {
+      height: 30px;
+      margin-right: 6px;
+    }
 
-        /* Bottom Navigation */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background-color: var(--white);
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            max-width: 480px;
-            margin: 0 auto;
-            height: 60px;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
+    .logo h1 {
+      font-size: 1rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
 
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-            text-decoration: none;
-            font-size: 0.7rem;
-            width: 20%;
-            height: 100%;
-            transition: all 0.3s ease;
-        }
+    .logo .ncr {
+      font-size: 0.6rem;
+      color: var(--gray);
+      margin-left: 6px;
+    }
 
-        .nav-item i {
-            font-size: 1.2rem;
-            margin-bottom: 4px;
-        }
+    /* Desktop Navigation */
+    .desktop-nav {
+      display: none;
+    }
 
-        .nav-item.active {
-            color: var(--primary);
-        }
+    .desktop-nav ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
 
-        /* Content */
-        .content-section {
-            padding: 20px 15px;
-        }
+    .desktop-nav .nav-link {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
 
-        .success-card {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            padding: 30px 20px;
-            margin: 20px 0;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
+    .desktop-nav .nav-link:hover,
+    .desktop-nav .nav-link.active {
+      color: var(--primary);
+      background: rgba(214, 19, 19, 0.1);
+    }
 
-        .success-icon {
-            font-size: 4rem;
-            color: var(--success);
-            margin-bottom: 20px;
-        }
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: block;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--dark);
+      padding: 8px;
+    }
 
-        .success-title {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
+    /* Mobile Menu Overlay */
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1500;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
 
-        .success-message {
-            margin-bottom: 25px;
-            color: var(--text);
-        }
+    .mobile-menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
 
-        .application-details {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: var(--shadow);
-        }
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100%;
+      background: white;
+      z-index: 1600;
+      transition: right 0.3s ease;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    }
 
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--light-gray);
-        }
+    .mobile-menu.active {
+      right: 0;
+    }
 
-        .detail-row:last-child {
-            border-bottom: none;
-        }
+    .mobile-menu-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .section-title {
-            font-size: 1.2rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-            border-bottom: 2px solid var(--primary);
-        }
+    .mobile-menu-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--dark);
+    }
 
-        .contact-info {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: var(--shadow);
-        }
+    .mobile-menu-nav {
+      padding: 20px 0;
+    }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
+    .mobile-menu-nav ul {
+      list-style: none;
+    }
 
-        .contact-item i {
-            width: 30px;
-            color: var(--primary);
-        }
+    .mobile-menu-nav ul li {
+      margin-bottom: 5px;
+    }
 
-        .btn {
-            display: inline-block;
-            background-color: var(--secondary);
-            color: var(--white);
-            padding: 10px 20px;
-            border-radius: var(--border-radius);
-            text-decoration: none;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            text-align: center;
-        }
+    .mobile-menu-nav ul li a {
+      display: block;
+      padding: 12px 20px;
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
 
-        .btn:hover {
-            background-color: #e68a00;
-        }
+    .mobile-menu-nav ul li a:hover,
+    .mobile-menu-nav ul li a.active {
+      background: rgba(214, 19, 19, 0.1);
+      color: var(--primary);
+    }
 
-        .btn-block {
-            display: block;
-            width: 100%;
-        }
-    </style>
+    .mobile-menu-nav ul li a i {
+      margin-right: 10px;
+      width: 20px;
+    }
+
+    /* Main Content Container */
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 130px);
+      padding: 20px;
+    }
+
+    /* Success Header */
+    .success-header {
+      text-align: center;
+      margin-bottom: 30px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    .success-icon {
+      font-size: 4rem;
+      color: var(--success);
+      margin-bottom: 15px;
+      animation: bounceIn 1.5s ease-out;
+    }
+
+    .success-title {
+      font-size: 1.8rem;
+      color: var(--dark);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .success-subtitle {
+      font-size: 1rem;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    /* Animation Container */
+    .animation-container {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 450px;
+      animation: slideInUp 1s ease-out 0.5s both;
+    }
+
+    /* Bank Transfer Animation */
+    .transfer-animation {
+      position: relative;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .account-box {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 15px;
+      padding: 20px 15px;
+      color: white;
+      text-align: center;
+      width: 140px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      position: relative;
+      z-index: 2;
+    }
+
+    .account-box.sender {
+      background: var(--gradient-secondary);
+    }
+
+    .account-box.receiver {
+      background: var(--gradient-primary);
+    }
+
+    .account-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .account-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .account-number {
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+
+    /* Money Transfer Animation */
+    .transfer-path {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--success), transparent);
+      z-index: 1;
+    }
+
+    .money-flow {
+      position: absolute;
+      top: 50%;
+      left: 20%;
+      transform: translateY(-50%);
+      animation: moneyTransfer 3s ease-in-out infinite;
+      z-index: 3;
+    }
+
+    .money-icon {
+      font-size: 1.5rem;
+      color: var(--success);
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    @keyframes moneyTransfer {
+      0% {
+        left: 20%;
+        opacity: 0;
+        transform: translateY(-50%) scale(0.5);
+      }
+      20% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+      }
+      80% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+      }
+      100% {
+        left: 80%;
+        opacity: 0;
+        transform: translateY(-50%) scale(0.5);
+      }
+    }
+
+    /* Transaction Details */
+    .transaction-details {
+      background: rgba(40, 167, 69, 0.1);
+      border-radius: 10px;
+      padding: 15px;
+      border-left: 4px solid var(--success);
+    }
+
+    .transaction-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    .transaction-row:last-child {
+      margin-bottom: 0;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--success);
+    }
+
+    .transaction-label {
+      color: var(--gray);
+    }
+
+    .transaction-value {
+      color: var(--dark);
+      font-weight: 500;
+    }
+
+    /* Contact Information */
+    .contact-info {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 450px;
+      animation: slideInUp 1s ease-out 1s both;
+    }
+
+    .contact-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-title {
+      font-size: 1.3rem;
+      color: var(--dark);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .contact-subtitle {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    .contact-methods {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      background: rgba(214, 19, 19, 0.05);
+      border-radius: 10px;
+      border: 1px solid rgba(214, 19, 19, 0.1);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .contact-method:hover {
+      background: rgba(214, 19, 19, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(214, 19, 19, 0.2);
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+
+    .contact-details h4 {
+      font-size: 1rem;
+      color: var(--dark);
+      margin-bottom: 3px;
+      font-weight: 600;
+    }
+
+    .contact-details p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin: 0;
+    }
+
+    /* Mobile Navigation - Bottom */
+    .mobile-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      display: block;
+      z-index: 1000;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .mobile-nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: space-around;
+      margin: 0;
+      padding: 0;
+    }
+
+    .mobile-nav ul li {
+      flex: 1;
+      text-align: center;
+    }
+
+    .mobile-nav ul li a {
+      display: block;
+      padding: 12px 5px;
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.7rem;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-nav ul li a.active {
+      color: var(--primary);
+    }
+
+    .mobile-nav ul li a i {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 3px;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Desktop styles */
+    @media (min-width: 769px) {
+      .desktop-nav {
+        display: block;
+      }
+      
+      .mobile-menu-btn,
+      .mobile-nav {
+        display: none;
+      }
+      
+      body {
+        padding-bottom: 0;
+      }
+
+      .contact-methods {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .success-title {
+        font-size: 2.2rem;
+      }
+
+      .success-subtitle {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Hide desktop elements on mobile */
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .account-box {
+        width: 120px;
+        padding: 15px 10px;
+      }
+
+      .account-name {
+        font-size: 0.8rem;
+      }
+
+      .account-number {
+        font-size: 0.65rem;
+      }
+
+      .success-title {
+        font-size: 1.5rem;
+      }
+
+      .animation-container {
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="app-container">
-        <header class="app-header">
-            <h1>YYC CASH LOAN</h1>
-        </header>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="/placeholder.svg?height=30&width=30" alt="YYC Cash Loan Logo">
+      <h1>YYC CASH LOAN</h1>
+      <span class="ncr">NCRCP15906</span>
+    </div>
+    
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="apply.html" class="nav-link">Apply</a></li>
+        <li><a href="loans.html" class="nav-link">Loans</a></li>
+        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+        <li><a href="account.html" class="nav-link active">Account</a></li>
+      </ul>
+    </nav>
+    
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
 
-        <section class="content-section">
-            <div class="success-card">
-                <i class="fas fa-check-circle success-icon"></i>
-                <h2 class="success-title">Application Submitted!</h2>
-                <p class="success-message">Thank you for applying with YYC CASH LOAN. Your application has been received and is now being processed.</p>
-                <p class="success-message">You will receive an SMS and email notification within 24 hours with the status of your application.</p>
-                <button class="btn btn-block" onclick="window.location.href='index.html#account'">Track Your Application</button>
-            </div>
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
-            <div class="application-details">
-                <h3 class="section-title">Application Summary</h3>
-                <div id="application-summary">
-                    <!-- This will be populated with JavaScript -->
-                </div>
-            </div>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <div class="logo">
+        <img src="/placeholder.svg?height=25&width=25" alt="YYC Cash Loan Logo">
+        <span style="font-weight: bold; color: var(--primary); margin-left: 8px;">YYC CASH LOAN</span>
+      </div>
+      <button class="mobile-menu-close" id="mobileMenuClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="mobile-menu-nav">
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+        <li><a href="apply.html"><i class="fas fa-file-alt"></i>Apply</a></li>
+        <li><a href="loans.html"><i class="fas fa-money-bill-wave"></i>Loans</a></li>
+        <li><a href="how-it-works.html"><i class="fas fa-info-circle"></i>How It Works</a></li>
+        <li><a href="account.html" class="active"><i class="fas fa-user"></i>Account</a></li>
+      </ul>
+    </nav>
+  </div>
 
-            <div class="contact-info">
-                <h3 class="section-title">Need Help?</h3>
-                <p>If you have any questions about your application, please contact us:</p>
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>yyccashloan@gmail.com</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Bottom Navigation -->
-        <nav class="bottom-nav">
-            <a href="index.html" class="nav-item">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
-            </a>
-            <a href="index.html#apply" class="nav-item">
-                <i class="fas fa-edit"></i>
-                <span>Apply</span>
-            </a>
-            <a href="index.html#loans" class="nav-item">
-                <i class="fas fa-money-bill-wave"></i>
-                <span>Loans</span>
-            </a>
-            <a href="index.html#how" class="nav-item">
-                <i class="fas fa-info-circle"></i>
-                <span>How It Works</span>
-            </a>
-            <a href="index.html#account" class="nav-item active">
-                <i class="fas fa-user"></i>
-                <span>Account</span>
-            </a>
-        </nav>
+  <!-- Main Content -->
+  <div class="main-container">
+    <!-- Success Header -->
+    <div class="success-header">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h1 class="success-title">Transfer Started Successful!</h1>
+      <p class="success-subtitle">Make sure to Contect us on whatsapp or email to confirm your sucessful Improvement Certificate and get your loan PAYOUT proof</p>
     </div>
 
-    <script>
-        // Load application data from localStorage
-        document.addEventListener('DOMContentLoaded', function() {
-            const applicationData = JSON.parse(localStorage.getItem('loanApplication'));
-            
-            if (applicationData) {
-                // Create HTML for application summary
-                let summaryHTML = '';
-                
-                // Add each detail to the summary
-                summaryHTML += createDetailRow('Full Name', applicationData.fullName);
-                summaryHTML += createDetailRow('ID Number', applicationData.idNumber);
-                summaryHTML += createDetailRow('Contact Number', applicationData.phone);
-                summaryHTML += createDetailRow('Email', applicationData.email);
-                summaryHTML += createDetailRow('Loan Amount', 'R' + parseInt(applicationData.loanAmount).toLocaleString());
-                summaryHTML += createDetailRow('Loan Purpose', applicationData.loanPurpose);
-                summaryHTML += createDetailRow('Repayment Term', applicationData.repaymentTerm + ' months');
-                
-                // Insert the HTML into the page
-                document.getElementById('application-summary').innerHTML = summaryHTML;
-            } else {
-                // If no application data is found
-                document.getElementById('application-summary').innerHTML = 
-                    '<p>No application data found. Please <a href="index.html#apply">apply for a loan</a>.</p>';
-            }
-        });
+    <!-- Transfer Animation -->
+    <div class="animation-container">
+      <div class="transfer-animation">
+        <!-- Sender Account -->
+        <div class="account-box sender">
+          <i class="fas fa-university account-icon"></i>
+          <div class="account-name">YYC LOANS</div>
+          <div class="account-number">ACCOUNT</div>
+        </div>
+
+        <!-- Transfer Path -->
+        <div class="transfer-path"></div>
         
-        // Helper function to create a detail row
-        function createDetailRow(label, value) {
-            return `
-                <div class="detail-row">
-                    <span>${label}:</span>
-                    <span>${value}</span>
-                </div>
-            `;
+        <!-- Money Flow Animation -->
+        <div class="money-flow">
+          <i class="fas fa-coins money-icon"></i>
+        </div>
+
+        <!-- Receiver Account -->
+        <div class="account-box receiver">
+          <i class="fas fa-user-circle account-icon"></i>
+          <div class="account-name">YOUR</div>
+          <div class="account-number">ACCOUNT</div>
+        </div>
+      </div>
+
+      <!-- Transaction Details -->
+      <div class="transaction-details">
+        <div class="transaction-row">
+          <span class="transaction-label">Transaction ID:</span>
+          <span class="transaction-value" id="transactionId">TXN-2025-001234</span>
+        </div>
+        <div class="transaction-row">
+          <span class="transaction-label">Date & Time:</span>
+          <span class="transaction-value" id="transactionDate">Jan 8, 2025 - 8:13 PM</span>
+        </div>
+        <div class="transaction-row">
+          <span class="transaction-label">Status:</span>
+          <span class="transaction-value">✅ 99% COMPLETED</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="contact-info">
+      <div class="contact-header">
+        <h2 class="contact-title">You Need to contact us to finalize and get Proof of Payment?</h2>
+        <p class="contact-subtitle">Contact our customer care team to receive your official payout confirmation</p>
+      </div>
+
+      <div class="contact-methods">
+        <a href="tel:+27123456789" class="contact-method">
+          <div class="contact-icon">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Call Us</h4>
+            <p>+27 12 345 6789</p>
+          </div>
+        </a>
+
+        <a href="https://wa.me/27123456789" class="contact-method" target="_blank">
+          <div class="contact-icon">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <div class="contact-details">
+            <h4>WhatsApp</h4>
+            <p>+27 12 345 6789</p>
+          </div>
+        </a>
+
+        <a href="mailto:support@yycashloan.co.za" class="contact-method">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Email Support</h4>
+            <p>support@yycashloan.co.za</p>
+          </div>
+        </a>
+
+        <div class="contact-method">
+          <div class="contact-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Business Hours</h4>
+            <p>Mon-Fri: 8:00 AM - 6:00 PM</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+      <li><a href="apply.html"><i class="fas fa-file-alt"></i>Apply</a></li>
+      <li><a href="loans.html"><i class="fas fa-money-bill-wave"></i>Loans</a></li>
+      <li><a href="how-it-works.html"><i class="fas fa-info-circle"></i>How It Works</a></li>
+      <li><a href="account.html" class="active"><i class="fas fa-user"></i>Account</a></li>
+    </ul>
+  </nav>
+
+  <script>
+    // Mobile Menu Functionality
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('active');
+      mobileMenuOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('active');
+      mobileMenuOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    mobileMenuBtn.addEventListener('click', openMobileMenu);
+    mobileMenuClose.addEventListener('click', closeMobileMenu);
+    mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+        closeMobileMenu();
+      }
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+        header.style.backdropFilter = 'blur(15px)';
+      } else {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.backdropFilter = 'blur(10px)';
+      }
+    });
+
+    // Generate dynamic transaction details
+    function generateTransactionDetails() {
+      // Generate random transaction ID
+      const transactionId = 'TXN-' + new Date().getFullYear() + '-' + 
+                           Math.random().toString().substr(2, 6);
+      
+      // Get current date and time
+      const now = new Date();
+      const options = { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      };
+      const transactionDate = now.toLocaleDateString('en-US', options);
+
+      // Update the display
+      document.getElementById('transactionId').textContent = transactionId;
+      document.getElementById('transactionDate').textContent = transactionDate;
+    }
+
+    // Initialize transaction details when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      generateTransactionDetails();
+      
+      // Add some celebratory effects
+      setTimeout(() => {
+        // You could add confetti or other celebration effects here
+        console.log('Payout successful! 🎉');
+      }, 2000);
+    });
+
+    // Add click tracking for contact methods
+    document.querySelectorAll('.contact-method').forEach(method => {
+      method.addEventListener('click', function(e) {
+        const contactType = this.querySelector('h4').textContent;
+        console.log(`User clicked: ${contactType}`);
+        
+        // You could track this interaction for analytics
+        // gtag('event', 'contact_click', { contact_type: contactType });
+      });
+    });
+
+    // Smooth scrolling for any anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
         }
-    </script>
+      });
+    });
+  </script>
 </body>
 </html>
