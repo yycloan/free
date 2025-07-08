@@ -4,61 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Loan Approval - YYC Loans</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9f9f9;
-      padding: 30px;
-      color: #333;
-    }
-    .letter {
-      background: white;
-      padding: 30px;
-      max-width: 800px;
-      margin: auto;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-    .header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .header h1 {
-      color: #d61313;
-      margin-bottom: 0;
-    }
-    .header h2 {
-      color: #1C75BC;
-      margin-top: 0;
-    }
-    h3 {
-      margin-top: 30px;
-      font-size: 1.1rem;
-      color: #000;
-    }
-    .highlight {
-      font-weight: bold;
-    }
-    .footer {
-      margin-top: 40px;
-      font-size: 0.9rem;
-      border-top: 1px solid #ddd;
-      padding-top: 20px;
-    }
-    .pay-now {
-      display: inline-block;
-      background-color: #28a745;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      margin-top: 15px;
-    }
-    .pay-now:hover {
-      background-color: #218838;
-    }
-    /* Header */
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Loan Approval - YYC CASH LOAN | NCRCP15906</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #d61313;
+            --secondary: #e63946;
+            --accent: #f1c40f;
+            --light: #ffffff;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #28a745;
+            --danger: #dc3545;
+            --gradient-secondary: linear-gradient(135deg, #e63946 0%, #d61313 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f9f9f9;
+            padding: 30px 30px 80px 30px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
         header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -66,8 +44,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
@@ -91,7 +71,7 @@
 
         /* Desktop Navigation */
         .desktop-nav {
-            display: none;
+            display: block;
         }
 
         .desktop-nav ul {
@@ -128,30 +108,84 @@
 
         /* Main Content */
         .main-content {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin-top: 100px;
         }
 
-        .page-header {
+        .letter {
+            background: white;
+            padding: 30px;
+            max-width: 800px;
+            margin: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 30px;
         }
 
-        .page-header h1 {
-            font-size: 3rem;
-            color: var(--dark);
-            margin-bottom: 20px;
-            font-weight: 800;
+        .header h1 {
+            color: #d61313;
+            margin-bottom: 0;
+            font-size: 2.5rem;
         }
 
-        .page-header p {
+        .header h2 {
+            color: #1C75BC;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .highlight {
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
             color: var(--gray);
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto;
         }
- /* Mobile Navigation */
+
+        .pay-now {
+            display: inline-block;
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.3);
+        }
+
+        .pay-now:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(230, 57, 70, 0.5);
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Mobile Navigation */
         .mobile-nav {
             position: fixed;
             bottom: 0;
@@ -195,48 +229,83 @@
             font-size: 1.1rem;
             margin-bottom: 3px;
         }
-  /* Mobile Responsiveness */
+
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            .main-content {
-                margin: 20px auto;
-                padding: 0 15px;
+            .desktop-nav {
+                display: none;
             }
 
-            .page-header h1 {
+            body {
+                padding: 15px 15px 80px 15px;
+            }
+
+            .main-content {
+                margin-top: 80px;
+            }
+
+            .letter {
+                padding: 20px;
+            }
+
+            .header h1 {
                 font-size: 2rem;
             }
 
-            .steps-container {
-                grid-template-columns: 1fr;
-                gap: 25px;
+            .header h2 {
+                font-size: 1.2rem;
             }
 
-            .timeline-section,
-            .requirements-section,
-            .cta-section {
-                padding: 40px 20px;
+            h3 {
+                font-size: 1rem;
+                margin-top: 20px;
             }
 
-            .timeline::before {
-                left: 20px;
+            .logo h1 {
+                font-size: 1.3rem;
             }
 
-            .timeline-item {
-                width: 100%;
-                left: 0 !important;
-                padding-left: 50px !important;
-                padding-right: 0 !important;
-                text-align: left !important;
+            .logo .ncr {
+                font-size: 0.7rem;
             }
 
-            .timeline-dot {
-                left: 10px !important;
-                right: auto !important;
+            .mobile-menu-btn {
+                font-size: 1.1rem;
+                padding: 6px;
             }
 
-            .requirements-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
+            .mobile-nav ul li a {
+                padding: 10px 5px;
+                font-size: 0.65rem;
+            }
+
+            .mobile-nav ul li a i {
+                font-size: 1rem;
+                margin-bottom: 2px;
+            }
+
+            .pay-now {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px 10px 70px 10px;
+            }
+
+            .letter {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header h2 {
+                font-size: 1.1rem;
             }
         }
 
@@ -252,13 +321,13 @@
             }
             
             body {
-                padding-bottom: 0;
+                padding-bottom: 30px;
             }
         }
   </style>
 </head>
 <body>
-    <!-- Header -->
+        <!-- Header -->
     <header>
         <div class="logo">
             <h1>YYC CASH LOAN</h1>
@@ -338,10 +407,11 @@
             <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
             <li><a href="apply.html"><i class="fas fa-file-alt"></i>Apply</a></li>
             <li><a href="loans.html"><i class="fas fa-money-bill-wave"></i>Loans</a></li>
-            <li><a href="how-it-works.html" class="active"><i class="fas fa-info-circle"></i>How It Works</a></li>
-            <li><a href="account.html"><i class="fas fa-user"></i>Account</a></li>
+            <li><a href="how-it-works.html"><i class="fas fa-info-circle"></i>How It Works</a></li>
+            <li><a href="account.html" class="active"><i class="fas fa-user"></i>Account</a></li>
         </ul>
     </nav>
+
 
   <script>
     function loadApprovalData() {
