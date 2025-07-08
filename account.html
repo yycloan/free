@@ -14,6 +14,7 @@
             --dark: #212529;
             --gray: #6c757d;
             --success: #28a745;
+            --danger: #dc3545;
             --gradient-secondary: linear-gradient(135deg, #e63946 0%, #d61313 100%);
         }
 
@@ -395,6 +396,267 @@
             margin-bottom: 3px;
         }
 
+        /* Enhanced Tracking Styles */
+        .tracking-card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border: 2px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tracking-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(214, 19, 19, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .money-transfer-container {
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .transfer-endpoints {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .endpoint {
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            min-width: 120px;
+        }
+
+        .endpoint-title {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .endpoint-subtitle {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .transfer-path {
+            flex: 1;
+            position: relative;
+            margin: 0 20px;
+            height: 6px;
+            background: #ddd;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .money-flow {
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transform: translateX(-10px);
+            transition: transform 2s ease-in-out;
+            box-shadow: 0 0 15px rgba(241, 196, 15, 0.8);
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 15px rgba(241, 196, 15, 0.8); }
+            100% { box-shadow: 0 0 25px rgba(241, 196, 15, 1); }
+        }
+
+        .transfer-amount {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .transfer-amount strong {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .enhanced-progress-bar {
+            height: 35px;
+            margin-top: 20px;
+            background: #ddd;
+            border-radius: 17px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .enhanced-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997, #17a2b8);
+            transition: width 2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1rem;
+            position: relative;
+            border-radius: 17px;
+        }
+
+        .enhanced-progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: progressShine 2s infinite;
+        }
+
+        @keyframes progressShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .approval-message {
+            margin-top: 25px;
+            padding: 25px;
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border: 2px solid #28a745;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .approval-message::before {
+            content: '🎉';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            font-size: 3rem;
+            opacity: 0.1;
+            animation: celebrate 3s infinite;
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(10deg) scale(1.1); }
+        }
+
+        .approval-title {
+            color: #155724;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .approval-text {
+            color: #155724;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .credit-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .credit-warning p {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .approval-btn {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .approval-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(230, 57, 70, 0.4);
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            display: block;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .mobile-nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+        }
+
+        .mobile-nav ul li {
+            flex: 1;
+            text-align: center;
+        }
+
+        .mobile-nav ul li a {
+            display: block;
+            padding: 12px 5px;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav ul li a.active {
+            color: var(--primary);
+        }
+
+        .mobile-nav ul li a i {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .desktop-nav {
@@ -428,6 +690,22 @@
             .quick-action-btn {
                 min-width: auto;
             }
+
+            .transfer-endpoints {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .transfer-path {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .money-flow {
+                position: relative;
+                transform: none;
+                margin: 0 auto;
+            }
         }
 
         /* Desktop styles */
@@ -443,243 +721,6 @@
             
             body {
                 padding-bottom: 0;
-            }
-        }
-
-        /* Enhanced Header Styles */
-        header {
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo h1 {
-            font-size: 1.75rem;
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        .logo .ncr {
-            font-size: 0.75rem;
-            color: var(--gray);
-            margin-left: 10px;
-        }
-
-        /* Desktop Navigation */
-        .desktop-nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .desktop-nav li {
-            margin-left: 25px;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s ease;
-            padding: 12px 18px;
-            border-radius: 30px;
-            display: block;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary);
-            background-color: rgba(214, 19, 19, 0.1);
-        }
-
-        /* Mobile Menu Button */
-        .mobile-menu-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            display: none;
-        }
-
-        .hamburger-line {
-            width: 30px;
-            height: 3px;
-            background-color: var(--dark);
-            margin: 6px 0;
-            transition: background-color 0.3s ease;
-        }
-
-        /* Mobile Slide-out Menu */
-        .mobile-menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1001;
-            display: none;
-        }
-
-        .mobile-slide-menu {
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 300px;
-            height: 100%;
-            background-color: var(--light);
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            z-index: 1002;
-            transition: right 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .mobile-slide-menu.active {
-            right: 0;
-        }
-
-        .mobile-menu-header {
-            padding: 20px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .mobile-logo span {
-            font-size: 1.5rem;
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        .mobile-menu-close {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: var(--gray);
-        }
-
-        .mobile-menu-list {
-            list-style: none;
-            padding: 20px;
-            margin: 0;
-            flex-grow: 1;
-        }
-
-        .mobile-nav-link {
-            display: block;
-            padding: 12px 15px;
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            margin-bottom: 10px;
-        }
-
-        .mobile-nav-link i {
-            margin-right: 10px;
-            width: 20px;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .mobile-nav-link:hover,
-        .mobile-nav-link.active {
-            background-color: rgba(214, 19, 19, 0.1);
-            color: var(--primary);
-        }
-
-        .mobile-menu-footer {
-            padding: 20px;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .contact-info p,
-        .ncr-info p {
-            margin: 5px 0;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-
-        .contact-info i {
-            margin-right: 5px;
-        }
-
-        /* Mobile Bottom Navigation */
-        .mobile-bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--light);
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            padding: 10px 0;
-            display: none;
-        }
-
-        .mobile-bottom-nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .bottom-nav-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: var(--dark);
-            transition: color 0.3s ease;
-        }
-
-        .bottom-nav-link i {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-
-        .bottom-nav-link span {
-            font-size: 0.75rem;
-        }
-
-        .bottom-nav-link:hover,
-        .bottom-nav-link.active {
-            color: var(--primary);
-        }
-
-        /* Media Queries for Enhanced Header */
-        @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .mobile-bottom-nav {
-                display: flex;
             }
         }
     </style>
@@ -749,53 +790,33 @@
             </div>
 
             <div class="dashboard-grid">
-                <!-- Current Loan Card -->
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-money-bill-wave"></i> Current Loan</h3>
-                    <div class="loan-status">Active - Good Standing</div>
-                    <div class="loan-details">
-                        <div class="detail-row">
-                            <span class="detail-label">Loan Amount:</span>
-                            <span class="detail-value">R15,000</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Outstanding Balance:</span>
-                            <span class="detail-value">R8,750</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Monthly Payment:</span>
-                            <span class="detail-value">R1,250</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Next Payment:</span>
-                            <span class="detail-value">15 Feb 2025</span>
-                        </div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 42%"></div>
-                    </div>
-                    <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 20px;">42% paid off</p>
-                    <div class="quick-actions">
-                        <button class="btn quick-action-btn" onclick="alert('Make payment functionality')">Make Payment</button>
-                        <button class="btn quick-action-btn btn-outline" onclick="alert('View statement functionality')">View Statement</button>
-                    </div>
-                </div>
-
                 <!-- Account Information Card -->
                 <div class="dashboard-card">
                     <h3><i class="fas fa-user"></i> Account Information</h3>
                     <div class="loan-details">
                         <div class="detail-row">
                             <span class="detail-label">Full Name:</span>
-                            <span class="detail-value">John Doe</span>
+                            <span class="detail-value" id="user-fullname">John Doe</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">Email:</span>
-                            <span class="detail-value">john@example.com</span>
+                            <span class="detail-value" id="user-email">john@example.com</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">Phone:</span>
-                            <span class="detail-value">+27 12 345 6789</span>
+                            <span class="detail-value" id="user-phone">+27 12 345 6789</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Loan Type:</span>
+                            <span class="detail-value" id="user-loantype">Personal Loan</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Loan Amount:</span>
+                            <span class="detail-value" id="user-loanamount">R15,000</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Loan Duration:</span>
+                            <span class="detail-value" id="user-loanduration">12 months</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">Member Since:</span>
@@ -808,32 +829,6 @@
                     </div>
                     <div class="quick-actions">
                         <button class="btn quick-action-btn btn-outline" onclick="alert('Update profile functionality')">Update Profile</button>
-                    </div>
-                </div>
-
-                <!-- Payment History Card -->
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-history"></i> Recent Payments</h3>
-                    <div class="loan-details">
-                        <div class="detail-row">
-                            <span class="detail-label">15 Jan 2025:</span>
-                            <span class="detail-value" style="color: var(--success);">R1,250 ✓</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">15 Dec 2024:</span>
-                            <span class="detail-value" style="color: var(--success);">R1,250 ✓</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">15 Nov 2024:</span>
-                            <span class="detail-value" style="color: var(--success);">R1,250 ✓</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">15 Oct 2024:</span>
-                            <span class="detail-value" style="color: var(--success);">R1,250 ✓</span>
-                        </div>
-                    </div>
-                    <div class="quick-actions">
-                        <button class="btn quick-action-btn btn-outline" onclick="alert('View full history functionality')">View Full History</button>
                     </div>
                 </div>
 
@@ -863,189 +858,208 @@
     </nav>
 
     <script>
-// Use Email + Phone Number for login
-let storedData = JSON.parse(localStorage.getItem('loanApplication'));
-let currentStageIndex = parseInt(localStorage.getItem('loanStageIndex')) || 0;
+        // Use the exact same data structure from the loan application script
+        let storedData = JSON.parse(localStorage.getItem('loanApplication'));
+        let currentStageIndex = parseInt(localStorage.getItem('loanStageIndex')) || 0;
 
-function showDashboard(data) {
-    document.getElementById('loginSection').style.display = 'none';
-    document.getElementById('dashboardSection').style.display = 'block';
+        function showDashboard(data) {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'block';
 
-    document.querySelector('.welcome-message h2').innerText = `Welcome back, ${data.fullName.split(' ')[0]}!`;
+            // Update welcome message with correct name from saved data
+            const firstName = data.fullName.split(' ')[0];
+            document.querySelector('.welcome-message h2').innerText = `Welcome back, ${firstName}!`;
 
-    const accountDetails = document.querySelectorAll('.dashboard-card')[1].querySelectorAll('.detail-value');
-    accountDetails[0].innerText = data.fullName;
-    accountDetails[1].innerText = data.email;
-    accountDetails[2].innerText = data.phone;
-    accountDetails[3].innerText = new Date().toLocaleString('default', { month: 'short', year: 'numeric' });
-    accountDetails[4].innerText = 'Pending';
+            // Update all account information with exact saved data
+            document.getElementById('user-fullname').innerText = data.fullName;
+            document.getElementById('user-email').innerText = data.email;
+            document.getElementById('user-phone').innerText = data.phone;
+            document.getElementById('user-loantype').innerText = data.loanType;
+            document.getElementById('user-loanamount').innerText = `R${data.loanAmount}`;
+            document.getElementById('user-loanduration').innerText = data.loanDuration;
 
-    const loanAmountEl = document.querySelector('.dashboard-card .loan-details .detail-row:nth-child(1) .detail-value');
-    if (loanAmountEl) loanAmountEl.innerText = `R${data.loanAmount}`;
+            // Add Enhanced Live Tracking Bar
+            const trackingCard = document.createElement('div');
+            trackingCard.className = 'dashboard-card tracking-card';
+            trackingCard.innerHTML = `
+                <h3><i class="fas fa-chart-line"></i> Live Loan Application Tracking</h3>
+                <div class="loan-status" id="loan-status-label">Stage 1: Application Received (0%)</div>
+                
+                <!-- Money Transfer Animation -->
+                <div class="money-transfer-container">
+                    <div class="transfer-endpoints">
+                        <div class="endpoint">
+                            <div class="endpoint-title">YYC LOAN ACCOUNT</div>
+                            <div class="endpoint-subtitle">Source</div>
+                        </div>
+                        <div class="transfer-path">
+                            <div class="money-flow" id="money-flow">💰</div>
+                        </div>
+                        <div class="endpoint">
+                            <div class="endpoint-title">${data.fullName.toUpperCase()}</div>
+                            <div class="endpoint-subtitle">Your Account</div>
+                        </div>
+                    </div>
+                    <div class="transfer-amount">
+                        Transfer Amount: <strong>R${data.loanAmount}</strong>
+                    </div>
+                </div>
 
-    const cards = document.querySelectorAll('.dashboard-card');
-    if (cards[2] && cards[2].querySelector('h3').textContent.includes('Recent Payments')) {
-        cards[2].remove();
-    }
+                <!-- Enhanced Progress Bar -->
+                <div class="enhanced-progress-bar">
+                    <div class="enhanced-progress-fill" id="progress-fill" style="width: 0%;">
+                        <span id="progress-text">0%</span>
+                    </div>
+                </div>
+                
+                <div id="approval-message" style="display: none;"></div>
+            `;
+            
+            // Insert tracking card at the top
+            document.querySelector('.dashboard-grid').prepend(trackingCard);
 
-    const quickActionContainer = cards[0].querySelector('.quick-actions');
-    if (quickActionContainer) quickActionContainer.innerHTML = '';
-
-    // Add Live Tracking Bar
-    const topCard = document.createElement('div');
-    topCard.className = 'dashboard-card';
-    topCard.innerHTML = `
-        <h3><i class="fas fa-tasks"></i> Live Loan Application Tracking</h3>
-        <div class="loan-status" id="loan-status-label">Status: Starting...</div>
-        <div class="progress-bar" style="height: 24px; margin-top: 10px; background: #ddd; border-radius: 6px; overflow: hidden;">
-            <div class="progress-fill" id="progress-fill" style="
-                width: 5%;
-                font-weight: bold;
-                font-size: 0.9rem;
-                color: white;
-                text-align: center;
-                padding: 3px 0;
-                background: linear-gradient(90deg, #4caf50, #81c784);
-                transition: width 1s ease;
-            ">5%</div>
-        </div>
-    `;
-    document.querySelector('.dashboard-grid').prepend(topCard);
-
-    simulateProgress(data);
-    addUserActionButtons(data);
-}
-
-function simulateProgress(data) {
-    const progressBar = document.getElementById('progress-fill');
-    const statusLabel = document.getElementById('loan-status-label');
-
-    const steps = [
-        { percent: 5, delay: 0, message: 'Application Received' },
-        { percent: 25, delay: 60000, message: 'Processing Started' },
-        { percent: 88, delay: 60000, message: 'Application Under Review' },
-        { percent: 100, delay: 5000, message: `🎉 Congratulations ${data.fullName.split(' ')[0]}! Your loan of R${data.loanAmount} has been approved.` }
-    ];
-
-    function nextStep() {
-        if (currentStageIndex < steps.length) {
-            const s = steps[currentStageIndex];
-            progressBar.style.width = s.percent + '%';
-            progressBar.innerText = s.percent + '%';
-            statusLabel.innerText = 'Status: ' + s.message;
-
-            localStorage.setItem('loanStageIndex', currentStageIndex); // persist progress
-
-            if (currentStageIndex === steps.length - 1) {
-                const msg = document.createElement('div');
-                msg.style.marginTop = '20px';
-                msg.innerHTML = `
-                    ⚠️ However, your credit score is currently low.<br>
-                    To access funds and improve future eligibility, please repair your credit.<br><br>
-                    <a href="approval.html" class="btn btn-primary">View Approval & Fix Low Credit</a>
-                `;
-                progressBar.parentElement.appendChild(msg);
-            }
-
-            currentStageIndex++;
-            if (currentStageIndex < steps.length) {
-                setTimeout(nextStep, steps[currentStageIndex].delay);
-            }
+            // Start the tracking simulation
+            simulateApprovalProcess(data);
         }
-    }
 
-    nextStep();
-}
+        function simulateApprovalProcess(data) {
+            const progressBar = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+            const statusLabel = document.getElementById('loan-status-label');
+            const moneyFlow = document.getElementById('money-flow');
+            const approvalMessage = document.getElementById('approval-message');
 
-// Editable Action Buttons
-function addUserActionButtons(data) {
-    const actionCard = document.createElement('div');
-    actionCard.className = 'dashboard-card';
-    actionCard.innerHTML = `
-        <h3><i class="fas fa-cogs"></i> Quick Actions</h3>
-        <div class="quick-actions">
-            <button onclick="openPopup('profile', '${data.fullName}', '${data.email}', '${data.phone}')">Update Profile</button>
-            <button onclick="openPopup('support')">Contact Support</button>
-            <button onclick="openPopup('bank')">Update Banking Details</button>
-        </div>
-        <div id="popup" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; border-radius:8px; padding:20px; box-shadow:0 2px 8px rgba(0,0,0,0.3); z-index:1000;">
-            <div id="popup-content"></div>
-            <button onclick="savePopup()" style="margin-top:10px;">Save</button>
-            <button onclick="closePopup()">Close</button>
-        </div>
-    `;
-    document.querySelector('.dashboard-grid').appendChild(actionCard);
-}
+            const stages = [
+                { 
+                    percent: 0, 
+                    delay: 0, 
+                    message: 'Stage 1: Application Received (0%)'
+                },
+                { 
+                    percent: 25, 
+                    delay: 60000, // 1 minute
+                    message: 'Stage 2: Processing Started (25%)'
+                },
+                { 
+                    percent: 88, 
+                    delay: 120000, // 2 minutes after stage 2
+                    message: 'Stage 3: Application Accepted & Under Review (88%)'
+                },
+                { 
+                    percent: 100, 
+                    delay: 30000, // 30 seconds after stage 3
+                    message: 'Stage 4: Approval Complete (100%)'
+                }
+            ];
 
-function openPopup(type, name = '', email = '', phone = '') {
-    const popup = document.getElementById('popup');
-    const content = document.getElementById('popup-content');
-    popup.style.display = 'block';
+            function executeStage(stageIndex) {
+                if (stageIndex >= stages.length) return;
 
-    if (type === 'profile') {
-        content.innerHTML = `
-            <label>Full Name: <input type="text" id="editName" value="${name}"></label><br>
-            <label>Email: <input type="email" id="editEmail" value="${email}"></label><br>
-            <label>Phone: <input type="text" id="editPhone" value="${phone}"></label>
-        `;
-    } else if (type === 'support') {
-        content.innerHTML = `
-            <label>Your Message:<br>
-            <textarea id="supportMessage" rows="5" style="width:100%;"></textarea></label>
-        `;
-    } else if (type === 'bank') {
-        content.innerHTML = `
-            <label>Bank Name: <input type="text" id="bankName"></label><br>
-            <label>Account Number: <input type="text" id="bankAccount"></label>
-        `;
-    }
+                const stage = stages[stageIndex];
+                
+                // Update progress bar
+                progressBar.style.width = stage.percent + '%';
+                progressText.innerText = stage.percent + '%';
+                statusLabel.innerText = stage.message;
 
-    popup.setAttribute('data-type', type);
-}
+                // Animate money flow
+                if (stage.percent > 0) {
+                    const flowPercent = Math.min(stage.percent, 100);
+                    const transferPath = moneyFlow.parentElement;
+                    const pathWidth = transferPath.offsetWidth;
+                    const moveDistance = (flowPercent / 100) * (pathWidth - 20);
+                    moneyFlow.style.transform = `translateX(${moveDistance}px)`;
+                }
 
-function savePopup() {
-    const type = document.getElementById('popup').getAttribute('data-type');
-    if (type === 'profile') {
-        storedData.fullName = document.getElementById('editName').value.trim();
-        storedData.email = document.getElementById('editEmail').value.trim();
-        storedData.phone = document.getElementById('editPhone').value.trim();
-        localStorage.setItem('loanApplication', JSON.stringify(storedData));
-        alert('Profile updated successfully!');
-        location.reload();
-    } else if (type === 'support') {
-        const msg = document.getElementById('supportMessage').value;
-        alert("Support request sent:\n\n" + msg);
-    } else if (type === 'bank') {
-        const bank = document.getElementById('bankName').value;
-        const account = document.getElementById('bankAccount').value;
-        alert("Banking details saved:\n" + bank + " - " + account);
-    }
+                // Save progress
+                localStorage.setItem('loanStageIndex', stageIndex);
 
-    closePopup();
-}
+                // Handle final approval stage
+                if (stageIndex === stages.length - 1) {
+                    setTimeout(() => {
+                        approvalMessage.style.display = 'block';
+                        approvalMessage.innerHTML = `
+                            <div class="approval-message">
+                                <h3 class="approval-title">
+                                    🎉 Congratulations ${data.fullName.split(' ')[0]}!
+                                </h3>
+                                <p class="approval-text">
+                                    Your loan of <strong>R${data.loanAmount}</strong> has been approved!
+                                </p>
+                                <div class="credit-warning">
+                                    <p>
+                                        ⚠️ However, your credit score is currently low.
+                                    </p>
+                                    <p>
+                                        To access the funds and increase future loan eligibility, please repair your credit.
+                                    </p>
+                                </div>
+                                <a href="approvallettr.html" class="approval-btn">
+                                    View Approval & Fix Low Credit
+                                </a>
+                            </div>
+                        `;
+                    }, 2000);
+                    return;
+                }
 
-function closePopup() {
-    document.getElementById('popup').style.display = 'none';
-}
+                // Schedule next stage
+                const nextStageIndex = stageIndex + 1;
+                if (nextStageIndex < stages.length) {
+                    setTimeout(() => executeStage(nextStageIndex), stages[nextStageIndex].delay);
+                }
+            }
 
-// Login Handler
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('password').value.trim();
+            // Start from current stage or beginning
+            executeStage(currentStageIndex);
+        }
 
-    if (!storedData) {
-        alert("No application data found. Please apply first.");
-        return;
-    }
+        // Login Handler using exact same validation as loan application
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('password').value.trim();
 
-    if (email === storedData.email && phone === storedData.phone) {
-        showDashboard(storedData);
-    } else {
-        alert("Login failed. Email or phone number doesn't match our records.");
-    }
-});
-</script>
+            if (!storedData) {
+                alert("No application data found. Please apply first.");
+                return;
+            }
 
+            // Use exact same validation as the loan application script
+            if (email === storedData.email && phone === storedData.phone) {
+                showDashboard(storedData);
+            } else {
+                alert("Login failed. Email or phone number doesn't match our records.");
+            }
+        });
+
+        function logout() {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.getElementById('loginForm').reset();
+        }
+
+        // Mobile Menu Handler - exact same as loan application
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function () {
+                alert('Menu options: Home, Apply, Loans, How It Works, Account');
+            });
+        }
+
+        // Active mobile nav - exact same as loan application
+        function setActiveNavItem() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.mobile-nav a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', setActiveNavItem);
+    </script>
 </body>
 </html>
