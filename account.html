@@ -351,60 +351,17 @@
             min-width: 120px;
         }
 
-        /* Mobile Navigation */
-        .mobile-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: white;
-            display: block;
-            z-index: 1000;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            border-top: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .mobile-nav ul {
-            display: flex;
-            list-style: none;
-            justify-content: space-around;
-            margin: 0;
-            padding: 0;
-        }
-
-        .mobile-nav ul li {
-            flex: 1;
-            text-align: center;
-        }
-
-        .mobile-nav ul li a {
-            display: block;
-            padding: 12px 5px;
-            color: var(--gray);
-            text-decoration: none;
-            font-size: 0.7rem;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-nav ul li a.active {
-            color: var(--primary);
-        }
-
-        .mobile-nav ul li a i {
-            display: block;
-            font-size: 1.1rem;
-            margin-bottom: 3px;
-        }
-
-        /* Enhanced Tracking Styles */
-        .tracking-card {
-            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-            border: 2px solid var(--primary);
+        /* Advanced Tracking Styles */
+        .advanced-tracking-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
+            border: 3px solid transparent;
+            background-clip: padding-box;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
 
-        .tracking-card::before {
+        .advanced-tracking-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -412,109 +369,305 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(214, 19, 19, 0.1), transparent);
-            animation: shimmer 3s infinite;
+            animation: advancedShimmer 4s infinite;
         }
 
-        @keyframes shimmer {
+        @keyframes advancedShimmer {
             0% { left: -100%; }
             100% { left: 100%; }
         }
 
-        .money-transfer-container {
-            margin: 20px 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        .tracking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(214, 19, 19, 0.1);
+        }
+
+        .tracking-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tracking-title i {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 8px;
+            border-radius: 50%;
+            font-size: 1rem;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(40, 167, 69, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: livePulse 2s infinite;
+        }
+
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .stage-status {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 2px solid #2196f3;
+            padding: 15px 20px;
             border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .transfer-endpoints {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
+        .stage-status::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(33, 150, 243, 0.2), transparent);
+            animation: stageShine 3s infinite;
         }
 
-        .endpoint {
-            text-align: center;
-            padding: 10px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            min-width: 120px;
+        @keyframes stageShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
-        .endpoint-title {
+        .stage-text {
+            font-size: 1.1rem;
             font-weight: bold;
-            color: var(--primary);
-            font-size: 0.9rem;
+            color: #1565c0;
+            margin: 0;
         }
 
-        .endpoint-subtitle {
+        /* Advanced Money Transfer Simulation */
+        .transfer-simulation {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(214, 19, 19, 0.1);
+        }
+
+        .transfer-simulation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-secondary);
+            animation: transferProgress 3s infinite;
+        }
+
+        @keyframes transferProgress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .transfer-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .transfer-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .transfer-subtitle {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .transfer-visualization {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .bank-account {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            min-width: 140px;
+            position: relative;
+        }
+
+        .bank-account.source {
+            border: 3px solid var(--primary);
+        }
+
+        .bank-account.destination {
+            border: 3px solid var(--success);
+        }
+
+        .account-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .source .account-icon {
+            color: var(--primary);
+        }
+
+        .destination .account-icon {
+            color: var(--success);
+        }
+
+        .account-name {
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .account-type {
             font-size: 0.8rem;
             color: var(--gray);
+            text-align: center;
         }
 
         .transfer-path {
             flex: 1;
             position: relative;
             margin: 0 20px;
-            height: 6px;
-            background: #ddd;
-            border-radius: 3px;
+            height: 8px;
+            background: linear-gradient(90deg, #ddd, #bbb, #ddd);
+            border-radius: 4px;
             overflow: hidden;
         }
 
-        .money-flow {
+        .money-particles {
             position: absolute;
-            top: -10px;
+            top: -15px;
             left: 0;
-            width: 20px;
-            height: 20px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            transform: translateX(-10px);
-            transition: transform 2s ease-in-out;
-            box-shadow: 0 0 15px rgba(241, 196, 15, 0.8);
-            animation: pulse 1s infinite alternate;
+            width: 100%;
+            height: 40px;
+            pointer-events: none;
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 15px rgba(241, 196, 15, 0.8); }
-            100% { box-shadow: 0 0 25px rgba(241, 196, 15, 1); }
+        .money-particle {
+            position: absolute;
+            font-size: 16px;
+            animation: floatMoney 4s infinite linear;
+            opacity: 0;
         }
 
-        .transfer-amount {
+        @keyframes floatMoney {
+            0% { 
+                left: -20px; 
+                opacity: 0; 
+                transform: translateY(0px) rotate(0deg); 
+            }
+            10% { 
+                opacity: 1; 
+            }
+            90% { 
+                opacity: 1; 
+            }
+            100% { 
+                left: calc(100% + 20px); 
+                opacity: 0; 
+                transform: translateY(-10px) rotate(360deg); 
+            }
+        }
+
+        .transfer-amount-display {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(214, 19, 19, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(214, 19, 19, 0.2);
+        }
+
+        .amount-label {
             font-size: 0.9rem;
             color: var(--gray);
+            margin-bottom: 5px;
         }
 
-        .transfer-amount strong {
+        .amount-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-shadow: 0 2px 4px rgba(214, 19, 19, 0.2);
+        }
+
+        /* Ultra-Modern Progress Bar */
+        .ultra-progress-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border-radius: 20px;
+            border: 2px solid rgba(214, 19, 19, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .progress-title {
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .progress-percentage {
+            font-weight: bold;
             color: var(--primary);
             font-size: 1.1rem;
         }
 
-        .enhanced-progress-bar {
-            height: 35px;
-            margin-top: 20px;
-            background: #ddd;
-            border-radius: 17px;
+        .ultra-progress-bar {
+            height: 40px;
+            background: linear-gradient(135deg, #e9ecef, #dee2e6);
+            border-radius: 20px;
             overflow: hidden;
             position: relative;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .enhanced-progress-fill {
+        .ultra-progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #28a745, #20c997, #17a2b8);
-            transition: width 2s ease;
+            background: linear-gradient(135deg, #28a745, #20c997, #17a2b8, #007bff);
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease-in-out infinite;
+            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -522,94 +675,178 @@
             color: white;
             font-size: 1rem;
             position: relative;
-            border-radius: 17px;
+            border-radius: 20px;
         }
 
-        .enhanced-progress-fill::after {
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .ultra-progress-fill::after {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: progressShine 2s infinite;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: ultraShine 2s infinite;
         }
 
-        @keyframes progressShine {
+        @keyframes ultraShine {
             0% { left: -100%; }
             100% { left: 100%; }
         }
 
+        .progress-stages {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            position: relative;
+        }
+
+        .stage-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            flex: 1;
+        }
+
+        .stage-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #dee2e6;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stage-dot.active {
+            background: var(--success);
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(40, 167, 69, 0.5);
+        }
+
+        .stage-dot.current {
+            background: var(--primary);
+            animation: currentPulse 2s infinite;
+        }
+
+        @keyframes currentPulse {
+            0%, 100% { 
+                transform: scale(1.2); 
+                box-shadow: 0 0 20px rgba(214, 19, 19, 0.5); 
+            }
+            50% { 
+                transform: scale(1.4); 
+                box-shadow: 0 0 30px rgba(214, 19, 19, 0.8); 
+            }
+        }
+
+        .stage-label {
+            font-size: 0.7rem;
+            color: var(--gray);
+            text-align: center;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .stage-marker.active .stage-label {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .stage-marker.current .stage-label {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Approval Message */
         .approval-message {
-            margin-top: 25px;
-            padding: 25px;
+            margin-top: 30px;
+            padding: 30px;
             background: linear-gradient(135deg, #d4edda, #c3e6cb);
-            border: 2px solid #28a745;
-            border-radius: 15px;
+            border: 3px solid #28a745;
+            border-radius: 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            animation: approvalGlow 3s infinite alternate;
+        }
+
+        @keyframes approvalGlow {
+            0% { box-shadow: 0 0 20px rgba(40, 167, 69, 0.3); }
+            100% { box-shadow: 0 0 40px rgba(40, 167, 69, 0.6); }
         }
 
         .approval-message::before {
             content: '🎉';
             position: absolute;
-            top: -20px;
-            left: -20px;
-            font-size: 3rem;
+            top: -30px;
+            left: -30px;
+            font-size: 4rem;
             opacity: 0.1;
-            animation: celebrate 3s infinite;
+            animation: celebrate 4s infinite;
         }
 
         @keyframes celebrate {
             0%, 100% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(10deg) scale(1.1); }
+            25% { transform: rotate(10deg) scale(1.1); }
+            75% { transform: rotate(-10deg) scale(1.1); }
         }
 
         .approval-title {
             color: #155724;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             margin-bottom: 15px;
             font-weight: bold;
+            text-shadow: 0 2px 4px rgba(21, 87, 36, 0.2);
         }
 
         .approval-text {
             color: #155724;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             margin-bottom: 20px;
+            font-weight: 500;
         }
 
         .credit-warning {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px 0;
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
         }
 
         .credit-warning p {
             color: #856404;
             margin-bottom: 10px;
+            font-weight: 500;
         }
 
         .approval-btn {
             background: var(--gradient-secondary);
             color: white;
-            padding: 15px 30px;
-            border-radius: 25px;
+            padding: 18px 35px;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
             display: inline-block;
-            margin-top: 15px;
+            margin-top: 20px;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.3);
         }
 
         .approval-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(230, 57, 70, 0.4);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(230, 57, 70, 0.5);
         }
 
         /* Mobile Navigation */
@@ -691,20 +928,28 @@
                 min-width: auto;
             }
 
-            .transfer-endpoints {
+            .transfer-visualization {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
             }
 
             .transfer-path {
                 width: 100%;
                 margin: 10px 0;
+                transform: rotate(90deg);
             }
 
-            .money-flow {
-                position: relative;
-                transform: none;
-                margin: 0 auto;
+            .bank-account {
+                min-width: 120px;
+            }
+
+            .progress-stages {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .stage-marker {
+                flex: 0 0 45%;
             }
         }
 
@@ -878,37 +1123,86 @@
             document.getElementById('user-loanamount').innerText = `R${data.loanAmount}`;
             document.getElementById('user-loanduration').innerText = data.loanDuration;
 
-            // Add Enhanced Live Tracking Bar
-            const trackingCard = document.createElement('div');
-            trackingCard.className = 'dashboard-card tracking-card';
-            trackingCard.innerHTML = `
-                <h3><i class="fas fa-chart-line"></i> Live Loan Application Tracking</h3>
-                <div class="loan-status" id="loan-status-label">Stage 1: Application Received (0%)</div>
+            // Add Ultra-Advanced Live Tracking Bar
+            const advancedTrackingCard = document.createElement('div');
+            advancedTrackingCard.className = 'dashboard-card advanced-tracking-card';
+            advancedTrackingCard.innerHTML = `
+                <div class="tracking-header">
+                    <div class="tracking-title">
+                        <i class="fas fa-chart-line"></i>
+                        <h3 style="margin: 0; color: var(--primary);">Live Loan Application Tracking</h3>
+                    </div>
+                    <div class="live-indicator">
+                        <div class="live-dot"></div>
+                        <span>LIVE</span>
+                    </div>
+                </div>
                 
-                <!-- Money Transfer Animation -->
-                <div class="money-transfer-container">
-                    <div class="transfer-endpoints">
-                        <div class="endpoint">
-                            <div class="endpoint-title">YYC LOAN ACCOUNT</div>
-                            <div class="endpoint-subtitle">Source</div>
+                <div class="stage-status" id="stage-status">
+                    <p class="stage-text" id="stage-text">Stage 1: Application Received (0%)</p>
+                </div>
+                
+                <!-- Advanced Money Transfer Simulation -->
+                <div class="transfer-simulation">
+                    <div class="transfer-header">
+                        <div class="transfer-title">💰 Secure Money Transfer Simulation</div>
+                        <div class="transfer-subtitle">Real-time fund transfer visualization</div>
+                    </div>
+                    
+                    <div class="transfer-visualization">
+                        <div class="bank-account source">
+                            <div class="account-icon">🏦</div>
+                            <div class="account-name">YYC LOAN ACCOUNT</div>
+                            <div class="account-type">Source Bank</div>
                         </div>
+                        
                         <div class="transfer-path">
-                            <div class="money-flow" id="money-flow">💰</div>
+                            <div class="money-particles" id="money-particles"></div>
                         </div>
-                        <div class="endpoint">
-                            <div class="endpoint-title">${data.fullName.toUpperCase()}</div>
-                            <div class="endpoint-subtitle">Your Account</div>
+                        
+                        <div class="bank-account destination">
+                            <div class="account-icon">👤</div>
+                            <div class="account-name">${data.fullName.toUpperCase()}</div>
+                            <div class="account-type">Your Account</div>
                         </div>
                     </div>
-                    <div class="transfer-amount">
-                        Transfer Amount: <strong>R${data.loanAmount}</strong>
+                    
+                    <div class="transfer-amount-display">
+                        <div class="amount-label">Transfer Amount</div>
+                        <div class="amount-value">R${data.loanAmount}</div>
                     </div>
                 </div>
 
-                <!-- Enhanced Progress Bar -->
-                <div class="enhanced-progress-bar">
-                    <div class="enhanced-progress-fill" id="progress-fill" style="width: 0%;">
-                        <span id="progress-text">0%</span>
+                <!-- Ultra-Modern Progress Bar -->
+                <div class="ultra-progress-container">
+                    <div class="progress-label">
+                        <span class="progress-title">Application Progress</span>
+                        <span class="progress-percentage" id="progress-percentage">0%</span>
+                    </div>
+                    
+                    <div class="ultra-progress-bar">
+                        <div class="ultra-progress-fill" id="ultra-progress-fill" style="width: 0%;">
+                            <span id="progress-text">0%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-stages">
+                        <div class="stage-marker" id="stage-1">
+                            <div class="stage-dot current"></div>
+                            <div class="stage-label">Application<br>Received</div>
+                        </div>
+                        <div class="stage-marker" id="stage-2">
+                            <div class="stage-dot"></div>
+                            <div class="stage-label">Processing<br>Started</div>
+                        </div>
+                        <div class="stage-marker" id="stage-3">
+                            <div class="stage-dot"></div>
+                            <div class="stage-label">Under<br>Review</div>
+                        </div>
+                        <div class="stage-marker" id="stage-4">
+                            <div class="stage-dot"></div>
+                            <div class="stage-label">Approval<br>Complete</div>
+                        </div>
                     </div>
                 </div>
                 
@@ -916,60 +1210,104 @@
             `;
             
             // Insert tracking card at the top
-            document.querySelector('.dashboard-grid').prepend(trackingCard);
+            document.querySelector('.dashboard-grid').prepend(advancedTrackingCard);
 
-            // Start the tracking simulation
-            simulateApprovalProcess(data);
+            // Start the advanced tracking simulation
+            simulateAdvancedApprovalProcess(data);
         }
 
-        function simulateApprovalProcess(data) {
-            const progressBar = document.getElementById('progress-fill');
+        function createMoneyParticles() {
+            const particlesContainer = document.getElementById('money-particles');
+            if (!particlesContainer) return;
+
+            const particles = ['💰', '💵', '💸', '🪙'];
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'money-particle';
+                particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+                particle.style.top = Math.random() * 20 + 'px';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                particle.style.animationDuration = (3 + Math.random() * 2) + 's';
+                
+                particlesContainer.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 5000);
+            }, 800);
+        }
+
+        function updateStageMarkers(currentStage) {
+            for (let i = 1; i <= 4; i++) {
+                const marker = document.getElementById(`stage-${i}`);
+                const dot = marker.querySelector('.stage-dot');
+                
+                if (i < currentStage) {
+                    dot.className = 'stage-dot active';
+                    marker.className = 'stage-marker active';
+                } else if (i === currentStage) {
+                    dot.className = 'stage-dot current';
+                    marker.className = 'stage-marker current';
+                } else {
+                    dot.className = 'stage-dot';
+                    marker.className = 'stage-marker';
+                }
+            }
+        }
+
+        function simulateAdvancedApprovalProcess(data) {
+            const progressBar = document.getElementById('ultra-progress-fill');
             const progressText = document.getElementById('progress-text');
-            const statusLabel = document.getElementById('loan-status-label');
-            const moneyFlow = document.getElementById('money-flow');
+            const progressPercentage = document.getElementById('progress-percentage');
+            const stageText = document.getElementById('stage-text');
             const approvalMessage = document.getElementById('approval-message');
+
+            // Start money particles animation
+            createMoneyParticles();
 
             const stages = [
                 { 
                     percent: 0, 
                     delay: 0, 
-                    message: 'Stage 1: Application Received (0%)'
+                    message: 'Stage 1: Application Received (0%)',
+                    stage: 1
                 },
                 { 
                     percent: 25, 
                     delay: 60000, // 1 minute
-                    message: 'Stage 2: Processing Started (25%)'
+                    message: 'Stage 2: Processing Started (25%)',
+                    stage: 2
                 },
                 { 
                     percent: 88, 
                     delay: 120000, // 2 minutes after stage 2
-                    message: 'Stage 3: Application Accepted & Under Review (88%)'
+                    message: 'Stage 3: Application Accepted & Under Review (88%)',
+                    stage: 3
                 },
                 { 
-                    percent: 100, 
+                    percent: 99, 
                     delay: 30000, // 30 seconds after stage 3
-                    message: 'Stage 4: Approval Complete (100%)'
+                    message: 'Stage 4: Approval Complete (99%)',
+                    stage: 4
                 }
             ];
 
-            function executeStage(stageIndex) {
+            function executeAdvancedStage(stageIndex) {
                 if (stageIndex >= stages.length) return;
 
                 const stage = stages[stageIndex];
                 
-                // Update progress bar
+                // Update progress bar with smooth animation
                 progressBar.style.width = stage.percent + '%';
                 progressText.innerText = stage.percent + '%';
-                statusLabel.innerText = stage.message;
+                progressPercentage.innerText = stage.percent + '%';
+                stageText.innerText = stage.message;
 
-                // Animate money flow
-                if (stage.percent > 0) {
-                    const flowPercent = Math.min(stage.percent, 100);
-                    const transferPath = moneyFlow.parentElement;
-                    const pathWidth = transferPath.offsetWidth;
-                    const moveDistance = (flowPercent / 100) * (pathWidth - 20);
-                    moneyFlow.style.transform = `translateX(${moveDistance}px)`;
-                }
+                // Update stage markers
+                updateStageMarkers(stage.stage);
 
                 // Save progress
                 localStorage.setItem('loanStageIndex', stageIndex);
@@ -979,39 +1317,39 @@
                     setTimeout(() => {
                         approvalMessage.style.display = 'block';
                         approvalMessage.innerHTML = `
-                            <div class="approval-message">
-                                <h3 class="approval-title">
-                                    🎉 Congratulations ${data.fullName.split(' ')[0]}!
-                                </h3>
-                                <p class="approval-text">
-                                    Your loan of <strong>R${data.loanAmount}</strong> has been approved!
-                                </p>
-                                <div class="credit-warning">
-                                    <p>
-                                        ⚠️ However, your credit score is currently low.
-                                    </p>
-                                    <p>
-                                        To access the funds and increase future loan eligibility, please repair your credit.
-                                    </p>
-                                </div>
-                                <a href="approvallettr.html" class="approval-btn">
-                                    View Approval & Fix Low Credit
-                                </a>
-                            </div>
-                        `;
-                    }, 2000);
+            <div class="approval-message">
+                <h3 class="approval-title">
+                    🎉 Congratulations ${data.fullName.split(' ')[0]}!
+                </h3>
+                <p class="approval-text">
+                    Your loan of <strong>R${data.loanAmount}</strong> has been approved.
+                </p>
+                <div class="credit-warning">
+                    <p>
+                        ⚠️ However, your credit score is currently low.
+                    </p>
+                    <p>
+                        To access the funds and increase future loan eligibility, please repair your credit.
+                    </p>
+                </div>
+                <button class="approval-btn" onclick="window.location.href='approvallettr.html'">
+                    View Approval & Fix Low Credit
+                </button>
+            </div>
+        `;
+                    }, 3000);
                     return;
                 }
 
                 // Schedule next stage
                 const nextStageIndex = stageIndex + 1;
                 if (nextStageIndex < stages.length) {
-                    setTimeout(() => executeStage(nextStageIndex), stages[nextStageIndex].delay);
+                    setTimeout(() => executeAdvancedStage(nextStageIndex), stages[nextStageIndex].delay);
                 }
             }
 
             // Start from current stage or beginning
-            executeStage(currentStageIndex);
+            executeAdvancedStage(currentStageIndex);
         }
 
         // Login Handler using exact same validation as loan application
