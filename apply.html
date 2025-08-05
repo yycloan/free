@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Put your HTML text here<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -339,7 +339,7 @@
                 <li><a href="apply.html" class="nav-link active">Apply</a></li>
                 <li><a href="loans.html" class="nav-link">Loans</a></li>
                 <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
-                <li><a href="approvallettr.html" class="nav-link">Account</a></li>
+                <li><a href="account.html" class="nav-link">Account</a></li>
             </ul>
         </nav>
         
@@ -588,7 +588,6 @@
         }
 
         const result = await response.json();
-        // Return the format Baserow expects for a file field: { "name": "..." }
         return { name: result.name };
     }
 
@@ -626,40 +625,42 @@
             return;
         }
 
-        // --- Disable button and show loading state ---
         submitButton.disabled = true;
         submitButton.textContent = 'Submitting...';
 
         try {
             // --- 1. Get form data ---
-            const fullName = `${document.getElementById('first-name').value.trim()} ${document.getElementById('last-name').value.trim()}`;
+            const firstName = document.getElementById('first-name').value.trim();
+            const lastName = document.getElementById('last-name').value.trim();
+            const fullName = `${firstName} ${lastName}`;
             const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const idNumber = document.getElementById('id-number').value.trim();
             const loanAmount = parseFloat(document.getElementById('loan-amount').value);
             const repaymentTerm = `${document.getElementById('repayment-term').value.trim()} months`;
             const idFile = document.getElementById('id-doc').files[0];
             const bankStatementFile = document.getElementById('bank-slip').files[0];
             
-            // --- 2. Upload files concurrently and get their Baserow names ---
-            console.log("Uploading files to Baserow...");
+            // --- 2. Upload files to Baserow ---
+            console.log("Uploading files...");
             const [idUploadResult, bankStatementUploadResult] = await Promise.all([
                 uploadFileToBaserow(idFile),
                 uploadFileToBaserow(bankStatementFile)
             ]);
-            console.log("Files uploaded successfully:", { idUploadResult, bankStatementUploadResult });
+            console.log("Files uploaded successfully.");
 
-            // --- 3. Construct the row data payload using field IDs ---
+            // --- 3. Construct the Baserow row data payload ---
             const rowData = {
                 "field_4477077": fullName,
                 "field_4477079": email,
                 "field_4477085": loanAmount,
                 "field_4477086": repaymentTerm,
-                "field_4477095": [idUploadResult], // File fields must be an array of objects
+                "field_4477095": [idUploadResult], 
                 "field_4477096": [bankStatementUploadResult]
             };
-            console.log("Payload to be sent:", JSON.stringify(rowData, null, 2));
-
-
+            
             // --- 4. Post the new row to the Baserow table ---
+            console.log("Creating new row in Baserow...");
             const createRowUrl = `${BASEROW_API_BASE_URL}database/rows/table/${BASEROW_TABLE_ID}/`;
             const createRowResponse = await fetch(createRowUrl, {
                 method: 'POST',
@@ -672,22 +673,29 @@
 
             if (!createRowResponse.ok) {
                 const errorData = await createRowResponse.json();
-                console.error("Baserow API Error:", errorData);
                 throw new Error(`Failed to create row: ${JSON.stringify(errorData.detail) || 'Unknown API error'}`);
             }
-            
-            const newRow = await createRowResponse.json();
-            console.log("Successfully created new row:", newRow);
+            console.log("Baserow row created successfully.");
 
-            // --- 5. Success ---
+            // --- 5. Save User Details to Local Storage for Login ---
+            const userAccount = {
+                fullName: fullName,
+                email: email,
+                phone: phone,
+                idNumber: idNumber
+            };
+            localStorage.setItem('yycUserAccount', JSON.stringify(userAccount));
+            console.log('User account details saved to local storage:', userAccount);
+
+            // --- 6. Success ---
             showConfirmationPopup();
             form.reset();
 
         } catch (error) {
             console.error('Submission Error:', error);
-            alert(`An error occurred during submission. Please check the console (F12) for details and try again.\nError: ${error.message}`);
+            alert(`An error occurred during submission. Please check your details and try again.\nError: ${error.message}`);
         } finally {
-            // --- 6. Reset button state ---
+            // --- 7. Reset button state ---
             submitButton.disabled = false;
             submitButton.textContent = 'Submit Application';
         }
@@ -695,7 +703,7 @@
     
     function showConfirmationPopup() {
         const existingPopup = document.getElementById('loan-success-popup');
-        if (existingPopup) return; // Avoid duplicate popups
+        if (existingPopup) return; 
 
         const popup = document.createElement('div');
         popup.id = 'loan-success-popup';
@@ -715,8 +723,8 @@
 
         popup.innerHTML = `
             <h2 style="color: var(--success); margin-bottom: 10px;">✅ Loan Successfully Submitted!</h2>
-            <p style="color: var(--dark); margin-bottom: 25px;">⏱ Your application is processed and YOU QUALIFIED.</p>
-            <a href="account.html" class="btn btn-primary" style="margin-bottom: 20px;">VIEW YOUR APPROVAL DOCUMENT </a><br>
+            <p style="color: var(--dark); margin-bottom: 25px;">⏱ Your application is being processed and will be reviewed within 1 hour.</p>
+            <a href="account.html" class="btn btn-primary" style="margin-bottom: 20px;">Login to Your Account & Track Your Loan</a><br>
             <button onclick="document.getElementById('loan-success-popup').remove()" 
                     style="background: var(--danger); color: #fff; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">
                 ❌ Close
