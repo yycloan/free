@@ -179,24 +179,16 @@
             margin-bottom: 20px;
         }
 
-        .btn:hover {
+        .btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn:hover:not(:disabled) {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 15px 30px rgba(230, 57, 70, 0.4);
-        }
-
-        .forgot-password {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .forgot-password a {
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .forgot-password a:hover {
-            text-decoration: underline;
         }
 
         .register-link {
@@ -284,18 +276,7 @@
             margin-right: 10px;
             font-size: 1.5rem;
         }
-
-        .loan-status {
-            background: rgba(40, 167, 69, 0.1);
-            color: var(--success);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
+        
         .loan-details {
             margin-bottom: 20px;
         }
@@ -320,21 +301,6 @@
         .detail-value {
             font-weight: 600;
             color: var(--dark);
-        }
-
-        .progress-bar {
-            background: rgba(214, 19, 19, 0.1);
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-
-        .progress-fill {
-            background: var(--gradient-secondary);
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.3s ease;
         }
 
         .quick-actions {
@@ -458,315 +424,7 @@
             color: #1565c0;
             margin: 0;
         }
-
-        /* Advanced Money Transfer Simulation */
-        .transfer-simulation {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 20px;
-            padding: 25px;
-            margin: 25px 0;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid rgba(214, 19, 19, 0.1);
-        }
-
-        .transfer-simulation::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-secondary);
-            animation: transferProgress 3s infinite;
-        }
-
-        @keyframes transferProgress {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .transfer-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .transfer-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: var(--dark);
-            margin-bottom: 5px;
-        }
-
-        .transfer-subtitle {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-
-        .transfer-visualization {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 20px 0;
-            position: relative;
-        }
-
-        .bank-account {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            min-width: 140px;
-            position: relative;
-        }
-
-        .bank-account.source {
-            border: 3px solid var(--primary);
-        }
-
-        .bank-account.destination {
-            border: 3px solid var(--success);
-        }
-
-        .account-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .source .account-icon {
-            color: var(--primary);
-        }
-
-        .destination .account-icon {
-            color: var(--success);
-        }
-
-        .account-name {
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-align: center;
-            margin-bottom: 5px;
-        }
-
-        .account-type {
-            font-size: 0.8rem;
-            color: var(--gray);
-            text-align: center;
-        }
-
-        .transfer-path {
-            flex: 1;
-            position: relative;
-            margin: 0 20px;
-            height: 8px;
-            background: linear-gradient(90deg, #ddd, #bbb, #ddd);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .money-particles {
-            position: absolute;
-            top: -15px;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            pointer-events: none;
-        }
-
-        .money-particle {
-            position: absolute;
-            font-size: 16px;
-            animation: floatMoney 4s infinite linear;
-            opacity: 0;
-        }
-
-        @keyframes floatMoney {
-            0% { 
-                left: -20px; 
-                opacity: 0; 
-                transform: translateY(0px) rotate(0deg); 
-            }
-            10% { 
-                opacity: 1; 
-            }
-            90% { 
-                opacity: 1; 
-            }
-            100% { 
-                left: calc(100% + 20px); 
-                opacity: 0; 
-                transform: translateY(-10px) rotate(360deg); 
-            }
-        }
-
-        .transfer-amount-display {
-            text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(214, 19, 19, 0.05);
-            border-radius: 10px;
-            border: 1px solid rgba(214, 19, 19, 0.2);
-        }
-
-        .amount-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-            margin-bottom: 5px;
-        }
-
-        .amount-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            text-shadow: 0 2px 4px rgba(214, 19, 19, 0.2);
-        }
-
-        /* Ultra-Modern Progress Bar */
-        .ultra-progress-container {
-            margin: 30px 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border-radius: 20px;
-            border: 2px solid rgba(214, 19, 19, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .progress-title {
-            font-weight: bold;
-            color: var(--dark);
-        }
-
-        .progress-percentage {
-            font-weight: bold;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-
-        .ultra-progress-bar {
-            height: 40px;
-            background: linear-gradient(135deg, #e9ecef, #dee2e6);
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .ultra-progress-fill {
-            height: 100%;
-            background: linear-gradient(135deg, #28a745, #20c997, #17a2b8, #007bff);
-            background-size: 200% 100%;
-            animation: gradientShift 3s ease-in-out infinite;
-            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
-            font-size: 1rem;
-            position: relative;
-            border-radius: 20px;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .ultra-progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: ultraShine 2s infinite;
-        }
-
-        @keyframes ultraShine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .progress-stages {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            position: relative;
-        }
-
-        .stage-marker {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            flex: 1;
-        }
-
-        .stage-dot {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #dee2e6;
-            border: 3px solid white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 2;
-        }
-
-        .stage-dot.active {
-            background: var(--success);
-            transform: scale(1.2);
-            box-shadow: 0 0 20px rgba(40, 167, 69, 0.5);
-        }
-
-        .stage-dot.current {
-            background: var(--primary);
-            animation: currentPulse 2s infinite;
-        }
-
-        @keyframes currentPulse {
-            0%, 100% { 
-                transform: scale(1.2); 
-                box-shadow: 0 0 20px rgba(214, 19, 19, 0.5); 
-            }
-            50% { 
-                transform: scale(1.4); 
-                box-shadow: 0 0 30px rgba(214, 19, 19, 0.8); 
-            }
-        }
-
-        .stage-label {
-            font-size: 0.7rem;
-            color: var(--gray);
-            text-align: center;
-            margin-top: 8px;
-            font-weight: 500;
-        }
-
-        .stage-marker.active .stage-label {
-            color: var(--success);
-            font-weight: bold;
-        }
-
-        .stage-marker.current .stage-label {
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        /* Approval Message */
+        
         .approval-message {
             margin-top: 30px;
             padding: 30px;
@@ -894,372 +552,25 @@
             margin-bottom: 3px;
         }
 
-        /* Mobile Responsiveness */
         /* Mobile-First Optimizations */
-@media (max-width: 768px) {
-    .desktop-nav {
-        display: none;
-    }
-
-    .main-content {
-        margin: 10px auto;
-        padding: 0 10px;
-    }
-
-    .login-section {
-        padding: 20px;
-        margin: 10px;
-    }
-
-    .login-section h1 {
-        font-size: 1.8rem;
-        margin-bottom: 15px;
-    }
-
-    .login-section p {
-        font-size: 0.9rem;
-        margin-bottom: 20px;
-    }
-
-    .form-control {
-        padding: 12px;
-        font-size: 0.9rem;
-    }
-
-    .btn {
-        padding: 12px 25px;
-        font-size: 0.9rem;
-    }
-
-    .dashboard-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-
-    .welcome-message h2 {
-        font-size: 1.5rem;
-        margin-bottom: 8px;
-    }
-
-    .welcome-message p {
-        font-size: 0.9rem;
-    }
-
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .dashboard-card {
-        padding: 20px;
-        border-radius: 12px;
-    }
-
-    .dashboard-card h3 {
-        font-size: 1.1rem;
-        margin-bottom: 15px;
-    }
-
-    .dashboard-card h3 i {
-        font-size: 1.2rem;
-    }
-
-    .detail-row {
-        margin-bottom: 8px;
-        padding-bottom: 6px;
-    }
-
-    .detail-label {
-        font-size: 0.8rem;
-    }
-
-    .detail-value {
-        font-size: 0.9rem;
-    }
-
-    .quick-actions {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .quick-action-btn {
-        min-width: auto;
-        padding: 10px 15px;
-        font-size: 0.8rem;
-    }
-
-    /* Advanced Tracking Mobile Optimizations */
-    .advanced-tracking-card {
-        padding: 15px;
-    }
-
-    .tracking-header {
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-    }
-
-    .tracking-title h3 {
-        font-size: 1rem;
-    }
-
-    .tracking-title i {
-        padding: 6px;
-        font-size: 0.9rem;
-    }
-
-    .live-indicator {
-        padding: 4px 8px;
-        font-size: 0.7rem;
-    }
-
-    .live-dot {
-        width: 6px;
-        height: 6px;
-    }
-
-    .stage-status {
-        padding: 12px 15px;
-        margin-bottom: 15px;
-    }
-
-    .stage-text {
-        font-size: 0.9rem;
-    }
-
-    /* Transfer Simulation Mobile */
-    .transfer-simulation {
-        padding: 15px;
-        margin: 15px 0;
-    }
-
-    .transfer-title {
-        font-size: 0.9rem;
-    }
-
-    .transfer-subtitle {
-        font-size: 0.8rem;
-    }
-
-    .transfer-visualization {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .bank-account {
-        min-width: 100px;
-        padding: 15px;
-    }
-
-    .account-icon {
-        font-size: 1.5rem;
-        margin-bottom: 8px;
-    }
-
-    .account-name {
-        font-size: 0.8rem;
-    }
-
-    .account-type {
-        font-size: 0.7rem;
-    }
-
-    .transfer-path {
-        width: 80%;
-        margin: 8px auto;
-        height: 6px;
-        transform: rotate(90deg);
-    }
-
-    .money-particles {
-        height: 30px;
-        top: -12px;
-    }
-
-    .money-particle {
-        font-size: 14px;
-    }
-
-    .transfer-amount-display {
-        padding: 12px;
-        margin-top: 15px;
-    }
-
-    .amount-label {
-        font-size: 0.8rem;
-    }
-
-    .amount-value {
-        font-size: 1.2rem;
-    }
-
-    /* Ultra Progress Bar Mobile */
-    .ultra-progress-container {
-        margin: 20px 0;
-        padding: 15px;
-    }
-
-    .progress-title {
-        font-size: 0.9rem;
-    }
-
-    .progress-percentage {
-        font-size: 1rem;
-    }
-
-    .ultra-progress-bar {
-        height: 30px;
-    }
-
-    .ultra-progress-fill {
-        font-size: 0.9rem;
-    }
-
-    .progress-stages {
-        margin-top: 12px;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    .stage-marker {
-        flex: 0 0 45%;
-        margin-bottom: 10px;
-    }
-
-    .stage-dot {
-        width: 12px;
-        height: 12px;
-        border: 2px solid white;
-    }
-
-    .stage-label {
-        font-size: 0.65rem;
-        margin-top: 6px;
-        line-height: 1.2;
-    }
-
-    /* Approval Message Mobile */
-    .approval-message {
-        margin-top: 20px;
-        padding: 20px;
-    }
-
-    .approval-title {
-        font-size: 1.3rem;
-        margin-bottom: 12px;
-    }
-
-    .approval-text {
-        font-size: 1rem;
-        margin-bottom: 15px;
-    }
-
-    .credit-warning {
-        padding: 15px;
-        margin: 15px 0;
-    }
-
-    .credit-warning p {
-        font-size: 0.9rem;
-        margin-bottom: 8px;
-    }
-
-    .approval-btn {
-        padding: 14px 25px;
-        font-size: 0.9rem;
-        margin-top: 15px;
-    }
-
-    /* Mobile Navigation Adjustments */
-    .mobile-nav ul li a {
-        padding: 10px 5px;
-        font-size: 0.65rem;
-    }
-
-    .mobile-nav ul li a i {
-        font-size: 1rem;
-        margin-bottom: 2px;
-    }
-
-    /* Header Mobile */
-    header {
-        padding: 12px 4%;
-    }
-
-    .logo h1 {
-        font-size: 1.3rem;
-    }
-
-    .logo .ncr {
-        font-size: 0.7rem;
-    }
-
-    .mobile-menu-btn {
-        font-size: 1.1rem;
-        padding: 6px;
-    }
-
-    /* Reduce spacing and margins for mobile */
-    body {
-        padding-bottom: 60px;
-    }
-
-    .logout-btn {
-        padding: 8px 16px;
-        font-size: 0.8rem;
-    }
-}
-
-/* Extra small phones */
-@media (max-width: 480px) {
-    .main-content {
-        padding: 0 8px;
-    }
-
-    .login-section {
-        padding: 15px;
-        margin: 8px;
-    }
-
-    .login-section h1 {
-        font-size: 1.6rem;
-    }
-
-    .dashboard-card {
-        padding: 15px;
-    }
-
-    .advanced-tracking-card {
-        padding: 12px;
-    }
-
-    .transfer-simulation {
-        padding: 12px;
-    }
-
-    .ultra-progress-container {
-        padding: 12px;
-    }
-
-    .approval-message {
-        padding: 15px;
-    }
-
-    .stage-marker {
-        flex: 0 0 48%;
-    }
-
-    .bank-account {
-        padding: 12px;
-        min-width: 90px;
-    }
-
-    .account-icon {
-        font-size: 1.3rem;
-    }
-}
+        @media (max-width: 768px) {
+            .desktop-nav { display: none; }
+            .main-content { margin: 10px auto; padding: 0 10px; }
+            .login-section { padding: 20px; margin: 10px; }
+            .login-section h1 { font-size: 1.8rem; margin-bottom: 15px; }
+            .login-section p { font-size: 0.9rem; margin-bottom: 20px; }
+            .form-control { padding: 12px; font-size: 0.9rem; }
+            .btn { padding: 12px 25px; font-size: 0.9rem; }
+            .dashboard-header { flex-direction: column; text-align: center; gap: 15px; padding: 20px; margin-bottom: 20px; }
+            .welcome-message h2 { font-size: 1.5rem; margin-bottom: 8px; }
+            .welcome-message p { font-size: 0.9rem; }
+            .dashboard-grid { grid-template-columns: 1fr; gap: 15px; }
+            .dashboard-card { padding: 20px; border-radius: 12px; }
+            .dashboard-card h3 { font-size: 1.1rem; margin-bottom: 15px; }
+            .dashboard-card h3 i { font-size: 1.2rem; }
+            header { padding: 12px 4%; }
+            .logo h1 { font-size: 1.3rem; }
+        }
     </style>
 </head>
 <body>
@@ -1270,7 +581,6 @@
             <span class="ncr">NCRCP15906</span>
         </div>
         
-        <!-- Desktop Navigation -->
         <nav class="desktop-nav">
             <ul>
                 <li><a href="index.html" class="nav-link">Home</a></li>
@@ -1281,7 +591,6 @@
             </ul>
         </nav>
         
-        <!-- Mobile Menu Button -->
         <button class="mobile-menu-btn" id="mobileMenuBtn">
             <i class="fas fa-bars"></i>
         </button>
@@ -1292,23 +601,15 @@
         <!-- Login Section -->
         <div class="login-section" id="loginSection">
             <h1>My Account</h1>
-            <p>Access your loan dashboard and manage your account</p>
+            <p>Enter your email address to access your loan dashboard</p>
             
             <form class="login-form" id="loginForm">
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="youremail@example.com" required>
                 </div>
-                <div class="form-group">
-                    <label for="password">Phone Number</label>
-                    <input type="password" id="password" name="password" class="form-control" required>
-                </div>
-                <button type="submit" class="btn">Login to Account</button>
+                <button type="submit" class="btn">Find My Account</button>
             </form>
-            
-            <div class="forgot-password">
-                <a href="#" onclick="alert('Password reset functionality would be implemented here')">Forgot your password?</a>
-            </div>
             
             <div class="register-link">
                 <p>Don't have an account yet?</p>
@@ -1320,65 +621,14 @@
         <div class="dashboard-section" id="dashboardSection">
             <div class="dashboard-header">
                 <div class="welcome-message">
-                    <h2>Welcome back, John!</h2>
+                    <h2 id="welcome-name">Welcome back!</h2>
                     <p>Here's your loan overview and account details</p>
                 </div>
                 <button class="btn logout-btn" onclick="logout()">Logout</button>
             </div>
 
             <div class="dashboard-grid">
-                <!-- Account Information Card -->
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-user"></i> Account Information</h3>
-                    <div class="loan-details">
-                        <div class="detail-row">
-                            <span class="detail-label">Full Name:</span>
-                            <span class="detail-value" id="user-fullname">John Doe</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Email:</span>
-                            <span class="detail-value" id="user-email">john@example.com</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Phone:</span>
-                            <span class="detail-value" id="user-phone">+27 12 345 6789</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Loan Type:</span>
-                            <span class="detail-value" id="user-loantype">Personal Loan</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Loan Amount:</span>
-                            <span class="detail-value" id="user-loanamount">R15,000</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Loan Duration:</span>
-                            <span class="detail-value" id="user-loanduration">12 months</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Member Since:</span>
-                            <span class="detail-value">Jan 2024</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Account Status:</span>
-                            <span class="detail-value" style="color: var(--success);">Verified</span>
-                        </div>
-                    </div>
-                    <div class="quick-actions">
-                        <button class="btn quick-action-btn btn-outline" onclick="alert('Update profile functionality')">Update Profile</button>
-                    </div>
-                </div>
-
-                <!-- Quick Actions Card -->
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
-                    <div class="quick-actions" style="flex-direction: column; gap: 15px;">
-                        <button class="btn quick-action-btn" onclick="alert('Apply for new loan functionality')">Apply for New Loan</button>
-                        <button class="btn quick-action-btn btn-outline" onclick="alert('Download documents functionality')">Download Documents</button>
-                        <button class="btn quick-action-btn btn-outline" onclick="alert('Contact support functionality')">Contact Support</button>
-                        <button class="btn quick-action-btn btn-outline" onclick="alert('Update banking details functionality')">Update Banking Details</button>
-                    </div>
-                </div>
+                <!-- This will be dynamically populated -->
             </div>
         </div>
     </div>
@@ -1394,302 +644,227 @@
         </ul>
     </nav>
 
-    <script>
-        // Use the exact same data structure from the loan application script
-        let storedData = JSON.parse(localStorage.getItem('loanApplication'));
-        let currentStageIndex = parseInt(localStorage.getItem('loanStageIndex')) || 0;
+<script>
+    // --- Baserow API Configuration ---
+    const BASEROW_API_BASE_URL = 'https://api.baserow.io/api/';
+    const BASEROW_API_KEY = 'qVXtv5uzHaSzMLbLRE7rITJHlc4G6WN2';
+    const BASEROW_TABLE_ID = '558162';
 
-        function showDashboard(data) {
-            document.getElementById('loginSection').style.display = 'none';
-            document.getElementById('dashboardSection').style.display = 'block';
+    // --- Core Functions ---
+    function showDashboard(data) {
+        const loginSection = document.getElementById('loginSection');
+        const dashboardSection = document.getElementById('dashboardSection');
+        const welcomeName = document.getElementById('welcome-name');
+        const dashboardGrid = document.querySelector('.dashboard-grid');
 
-            // Update welcome message with correct name from saved data
-            const firstName = data.fullName.split(' ')[0];
-            document.querySelector('.welcome-message h2').innerText = `Welcome back, ${firstName}!`;
+        loginSection.style.display = 'none';
+        
+        // Update welcome message
+        const firstName = data.fullName ? data.fullName.split(' ')[0] : 'Valued Client';
+        welcomeName.textContent = `Welcome back, ${firstName}!`;
 
-            // Update all account information with exact saved data
-            document.getElementById('user-fullname').innerText = data.fullName;
-            document.getElementById('user-email').innerText = data.email;
-            document.getElementById('user-phone').innerText = data.phone;
-            document.getElementById('user-loantype').innerText = data.loanType;
-            document.getElementById('user-loanamount').innerText = `R${data.loanAmount}`;
-            document.getElementById('user-loanduration').innerText = data.loanDuration;
-
-            // Add Ultra-Advanced Live Tracking Bar
-            const advancedTrackingCard = document.createElement('div');
-            advancedTrackingCard.className = 'dashboard-card advanced-tracking-card';
-            advancedTrackingCard.innerHTML = `
-                <div class="tracking-header">
-                    <div class="tracking-title">
-                        <i class="fas fa-chart-line"></i>
-                        <h3 style="margin: 0; color: var(--primary);">Live Loan Application Tracking</h3>
-                    </div>
-                    <div class="live-indicator">
-                        <div class="live-dot"></div>
-                        <span>LIVE</span>
-                    </div>
+        // Clear previous dashboard content
+        dashboardGrid.innerHTML = '';
+        
+        // --- Create and append the new advanced tracking card ---
+        const advancedTrackingCard = document.createElement('div');
+        advancedTrackingCard.className = 'dashboard-card advanced-tracking-card';
+        advancedTrackingCard.innerHTML = `
+            <div class="tracking-header">
+                <div class="tracking-title">
+                    <i class="fas fa-chart-line"></i>
+                    <h3 style="margin: 0; color: var(--primary);">Live Loan Application Tracking</h3>
                 </div>
-                
-                <div class="stage-status" id="stage-status">
-                    <p class="stage-text" id="stage-text">Stage 1: Application Received (0%)</p>
+                <div class="live-indicator">
+                    <div class="live-dot"></div>
+                    <span>LIVE</span>
                 </div>
-                
-                <!-- Advanced Money Transfer Simulation -->
-                <div class="transfer-simulation">
-                    <div class="transfer-header">
-                        <div class="transfer-title">💰 Secure Money Transfer Simulation</div>
-                        <div class="transfer-subtitle">Real-time fund transfer visualization</div>
-                    </div>
-                    
-                    <div class="transfer-visualization">
-                        <div class="bank-account source">
-                            <div class="account-icon">🏦</div>
-                            <div class="account-name">YYC LOAN ACCOUNT</div>
-                            <div class="account-type">Source Bank</div>
-                        </div>
-                        
-                        <div class="transfer-path">
-                            <div class="money-particles" id="money-particles"></div>
-                        </div>
-                        
-                        <div class="bank-account destination">
-                            <div class="account-icon">👤</div>
-                            <div class="account-name">${data.fullName.toUpperCase()}</div>
-                            <div class="account-type">Your Account</div>
-                        </div>
-                    </div>
-                    
-                    <div class="transfer-amount-display">
-                        <div class="amount-label">Transfer Amount</div>
-                        <div class="amount-value">R${data.loanAmount}</div>
-                    </div>
+            </div>
+            <div class="stage-status">
+                <p class="stage-text" id="stage-text">Initializing...</p>
+            </div>
+            <div id="approval-message" style="display: none;"></div>
+        `;
+        dashboardGrid.appendChild(advancedTrackingCard);
+
+        // --- Create and append the account information card ---
+        const accountInfoCard = document.createElement('div');
+        accountInfoCard.className = 'dashboard-card';
+        accountInfoCard.innerHTML = `
+            <h3><i class="fas fa-user"></i> Account Information</h3>
+            <div class="loan-details">
+                <div class="detail-row">
+                    <span class="detail-label">Full Name:</span>
+                    <span class="detail-value">${data.fullName || 'N/A'}</span>
                 </div>
-
-                <!-- Ultra-Modern Progress Bar -->
-                <div class="ultra-progress-container">
-                    <div class="progress-label">
-                        <span class="progress-title">Application Progress</span>
-                        <span class="progress-percentage" id="progress-percentage">0%</span>
-                    </div>
-                    
-                    <div class="ultra-progress-bar">
-                        <div class="ultra-progress-fill" id="ultra-progress-fill" style="width: 0%;">
-                            <span id="progress-text">0%</span>
-                        </div>
-                    </div>
-                    
-                    <div class="progress-stages">
-                        <div class="stage-marker" id="stage-1">
-                            <div class="stage-dot current"></div>
-                            <div class="stage-label">Application<br>Received</div>
-                        </div>
-                        <div class="stage-marker" id="stage-2">
-                            <div class="stage-dot"></div>
-                            <div class="stage-label">Processing<br>Started</div>
-                        </div>
-                        <div class="stage-marker" id="stage-3">
-                            <div class="stage-dot"></div>
-                            <div class="stage-label">Under<br>Review</div>
-                        </div>
-                        <div class="stage-marker" id="stage-4">
-                            <div class="stage-dot"></div>
-                            <div class="stage-label">Approval<br>Complete</div>
-                        </div>
-                    </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value">${data.email || 'N/A'}</span>
                 </div>
-                
-                <div id="approval-message" style="display: none;"></div>
-            `;
-            
-            // Insert tracking card at the top
-            document.querySelector('.dashboard-grid').prepend(advancedTrackingCard);
-
-            // Start the advanced tracking simulation
-            simulateAdvancedApprovalProcess(data);
-        }
-
-        function createMoneyParticles() {
-            const particlesContainer = document.getElementById('money-particles');
-            if (!particlesContainer) return;
-
-            const particles = ['💰', '💵', '💸', '🪙'];
-            
-            setInterval(() => {
-                const particle = document.createElement('div');
-                particle.className = 'money-particle';
-                particle.textContent = particles[Math.floor(Math.random() * particles.length)];
-                particle.style.top = Math.random() * 20 + 'px';
-                particle.style.animationDelay = Math.random() * 2 + 's';
-                particle.style.animationDuration = (3 + Math.random() * 2) + 's';
-                
-                particlesContainer.appendChild(particle);
-                
-                setTimeout(() => {
-                    if (particle.parentNode) {
-                        particle.parentNode.removeChild(particle);
-                    }
-                }, 5000);
-            }, 800);
-        }
-
-        function updateStageMarkers(currentStage) {
-            for (let i = 1; i <= 4; i++) {
-                const marker = document.getElementById(`stage-${i}`);
-                const dot = marker.querySelector('.stage-dot');
-                
-                if (i < currentStage) {
-                    dot.className = 'stage-dot active';
-                    marker.className = 'stage-marker active';
-                } else if (i === currentStage) {
-                    dot.className = 'stage-dot current';
-                    marker.className = 'stage-marker current';
-                } else {
-                    dot.className = 'stage-dot';
-                    marker.className = 'stage-marker';
-                }
-            }
-        }
-
-        function simulateAdvancedApprovalProcess(data) {
-            const progressBar = document.getElementById('ultra-progress-fill');
-            const progressText = document.getElementById('progress-text');
-            const progressPercentage = document.getElementById('progress-percentage');
-            const stageText = document.getElementById('stage-text');
-            const approvalMessage = document.getElementById('approval-message');
-
-            // Start money particles animation
-            createMoneyParticles();
-
-            const stages = [
-                { 
-                    percent: 0, 
-                    delay: 0, 
-                    message: 'Stage 1: Application Received (0%)',
-                    stage: 1
-                },
-                { 
-                    percent: 25, 
-                    delay: 60000, // 1 minute
-                    message: 'Stage 2: Processing Started (25%)',
-                    stage: 2
-                },
-                { 
-                    percent: 88, 
-                    delay: 120000, // 2 minutes after stage 2
-                    message: 'Stage 3: Application Accepted & Under Review (88%)',
-                    stage: 3
-                },
-                { 
-                    percent: 99, 
-                    delay: 30000, // 30 seconds after stage 3
-                    message: 'Stage 4: Approval Complete (99%)',
-                    stage: 4
-                }
-            ];
-
-            function executeAdvancedStage(stageIndex) {
-                if (stageIndex >= stages.length) return;
-
-                const stage = stages[stageIndex];
-                
-                // Update progress bar with smooth animation
-                progressBar.style.width = stage.percent + '%';
-                progressText.innerText = stage.percent + '%';
-                progressPercentage.innerText = stage.percent + '%';
-                stageText.innerText = stage.message;
-
-                // Update stage markers
-                updateStageMarkers(stage.stage);
-
-                // Save progress
-                localStorage.setItem('loanStageIndex', stageIndex);
-
-                // Handle final approval stage
-                if (stageIndex === stages.length - 1) {
-                    setTimeout(() => {
-                        approvalMessage.style.display = 'block';
-                        approvalMessage.innerHTML = `
-            <div class="approval-message">
-                <h3 class="approval-title">
-                    🎉 Congratulations ${data.fullName.split(' ')[0]}!
-                </h3>
-                <p class="approval-text">
-                    Your loan of <strong>R${data.loanAmount}</strong> has been approved.
-                </p>
-                <div class="credit-warning">
-                    <p>
-                        ⚠️ However, your credit score is currently low.
-                    </p>
-                    <p>
-                        To access the funds and increase future loan eligibility, please repair your credit.
-                    </p>
+                <div class="detail-row">
+                    <span class="detail-label">Phone:</span>
+                    <span class="detail-value">${data.phone || 'N/A'}</span>
                 </div>
-                <button class="approval-btn" onclick="window.location.href='approvallettr.html'">
-                    View Approval & Fix Low Credit
-                </button>
+                <div class="detail-row">
+                    <span class="detail-label">Loan Amount:</span>
+                    <span class="detail-value">${data.loanAmount && data.loanAmount !== 'N/A' ? 'R' + data.loanAmount : 'N/A'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Loan Duration:</span>
+                    <span class="detail-value">${data.loanDuration || 'N/A'}</span>
+                </div>
             </div>
         `;
-                    }, 3000);
-                    return;
-                }
+        dashboardGrid.appendChild(accountInfoCard);
 
-                // Schedule next stage
-                const nextStageIndex = stageIndex + 1;
-                if (nextStageIndex < stages.length) {
-                    setTimeout(() => executeAdvancedStage(nextStageIndex), stages[nextStageIndex].delay);
-                }
-            }
+        dashboardSection.style.display = 'block';
+        simulateApprovalProcess(data);
+    }
 
-            // Start from current stage or beginning
-            executeAdvancedStage(currentStageIndex);
+    function simulateApprovalProcess(data) {
+        const stageText = document.getElementById('stage-text');
+        const approvalMessageContainer = document.getElementById('approval-message');
+        
+        if (!stageText || !approvalMessageContainer) return;
+
+        const stages = [
+            { delay: 2000, message: 'Stage 1: Application Received' },
+            { delay: 4000, message: 'Stage 2: Processing Started...' },
+            { delay: 4000, message: 'Stage 3: Application Under Review...' },
+            { delay: 5000, message: 'Stage 4: Approval Complete!' }
+        ];
+
+        let currentDelay = 0;
+        stages.forEach((stage, index) => {
+            currentDelay += stage.delay;
+            setTimeout(() => {
+                stageText.innerText = stage.message;
+
+                // Handle final approval stage
+                if (index === stages.length - 1) {
+                    setTimeout(() => {
+                        stageText.style.display = 'none';
+                        approvalMessageContainer.style.display = 'block';
+                        approvalMessageContainer.innerHTML = `
+                            <div class="approval-message">
+                                <h3 class="approval-title">🎉 Congratulations ${data.fullName ? data.fullName.split(' ')[0] : ''}!</h3>
+                                <p class="approval-text">Your loan for <strong>${data.loanAmount ? 'R' + data.loanAmount : 'the requested amount'}</strong> has been approved.</p>
+                                <div class="credit-warning">
+                                    <p>⚠️ However, your credit score is currently low.</p>
+                                    <p>To access the funds and increase future loan eligibility, please repair your credit.</p>
+                                </div>
+                                <a href="approvallettr.html" class="approval-btn">View Approval & Fix Low Credit</a>
+                            </div>`;
+                    }, 2000);
+                }
+            }, currentDelay);
+        });
+    }
+
+    function logout() {
+        // Clear the specific user account from storage to require login again
+        localStorage.removeItem('yycUserAccount');
+        document.getElementById('loginSection').style.display = 'block';
+        document.getElementById('dashboardSection').style.display = 'none';
+        document.getElementById('loginForm').reset();
+    }
+    
+    // --- Event Listeners ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Automatically check for a logged-in user on page load
+        const storedUser = localStorage.getItem('yycUserAccount');
+        if (storedUser) {
+            console.log("Found logged-in user in local storage.");
+            showDashboard(JSON.parse(storedUser));
         }
 
-        // Login Handler using exact same validation as loan application
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('password').value.trim();
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value.trim().toLowerCase();
+            const submitButton = this.querySelector('button[type="submit"]');
 
-            if (!storedData) {
-                alert("No application data found. Please apply first.");
+            if (!email) {
+                alert('Please enter your email address.');
                 return;
             }
 
-            // Use exact same validation as the loan application script
-            if (email === storedData.email && phone === storedData.phone) {
-                showDashboard(storedData);
-            } else {
-                alert("Login failed. Email or phone number doesn't match our records.");
+            submitButton.disabled = true;
+            submitButton.textContent = 'Searching...';
+
+            try {
+                // --- 1. First, check if the entered email matches any locally stored account ---
+                if (storedUser) {
+                    const localData = JSON.parse(storedUser);
+                    if (localData.email && localData.email.toLowerCase() === email) {
+                        console.log('Email matches user in local storage.');
+                        showDashboard(localData);
+                        return; // Exit after successful local login
+                    }
+                }
+
+                // --- 2. If not found locally, query Baserow API ---
+                console.log('Querying Baserow for email:', email);
+                const filterUrl = `${BASEROW_API_BASE_URL}database/rows/table/${BASEROW_TABLE_ID}/?filter__field_4477079__equal=${encodeURIComponent(email)}&user_field_names=true`;
+
+                const response = await fetch(filterUrl, {
+                    headers: { 'Authorization': `Token ${BASEROW_API_KEY}` }
+                });
+
+                if (!response.ok) {
+                    throw new Error('API request failed. Please try again later.');
+                }
+
+                const jsonResponse = await response.json();
+                
+                if (jsonResponse.results && jsonResponse.results.length > 0) {
+                    const record = jsonResponse.results[0];
+                    console.log('Found user in Baserow:', record);
+
+                    // --- 3. Adapt Baserow data for our dashboard function ---
+                    const dashboardData = {
+                        fullName: record['FullName (4477077)'] || 'N/A',
+                        email: record['Email (4477079)'] || email,
+                        phone: 'N/A', // This info isn't in the apply.html -> baserow link
+                        loanType: 'N/A', // This info isn't in the apply.html -> baserow link
+                        loanAmount: record['LoanAmount (4477085)'] || 'N/A',
+                        loanDuration: record['RepaymentPeriod (4477086)'] || 'N/A'
+                    };
+
+                    // --- 4. Save fetched data to local storage for the next visit ---
+                    localStorage.setItem('yycUserAccount', JSON.stringify(dashboardData));
+                    
+                    showDashboard(dashboardData);
+                } else {
+                    alert('No account found for this email address. Please check the email or apply for a loan.');
+                }
+
+            } catch (error) {
+                console.error('Login Error:', error);
+                alert('An error occurred during login. Please try again.');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Find My Account';
             }
         });
-
-        function logout() {
-            document.getElementById('loginSection').style.display = 'block';
-            document.getElementById('dashboardSection').style.display = 'none';
-            document.getElementById('loginForm').reset();
-        }
-
-        // Mobile Menu Handler - exact same as loan application
+        
+        // Mobile Menu Handler
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', function () {
-                alert('Menu options: Home, Apply, Loans, How It Works, Account');
-            });
+            mobileMenuBtn.addEventListener('click', () => alert('Menu options: Home, Apply, Loans, How It Works, Account'));
         }
 
-        // Active mobile nav - exact same as loan application
-        function setActiveNavItem() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            const navLinks = document.querySelectorAll('.mobile-nav a');
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', setActiveNavItem);
-    </script>
+        // Active mobile nav
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('.mobile-nav a');
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
 </body>
 </html>
