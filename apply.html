@@ -209,6 +209,13 @@
             padding: 20px;
             font-size: 1.2rem;
         }
+        
+        .btn-submit:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
 
         .security-notice {
             background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(40, 167, 69, 0.05) 100%);
@@ -461,57 +468,57 @@
                 </div>
 
                 <!-- Loan Information -->
-<div class="form-section">
-    <h3><i class="fas fa-money-bill-wave"></i> Loan Information</h3>
-    <div class="form-grid">
-        <div class="form-group">
-            <label for="loan-amount">Loan Amount (R) *</label>
-            <input type="number" id="loan-amount" name="loan_amount" class="form-control" min="1000" max="250000" required>
-        </div>
-        <div class="form-group">
-            <label for="loan-purpose">Loan Purpose *</label>
-            <select id="loan-purpose" name="loan_purpose" class="form-control" required>
-                <option value="">Select Purpose</option>
-                <option value="personal">Personal Use</option>
-                <option value="debt-consolidation">Debt Consolidation</option>
-                <option value="home-improvement">Home Improvement</option>
-                <option value="medical">Medical Expenses</option>
-                <option value="education">Education</option>
-                <option value="business">Business</option>
-                <option value="emergency">Emergency</option>
-                <option value="other">Other</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="repayment-term">Preferred Repayment Term *</label>
-            <select id="repayment-term" name="repayment_term" class="form-control" required>
-                <option value="">Select Term</option>
-                <option value="1">1 month</option>
-                <option value="2">2 months</option>
-                <option value="3">3 months</option>
-                <option value="6">6 months</option>
-                <option value="12">12 months</option>
-                <option value="18">18 months</option>
-                <option value="24">24 months</option>
-                <option value="36">36 months</option>
-                <option value="48">48 months</option>
-                <option value="60">60 months</option>
-                <option value="72">72 months</option>
-                <option value="84">84 months</option>
-            </select>
-        </div>
+                <div class="form-section">
+                    <h3><i class="fas fa-money-bill-wave"></i> Loan Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="loan-amount">Loan Amount (R) *</label>
+                            <input type="number" id="loan-amount" name="loan_amount" class="form-control" min="1000" max="5000000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loan-purpose">Loan Purpose *</label>
+                            <select id="loan-purpose" name="loan_purpose" class="form-control" required>
+                                <option value="">Select Purpose</option>
+                                <option value="personal">Personal Use</option>
+                                <option value="debt-consolidation">Debt Consolidation</option>
+                                <option value="home-improvement">Home Improvement</option>
+                                <option value="medical">Medical Expenses</option>
+                                <option value="education">Education</option>
+                                <option value="business">Business</option>
+                                <option value="emergency">Emergency</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="repayment-term">Preferred Repayment Term *</label>
+                            <select id="repayment-term" name="repayment_term" class="form-control" required>
+                                <option value="">Select Term</option>
+                                <option value="1">1 month</option>
+                                <option value="2">2 months</option>
+                                <option value="3">3 months</option>
+                                <option value="6">6 months</option>
+                                <option value="12">12 months</option>
+                                <option value="18">18 months</option>
+                                <option value="24">24 months</option>
+                                <option value="36">36 months</option>
+                                <option value="48">48 months</option>
+                                <option value="60">60 months</option>
+                                <option value="72">72 months</option>
+                                <option value="84">84 months</option>
+                            </select>
+                        </div>
 
-        <!-- New File Upload Fields -->
-        <div class="form-group">
-            <label for="id-doc">Upload ID Document *</label>
-            <input type="file" id="id-doc" name="id_document" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
-        </div>
-        <div class="form-group">
-            <label for="bank-slip">Upload Bank Statement or Payslip *</label>
-            <input type="file" id="bank-slip" name="bank_statement" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
-        </div>
-    </div>
-</div>
+                        <!-- New File Upload Fields -->
+                        <div class="form-group">
+                            <label for="id-doc">Upload ID Document *</label>
+                            <input type="file" id="id-doc" name="id_document" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bank-slip">Upload Bank Statement or Payslip *</label>
+                            <input type="file" id="bank-slip" name="bank_statement" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                        </div>
+                    </div>
+                </div>
 
 
                 <!-- Terms and Conditions -->
@@ -553,82 +560,172 @@
     </nav>
 
 <script>
-    document.getElementById('loan-application').addEventListener('submit', function(e) {
+    // Baserow API Configuration
+    const BASEROW_API_BASE_URL = 'https://api.baserow.io/api/';
+    const BASEROW_API_KEY = 'qVXtv5uzHaSzMLbLRE7rITJHlc4G6WN2';
+    const BASEROW_TABLE_ID = '558162';
+
+    /**
+     * Uploads a file to Baserow user files.
+     * @param {File} file The file to upload.
+     * @returns {Promise<Object>} A promise that resolves with the Baserow file object.
+     */
+    async function uploadFileToBaserow(file) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await fetch(`${BASEROW_API_BASE_URL}user-files/upload-file/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${BASEROW_API_KEY}`
+            },
+            body: formData
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`File upload failed: ${JSON.stringify(errorData)}`);
+        }
+
+        const result = await response.json();
+        // Return the format Baserow expects for a file field: { "name": "..." }
+        return { name: result.name };
+    }
+
+
+    document.getElementById('loan-application').addEventListener('submit', async function(e) {
         e.preventDefault();
+        const form = this;
+        const submitButton = form.querySelector('button[type="submit"]');
 
-        const requiredFields = this.querySelectorAll('[required]');
+        // --- Form Validation ---
+        const requiredFields = form.querySelectorAll('[required]');
         let isValid = true;
-
         requiredFields.forEach(field => {
-            if (!field.value.trim()) {
+            let fieldHasError = false;
+            if ((field.type === 'checkbox' && !field.checked) || !field.value) {
+                fieldHasError = true;
+            }
+
+            if(fieldHasError) {
                 field.style.borderColor = 'var(--danger)';
+                if (field.type === 'file') {
+                    field.closest('.form-group').querySelector('label').style.color = 'var(--danger)';
+                }
                 isValid = false;
             } else {
                 field.style.borderColor = 'rgba(214, 19, 19, 0.1)';
+                 if (field.type === 'file') {
+                    field.closest('.form-group').querySelector('label').style.color = 'var(--dark)';
+                }
             }
         });
 
         if (!isValid) {
-            alert('Please fill in all required fields.');
+            alert('Please fill in all required fields marked with *');
             return;
         }
 
-        const fullName = `${document.getElementById('first-name').value.trim()} ${document.getElementById('last-name').value.trim()}`;
-        const email = document.getElementById('email').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const loanType = document.getElementById('loan-purpose').value.trim();
-        const loanAmount = document.getElementById('loan-amount').value.trim();
-        const loanDuration = document.getElementById('repayment-term').value.trim();
+        // --- Disable button and show loading state ---
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
 
-        const loanData = {
-            fullName,
-            email,
-            phone,
-            loanType,
-            loanAmount,
-            loanDuration
-        };
+        try {
+            // --- 1. Get form data ---
+            const fullName = `${document.getElementById('first-name').value.trim()} ${document.getElementById('last-name').value.trim()}`;
+            const email = document.getElementById('email').value.trim();
+            const loanAmount = parseFloat(document.getElementById('loan-amount').value);
+            const repaymentTerm = `${document.getElementById('repayment-term').value.trim()} months`;
+            const idFile = document.getElementById('id-doc').files[0];
+            const bankStatementFile = document.getElementById('bank-slip').files[0];
+            
+            // --- 2. Upload files concurrently and get their Baserow names ---
+            console.log("Uploading files to Baserow...");
+            const [idUploadResult, bankStatementUploadResult] = await Promise.all([
+                uploadFileToBaserow(idFile),
+                uploadFileToBaserow(bankStatementFile)
+            ]);
+            console.log("Files uploaded successfully:", { idUploadResult, bankStatementUploadResult });
 
-        localStorage.setItem('loanApplication', JSON.stringify(loanData));
+            // --- 3. Construct the row data payload using field IDs ---
+            const rowData = {
+                "field_4477077": fullName,
+                "field_4477079": email,
+                "field_4477085": loanAmount,
+                "field_4477086": repaymentTerm,
+                "field_4477095": [idUploadResult], // File fields must be an array of objects
+                "field_4477096": [bankStatementUploadResult]
+            };
+            console.log("Payload to be sent:", JSON.stringify(rowData, null, 2));
 
-        // Show custom confirmation modal
-        showConfirmationPopup();
 
-        this.reset();
+            // --- 4. Post the new row to the Baserow table ---
+            const createRowUrl = `${BASEROW_API_BASE_URL}database/rows/table/${BASEROW_TABLE_ID}/`;
+            const createRowResponse = await fetch(createRowUrl, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Token ${BASEROW_API_KEY}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(rowData)
+            });
+
+            if (!createRowResponse.ok) {
+                const errorData = await createRowResponse.json();
+                console.error("Baserow API Error:", errorData);
+                throw new Error(`Failed to create row: ${JSON.stringify(errorData.detail) || 'Unknown API error'}`);
+            }
+            
+            const newRow = await createRowResponse.json();
+            console.log("Successfully created new row:", newRow);
+
+            // --- 5. Success ---
+            showConfirmationPopup();
+            form.reset();
+
+        } catch (error) {
+            console.error('Submission Error:', error);
+            alert(`An error occurred during submission. Please check the console (F12) for details and try again.\nError: ${error.message}`);
+        } finally {
+            // --- 6. Reset button state ---
+            submitButton.disabled = false;
+            submitButton.textContent = 'Submit Application';
+        }
     });
-
+    
     function showConfirmationPopup() {
-    const existingPopup = document.getElementById('loan-success-popup');
-    if (existingPopup) return; // Avoid duplicate popups
+        const existingPopup = document.getElementById('loan-success-popup');
+        if (existingPopup) return; // Avoid duplicate popups
 
-    const popup = document.createElement('div');
-    popup.id = 'loan-success-popup';
-    popup.style.position = 'fixed';
-    popup.style.top = '50%';
-    popup.style.left = '50%';
-    popup.style.transform = 'translate(-50%, -50%)';
-    popup.style.zIndex = '10000';
-    popup.style.background = '#fff';
-    popup.style.padding = '30px';
-    popup.style.borderRadius = '20px';
-    popup.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
-    popup.style.textAlign = 'center';
-    popup.style.maxWidth = '90%';
-    popup.style.width = '90%';
-    popup.style.maxWidth = '400px';
+        const popup = document.createElement('div');
+        popup.id = 'loan-success-popup';
+        popup.style.position = 'fixed';
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.zIndex = '10000';
+        popup.style.background = '#fff';
+        popup.style.padding = '30px';
+        popup.style.borderRadius = '20px';
+        popup.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
+        popup.style.textAlign = 'center';
+        popup.style.maxWidth = '90%';
+        popup.style.width = '90%';
+        popup.style.maxWidth = '400px';
 
-    popup.innerHTML = `
-        <h2 style="color: var(--success); margin-bottom: 10px;">✅ Loan Successfully Submitted!</h2>
-        <p style="color: var(--dark); margin-bottom: 25px;">⏱ Your application is being processed and will be reviewed within 1 hour.</p>
-        <a href="account.html" class="btn btn-primary" style="margin-bottom: 20px;">Login to Your Account & Track Your Loan</a><br>
-        <button onclick="document.getElementById('loan-success-popup').remove()" 
-                style="background: var(--danger); color: #fff; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">
-            ❌ Close
-        </button>
-    `;
+        popup.innerHTML = `
+            <h2 style="color: var(--success); margin-bottom: 10px;">✅ Loan Successfully Submitted!</h2>
+            <p style="color: var(--dark); margin-bottom: 25px;">⏱ Your application is being processed and will be reviewed within 1 hour.</p>
+            <a href="account.html" class="btn btn-primary" style="margin-bottom: 20px;">Login to Your Account & Track Your Loan</a><br>
+            <button onclick="document.getElementById('loan-success-popup').remove()" 
+                    style="background: var(--danger); color: #fff; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">
+                ❌ Close
+            </button>
+        `;
 
-    document.body.appendChild(popup);
-}
+        document.body.appendChild(popup);
+    }
+
     // ID input validation
     document.getElementById('id-number').addEventListener('input', function () {
         const idNumber = this.value.replace(/\D/g, '');
