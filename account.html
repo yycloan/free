@@ -182,6 +182,8 @@
         .btn:disabled {
             background: var(--gray);
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         .btn:hover:not(:disabled) {
@@ -327,6 +329,21 @@
             color: var(--dark);
         }
 
+        .progress-bar {
+            background: rgba(214, 19, 19, 0.1);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            background: var(--gradient-secondary);
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
         .quick-actions {
             display: flex;
             gap: 10px;
@@ -435,11 +452,6 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(33, 150, 243, 0.2), transparent);
             animation: stageShine 3s infinite;
-        }
-
-        @keyframes stageShine {
-            0% { left: -100%; }
-            100% { left: 100%; }
         }
 
         .stage-text {
@@ -804,21 +816,7 @@
             margin-bottom: 20px;
             font-weight: 500;
         }
-
-        .credit-warning {
-            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
-            border: 2px solid #ffc107;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .credit-warning p {
-            color: #856404;
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-
+        
         .approval-btn {
             background: var(--gradient-secondary);
             color: white;
@@ -884,370 +882,40 @@
             margin-bottom: 3px;
         }
 
-/* Mobile-First Optimizations */
 @media (max-width: 768px) {
-    .desktop-nav {
-        display: none;
-    }
-
-    .main-content {
-        margin: 10px auto;
-        padding: 0 10px;
-    }
-
-    .login-section {
-        padding: 20px;
-        margin: 10px;
-    }
-
-    .login-section h1 {
-        font-size: 1.8rem;
-        margin-bottom: 15px;
-    }
-
-    .login-section p {
-        font-size: 0.9rem;
-        margin-bottom: 20px;
-    }
-
-    .form-control {
-        padding: 12px;
-        font-size: 0.9rem;
-    }
-
-    .btn {
-        padding: 12px 25px;
-        font-size: 0.9rem;
-    }
-
-    .dashboard-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-
-    .welcome-message h2 {
-        font-size: 1.5rem;
-        margin-bottom: 8px;
-    }
-
-    .welcome-message p {
-        font-size: 0.9rem;
-    }
-
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .dashboard-card {
-        padding: 20px;
-        border-radius: 12px;
-    }
-
-    .dashboard-card h3 {
-        font-size: 1.1rem;
-        margin-bottom: 15px;
-    }
-
-    .dashboard-card h3 i {
-        font-size: 1.2rem;
-    }
-
-    .detail-row {
-        margin-bottom: 8px;
-        padding-bottom: 6px;
-    }
-
-    .detail-label {
-        font-size: 0.8rem;
-    }
-
-    .detail-value {
-        font-size: 0.9rem;
-    }
-
-    .quick-actions {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .quick-action-btn {
-        min-width: auto;
-        padding: 10px 15px;
-        font-size: 0.8rem;
-    }
-
-    /* Advanced Tracking Mobile Optimizations */
-    .advanced-tracking-card {
-        padding: 15px;
-    }
-
-    .tracking-header {
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-    }
-
-    .tracking-title h3 {
-        font-size: 1rem;
-    }
-
-    .tracking-title i {
-        padding: 6px;
-        font-size: 0.9rem;
-    }
-
-    .live-indicator {
-        padding: 4px 8px;
-        font-size: 0.7rem;
-    }
-
-    .live-dot {
-        width: 6px;
-        height: 6px;
-    }
-
-    .stage-status {
-        padding: 12px 15px;
-        margin-bottom: 15px;
-    }
-
-    .stage-text {
-        font-size: 0.9rem;
-    }
-
-    /* Transfer Simulation Mobile */
-    .transfer-simulation {
-        padding: 15px;
-        margin: 15px 0;
-    }
-
-    .transfer-title {
-        font-size: 0.9rem;
-    }
-
-    .transfer-subtitle {
-        font-size: 0.8rem;
-    }
-
-    .transfer-visualization {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .bank-account {
-        min-width: 100px;
-        padding: 15px;
-    }
-
-    .account-icon {
-        font-size: 1.5rem;
-        margin-bottom: 8px;
-    }
-
-    .account-name {
-        font-size: 0.8rem;
-    }
-
-    .account-type {
-        font-size: 0.7rem;
-    }
-
-    .transfer-path {
-        width: 80%;
-        margin: 8px auto;
-        height: 6px;
-        transform: rotate(90deg);
-    }
-
-    .money-particles {
-        height: 30px;
-        top: -12px;
-    }
-
-    .money-particle {
-        font-size: 14px;
-    }
-
-    .transfer-amount-display {
-        padding: 12px;
-        margin-top: 15px;
-    }
-
-    .amount-label {
-        font-size: 0.8rem;
-    }
-
-    .amount-value {
-        font-size: 1.2rem;
-    }
-
-    /* Ultra Progress Bar Mobile */
-    .ultra-progress-container {
-        margin: 20px 0;
-        padding: 15px;
-    }
-
-    .progress-title {
-        font-size: 0.9rem;
-    }
-
-    .progress-percentage {
-        font-size: 1rem;
-    }
-
-    .ultra-progress-bar {
-        height: 30px;
-    }
-
-    .ultra-progress-fill {
-        font-size: 0.9rem;
-    }
-
-    .progress-stages {
-        margin-top: 12px;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    .stage-marker {
-        flex: 0 0 45%;
-        margin-bottom: 10px;
-    }
-
-    .stage-dot {
-        width: 12px;
-        height: 12px;
-        border: 2px solid white;
-    }
-
-    .stage-label {
-        font-size: 0.65rem;
-        margin-top: 6px;
-        line-height: 1.2;
-    }
-
-    /* Approval Message Mobile */
-    .approval-message {
-        margin-top: 20px;
-        padding: 20px;
-    }
-
-    .approval-title {
-        font-size: 1.3rem;
-        margin-bottom: 12px;
-    }
-
-    .approval-text {
-        font-size: 1rem;
-        margin-bottom: 15px;
-    }
-
-    .credit-warning {
-        padding: 15px;
-        margin: 15px 0;
-    }
-
-    .credit-warning p {
-        font-size: 0.9rem;
-        margin-bottom: 8px;
-    }
-
-    .approval-btn {
-        padding: 14px 25px;
-        font-size: 0.9rem;
-        margin-top: 15px;
-    }
-
-    /* Mobile Navigation Adjustments */
-    .mobile-nav ul li a {
-        padding: 10px 5px;
-        font-size: 0.65rem;
-    }
-
-    .mobile-nav ul li a i {
-        font-size: 1rem;
-        margin-bottom: 2px;
-    }
-
-    /* Header Mobile */
-    header {
-        padding: 12px 4%;
-    }
-
-    .logo h1 {
-        font-size: 1.3rem;
-    }
-
-    .logo .ncr {
-        font-size: 0.7rem;
-    }
-
-    .mobile-menu-btn {
-        font-size: 1.1rem;
-        padding: 6px;
-    }
-
-    /* Reduce spacing and margins for mobile */
-    body {
-        padding-bottom: 60px;
-    }
-
-    .logout-btn {
-        padding: 8px 16px;
-        font-size: 0.8rem;
-    }
+    .desktop-nav { display: none; }
+    .main-content { margin: 10px auto; padding: 0 10px; }
+    .login-section { padding: 20px; margin: 10px; }
+    .login-section h1 { font-size: 1.8rem; }
+    .login-section p { font-size: 0.9rem; }
+    .form-control { padding: 12px; font-size: 0.9rem; }
+    .btn { padding: 12px 25px; font-size: 0.9rem; }
+    .dashboard-header { flex-direction: column; text-align: center; gap: 15px; padding: 20px; margin-bottom: 20px; }
+    .welcome-message h2 { font-size: 1.5rem; }
+    .welcome-message p { font-size: 0.9rem; }
+    .dashboard-grid { grid-template-columns: 1fr; gap: 15px; }
+    .dashboard-card { padding: 20px; }
+    .dashboard-card h3 { font-size: 1.1rem; }
+    .advanced-tracking-card, .transfer-simulation, .ultra-progress-container, .approval-message { padding: 15px; }
+    .transfer-visualization { flex-direction: column; gap: 10px; }
+    .transfer-path { width: 80%; margin: 8px auto; height: 6px; transform: rotate(90deg); }
+    .ultra-progress-bar { height: 30px; }
+    .progress-stages { flex-wrap: wrap; gap: 8px; }
+    .stage-marker { flex: 0 0 45%; }
+    .approval-title { font-size: 1.3rem; }
+    .approval-text { font-size: 1rem; }
+    .approval-btn { padding: 14px 25px; font-size: 0.9rem; }
+    header { padding: 12px 4%; }
+    .logo h1 { font-size: 1.3rem; }
+    body { padding-bottom: 60px; }
 }
 
-/* Extra small phones */
 @media (max-width: 480px) {
-    .main-content {
-        padding: 0 8px;
-    }
-
-    .login-section {
-        padding: 15px;
-        margin: 8px;
-    }
-
-    .login-section h1 {
-        font-size: 1.6rem;
-    }
-
-    .dashboard-card {
-        padding: 15px;
-    }
-
-    .advanced-tracking-card {
-        padding: 12px;
-    }
-
-    .transfer-simulation {
-        padding: 12px;
-    }
-
-    .ultra-progress-container {
-        padding: 12px;
-    }
-
-    .approval-message {
-        padding: 15px;
-    }
-
-    .stage-marker {
-        flex: 0 0 48%;
-    }
-
-    .bank-account {
-        padding: 12px;
-        min-width: 90px;
-    }
-
-    .account-icon {
-        font-size: 1.3rem;
-    }
+    .main-content { padding: 0 8px; }
+    .login-section { padding: 15px; margin: 8px; }
+    .login-section h1 { font-size: 1.6rem; }
+    .dashboard-card, .advanced-tracking-card, .transfer-simulation, .ultra-progress-container, .approval-message { padding: 12px; }
+    .stage-marker { flex: 0 0 48%; }
 }
     </style>
 </head>
@@ -1259,7 +927,6 @@
             <span class="ncr">NCRCP15906</span>
         </div>
         
-        <!-- Desktop Navigation -->
         <nav class="desktop-nav">
             <ul>
                 <li><a href="index.html" class="nav-link">Home</a></li>
@@ -1270,7 +937,6 @@
             </ul>
         </nav>
         
-        <!-- Mobile Menu Button -->
         <button class="mobile-menu-btn" id="mobileMenuBtn">
             <i class="fas fa-bars"></i>
         </button>
@@ -1281,14 +947,14 @@
         <!-- Login Section -->
         <div class="login-section" id="loginSection">
             <h1>My Account</h1>
-            <p>Access your loan dashboard using your email address.</p>
+            <p>Enter your email to access your loan dashboard</p>
             
             <form class="login-form" id="loginForm">
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
+                    <input type="email" id="email" name="email" class="form-control" required placeholder="your.email@example.com">
                 </div>
-                <button type="submit" class="btn" id="loginButton">Login to Account</button>
+                <button type="submit" class="btn" id="login-button">Login to Account</button>
             </form>
             
             <div class="register-link">
@@ -1299,56 +965,7 @@
 
         <!-- Dashboard Section -->
         <div class="dashboard-section" id="dashboardSection">
-             <div class="dashboard-header">
-                <div class="welcome-message">
-                    <h2 id="welcome-name">Welcome back!</h2>
-                    <p>Here's your loan overview and account details</p>
-                </div>
-                <button class="btn logout-btn" onclick="logout()">Logout</button>
-            </div>
-
-            <div class="dashboard-grid" id="dashboardGrid">
-                <!-- Account Information Card will be populated here -->
-                <div class="dashboard-card" id="accountInfoCard">
-                    <h3><i class="fas fa-user"></i> Account Information</h3>
-                    <div class="loan-details">
-                        <div class="detail-row">
-                            <span class="detail-label">Full Name:</span>
-                            <span class="detail-value" id="user-fullname">N/A</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Email:</span>
-                            <span class="detail-value" id="user-email">N/A</span>
-                        </div>
-                         <div class="detail-row">
-                            <span class="detail-label">Loan Amount:</span>
-                            <span class="detail-value" id="user-loanamount">N/A</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Loan Duration:</span>
-                            <span class="detail-value" id="user-loanduration">N/A</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Loan Type:</span>
-                            <span class="detail-value" id="user-loantype">N/A</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Phone:</span>
-                            <span class="detail-value" id="user-phone">N/A</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Actions Card -->
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
-                    <div class="quick-actions" style="flex-direction: column; gap: 15px;">
-                        <button class="btn quick-action-btn" onclick="window.location.href='apply.html'">Apply for New Loan</button>
-                        <button class="btn quick-action-btn btn-outline" onclick="alert('Download documents functionality')">Download Documents</button>
-                        <button class="btn quick-action-btn btn-outline" onclick="alert('Contact support functionality')">Contact Support</button>
-                    </div>
-                </div>
-            </div>
+             <!-- This content will be dynamically generated by JavaScript -->
         </div>
     </div>
 
@@ -1368,83 +985,170 @@
         const BASEROW_API_BASE_URL = 'https://api.baserow.io/api/';
         const BASEROW_API_KEY = 'qVXtv5uzHaSzMLbLRE7rITJHlc4G6WN2';
         const BASEROW_TABLE_ID = '558162';
-        const EMAIL_FIELD_ID = 'field_4477079';
+        const EMAIL_FIELD_ID = 'field_4477079'; // The field ID for your Email column
 
-        // --- Global State ---
-        let currentStageIndex = 0; // Reset stage on each login
+        // --- DOM Elements ---
+        const loginSection = document.getElementById('loginSection');
+        const dashboardSection = document.getElementById('dashboardSection');
+        const loginForm = document.getElementById('loginForm');
+        const loginButton = document.getElementById('login-button');
+        const emailInput = document.getElementById('email');
 
         /**
-         * Populates the dashboard with user data and shows it.
-         * This function is carefully designed to be re-run without creating duplicate elements.
-         * @param {object} data The user's application data.
+         * Fetches user data from Baserow based on email.
+         * @param {string} email The user's email address.
+         * @returns {Promise<Object|null>} A promise that resolves with the user data object or null if not found.
          */
-        function showDashboard(data) {
-            document.getElementById('loginSection').style.display = 'none';
-            document.getElementById('dashboardSection').style.display = 'block';
-
-            // --- 1. Populate Account Information Card with correct data ---
-            const firstName = data.fullName ? data.fullName.split(' ')[0] : '';
-            document.getElementById('welcome-name').innerText = `Welcome back, ${firstName}!`;
-            document.getElementById('user-fullname').innerText = data.fullName || 'N/A';
-            document.getElementById('user-email').innerText = data.email || 'N/A';
-            document.getElementById('user-loanamount').innerText = data.loanAmount ? `R${Number(data.loanAmount).toLocaleString('en-ZA')}` : 'N/A';
-            document.getElementById('user-loanduration').innerText = data.loanDuration || 'N/A';
-            document.getElementById('user-loantype').innerText = data.loanType || 'Personal Loan';
-            document.getElementById('user-phone').innerText = data.phone || 'N/A';
+        async function fetchUserData(email) {
+            const encodedEmail = encodeURIComponent(email);
+            const url = `${BASEROW_API_BASE_URL}database/rows/table/${BASEROW_TABLE_ID}/?user_field_names=true&filter__${EMAIL_FIELD_ID}__equal=${encodedEmail}`;
             
-            // --- 2. Clean up old tracking card if it exists ---
-            const dashboardGrid = document.getElementById('dashboardGrid');
-            const existingTrackingCard = document.getElementById('advancedTrackingCard');
-            if (existingTrackingCard) {
-                existingTrackingCard.remove();
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: { 'Authorization': `Token ${BASEROW_API_KEY}` }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+
+                const data = await response.json();
+                if (data.count > 0) {
+                    return data.results[0]; // Return the first matching record
+                }
+                return null; // No user found
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+                return null;
+            }
+        }
+
+        /**
+         * Renders the entire dashboard with data from Baserow.
+         * @param {Object} userData The user data object from Baserow.
+         */
+        function showDashboard(userData) {
+            loginSection.style.display = 'none';
+            
+            // Extract data with fallbacks for safety
+            const fullName = userData["FullName (4477077)"] || "N/A";
+            const email = userData["Email (4477079)"] || "N/A";
+            const loanAmount = userData["LoanAmount (4477085)"] || "0";
+            const loanDuration = userData["RepaymentPeriod (4477086)"] || "N/A";
+            const firstName = fullName.split(' ')[0];
+
+            dashboardSection.innerHTML = `
+                <div class="dashboard-header">
+                    <div class="welcome-message">
+                        <h2>Welcome back, ${firstName}!</h2>
+                        <p>Here's your loan overview and account details</p>
+                    </div>
+                    <button class="btn logout-btn" onclick="logout()">Logout</button>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card advanced-tracking-card">
+                        <div class="tracking-header">
+                            <div class="tracking-title">
+                                <i class="fas fa-chart-line"></i>
+                                <h3 style="margin: 0; color: var(--primary);">Live Loan Application Tracking</h3>
+                            </div>
+                            <div class="live-indicator"><div class="live-dot"></div><span>LIVE</span></div>
+                        </div>
+                        <div class="stage-status"><p class="stage-text" id="stage-text">Loading...</p></div>
+                        <div class="transfer-simulation">
+                             <div class="transfer-header">
+                                <div class="transfer-title">💰 Secure Money Transfer Simulation</div>
+                            </div>
+                            <div class="transfer-visualization">
+                                <div class="bank-account source"><div class="account-icon">🏦</div><div class="account-name">YYC LOAN ACCOUNT</div></div>
+                                <div class="transfer-path"><div class="money-particles" id="money-particles"></div></div>
+                                <div class="bank-account destination"><div class="account-icon">👤</div><div class="account-name">${fullName.toUpperCase()}</div></div>
+                            </div>
+                            <div class="transfer-amount-display">
+                                <div class="amount-label">Transfer Amount</div>
+                                <div class="amount-value">R${loanAmount}</div>
+                            </div>
+                        </div>
+                        <div class="ultra-progress-container">
+                            <div class="progress-label">
+                                <span class="progress-title">Application Progress</span>
+                                <span class="progress-percentage" id="progress-percentage">0%</span>
+                            </div>
+                            <div class="ultra-progress-bar"><div class="ultra-progress-fill" id="ultra-progress-fill" style="width: 0%;"><span id="progress-text">0%</span></div></div>
+                            <div class="progress-stages">
+                                <div class="stage-marker" id="stage-1"><div class="stage-dot"></div><div class="stage-label">Received</div></div>
+                                <div class="stage-marker" id="stage-2"><div class="stage-dot"></div><div class="stage-label">Processing</div></div>
+                                <div class="stage-marker" id="stage-3"><div class="stage-dot"></div><div class="stage-label">Review</div></div>
+                                <div class="stage-marker" id="stage-4"><div class="stage-dot"></div><div class="stage-label">Approval</div></div>
+                            </div>
+                        </div>
+                        <div id="approval-message-container"></div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-user"></i> Account Information</h3>
+                        <div class="loan-details">
+                            <div class="detail-row"><span class="detail-label">Full Name:</span><span class="detail-value">${fullName}</span></div>
+                            <div class="detail-row"><span class="detail-label">Email:</span><span class="detail-value">${email}</span></div>
+                            <div class="detail-row"><span class="detail-label">Loan Amount:</span><span class="detail-value">R${loanAmount}</span></div>
+                            <div class="detail-row"><span class="detail-label">Loan Duration:</span><span class="detail-value">${loanDuration}</span></div>
+                            <div class="detail-row"><span class="detail-label">Account Status:</span><span class="detail-value" style="color: var(--success);">Verified</span></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            dashboardSection.style.display = 'block';
+
+            // Start all animations and set the state to final approval
+            setFinalApprovalState(fullName, loanAmount);
+        }
+        
+        /**
+         * Immediately sets the UI to the final approval state.
+         * @param {string} fullName The full name of the user.
+         * @param {string} loanAmount The loan amount.
+         */
+        function setFinalApprovalState(fullName, loanAmount) {
+            // Update progress bar and text
+            document.getElementById('ultra-progress-fill').style.width = '99%';
+            document.getElementById('progress-text').innerText = '99%';
+            document.getElementById('progress-percentage').innerText = '99%';
+            
+            // Update stage text
+            document.getElementById('stage-text').innerText = 'Stage 4: Approval Complete (99%)';
+            
+            // Update stage markers
+            for (let i = 1; i <= 4; i++) {
+                const marker = document.getElementById(`stage-${i}`);
+                const dot = marker.querySelector('.stage-dot');
+                if (i < 4) {
+                    marker.className = 'stage-marker active';
+                    dot.className = 'stage-dot active';
+                } else {
+                    marker.className = 'stage-marker current';
+                    dot.className = 'stage-dot current';
+                }
             }
 
-            // --- 3. Create and inject the new, complete tracking card HTML ---
-            const advancedTrackingCard = document.createElement('div');
-            advancedTrackingCard.id = 'advancedTrackingCard'; // Add ID for easy removal later
-            advancedTrackingCard.className = 'dashboard-card advanced-tracking-card';
-            advancedTrackingCard.innerHTML = `
-                <div class="tracking-header">
-                    <div class="tracking-title"><i class="fas fa-chart-line"></i><h3 style="margin: 0; color: var(--primary);">Live Loan Application Tracking</h3></div>
-                    <div class="live-indicator"><div class="live-dot"></div><span>LIVE</span></div>
-                </div>
-                <div class="stage-status" id="stage-status"><p class="stage-text" id="stage-text">Loading...</p></div>
-                <div class="transfer-simulation">
-                    <div class="transfer-header">
-                        <div class="transfer-title">💰 Secure Money Transfer Simulation</div>
-                        <div class="transfer-subtitle">Real-time fund transfer visualization</div>
-                    </div>
-                    <div class="transfer-visualization">
-                        <div class="bank-account source"><div class="account-icon">🏦</div><div class="account-name">YYC LOAN ACCOUNT</div><div class="account-type">Source Bank</div></div>
-                        <div class="transfer-path"><div class="money-particles" id="money-particles"></div></div>
-                        <div class="bank-account destination"><div class="account-icon">👤</div><div class="account-name">${(data.fullName || 'YOUR NAME').toUpperCase()}</div><div class="account-type">Your Account</div></div>
-                    </div>
-                    <div class="transfer-amount-display"><div class="amount-label">Transfer Amount</div><div class="amount-value">R${data.loanAmount ? Number(data.loanAmount).toLocaleString('en-ZA') : '0.00'}</div></div>
-                </div>
-                <div class="ultra-progress-container">
-                    <div class="progress-label"><span class="progress-title">Application Progress</span><span class="progress-percentage" id="progress-percentage">0%</span></div>
-                    <div class="ultra-progress-bar"><div class="ultra-progress-fill" id="ultra-progress-fill" style="width: 0%;"><span id="progress-text">0%</span></div></div>
-                    <div class="progress-stages">
-                        <div class="stage-marker" id="stage-1"><div class="stage-dot"></div><div class="stage-label">Application<br>Received</div></div>
-                        <div class="stage-marker" id="stage-2"><div class="stage-dot"></div><div class="stage-label">Processing<br>Started</div></div>
-                        <div class="stage-marker" id="stage-3"><div class="stage-dot"></div><div class="stage-label">Under<br>Review</div></div>
-                        <div class="stage-marker" id="stage-4"><div class="stage-dot"></div><div class="stage-label">Approval<br>Complete</div></div>
-                    </div>
-                </div>
-                <div id="approval-message-container"></div>
-            `;
-            // Prepend the new tracking card so it appears first
-            dashboardGrid.prepend(advancedTrackingCard);
+            // Display the final approval message with the button
+            const approvalContainer = document.getElementById('approval-message-container');
+            approvalContainer.innerHTML = `
+                <div class="approval-message">
+                    <h3 class="approval-title">🎉 Congratulations ${fullName.split(' ')[0]}!</h3>
+                    <p class="approval-text">Your loan of <strong>R${loanAmount}</strong> has been approved.</p>
+                    <a href="approvallettr.html" class="approval-btn">View Your Approval Letter</a>
+                </div>`;
 
-            // --- 4. Start all animations now that the HTML is in the DOM ---
-            simulateAdvancedApprovalProcess(data);
+            // Start the money particle animation
+            createMoneyParticles();
         }
 
         function createMoneyParticles() {
             const particlesContainer = document.getElementById('money-particles');
             if (!particlesContainer) return;
             const particles = ['💰', '💵', '💸', '🪙'];
-            const intervalId = setInterval(() => {
+            setInterval(() => {
                 const particle = document.createElement('div');
                 particle.className = 'money-particle';
                 particle.textContent = particles[Math.floor(Math.random() * particles.length)];
@@ -1452,177 +1156,51 @@
                 particle.style.animationDelay = Math.random() * 2 + 's';
                 particle.style.animationDuration = (3 + Math.random() * 2) + 's';
                 particlesContainer.appendChild(particle);
-                setTimeout(() => particle.remove(), 5000);
+                setTimeout(() => { particle.remove(); }, 5000);
             }, 800);
-             // Store interval ID to clear it on logout
-            document.body.dataset.particleInterval = intervalId;
-        }
-
-        function updateStageMarkers(currentStage) {
-            for (let i = 1; i <= 4; i++) {
-                const marker = document.getElementById(`stage-${i}`);
-                if (!marker) continue;
-                const dot = marker.querySelector('.stage-dot');
-                if (i < currentStage) {
-                    dot.className = 'stage-dot active';
-                    marker.className = 'stage-marker active';
-                } else if (i === currentStage) {
-                    dot.className = 'stage-dot current';
-                    marker.className = 'stage-marker current';
-                } else {
-                    dot.className = 'stage-dot';
-                    marker.className = 'stage-marker';
-                }
-            }
-        }
-
-        function simulateAdvancedApprovalProcess(data) {
-            const progressBar = document.getElementById('ultra-progress-fill');
-            const progressText = document.getElementById('progress-text');
-            const progressPercentage = document.getElementById('progress-percentage');
-            const stageText = document.getElementById('stage-text');
-            const approvalContainer = document.getElementById('approval-message-container');
-
-            if (!progressBar || !progressText || !progressPercentage || !stageText || !approvalContainer) {
-                console.error("Dashboard elements not found. Cannot start simulation.");
-                return;
-            }
-
-            createMoneyParticles();
-
-            const stages = [
-                { percent: 0, delay: 0, message: 'Stage 1: Application Received (0%)', stage: 1 },
-                { percent: 25, delay: 5000, message: 'Stage 2: Processing Started (25%)', stage: 2 },
-                { percent: 88, delay: 10000, message: 'Stage 3: Application Accepted & Under Review (88%)', stage: 3 },
-                { percent: 99, delay: 8000, message: 'Stage 4: Approval Complete (99%)', stage: 4 }
-            ];
-
-            let timeouts = [];
-             document.body.dataset.timeouts = JSON.stringify(timeouts);
-
-            function executeAdvancedStage(stageIndex) {
-                if (stageIndex >= stages.length) return;
-
-                const stage = stages[stageIndex];
-                progressBar.style.width = stage.percent + '%';
-                progressText.innerText = stage.percent + '%';
-                progressPercentage.innerText = stage.percent + '%';
-                stageText.innerText = stage.message;
-                updateStageMarkers(stage.stage);
-                localStorage.setItem(`loanStageIndex_${data.email}`, stageIndex);
-                currentStageIndex = stageIndex;
-
-                if (stageIndex === stages.length - 1) {
-                    const finalTimeout = setTimeout(() => {
-                        approvalContainer.innerHTML = `
-                            <div class="approval-message">
-                                <h3 class="approval-title">🎉 Congratulations ${data.fullName.split(' ')[0]}!</h3>
-                                <p class="approval-text">Your loan of <strong>R${Number(data.loanAmount).toLocaleString('en-ZA')}</strong> has been approved.</p>
-                                <div class="credit-warning">
-                                    <p>⚠️ However, your credit score is currently low.</p>
-                                    <p>To access the funds and increase future loan eligibility, please repair your credit.</p>
-                                </div>
-                                <a href="approvallettr.html" class="approval-btn">View Approval & Fix Low Credit</a>
-                            </div>`;
-                    }, 3000);
-                    timeouts.push(finalTimeout);
-                    return;
-                }
-                const nextStageIndex = stageIndex + 1;
-                if (nextStageIndex < stages.length) {
-                    const nextTimeout = setTimeout(() => executeAdvancedStage(nextStageIndex), stages[nextStageIndex].delay);
-                    timeouts.push(nextTimeout);
-                }
-                 document.body.dataset.timeouts = JSON.stringify(timeouts);
-            }
-            
-            currentStageIndex = parseInt(localStorage.getItem(`loanStageIndex_${data.email}`)) || 0;
-            executeAdvancedStage(currentStageIndex);
         }
 
         /**
-         * Fetches user data from Baserow using their email address.
+         * Handles the login form submission.
          */
-        async function fetchUserFromBaserow(email) {
-            const encodedEmail = encodeURIComponent(email.trim());
-            const url = `${BASEROW_API_BASE_URL}database/rows/table/${BASEROW_TABLE_ID}/?user_field_names=true&filter__${EMAIL_FIELD_ID}__equal=${encodedEmail}`;
-            
-            try {
-                const response = await fetch(url, {
-                    headers: { 'Authorization': `Token ${BASEROW_API_KEY}` }
-                });
-                if (!response.ok) throw new Error(`Baserow API responded with status: ${response.status}`);
-                const data = await response.json();
-
-                if (data.results && data.results.length > 0) {
-                    const userData = data.results[0];
-                    return {
-                        fullName: userData["FullName (4477077)"],
-                        email: userData["Email (4477079)"],
-                        loanAmount: userData["LoanAmount (4477085)"],
-                        loanDuration: userData["RepaymentPeriod (4477086)"],
-                        // Use data from other fields if they exist in your table
-                        loanType: userData["Loan Purpose"] || "Personal Loan",
-                        phone: userData["Phone Number"] || "N/A"
-                    };
-                }
-                return null;
-            } catch (error) {
-                console.error("Failed to fetch from Baserow:", error);
-                return null;
-            }
-        }
-        
-        // --- Login Handler ---
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            const email = document.getElementById('email').value.trim();
-            const loginButton = document.getElementById('loginButton');
+            const email = emailInput.value.trim();
             if (!email) {
                 alert("Please enter your email address.");
                 return;
             }
+
             loginButton.disabled = true;
-            loginButton.textContent = "Logging In...";
+            loginButton.textContent = 'Searching...';
 
-            // 1. Check local device storage first for a quick login
-            const storedData = JSON.parse(localStorage.getItem('loanApplication'));
-            if (storedData && storedData.email === email) {
-                showDashboard(storedData);
+            const userData = await fetchUserData(email);
+
+            if (userData) {
+                showDashboard(userData);
             } else {
-                // 2. If not in local storage, query Baserow
-                const baserowData = await fetchUserFromBaserow(email);
-                if (baserowData) {
-                    localStorage.setItem('loanApplication', JSON.stringify(baserowData)); // Save for next time
-                    showDashboard(baserowData);
-                } else {
-                    alert("Login failed. No account was found with this email address.");
-                }
+                alert("Login Failed. No application found with this email address. Please check the email or apply for a loan.");
+                loginButton.disabled = false;
+                loginButton.textContent = 'Login to Account';
             }
-            
-            loginButton.disabled = false;
-            loginButton.textContent = "Login to Account";
         });
-        
-        function stopAllAnimations() {
-            // Clear particle interval
-            const intervalId = document.body.dataset.particleInterval;
-            if (intervalId) {
-                clearInterval(parseInt(intervalId));
-            }
-            // Clear all pending stage timeouts
-            const timeouts = JSON.parse(document.body.dataset.timeouts || "[]");
-            timeouts.forEach(clearTimeout);
-        }
 
+        /**
+         * Logs the user out and returns to the login screen.
+         */
         function logout() {
-            stopAllAnimations();
-            window.location.reload(); // The simplest way to reset the page state
+            dashboardSection.style.display = 'none';
+            dashboardSection.innerHTML = ''; // Clear dashboard content
+            loginSection.style.display = 'block';
+            loginForm.reset();
+            loginButton.disabled = false;
+            loginButton.textContent = 'Login to Account';
         }
 
-        // --- Standard Page Functions ---
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        mobileMenuBtn.addEventListener('click', () => alert('Menu options: Home, Apply, Loans, How It Works, Account'));
+        // --- Mobile Menu and Nav Activation ---
+        document.getElementById('mobileMenuBtn')?.addEventListener('click', () => {
+            alert('Menu options: Home, Apply, Loans, How It Works, Account');
+        });
 
         function setActiveNavItem() {
             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
@@ -1634,6 +1212,7 @@
             });
         }
         document.addEventListener('DOMContentLoaded', setActiveNavItem);
+
     </script>
 </body>
 </html>
