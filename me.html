@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Credit Cover Confirmation - YYC Personal Finance</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #d61313;
+            --secondary: #1C75BC;
+            --dark: #333;
+            --gray: #6c757d;
+            --page-bg: #f9f9f9;
+            --doc-bg: #ffffff;
+            --success: #28a745;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        body {
+            background-color: var(--page-bg);
+            font-family: 'Roboto', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1.1rem; /* Refined spacing for better page flow */
+        }
+
+        .toolbar {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            z-index: 1001;
+        }
+
+        .toolbar-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
+        }
+        
+        .toolbar-btn:hover {
+            background-color: #b00f0f;
+            transform: translateY(-2px);
+        }
+
+        .document-container {
+            max-width: 850px;
+            margin: 20px auto;
+        }
+        
+        .page {
+            background: var(--doc-bg);
+            border: 1px solid #e0e0e0;
+            padding: 40px 50px;
+            position: relative;
+            min-height: 1120px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .doc-header .logo h1 { color: var(--primary); font-size: 2.2rem; margin: 0; }
+        .doc-header .logo h2 { color: var(--secondary); font-size: 1.1rem; margin: 0; font-weight: 500; }
+        .doc-header .header-info { text-align: right; font-size: 0.9rem; color: var(--gray); }
+
+        .doc-footer {
+            position: absolute;
+            bottom: 40px;
+            left: 50px;
+            right: 50px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--gray);
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+            margin-top: 25px;
+            margin-bottom: 20px; /* Adjusted for flow */
+        }
+        
+        .recipient-info {
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+        }
+
+        .summary-box {
+            background: #f0f8ff;
+            border-left: 5px solid var(--secondary);
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+        }
+
+        .summary-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .summary-box ul li {
+            padding: 8px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #e0e6eb;
+        }
+
+        .summary-box ul li:last-child {
+            border-bottom: none;
+        }
+        
+        .summary-box .highlight-fee {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+        
+        .signature-section {
+            margin-top: 60px; /* Reduced from 80px for better fit */
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .signature-image {
+            display: block;
+            max-width: 180px; /* Controlled size for professional look */
+            margin-bottom: 5px; /* Space between signature and text */
+        }
+        
+        @media print {
+            body { padding: 0; background: #fff; }
+            .toolbar, .page { box-shadow: none; border: none; margin: 0; }
+            .document-container { width: 100%; }
+            .page { min-height: 0; page-break-after: always; }
+            .page:last-child { page-break-after: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="toolbar">
+    <button class="toolbar-btn" id="downloadPdfBtn"><i class="fas fa-download"></i> Download PDF</button>
+</div>
+
+<div class="document-container" id="creditCoverDocument">
+    <!-- Page 1 -->
+    <div class="page" id="page1">
+        <div class="doc-header">
+            <div class="logo"><h1>YYC</h1><h2>PERSONAL FINANCE</h2></div>
+            <div class="header-info">
+                <strong>Document:</strong> Credit Cover Confirmation<br>
+                <strong>Date:</strong> <span id="current-date"></span><br>
+                <strong>Ref ID:</strong> CC-202408-<span id="application-id"></span>
+            </div>
+        </div>
+
+        <div class="recipient-info">
+            <p style="margin:0;"><strong>To:</strong> <span id="user-name"></span></p>
+            <p style="margin:0;"><strong>ID Number:</strong> <span id="id-number"></span></p>
+        </div>
+        
+        <h3>Subject: Credit Cover Confirmation – Loan Approval Finalization</h3>
+
+        <p>Dear <strong id="user-name-salutation"></strong>,</p>
+
+        <p>We are pleased to notify you that your Credit Cover has been successfully registered with YYC Cash Loan (NCRCP15906), finalizing an essential step in preparing your <strong id="loan-amount-text-1"></strong> loan for release.</p>
+
+        <h3>Why This Cover Was Needed</h3>
+        <p>As part of our internal loan risk assessment process, your current credit history reflected a higher lending risk profile. To ensure your application proceeds smoothly without further complications or delays, the Credit Cover was required.</p>
+        <p>This protection does not only shield the lender, but more importantly, it guarantees the full disbursement of your approved loan amount of <strong id="loan-amount-text-2"></strong> — without being affected by your current credit score.</p>
+        
+        <h3>How the Credit Cover Works for You</h3>
+        <ul>
+            <li><strong>Secures Your Payout:</strong> Ensures the loan will be processed and released, regardless of credit rating concerns.</li>
+            <li><strong>Financial Safety Net:</strong> Should unexpected events impact your ability to repay — such as job loss or health setbacks — the cover helps maintain repayments or settle the balance entirely where applicable.</li>
+            <li><strong>No Ongoing Charges:</strong> This is a once-off activation, not a recurring premium.</li>
+        </ul>
+
+        <div class="doc-footer">Page 1 of 2</div>
+    </div>
+
+    <!-- Page 2 -->
+    <div class="page" id="page2">
+        <div class="doc-header">
+            <div class="logo"><h1>YYC</h1><h2>PERSONAL FINANCE</h2></div>
+            <div class="header-info">
+                <strong>Document:</strong> Credit Cover Confirmation<br>
+                <strong>Ref ID:</strong> CC-202408-<span id="application-id-2"></span>
+            </div>
+        </div>
+
+        <h3>Activation Fee Details</h3>
+        <p>The cover is secured with a one-time fee of <strong id="fee-amount-text"></strong>, which finalizes your protection and ensures your loan can be paid out smoothly. This payment is an investment in both your peace of mind and the integrity of your financial commitments.</p>
+
+        <div class="summary-box">
+             <h4>Activation Summary</h4>
+             <ul>
+                <li><span>One-time fee payable:</span> <strong class="highlight-fee" id="fee-amount"></strong></li>
+                <li><span>Loan amount secured:</span> <strong id="loan-amount"></strong></li>
+                <li><span>Provider:</span> <strong>YYC Cash Loan</strong></li>
+                <li><span>NCR Registration:</span> <strong>NCRCP15906</strong></li>
+                <li><span>Status:</span> <strong style="color: var(--success);">Cover Activated – Loan Ready for Disbursement</strong></li>
+             </ul>
+        </div>
+        
+        <p>We recognize the importance of this loan and the opportunities it may bring. By putting this protection in place, you’ve ensured both your peace of mind and the successful release of your funds.</p>
+
+        <p>Should you have any queries or require additional information, please feel free to contact our support office directly.</p>
+        
+        <div class="signature-section">
+            <!-- Signature Image Added Here -->
+            <img src="image/211935-1qeWBB1398605222.jpgg" alt="Digital Signature" class="signature-image">
+            <p style="margin-bottom: 0.5rem;">Warm regards,</p>
+            <p>
+                <strong>YYC Cash Loan</strong><br>
+                NCRCP15906
+            </p>
+        </div>
+
+        <div class="doc-footer">Page 2 of 2</div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // --- Configuration: All client data is set here ---
+        const clientData = {
+            name: "Sarel Van Aswegen",
+            idNumber: "9010105045082",
+            loanAmount: 1000000,
+            activationFee: 1850.00
+        };
+
+        const formatCurrency = (num) => `R${num.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+        // --- Main function to populate the document ---
+        function populateDocument() {
+            const appId = clientData.idNumber.slice(-4);
+            const today = new Date().toLocaleDateString("en-ZA", { year: 'numeric', month: 'long', day: 'numeric' });
+            
+            // Dates and IDs
+            document.getElementById("current-date").textContent = today;
+            document.getElementById("application-id").textContent = appId;
+            document.getElementById("application-id-2").textContent = appId;
+
+            // Recipient Info
+            document.getElementById("user-name").textContent = clientData.name;
+            document.getElementById("id-number").textContent = clientData.idNumber;
+            document.getElementById("user-name-salutation").textContent = `Mr. ${clientData.name.split(' ').pop()}`;
+            
+            // Amounts
+            const formattedLoanAmount = formatCurrency(clientData.loanAmount);
+            const formattedFeeAmount = formatCurrency(clientData.activationFee);
+            
+            document.getElementById("loan-amount-text-1").textContent = formattedLoanAmount;
+            document.getElementById("loan-amount-text-2").textContent = formattedLoanAmount;
+            document.getElementById("fee-amount-text").textContent = formattedFeeAmount;
+            
+            // Summary Box
+            document.getElementById("fee-amount").textContent = formattedFeeAmount;
+            document.getElementById("loan-amount").textContent = formattedLoanAmount;
+        }
+
+        populateDocument();
+
+        // --- PDF Download Logic ---
+        document.getElementById('downloadPdfBtn').addEventListener('click', function () {
+            const element = document.getElementById('creditCoverDocument');
+            const opt = {
+                margin:       [0, 0, 0, 0], // No margin for full page control
+                filename:     `YYC_Credit_Cover_${clientData.name.replace(' ', '_')}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+            // Use html2pdf to generate the PDF from the element
+            html2pdf().set(opt).from(element).save();
+        });
+    });
+</script>
+
+</body>
+</html>
