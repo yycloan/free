@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Credit Cover Confirmation - YYC Personal Finance</title>
+    <title>Loan Origination Fee - YYC Personal Finance</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -14,7 +14,9 @@
             --gray: #6c757d;
             --page-bg: #f9f9f9;
             --doc-bg: #ffffff;
-            --success: #28a745;
+            --warning-bg: #fffbe6;
+            --warning-border: #ffe58f;
+            --warning-text: #d66b0a;
         }
 
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
@@ -30,7 +32,7 @@
 
         p {
             margin-top: 0;
-            margin-bottom: 1.1rem; /* Refined spacing for better page flow */
+            margin-bottom: 1.1rem;
         }
 
         .toolbar {
@@ -68,7 +70,6 @@
             padding: 40px 50px;
             position: relative;
             min-height: 1120px;
-            margin-bottom: 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
@@ -103,18 +104,13 @@
             border-bottom: 1px solid #eee;
             padding-bottom: 8px;
             margin-top: 25px;
-            margin-bottom: 20px; /* Adjusted for flow */
+            margin-bottom: 20px;
         }
         
-        .recipient-info {
-            font-size: 1.05rem;
-            margin-bottom: 25px;
-        }
-
         .summary-box {
             background: #f0f8ff;
             border-left: 5px solid var(--secondary);
-            padding: 15px 20px;
+            padding: 20px;
             margin: 25px 0;
             border-radius: 5px;
         }
@@ -132,35 +128,42 @@
             font-size: 1.1rem;
             border-bottom: 1px solid #e0e6eb;
         }
-
-        .summary-box ul li:last-child {
-            border-bottom: none;
+        .summary-box ul li:last-child { border-bottom: none; }
+        
+        .final-payment-notice {
+            background: var(--warning-bg);
+            border: 1px solid var(--warning-border);
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
         }
         
-        .summary-box .highlight-fee {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1.2em;
+        .final-payment-notice h4 {
+             margin-top: 0;
+             color: var(--warning-text);
+             font-size: 1.25rem;
+        }
+        .final-payment-notice p {
+            margin-bottom: 0;
+            color: #5b491a;
         }
         
         .signature-section {
-            margin-top: 60px; /* Reduced from 80px for better fit */
-            padding-top: 15px;
-            border-top: 1px solid #ddd;
+            margin-top: 40px;
         }
         
         .signature-image {
             display: block;
-            max-width: 180px; /* Controlled size for professional look */
-            margin-bottom: 5px; /* Space between signature and text */
+            max-width: 180px;
+            margin-bottom: 5px;
         }
         
         @media print {
             body { padding: 0; background: #fff; }
             .toolbar, .page { box-shadow: none; border: none; margin: 0; }
             .document-container { width: 100%; }
-            .page { min-height: 0; page-break-after: always; }
-            .page:last-child { page-break-after: auto; }
+            .page { min-height: 0; }
         }
     </style>
 </head>
@@ -170,82 +173,53 @@
     <button class="toolbar-btn" id="downloadPdfBtn"><i class="fas fa-download"></i> Download PDF</button>
 </div>
 
-<div class="document-container" id="creditCoverDocument">
-    <!-- Page 1 -->
+<div class="document-container" id="originationFeeDocument">
     <div class="page" id="page1">
         <div class="doc-header">
             <div class="logo"><h1>YYC</h1><h2>PERSONAL FINANCE</h2></div>
             <div class="header-info">
-                <strong>Document:</strong> Credit Cover Confirmation<br>
+                <strong>Document:</strong> Loan Origination Fee<br>
                 <strong>Date:</strong> <span id="current-date"></span><br>
-                <strong>Ref ID:</strong> CC-202408-<span id="application-id"></span>
+                <strong>Ref ID:</strong> OF-202408-<span id="application-id"></span>
             </div>
         </div>
 
-        <div class="recipient-info">
-            <p style="margin:0;"><strong>To:</strong> <span id="user-name"></span></p>
-            <p style="margin:0;"><strong>ID Number:</strong> <span id="id-number"></span></p>
-        </div>
-        
-        <h3>Subject: Credit Cover Confirmation – Loan Approval Finalization</h3>
+        <h3>Subject: Loan Origination Fee for Loan Application</h3>
 
         <p>Dear <strong id="user-name-salutation"></strong>,</p>
 
-        <p>We are pleased to notify you that your Credit Cover has been successfully registered with YYC Cash Loan (NCRCP15906), finalizing an essential step in preparing your <strong id="loan-amount-text-1"></strong> loan for release.</p>
-
-        <h3>Why This Cover Was Needed</h3>
-        <p>As part of our internal loan risk assessment process, your current credit history reflected a higher lending risk profile. To ensure your application proceeds smoothly without further complications or delays, the Credit Cover was required.</p>
-        <p>This protection does not only shield the lender, but more importantly, it guarantees the full disbursement of your approved loan amount of <strong id="loan-amount-text-2"></strong> — without being affected by your current credit score.</p>
+        <p>We are pleased to confirm that your loan application for an amount of <strong id="loan-amount-text"></strong> has been approved. As part of the loan agreement, there is a loan origination fee that is required in order to complete the processing and formalization of your loan. This fee covers the legal and administrative costs of securing and preparing the necessary documentation for your loan.</p>
         
-        <h3>How the Credit Cover Works for You</h3>
-        <ul>
-            <li><strong>Secures Your Payout:</strong> Ensures the loan will be processed and released, regardless of credit rating concerns.</li>
-            <li><strong>Financial Safety Net:</strong> Should unexpected events impact your ability to repay — such as job loss or health setbacks — the cover helps maintain repayments or settle the balance entirely where applicable.</li>
-            <li><strong>No Ongoing Charges:</strong> This is a once-off activation, not a recurring premium.</li>
-        </ul>
-
-        <div class="doc-footer">Page 1 of 2</div>
-    </div>
-
-    <!-- Page 2 -->
-    <div class="page" id="page2">
-        <div class="doc-header">
-            <div class="logo"><h1>YYC</h1><h2>PERSONAL FINANCE</h2></div>
-            <div class="header-info">
-                <strong>Document:</strong> Credit Cover Confirmation<br>
-                <strong>Ref ID:</strong> CC-202408-<span id="application-id-2"></span>
-            </div>
-        </div>
-
-        <h3>Activation Fee Details</h3>
-        <p>The cover is secured with a one-time fee of <strong id="fee-amount-text"></strong>, which finalizes your protection and ensures your loan can be paid out smoothly. This payment is an investment in both your peace of mind and the integrity of your financial commitments.</p>
-
         <div class="summary-box">
-             <h4>Activation Summary</h4>
+             <h4>Loan Origination Fee Breakdown:</h4>
              <ul>
-                <li><span>One-time fee payable:</span> <strong class="highlight-fee" id="fee-amount"></strong></li>
-                <li><span>Loan amount secured:</span> <strong id="loan-amount"></strong></li>
-                <li><span>Provider:</span> <strong>YYC Cash Loan</strong></li>
-                <li><span>NCR Registration:</span> <strong>NCRCP15906</strong></li>
-                <li><span>Status:</span> <strong style="color: var(--success);">Cover Activated – Loan Ready for Disbursement</strong></li>
+                <li><span>Fee Percentage:</span> <strong id="fee-percentage"></strong></li>
+                <li><span>Fee Amount:</span> <strong id="fee-amount" style="color: var(--primary); font-weight: 700;"></strong></li>
              </ul>
+             <small style="display: block; margin-top: 15px; color: var(--gray);">This fee must be paid upfront and cannot be deducted from the loan amount. The fee is a legal cost incurred as part of finalizing the loan agreement.</small>
         </div>
-        
-        <p>We recognize the importance of this loan and the opportunities it may bring. By putting this protection in place, you’ve ensured both your peace of mind and the successful release of your funds.</p>
 
-        <p>Should you have any queries or require additional information, please feel free to contact our support office directly.</p>
+        <div class="final-payment-notice">
+            <h4><i class="fas fa-check-circle"></i> Final Payment Guarantee</h4>
+            <p>Please note: <strong>This is the final payment required</strong> before the loan is fully processed and disbursed to you. No further fees or charges will be incurred beyond this payment. We guarantee that once this payment is received, all other administrative and legal costs will be settled, and the loan disbursement will proceed without delay.</p>
+        </div>
+
+        <p>To proceed, kindly arrange the payment of <strong id="fee-amount-2"></strong> at your earliest convenience. Payment instructions will follow in a separate communication.</p>
+        
+        <p>Please be advised that failure to make this payment could delay the loan disbursement. Once this payment is processed, your loan will be fully finalized, and we will proceed with the agreed terms.</p>
+
+        <p>If you have any questions or require clarification, please feel free to contact us at your convenience. We appreciate your prompt attention to this matter and look forward to assisting you with the final steps of your loan.</p>
         
         <div class="signature-section">
-            <!-- Signature Image Added Here -->
+            <p style="margin-bottom: 0;">Sincerely,</p>
             <img src="image/211935-1qeWBB1398605222.jpg" alt="Digital Signature" class="signature-image">
-            <p style="margin-bottom: 0.5rem;">Warm regards,</p>
-            <p>
+            <p style="margin-top: 0;">
                 <strong>YYC Cash Loan</strong><br>
                 NCRCP15906
             </p>
         </div>
 
-        <div class="doc-footer">Page 2 of 2</div>
+        <div class="doc-footer">YYC Personal Finance | NCRCP15906 | Confidential Document</div>
     </div>
 </div>
 
@@ -256,7 +230,8 @@
             name: "Sarel Van Aswegen",
             idNumber: "9010105045082",
             loanAmount: 1000000,
-            activationFee: 1850.00
+            originationFeePercentage: 0.003, // 0.3%
+            originationFeeAmount: 3000
         };
 
         const formatCurrency = (num) => `R${num.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -269,39 +244,32 @@
             // Dates and IDs
             document.getElementById("current-date").textContent = today;
             document.getElementById("application-id").textContent = appId;
-            document.getElementById("application-id-2").textContent = appId;
 
-            // Recipient Info
-            document.getElementById("user-name").textContent = clientData.name;
-            document.getElementById("id-number").textContent = clientData.idNumber;
+            // Salutation
             document.getElementById("user-name-salutation").textContent = `Mr. ${clientData.name.split(' ').pop()}`;
             
             // Amounts
             const formattedLoanAmount = formatCurrency(clientData.loanAmount);
-            const formattedFeeAmount = formatCurrency(clientData.activationFee);
+            const formattedFeeAmount = formatCurrency(clientData.originationFeeAmount);
             
-            document.getElementById("loan-amount-text-1").textContent = formattedLoanAmount;
-            document.getElementById("loan-amount-text-2").textContent = formattedLoanAmount;
-            document.getElementById("fee-amount-text").textContent = formattedFeeAmount;
-            
-            // Summary Box
+            document.getElementById("loan-amount-text").textContent = formattedLoanAmount;
+            document.getElementById("fee-percentage").textContent = `${(clientData.originationFeePercentage * 100).toFixed(1)}% of the loan amount`;
             document.getElementById("fee-amount").textContent = formattedFeeAmount;
-            document.getElementById("loan-amount").textContent = formattedLoanAmount;
+            document.getElementById("fee-amount-2").textContent = formattedFeeAmount;
         }
 
         populateDocument();
 
         // --- PDF Download Logic ---
         document.getElementById('downloadPdfBtn').addEventListener('click', function () {
-            const element = document.getElementById('creditCoverDocument');
+            const element = document.getElementById('originationFeeDocument');
             const opt = {
-                margin:       [0, 0, 0, 0], // No margin for full page control
-                filename:     `YYC_Credit_Cover_${clientData.name.replace(' ', '_')}.pdf`,
+                margin:       [0, 0, 0, 0],
+                filename:     `YYC_Origination_Fee_${clientData.name.replace(' ', '_')}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true },
                 jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
-            // Use html2pdf to generate the PDF from the element
             html2pdf().set(opt).from(element).save();
         });
     });
