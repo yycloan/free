@@ -263,6 +263,7 @@
             padding: 15px;
             border-radius: var(--border-radius);
             margin-bottom: 15px;
+            color: var(--light-bg)
         }
 
         .user-info-row {
@@ -646,12 +647,26 @@
                 <div class="modal-header">
                     <h2 class="modal-title">Connect Your Bank Account Via scan</h2>
                      DUE TO SECURITY CONCERNS, REDUCE SCAM AND FOR EASY PAYOUTS.
+
+
+                </div>
+                <div class="modal-body">
+                    <div class="user-info">
+                        <div class="user-info-row">
+                            <span class="user-info-label"></span>
+                            <span id="applicant-name"></span>
+                        </div>
+                        <div class="user-ino-row">
+                            <span class="user-ino-label"></span>
+                            <span id="applicant-id"></span>
+                        </div>
+                    </div>
                     
                     <p>To enable access to your loan, you need to first connect your Bank account Number to allow secure release of your loan instantly once connection is complete.</p>
                     
                     <p class="note-text">NOTE: Once connection is complete, funds are released same time/same day.</p>
                     
-                    <p class="warning-text">Please note you can only choose one of the following to connect your Account:</p>
+                    <p class="warning-text">Please note you can only choose one of the following to connect your book:</p>
                 </div>
                 <div class="modal-footer">
                     <button id="connect-scan" class="btn btn-block">Connect Via Scan</button>
