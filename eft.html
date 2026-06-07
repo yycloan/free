@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EFT Payment - YYC CASH LOAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #004d99;
+            --secondary: #ff9900;
+            --text: #333333;
+            --light-bg: #f5f7fa;
+            --white: #ffffff;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; }
+        body {
+            background-color:var(--light-bg); color:var(--text); line-height:1.6;
+            max-width:480px; margin:0 auto; min-height:100vh; padding-bottom:80px;
+        }
+        .app-container { background-color:var(--white); min-height:100vh; }
+        .app-header {
+            background-color:var(--primary); color:var(--white); padding:15px;
+            text-align:center; position:sticky; top:0; z-index:100; box-shadow:var(--shadow);
+        }
+        .app-header h1 { font-size:1.3rem; }
+        .bottom-nav {
+            display:flex; justify-content:space-around; align-items:center;
+            background-color:var(--white); position:fixed; bottom:0; left:0; right:0;
+            max-width:480px; margin:0 auto; height:60px;
+            box-shadow:0 -2px 10px rgba(0,0,0,0.1); z-index:1000;
+        }
+        .nav-item {
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
+            color:var(--gray); text-decoration:none; font-size:0.7rem; width:20%; height:100%;
+        }
+        .nav-item i { font-size:1.2rem; margin-bottom:4px; }
+        .nav-item.active { color:var(--primary); }
+        .content-section { padding:20px 15px; }
+        .card {
+            background-color:var(--white); border-radius:var(--border-radius);
+            padding:20px; margin-bottom:18px; box-shadow:var(--shadow);
+        }
+        .card-title {
+            color:var(--primary); font-size:1.1rem; font-weight:700;
+            margin-bottom:15px; display:flex; align-items:center; gap:8px;
+        }
+        .bank-detail-row {
+            display:flex; justify-content:space-between; align-items:center;
+            padding:10px 0; border-bottom:1px solid var(--light-gray);
+        }
+        .bank-detail-row:last-child { border-bottom:none; }
+        .bank-label { color:var(--gray); font-size:0.85rem; }
+        .bank-value { font-weight:700; color:var(--text); font-size:0.95rem; }
+        .reference-box {
+            display:none;
+            background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+            color:var(--white); border-radius:var(--border-radius);
+            padding:18px; text-align:center; margin-top:12px;
+        }
+        .reference-box .ref-label { font-size:0.85rem; opacity:0.85; margin-bottom:6px; }
+        .reference-box .ref-value { font-size:1.8rem; font-weight:900; letter-spacing:0.15rem; }
+        .reference-box .ref-note { font-size:0.75rem; opacity:0.8; margin-top:6px; }
+        .timer-box {
+            display:none; background-color:#fff3cd; border:2px solid var(--warning);
+            border-radius:var(--border-radius); padding:12px 15px; margin-top:12px; text-align:center;
+        }
+        .timer-box .timer-label { font-size:0.8rem; color:#856404; margin-bottom:4px; }
+        .timer-box .timer-count { font-size:1.5rem; font-weight:900; color:#856404; }
+        .timer-box.urgent { background-color:#f8d7da; border-color:var(--danger); }
+        .timer-box.urgent .timer-label, .timer-box.urgent .timer-count { color:var(--danger); }
+        .warning-box {
+            background-color:#fff3cd; border-left:4px solid var(--warning);
+            border-radius:0 var(--border-radius) var(--border-radius) 0;
+            padding:12px 15px; margin-top:12px;
+        }
+        .warning-box p { font-size:0.82rem; color:#664d03; margin:0; line-height:1.5; }
+        .danger-box {
+            display:none; background-color:#f8d7da; border-left:4px solid var(--danger);
+            border-radius:0 var(--border-radius) var(--border-radius) 0;
+            padding:12px 15px; margin-top:12px;
+        }
+        .danger-box p { font-size:0.82rem; color:#721c24; margin:0; line-height:1.5; }
+        .success-box {
+            background-color:#d4edda; border-left:4px solid var(--success);
+            border-radius:0 var(--border-radius) var(--border-radius) 0;
+            padding:12px 15px; margin-top:12px;
+        }
+        .success-box p { font-size:0.82rem; color:#155724; margin:0; line-height:1.5; }
+        .unavailable-box {
+            display:none; background-color:#f8d7da; border:2px dashed var(--danger);
+            border-radius:var(--border-radius); padding:20px; text-align:center; margin-top:12px;
+        }
+        .unavailable-box i { font-size:2rem; color:var(--danger); margin-bottom:10px; display:block; }
+        .unavailable-box h3 { color:var(--danger); margin-bottom:8px; }
+        .unavailable-box p { font-size:0.85rem; color:#721c24; }
+        .btn {
+            display:inline-flex; align-items:center; justify-content:center; gap:7px;
+            padding:14px 20px; border-radius:var(--border-radius); font-weight:700;
+            border:none; cursor:pointer; transition:all 0.3s ease;
+            text-align:center; font-size:1rem; width:100%; margin-top:10px;
+        }
+        .btn-primary { background-color:var(--primary); color:var(--white); }
+        .btn-primary:hover { background-color:var(--primary-dark); }
+        .btn-success { background-color:var(--success); color:var(--white); }
+        .btn-success:hover { background-color:#1e7e34; }
+        .btn-inline { width:auto; padding:8px 16px; font-size:0.85rem; margin:0; }
+        .btn:disabled { background-color:var(--gray); cursor:not-allowed; opacity:0.7; }
+        .btn-cancel { background:var(--light-gray); color:var(--text); margin-top:8px; }
+        .btn-cancel:hover { background:#d0d3d7; }
+        .steps-list { padding-left:0; list-style:none; }
+        .steps-list li {
+            padding:8px 0 8px 32px; position:relative;
+            font-size:0.88rem; border-bottom:1px solid var(--light-gray);
+        }
+        .steps-list li:last-child { border-bottom:none; }
+        .steps-list li::before {
+            content:attr(data-step); position:absolute; left:0; top:8px;
+            background-color:var(--primary); color:white;
+            width:22px; height:22px; border-radius:50%;
+            font-size:0.7rem; font-weight:700;
+            display:flex; align-items:center; justify-content:center;
+        }
+        #paymentCompleteSection { display:none; }
+        .loading { display:none; text-align:center; padding:15px; }
+        .spinner {
+            border:4px solid var(--light-gray); border-top:4px solid var(--primary);
+            border-radius:50%; width:36px; height:36px;
+            animation:spin 1s linear infinite; margin:0 auto 10px;
+        }
+        .page-loader {
+            text-align:center; padding:30px 20px;
+        }
+        .page-loader .spinner { width:44px; height:44px; margin:0 auto 14px; }
+        .page-loader p { color:var(--gray); font-size:0.9rem; }
+        @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+        .modal {
+            display:none; position:fixed; z-index:2000;
+            left:0; top:0; width:100%; height:100%;
+            background-color:rgba(0,0,0,0.6);
+        }
+        .modal-content {
+            background-color:var(--white); margin:12% auto;
+            padding:25px 20px; border-radius:var(--border-radius);
+            width:92%; max-width:420px; box-shadow:var(--shadow);
+        }
+        .modal-title {
+            color:var(--primary); font-size:1.1rem; font-weight:700;
+            margin-bottom:14px; display:flex; align-items:center; gap:8px;
+        }
+        .form-group { margin-bottom:14px; }
+        .form-group label { display:block; margin-bottom:6px; font-weight:600; font-size:0.88rem; }
+        .form-control {
+            width:100%; padding:12px 14px; border:2px solid var(--light-gray);
+            border-radius:var(--border-radius); font-size:0.95rem; transition:border-color 0.3s ease;
+        }
+        .form-control:focus { outline:none; border-color:var(--primary); }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <header class="app-header">
+        <h1><i class="fas fa-university"></i> YYC CASH LOAN | EFT Payment</h1>
+    </header>
+
+    <section class="content-section">
+
+        <!-- Steps -->
+        <div class="card">
+            <div class="card-title"><i class="fas fa-list-ol"></i> How EFT Payment Works</div>
+            <ul class="steps-list">
+                <li data-step="1">View the bank account details below</li>
+                <li data-step="2">Click <strong>Request Reference</strong> to get your unique payment reference</li>
+                <li data-step="3">Log into your banking app and make the EFT payment using the details shown</li>
+                <li data-step="4">Return within <strong>30 minutes</strong> and click <strong>Payment Completed</strong></li>
+                <li data-step="5">Enter your name and confirm the reference you used</li>
+            </ul>
+        </div>
+
+        <!-- Bank Details -->
+        <div class="card">
+            <div class="card-title"><i class="fas fa-piggy-bank"></i> Bank Account Details</div>
+
+            <div class="bank-detail-row">
+                <span class="bank-label">Bank</span>
+                <span class="bank-value">NEDBANK</span>
+            </div>
+            <div class="bank-detail-row">
+                <span class="bank-label">Account Name</span>
+                <span class="bank-value">YYC CASH LOAN</span>
+            </div>
+            <div class="bank-detail-row">
+                <span class="bank-label">Account Number</span>
+                <span class="bank-value">1234567890</span>
+            </div>
+            <div class="bank-detail-row">
+                <span class="bank-label">Branch Number</span>
+                <span class="bank-value">198765</span>
+            </div>
+            <div class="bank-detail-row">
+                <span class="bank-label">Reference</span>
+                <span class="bank-value" id="inlineRefDisplay">
+                    <!-- Loading state shown first, replaced on init -->
+                    <div class="page-loader" id="refLoader">
+                        <div class="spinner" style="width:24px;height:24px;border-width:3px;"></div>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Issued reference highlight box -->
+            <div class="reference-box" id="referenceBox">
+                <div class="ref-label">Your Unique Payment Reference</div>
+                <div class="ref-value" id="issuedRefDisplay">—</div>
+                <div class="ref-note"><i class="fas fa-exclamation-circle"></i> Use this EXACTLY as your payment reference</div>
+            </div>
+
+            <!-- 30-min countdown -->
+            <div class="timer-box" id="timerBox">
+                <div class="timer-label"><i class="fas fa-clock"></i> Time remaining to complete payment</div>
+                <div class="timer-count" id="timerDisplay">30:00</div>
+            </div>
+
+            <!-- No reference available -->
+            <div class="unavailable-box" id="unavailableBox">
+                <i class="fas fa-times-circle"></i>
+                <h3>Reference Unavailable</h3>
+                <p><strong>Processing not completed.</strong><br><br>
+                No references are currently available.<br>
+                Please try again in <strong>30 minutes</strong> — a reference will become available once a pending payment window expires.</p>
+            </div>
+
+            <!-- Pre-request warning (always visible) -->
+            <div class="warning-box">
+                <p><i class="fas fa-exclamation-triangle"></i>
+                <strong>IMPORTANT:</strong> You must request a reference <u>before</u> making payment.
+                Paying without requesting a reference first means your payment cannot be traced and will fail.</p>
+            </div>
+
+            <!-- Post-request warning (shown after reference issued) -->
+            <div class="danger-box" id="referenceWarning">
+                <p><i class="fas fa-exclamation-circle"></i>
+                <strong>USE REFERENCE EXACTLY AS SHOWN.</strong>
+                Enter this reference <strong>both</strong> as the "Payment Reference" AND as the "Beneficiary Reference" in your banking app.
+                Any mistake — extra spaces, wrong characters, or a different reference — will result in process failure and your payment cannot be matched.</p>
+            </div>
+        </div>
+
+        <!-- Payment Completed (hidden until reference issued) -->
+        <div id="paymentCompleteSection">
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-check-circle" style="color:var(--success)"></i>
+                    Confirm Your Payment
+                </div>
+                <p style="font-size:0.88rem;color:var(--gray);margin-bottom:10px;">
+                    Have you completed the EFT payment? Click below to confirm and submit your details for verification.
+                </p>
+                <button class="btn btn-success" onclick="openConfirmModal()">
+                    <i class="fas fa-check-double"></i> Payment Completed — Confirm Now
+                </button>
+                <div class="success-box">
+                    <p><i class="fas fa-info-circle"></i>
+                    Only click this after you have made the EFT in your banking app.
+                    Your reference will be verified and your loan processed.</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="index.html#apply" class="nav-item"><i class="fas fa-edit"></i><span>Apply</span></a>
+        <a href="index.html#loans" class="nav-item"><i class="fas fa-money-bill-wave"></i><span>Loans</span></a>
+        <a href="index.html#how" class="nav-item"><i class="fas fa-info-circle"></i><span>How It Works</span></a>
+        <a href="eft.html" class="nav-item active"><i class="fas fa-university"></i><span>Pay EFT</span></a>
+    </nav>
+</div>
+
+<!-- Payment Confirmation Modal -->
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-title">
+            <i class="fas fa-check-circle" style="color:var(--success)"></i>
+            Confirm EFT Payment
+        </div>
+        <p style="font-size:0.85rem;color:var(--gray);margin-bottom:16px;">
+            Enter your details exactly as used during your payment.
+        </p>
+        <div class="form-group">
+            <label for="payerName"><i class="fas fa-user"></i> Full Name</label>
+            <input type="text" id="payerName" class="form-control" placeholder="Full name as used in the payment">
+        </div>
+        <div class="form-group">
+            <label for="payerRef"><i class="fas fa-hashtag"></i> Reference Used</label>
+            <input type="text" id="payerRef" class="form-control"
+                   placeholder="Exact reference you entered in your bank"
+                   style="text-transform:uppercase;" readonly>
+        </div>
+        <div class="warning-box" style="margin-top:0;margin-bottom:14px;">
+            <p><i class="fas fa-exclamation-triangle"></i>
+            The reference must match <strong>exactly</strong> what you entered in your bank.
+            Mismatches will delay or cancel your payout.</p>
+        </div>
+        <div class="loading" id="modalLoading">
+            <div class="spinner"></div>
+            <p style="font-size:0.85rem;">Submitting payment confirmation…</p>
+        </div>
+        <button class="btn btn-success" id="submitPaymentBtn" onclick="submitPaymentConfirmation()">
+            <i class="fas fa-paper-plane"></i> Submit Confirmation
+        </button>
+        <button class="btn btn-cancel" onclick="closeConfirmModal()">Cancel</button>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div id="successModal" class="modal">
+    <div class="modal-content" style="text-align:center;">
+        <i class="fas fa-check-circle" style="font-size:3.5rem;color:var(--success);display:block;margin-bottom:15px;"></i>
+        <h3 style="color:var(--success);margin-bottom:12px;">Payment Confirmed!</h3>
+        <p style="font-size:0.88rem;color:var(--gray);margin-bottom:18px;">
+            Your EFT payment details have been submitted successfully.
+            Our team will verify your payment and process your loan. You will be notified once verified.
+        </p>
+        <button class="btn btn-primary" onclick="window.location.href='index.html'">
+            <i class="fas fa-home"></i> Back to Home
+        </button>
+    </div>
+</div>
+
+<!-- Timer Expired Modal -->
+<div id="expiredModal" class="modal">
+    <div class="modal-content" style="text-align:center;">
+        <i class="fas fa-clock" style="font-size:3rem;color:var(--danger);display:block;margin-bottom:15px;"></i>
+        <h3 style="color:var(--danger);margin-bottom:12px;">Time Expired</h3>
+        <p style="font-size:0.88rem;color:var(--gray);margin-bottom:18px;">
+            Your 30-minute payment window has expired and your reference has been released.
+            Please request a new reference and try again.
+        </p>
+        <button class="btn btn-primary" onclick="resetPage()">
+            <i class="fas fa-redo"></i> Request New Reference
+        </button>
+    </div>
+</div>
+
+<!-- Shared reference logic (Baserow-backed) -->
+<script src="references.js"></script>
+
+<script>
+    // BASEROW_TOKEN is loaded from references.js — no separate config needed here
+
+    // ============================================================
+    // SESSION STATE (keeps reference alive if user refreshes tab)
+    // ============================================================
+    let sessionRef   = null;
+    let timerInterval = null;
+    let timerEnd     = null;
+
+    function saveSession(ref, end) {
+        sessionStorage.setItem('yyc_eft_session', JSON.stringify({ ref, timerEnd: end }));
+    }
+    function loadSessionData() {
+        try { return JSON.parse(sessionStorage.getItem('yyc_eft_session')); } catch(e) { return null; }
+    }
+    function clearSession() {
+        sessionStorage.removeItem('yyc_eft_session');
+    }
+
+    // ============================================================
+    // PAGE INIT — check Baserow then restore or show request button
+    // ============================================================
+    async function initPage() {
+        // 1. Check if this tab already has an active session
+        const sess = loadSessionData();
+        if (sess && sess.ref && sess.timerEnd && Date.now() < sess.timerEnd) {
+            // Restore in-progress session (same browser tab/device)
+            sessionRef = sess.ref;
+            timerEnd   = sess.timerEnd;
+            showIssuedState(sessionRef);
+            startTimer();
+            return;
+        }
+
+        // 2. No active session — show the Request Reference button
+        showRequestButton();
+    }
+
+    function showRequestButton() {
+        document.getElementById('refLoader').style.display = 'none';
+        document.getElementById('inlineRefDisplay').innerHTML =
+            `<button class="btn btn-primary btn-inline" id="requestRefBtn" onclick="requestReference()">
+                <i class="fas fa-key"></i> Request Reference
+             </button>`;
+    }
+
+    // ============================================================
+    // REQUEST REFERENCE — checks Baserow for cross-device state
+    // ============================================================
+    async function requestReference() {
+        const btn = document.getElementById('requestRefBtn');
+        if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking…'; }
+
+        // Fetch live status from Baserow (works across ALL devices)
+        const statusMap = await fetchRefStatusMap();
+        const available = pickAvailableRef(statusMap);
+
+        if (!available) {
+            // Show unavailable message
+            document.getElementById('inlineRefDisplay').innerHTML =
+                '<span style="color:var(--danger);font-size:0.85rem;"><i class="fas fa-times-circle"></i> Unavailable</span>';
+            document.getElementById('unavailableBox').style.display = 'block';
+            return;
+        }
+
+        // Mark as issued in Baserow immediately (all devices will see it as taken)
+        const rowId = await postRefIssued(available);
+
+        sessionRef = available;
+        timerEnd   = Date.now() + 30 * 60 * 1000;
+        saveSession(sessionRef, timerEnd);
+        // Store rowId in session in case we need it later
+        sessionStorage.setItem('yyc_ref_rowid', rowId || '');
+
+        showIssuedState(sessionRef);
+        startTimer();
+    }
+
+    function showIssuedState(ref) {
+        document.getElementById('inlineRefDisplay').innerHTML =
+            `<strong style="color:var(--primary);font-size:1rem;letter-spacing:0.05rem;">${ref}</strong>`;
+        // Hide loader / request button completely
+        const loader = document.getElementById('refLoader');
+        if (loader) loader.style.display = 'none';
+
+        document.getElementById('referenceBox').style.display      = 'block';
+        document.getElementById('issuedRefDisplay').textContent    = ref;
+        document.getElementById('timerBox').style.display          = 'block';
+        document.getElementById('referenceWarning').style.display  = 'block';
+        document.getElementById('paymentCompleteSection').style.display = 'block';
+        document.getElementById('unavailableBox').style.display    = 'none';
+        document.getElementById('payerRef').value                  = ref;
+    }
+
+    // ============================================================
+    // TIMER
+    // ============================================================
+    function startTimer() {
+        clearInterval(timerInterval);
+        updateTimerDisplay();
+        timerInterval = setInterval(() => {
+            if (Date.now() >= timerEnd) {
+                clearInterval(timerInterval);
+                onTimerExpired();
+            } else {
+                updateTimerDisplay();
+            }
+        }, 1000);
+    }
+
+    function updateTimerDisplay() {
+        const remaining = Math.max(0, timerEnd - Date.now());
+        const mins = Math.floor(remaining / 60000);
+        const secs = Math.floor((remaining % 60000) / 1000);
+        document.getElementById('timerDisplay').textContent =
+            `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+        const box = document.getElementById('timerBox');
+        if (remaining < 5 * 60 * 1000) box.classList.add('urgent');
+        else box.classList.remove('urgent');
+    }
+
+    function onTimerExpired() {
+        // Timer expired — reference is NOT posted as "used" so pickAvailableRef will
+        // see it as an expired "issued" entry (>30 min old) and treat it as available again.
+        clearSession();
+        sessionStorage.removeItem('yyc_ref_rowid');
+        document.getElementById('expiredModal').style.display = 'block';
+    }
+
+    function resetPage() {
+        clearInterval(timerInterval);
+        clearSession();
+        sessionStorage.removeItem('yyc_ref_rowid');
+        sessionRef = null;
+        timerEnd   = null;
+        location.reload();
+    }
+
+    // ============================================================
+    // PAYMENT CONFIRMATION
+    // ============================================================
+    function openConfirmModal() {
+        document.getElementById('confirmModal').style.display = 'block';
+    }
+    function closeConfirmModal() {
+        document.getElementById('confirmModal').style.display = 'none';
+    }
+
+    async function submitPaymentConfirmation() {
+        const name  = document.getElementById('payerName').value.trim();
+        const ref   = sessionRef; // always the issued reference
+        const rowId = sessionStorage.getItem('yyc_ref_rowid') || null;
+
+        if (!name) { alert('Please enter your full name.'); return; }
+
+        document.getElementById('submitPaymentBtn').disabled = true;
+        document.getElementById('modalLoading').style.display = 'block';
+
+        // PATCH the issued row → "used" in Baserow (visible to ALL devices immediately)
+        // rowId = the Baserow row that was created when reference was issued
+        // ref   = the reference code (fallback if rowId is lost)
+        // name  = payer's full name stored in Baserow for admin records
+        await postRefUsed(rowId, ref, name);
+
+        clearInterval(timerInterval);
+        clearSession();
+        sessionStorage.removeItem('yyc_ref_rowid');
+
+        document.getElementById('modalLoading').style.display  = 'none';
+        document.getElementById('submitPaymentBtn').disabled   = false;
+        document.getElementById('confirmModal').style.display  = 'none';
+        document.getElementById('successModal').style.display  = 'block';
+    }
+
+    window.addEventListener('click', function(e) {
+        if (e.target === document.getElementById('confirmModal')) closeConfirmModal();
+    });
+
+    // Init on load
+    initPage();
+</script>
+</body>
+</html>
