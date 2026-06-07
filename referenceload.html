@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reference Loader - YYC CASH LOAN (Admin)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #004d99;
+            --secondary: #ff9900;
+            --text: #333333;
+            --light-bg: #f5f7fa;
+            --white: #ffffff;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; }
+        body {
+            background-color:var(--light-bg); color:var(--text); line-height:1.6;
+            max-width:480px; margin:0 auto; min-height:100vh; padding-bottom:30px;
+        }
+        .app-container { background-color:var(--white); min-height:100vh; }
+        .app-header {
+            background-color:var(--primary-dark); color:var(--white); padding:15px;
+            text-align:center; position:sticky; top:0; z-index:100; box-shadow:var(--shadow);
+        }
+        .app-header h1 { font-size:1.2rem; }
+        .app-header p { font-size:0.75rem; opacity:0.8; margin-top:3px; }
+        .admin-badge {
+            display:inline-block; background-color:var(--secondary); color:var(--white);
+            font-size:0.65rem; font-weight:700; padding:2px 8px; border-radius:20px;
+            vertical-align:middle; margin-left:6px; text-transform:uppercase;
+        }
+        .content-section { padding:20px 15px; }
+        .card {
+            background-color:var(--white); border-radius:var(--border-radius);
+            padding:20px; margin-bottom:18px; box-shadow:var(--shadow);
+        }
+        .card-title {
+            color:var(--primary); font-size:1.05rem; font-weight:700;
+            margin-bottom:15px; display:flex; align-items:center; gap:8px;
+        }
+        /* Stats */
+        .stats-row { display:flex; gap:10px; margin-bottom:18px; }
+        .stat-box { flex:1; border-radius:var(--border-radius); padding:14px 8px; text-align:center; box-shadow:var(--shadow); }
+        .stat-box .stat-num { font-size:1.6rem; font-weight:900; }
+        .stat-box .stat-label { font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04rem; margin-top:2px; }
+        .stat-available { background-color:#d4edda; color:var(--success); }
+        .stat-issued    { background-color:#fff3cd; color:#856404; }
+        .stat-used      { background-color:#f8d7da; color:var(--danger); }
+        .stat-total     { background-color:#cce5ff; color:var(--primary); }
+        /* Source info */
+        .source-box {
+            background-color:#e6f0fa; border-left:4px solid var(--primary);
+            border-radius:0 var(--border-radius) var(--border-radius) 0;
+            padding:12px 15px; margin-bottom:15px;
+        }
+        .source-box p { font-size:0.82rem; color:var(--primary-dark); margin:0; line-height:1.6; }
+        .source-box code { background:rgba(0,102,204,0.1); padding:1px 5px; border-radius:4px; font-family:monospace; font-size:0.85rem; }
+        .master-list-box {
+            background-color:var(--light-bg); border-radius:var(--border-radius);
+            padding:14px; max-height:160px; overflow-y:auto;
+            font-family:monospace; font-size:0.85rem;
+        }
+        .master-list-box .m-ref {
+            display:inline-block; background:var(--white); border:1px solid var(--light-gray);
+            border-radius:4px; padding:2px 8px; margin:3px;
+            color:var(--primary-dark); font-weight:600;
+        }
+        /* Reference list */
+        .filter-tabs { display:flex; gap:6px; margin-bottom:14px; flex-wrap:wrap; }
+        .filter-tab {
+            padding:6px 14px; border-radius:20px; font-size:0.78rem; font-weight:600;
+            border:2px solid var(--light-gray); background:var(--white); cursor:pointer; transition:all 0.2s ease;
+        }
+        .filter-tab.active-all       { border-color:var(--primary); color:var(--primary); background-color:#e6f0fa; }
+        .filter-tab.active-available { border-color:var(--success); color:var(--success); background-color:#d4edda; }
+        .filter-tab.active-issued    { border-color:#856404; color:#856404; background-color:#fff3cd; }
+        .filter-tab.active-used      { border-color:var(--danger); color:var(--danger); background-color:#f8d7da; }
+        .ref-list { list-style:none; }
+        .ref-item {
+            display:flex; justify-content:space-between; align-items:center;
+            padding:10px 12px; border-radius:6px; margin-bottom:8px;
+            font-size:0.88rem; background-color:var(--light-bg);
+        }
+        .ref-item .ref-code { font-weight:700; font-family:monospace; font-size:1rem; letter-spacing:0.05rem; }
+        .ref-item .ref-meta { font-size:0.72rem; color:var(--gray); margin-top:2px; }
+        .ref-item .ref-source { font-size:0.68rem; color:var(--gray); font-style:italic; }
+        .ref-actions { display:flex; gap:6px; align-items:center; flex-shrink:0; margin-left:8px; }
+        .badge {
+            display:inline-block; padding:3px 10px; border-radius:20px;
+            font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04rem;
+        }
+        .badge-available { background-color:#d4edda; color:var(--success); }
+        .badge-issued    { background-color:#fff3cd; color:#856404; }
+        .badge-used      { background-color:#f8d7da; color:var(--danger); }
+        .empty-state { text-align:center; padding:30px 20px; color:var(--gray); }
+        .empty-state i { font-size:2.5rem; margin-bottom:12px; display:block; opacity:0.4; }
+        .empty-state p { font-size:0.88rem; }
+        .page-loading { text-align:center; padding:30px 20px; color:var(--gray); }
+        .spinner {
+            border:4px solid var(--light-gray); border-top:4px solid var(--primary);
+            border-radius:50%; width:36px; height:36px;
+            animation:spin 1s linear infinite; margin:0 auto 12px;
+        }
+        @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+        /* Buttons */
+        .btn {
+            display:inline-flex; align-items:center; justify-content:center; gap:6px;
+            padding:12px 18px; border-radius:var(--border-radius); font-weight:700;
+            border:none; cursor:pointer; transition:all 0.3s ease; font-size:0.9rem; white-space:nowrap;
+        }
+        .btn-full { width:100%; }
+        .btn-primary { background-color:var(--primary); color:var(--white); }
+        .btn-primary:hover { background-color:var(--primary-dark); }
+        .btn-danger  { background-color:var(--danger);  color:var(--white); }
+        .btn-danger:hover { background-color:#c82333; }
+        .btn-warning { background-color:var(--warning); color:#333; }
+        .btn-warning:hover { background-color:#e0a800; }
+        .btn-muted { background-color:var(--light-gray); color:var(--text); }
+        .btn-muted:hover { background-color:#d0d3d7; }
+        .btn-sm { padding:5px 11px; font-size:0.74rem; }
+        /* Toast */
+        .toast {
+            position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+            background-color:#333; color:white; padding:10px 22px;
+            border-radius:25px; font-size:0.85rem; z-index:3000;
+            opacity:0; transition:opacity 0.3s ease; white-space:nowrap; pointer-events:none;
+        }
+        .toast.show { opacity:1; }
+        .last-updated { font-size:0.75rem; color:var(--gray); text-align:right; margin-bottom:10px; }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <header class="app-header">
+        <h1><i class="fas fa-key"></i> Reference Loader <span class="admin-badge">Admin</span></h1>
+        <p>Live cross-device reference status via Baserow</p>
+    </header>
+
+    <section class="content-section">
+
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="stat-box stat-available"><div class="stat-num" id="statAvailable">—</div><div class="stat-label">Available</div></div>
+            <div class="stat-box stat-issued">   <div class="stat-num" id="statIssued">—</div>   <div class="stat-label">Issued</div></div>
+            <div class="stat-box stat-used">     <div class="stat-num" id="statUsed">—</div>     <div class="stat-label">Used</div></div>
+            <div class="stat-box stat-total">    <div class="stat-num" id="statTotal">—</div>    <div class="stat-label">Total</div></div>
+        </div>
+
+        <!-- Source info -->
+        <div class="card">
+            <div class="card-title"><i class="fas fa-code"></i> Reference Source</div>
+            <div class="source-box">
+                <p><i class="fas fa-info-circle"></i>
+                References are defined in <code>references.js</code> inside the <code>MASTER_REFERENCES</code> array.
+                Status (issued / used) is stored in <strong>Baserow</strong> — meaning all devices share the same live state.
+                Edit the array in <code>references.js</code> to add or remove references.</p>
+            </div>
+            <p style="font-size:0.8rem;font-weight:700;color:var(--gray);margin-bottom:8px;">Current master list in references.js:</p>
+            <div class="master-list-box" id="masterListDisplay">
+                <em style="color:var(--gray)">Loading…</em>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="card">
+            <div class="card-title"><i class="fas fa-tools"></i> Actions</div>
+            <button class="btn btn-primary btn-full" onclick="refresh()" id="refreshBtn">
+                <i class="fas fa-sync"></i> Refresh from Baserow
+            </button>
+            <p style="font-size:0.78rem;color:var(--gray);margin-top:10px;line-height:1.5;">
+                <i class="fas fa-info-circle"></i>
+                Reference status is live from Baserow. To mark a used reference as available again,
+                you must delete or edit that row directly in your Baserow table
+                (set Status back to something other than <code>ref_used</code>).
+            </p>
+        </div>
+
+        <!-- Reference status list -->
+        <div class="card">
+            <div class="card-title"><i class="fas fa-list-ul"></i> Reference Status</div>
+            <div class="last-updated" id="lastUpdated"></div>
+            <div class="filter-tabs">
+                <button class="filter-tab active-all"  onclick="setFilter('all')"       id="tab-all">All</button>
+                <button class="filter-tab"             onclick="setFilter('available')" id="tab-available">Available</button>
+                <button class="filter-tab"             onclick="setFilter('issued')"    id="tab-issued">Issued</button>
+                <button class="filter-tab"             onclick="setFilter('used')"      id="tab-used">Used</button>
+            </div>
+            <div id="refListContainer">
+                <div class="page-loading">
+                    <div class="spinner"></div>
+                    <p>Fetching live status from Baserow…</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- Shared reference logic (Baserow-backed) -->
+<script src="references.js"></script>
+
+<script>
+    let currentFilter = 'all';
+    let currentStatusMap = {};
+
+    function showToast(msg, color) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.style.backgroundColor = color || '#333';
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    function setFilter(filter) {
+        currentFilter = filter;
+        document.querySelectorAll('.filter-tab').forEach(t => t.className = 'filter-tab');
+        document.getElementById('tab-' + filter).classList.add('active-' + filter);
+        renderList(currentStatusMap);
+    }
+
+    function formatTimeAgo(ts) {
+        if (!ts) return '';
+        const mins = Math.floor((Date.now() - ts) / 60000);
+        if (mins < 1) return 'just now';
+        if (mins < 60) return `${mins}m ago`;
+        return `${Math.floor(mins / 60)}h ago`;
+    }
+
+    function getRefStatus(ref, statusMap) {
+        const entry = statusMap[ref];
+        if (!entry) return 'available';
+        if (entry.status === 'used') return 'used';
+        if (entry.status === 'issued') {
+            const elapsed = entry.issuedAt ? Date.now() - entry.issuedAt : Infinity;
+            if (elapsed >= 30 * 60 * 1000) return 'available'; // expired issued = available
+            return 'issued';
+        }
+        return 'available';
+    }
+
+    function renderMasterList() {
+        const box = document.getElementById('masterListDisplay');
+        if (!MASTER_REFERENCES || !MASTER_REFERENCES.length) {
+            box.innerHTML = '<em style="color:var(--gray)">No references defined in MASTER_REFERENCES yet.</em>';
+            return;
+        }
+        box.innerHTML = MASTER_REFERENCES.map(r =>
+            `<span class="m-ref">${r.trim().toUpperCase()}</span>`
+        ).join('');
+    }
+
+    function renderList(statusMap) {
+        const container = document.getElementById('refListContainer');
+        const now = Date.now();
+
+        const allRefs = MASTER_REFERENCES.map(r => {
+            const key = r.trim().toUpperCase();
+            const computedStatus = getRefStatus(key, statusMap);
+            const entry = statusMap[key];
+            return { ref: key, status: computedStatus, issuedAt: entry ? entry.issuedAt : null };
+        });
+
+        let filtered = currentFilter === 'all' ? allRefs : allRefs.filter(r => r.status === currentFilter);
+
+        if (!filtered.length) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-inbox"></i>
+                    <p>No <strong>${currentFilter}</strong> references.</p>
+                </div>`;
+            return;
+        }
+
+        const items = filtered.map(r => {
+            const badgeClass = r.status === 'available' ? 'badge-available' : r.status === 'issued' ? 'badge-issued' : 'badge-used';
+
+            let meta = '';
+            if (r.status === 'issued' && r.issuedAt) {
+                const remaining = Math.max(0, (r.issuedAt + 30 * 60 * 1000) - now);
+                const mins = Math.floor(remaining / 60000);
+                const secs = Math.floor((remaining % 60000) / 1000);
+                meta = `Issued ${formatTimeAgo(r.issuedAt)} — expires in ${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+            } else if (r.status === 'used') {
+                meta = 'Permanently used — will not be re-issued';
+            }
+
+            return `
+                <li class="ref-item">
+                    <div>
+                        <div class="ref-code">${r.ref}</div>
+                        ${meta ? `<div class="ref-meta">${meta}</div>` : ''}
+                    </div>
+                    <div class="ref-actions">
+                        <span class="badge ${badgeClass}">${r.status}</span>
+                    </div>
+                </li>`;
+        }).join('');
+
+        container.innerHTML = `<ul class="ref-list">${items}</ul>`;
+    }
+
+    function updateStats(statusMap) {
+        let available = 0, issued = 0, used = 0;
+        MASTER_REFERENCES.forEach(r => {
+            const key = r.trim().toUpperCase();
+            const s = getRefStatus(key, statusMap);
+            if (s === 'available') available++;
+            else if (s === 'issued') issued++;
+            else if (s === 'used') used++;
+        });
+        document.getElementById('statAvailable').textContent = available;
+        document.getElementById('statIssued').textContent    = issued;
+        document.getElementById('statUsed').textContent      = used;
+        document.getElementById('statTotal').textContent     = MASTER_REFERENCES.length;
+    }
+
+    async function refresh() {
+        const btn = document.getElementById('refreshBtn');
+        if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading…'; }
+
+        document.getElementById('refListContainer').innerHTML =
+            `<div class="page-loading"><div class="spinner"></div><p>Fetching from Baserow…</p></div>`;
+
+        const statusMap = await fetchRefStatusMap();
+        currentStatusMap = statusMap;
+
+        renderMasterList();
+        renderList(statusMap);
+        updateStats(statusMap);
+
+        const now = new Date();
+        document.getElementById('lastUpdated').textContent =
+            `Last updated: ${now.toLocaleTimeString()}`;
+
+        if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-sync"></i> Refresh from Baserow'; }
+        showToast('Refreshed from Baserow', '#28a745');
+    }
+
+    // Init
+    renderMasterList();
+    refresh();
+
+    // Auto-refresh every 60 seconds
+    setInterval(refresh, 60000);
+</script>
+</body>
+</html>
